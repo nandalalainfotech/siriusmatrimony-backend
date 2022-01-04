@@ -15,7 +15,7 @@ const companydetails001mb = mongoose.model(
 			'inserteduser': String,
 			'inserteddatetime': Date,
 			'updateduser': String,
-			'updateddatetime': Date
+			'updateddatetime': Date,
 		},
 		{ timestamps: false }
 	)

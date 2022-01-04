@@ -1,4 +1,5 @@
-import * as subscriberdetailscontroller from "../services/subscriberdetailsservice.js";
+import * as subscriberdetails from "../services/subscriberdetailsservice.js";
+
 import express from 'express';
 
 const router = express.Router();
@@ -9,10 +10,10 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/', subscriberdetailscontroller.list);
-router.get('/:id', subscriberdetailscontroller.show);
-router.post('/', subscriberdetailscontroller.create);
-router.put('/:id', subscriberdetailscontroller.update);
-router.delete('/:id', subscriberdetailscontroller.remove);
+router.get('/', subscriberdetails.list);
+router.get('/:id', subscriberdetails.show);
+router.post('/', subscriberdetails.create);
+router.put('/:id', subscriberdetails.update);
+router.delete('/:id', subscriberdetails.remove);
 
-module.exports = router;
+export default router;

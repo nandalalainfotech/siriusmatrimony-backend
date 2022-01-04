@@ -18,8 +18,14 @@ import subscribercontentauthcontroller from "./app/controllers/subscribercontent
 import subscriberpersonalinfocontroller from "./app/controllers/subscriberpersonalinfocontroller.js";
 import subscriberprofessionalinfocontroller from "./app/controllers/subscriberprofessionalinfocontroller.js";
 import subscriptionmastercontroller from "./app/controllers/subscriptionmastercontroller.js"
-
-
+import usercontroller from "./app/controllers/usercontroller.js";
+import reviewcontroller from "./app/controllers/reviewcontroller.js"
+import photocontroller from "./app/controllers/photocontroller.js"
+import videocontroller from "./app/controllers/videocontroller.js"
+import personcontroller from "./app/controllers/personcontroller.js"
+import rolecontroller from "./app/controllers/rolecontroller.js";
+import personrolecontroller from "./app/controllers/personrolecontroller.js";
+import subscriberdetailscontroller from "./app/controllers/subscriberdetailscontroller.js";
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -42,6 +48,13 @@ const Subscribercontentauth001wb = db.subscribercontentauth001wb;
 const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
 const Subscriberprofessionalinfo002wb = db.subscriberprofessionalinfo002wb;
 const Subscriptionmaster001mb = db.subscriptionmaster001mb;
+const User001mb = db.user001mb;
+const Review001mb = db.review001mb;
+const Person001wb = db.person001wb;
+const Photo001wb = db.photo001wb;
+const Video001wb = db.video001wb;
+const Role001wb = db.role001wb;
+const Personrole001wb = db.personrole001wb;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function initial() {
@@ -56,29 +69,9 @@ function initial() {
           'inserteduser': "raj",
           'inserteddatetime': 11 / 12 / 22,
           'updateddatetime': 11 / 12 / 22,
-          'updateduser': "raj"
-        },
-        {
-          'countryid': 12,
-          'countryname': "palls",
-          'countrydesc': "good",
-          'status': "good",
-          'inserteduser': "raj",
-          'inserteddatetime': 11 / 12 / 22,
-          'updateddatetime': 11 / 12 / 22,
-          'updateduser': "raj"
-        },
-        {
-          'countryid': 1,
-          'countryname': "palls",
-          'countrydesc': "good",
-          'status': "good",
-          'inserteduser': "raj",
-          'inserteddatetime': 11 / 12 / 22,
-          'updateddatetime': 11 / 12 / 22,
-          'updateduser': "raj"
-        }
+          'updateduser': "raj",
 
+        },
       ])
         .then(() => {
         })
@@ -306,6 +299,36 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
+  User001mb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      User001mb.insertMany([{
+        'firstname': "Raj",
+        'lastname': "h",
+        'username': "RAJ"
+
+      }
+
+      ])
+        .then(() => {
+
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
+  Review001mb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Review001mb.insertMany([{
+        'body': "raj",
+        'lastname': "d",
+        'rating': 55
+      }
+      ])
+        .then(() => {
+
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
   Subscribercontent001wb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       Subscribercontent001wb.insertMany([{
@@ -413,6 +436,80 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
+  Video001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Video001wb.insertMany([{
+        'category': "s222",
+        'filename': "img.png",
+        'originalfilename': "photo",
+        'status': "active",
+        'content': "678667",
+        'inserteduser': "raj",
+        'inserteddatetime': 6 / 11 / 22,
+        'updateduser': "raju",
+        'updateddatetime': 7 / 11 / 22
+      }
+
+      ])
+        .then(() => {
+
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
+  Photo001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Photo001wb.insertMany([{
+        'category': "s222",
+        'filename': "img.png",
+        'originalfilename': "photo",
+        'content': "678667",
+        'status': "active",
+        'inserteduser': "raj",
+        'inserteddatetime': 6 / 11 / 22,
+        'updateduser': "raju",
+        'updateddatetime': 7 / 11 / 22
+      }
+
+      ])
+        .then(() => {
+
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
+  Person001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Person001wb.insertMany([{
+        'firstname': "RAJ",
+        'lasttname': "d",
+        'zipcode': 1223243,
+        'dob': 3 / 11 / 2000,
+        'email': "xyz@gmail.com",
+        'confirmemail': "xyz@gmail.com",
+        'sex': "male",
+        'address1': "xyz",
+        'address2': "xyz",
+        'address3': "xyz",
+        'city': "chennai",
+        'state': "tn",
+        'country': "india",
+        'mobile': 76886797974,
+        'landline': 423321211,
+        'status': "active",
+        'inserteduser': "raj",
+        'inserteddatetime': 5 / 11 / 22,
+        'updateduser': "raju",
+        'updateddatetime': 12 / 11 / 22
+      }
+
+      ])
+        .then(() => {
+
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
   Subscriptionmaster001mb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       Subscriptionmaster001mb.insertMany([{
@@ -436,6 +533,38 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
+  Role001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Role001wb.insertMany([{
+        'rolename': "farmer",
+        'status': "active",
+        'discountflag': true,
+        'inserteduser': "aravindh",
+        'inserteddatetime': 3 / 11 / 22,
+        'updateduser': "selvam",
+        'updateddatetime': 3 / 11 / 22
+      }
+      ])
+        .then(() => {
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
+  Personrole001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Personrole001wb.insertMany([{
+        'personname': "sridharan",
+        'inserteduser': "aravindh",
+        'inserteddatetime': 3 / 11 / 22,
+        'updateduser': "selvam",
+        'updateddatetime': 3 / 11 / 22
+      }
+      ])
+        .then(() => {
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
 }
 app.use("/api/countrycontroller", countrycontroller);
 app.use("/api/categorydetailcontroller", categorydetailcontroller);
@@ -452,6 +581,14 @@ app.use("/api/subscribercontentcontroller", subscribercontentcontroller);
 app.use("/api/subscriberpersonalinfocontroller", subscriberpersonalinfocontroller);
 app.use("/api/subscriberprofessionalinfocontroller", subscriberprofessionalinfocontroller);
 app.use("/api/subscriptionmastercontroller", subscriptionmastercontroller);
+app.use("/api/usercontroller", usercontroller);
+app.use("/api/reviewcontroller", reviewcontroller);
+app.use("/api/personcontroller", personcontroller);
+app.use("/api/photocontroller", photocontroller);
+app.use("/api/videocontroller", videocontroller);
+app.use("/api/personrolecontroller", personrolecontroller);
+app.use("/api/rolecontroller", rolecontroller);
+app.use("/api/subscriberdetailscontroller", subscriberdetailscontroller);
 
 const PORT = process.env.PORT || 8081;
 

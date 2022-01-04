@@ -2,7 +2,18 @@ import db from "../models/main.js";
 
 const Country001mb = db.country001mb;
 
+const Companydetails001mb = db.companydetails001mb;
+
 export const list = async (req, res) => {
+    console.log("testing---company");
+    // Country001mb.find()
+    //     .then(Companydetails001mb => {
+    //         res.send(Companydetails001mb);
+    //     }).catch(err => {
+    //         res.status(500).send({
+    //             message: err.message
+    //         });
+    //     });
     Country001mb.find(function (err, Country001mb) {
         if (err) {
             return res.status(500).json({
