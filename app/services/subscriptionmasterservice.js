@@ -11,7 +11,7 @@ export const list = async (req, res) => {
             });
         }
 
-        return res.json(subscriptionmaster001mbs);
+        return res.json(subscriptionmaster001mb);
     });
 };
 

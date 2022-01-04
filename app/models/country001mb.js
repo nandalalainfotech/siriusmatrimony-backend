@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 mongoose.pluralize(null);
 
 const country001mb = mongoose.model(
@@ -13,7 +14,13 @@ const country001mb = mongoose.model(
 			'inserteduser': String,
 			'inserteddatetime': Date,
 			'updateddatetime': Date,
-			'updateduser': String
+			'updateduser': String,
+			'companydetails001mb': [
+				{
+				  type: mongoose.Schema.Types.ObjectId,
+				  ref: "companydetails001mb",
+				},
+			  ],
 		},
 		{ timestamps: false }
 	)

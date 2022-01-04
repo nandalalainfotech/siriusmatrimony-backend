@@ -15,6 +15,13 @@ import subscribercontentauth001wb from "./subscribercontentauth001wb.js";
 import subscriberpersonalinfo001wb from "./subscriberpersonalinfo001wb.js";
 import subscriberprofessionalinfo002wb from "./subscriberprofessionalinfo002wb.js";
 import subscriptionmaster001mb from "./subscriptionmaster001mb.js";
+import user001mb from "./user001mb.js";
+import review001mb from "./review001mb.js";
+import person001wb from "./person001wb.js";
+import photo001wb from "./photo001wb.js";
+import video001wb from "./video001wb.js";
+import role001wb from "./role001wb.js";
+import personrole001wb from "./personrole001wb.js"
 
 mongoose.Promise = global.Promise;
 const db = {};
@@ -36,6 +43,11 @@ db.subscribercontentauth001wb = subscribercontentauth001wb;
 db.subscriberpersonalinfo001wb = subscriberpersonalinfo001wb;
 db.subscriberprofessionalinfo002wb = subscriberprofessionalinfo002wb;
 db.subscriptionmaster001mb = subscriptionmaster001mb;
-
-
+db.user001mb = user001mb;
+db.review001mb = review001mb;
+db.person001wb = person001wb;
+db.photo001wb = photo001wb;
+db.video001wb = video001wb;
+db.role001wb = role001wb;
+db.personrole001wb = personrole001wb;
 export default db;
