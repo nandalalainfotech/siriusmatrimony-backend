@@ -17,4 +17,3 @@ router.put('/:id', countrycontroller.update);
 router.delete('/:id', countrycontroller.remove);
 
 export default router;
-// Country001mb.find({_id:'61d2b34ec10e1306343d0625'}).populate('companyname', 'address').exec(function (err, Country001mb) {

@@ -3,7 +3,7 @@ import db from "../models/main.js";
 const Language001mb = db.language001mb;
 
 export const list = async(req, res) => {
-    Language001mb.find(function (err, language001mbs) {
+    Language001mb.find(function (err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -11,7 +11,7 @@ export const list = async(req, res) => {
             });
         }
 
-        return res.json(language001mbs);
+        return res.json(language001mb);
     });
 };
 export const show = (req, res) => {

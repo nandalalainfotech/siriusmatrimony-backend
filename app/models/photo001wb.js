@@ -5,9 +5,9 @@ mongoose.pluralize(null);
 const photo001wb = mongoose.model(
     "photo001wb",
     new mongoose.Schema({
-        'category': String,
+        'fieldname': String,
         'filename': String,
-        'originalfilename': String,
+        'originalname': String,
         'content': Buffer,
         'status': String,
         'inserteduser': String,

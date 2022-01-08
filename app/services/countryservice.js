@@ -2,19 +2,10 @@ import db from "../models/main.js";
 
 const Country001mb = db.country001mb;
 
-const Companydetails001mb = db.companydetails001mb;
+
 
 export const list = async (req, res) => {
-    console.log("testing---company");
-    // Country001mb.find()
-    //     .then(Companydetails001mb => {
-    //         res.send(Companydetails001mb);
-    //     }).catch(err => {
-    //         res.status(500).send({
-    //             message: err.message
-    //         });
-    //     });
-    Country001mb.find(function (err, Country001mb) {
+    Country001mb.find(function (err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -26,6 +17,19 @@ export const list = async (req, res) => {
     });
 };
 
+// export const list =  (req, res) => {
+//     console.log("result------findone person001wb",req.body.inserteduser);
+//     Person001wb.findOne({ firstname: req.body.inserteduser })
+//     .populate('photo001wb')
+//     .then((result) => {
+//         console.log("result------populate person001wb ",result);
+//             res.json(result);
+//             console.log("result------populate3 person001wb", result);
+//         })
+//         .catch((error) => {
+//             res.status(500).json({ error });
+//         });
+// };
 export const show = async (req, res) => {
     var id = req.params.id;
 
@@ -48,29 +52,53 @@ export const show = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-    var country001mb = new Country001mb({
-        countryid: req.body.countryid,
-        countryname: req.body.countryname,
-        countrydesc: req.body.countrydesc,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateddatetime: req.body.updateddatetime,
-        updateduser: req.body.updateduser
-    });
+    console.log("res", res);
+    const country001mb = new Country001mb();
 
-    country001mb.save(function (err, country001mb) {
-        console.log("country", country001mb);
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating country001mb',
-                error: err
-            });
-        }
+        country001mb.countryid = req.body.countryid,
+        country001mb.countryname = req.body.countryname,
+        country001mb.countrydesc = req.body.countrydesc,
+        country001mb.status = req.body.status,
+        country001mb.inserteduser = req.body.inserteduser,
+        country001mb.inserteddatetime = req.body.inserteddatetime,
+        country001mb.updateddatetime = req.body.updateddatetime,
+        country001mb.updateduser = req.body.updateduser
 
-        return res.status(201).json(country001mb);
-    });
+    country001mb.save()
+        .then((result) => {
+            console.log("result------country001mb", result);
+            res.json({ message: 'country001mb created!', result });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
+
+
+// export const create = async (req, res) => {
+//     var country001mb = new Country001mb({
+//         countryid: req.body.countryid,
+//         countryname: req.body.countryname,
+//         countrydesc: req.body.countrydesc,
+//         status: req.body.status,
+//         inserteduser: req.body.inserteduser,
+//         inserteddatetime: req.body.inserteddatetime,
+//         updateddatetime: req.body.updateddatetime,
+//         updateduser: req.body.updateduser
+//     });
+
+//     country001mb.save(function (err, country001mb) {
+//         console.log("country", country001mb);
+//         if (err) {
+//             return res.status(500).json({
+//                 message: 'Error when creating country001mb',
+//                 error: err
+//             });
+//         }
+
+//         return res.status(201).json(country001mb);
+//     });
+// };
 
 export const update = async (req, res) => {
     var id = req.params.id;

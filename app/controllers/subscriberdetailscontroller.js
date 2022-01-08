@@ -10,9 +10,9 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/', subscriberdetails.list);
+router.get('/list', subscriberdetails.list);
 router.get('/:id', subscriberdetails.show);
-router.post('/', subscriberdetails.create);
+router.post('/create', subscriberdetails.create);
 router.put('/:id', subscriberdetails.update);
 router.delete('/:id', subscriberdetails.remove);
 

@@ -1,4 +1,4 @@
-import * as userservice from "../services/userservice.js";
+import * as usersampleservice from "../services/usersampleservice.js";
 
 import express from 'express';
 
@@ -10,9 +10,9 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/username', userservice.getUser);
+router.get('/username', usersampleservice.getUser);
 
-router.post('/createUser', userservice.createUser);
+router.post('/createUser', usersampleservice.createUser);
 
 
 export default router;

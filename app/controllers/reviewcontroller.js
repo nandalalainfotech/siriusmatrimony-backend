@@ -10,7 +10,7 @@ router.use(function (req, res, next) {
     next();
 });
 
-// router.get('/list', reviewservice.findOne);
+ router.get('/list', reviewservice.list);
 
 router.post('/createReview', reviewservice.createReview);
 
