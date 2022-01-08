@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import multer from "multer"
 import db from "./app/models/main.js";
 import countrycontroller from "./app/controllers/countrycontroller.js";
 import categorydetailcontroller from "./app/controllers/categorydetailscontroller.js";
@@ -18,14 +19,16 @@ import subscribercontentauthcontroller from "./app/controllers/subscribercontent
 import subscriberpersonalinfocontroller from "./app/controllers/subscriberpersonalinfocontroller.js";
 import subscriberprofessionalinfocontroller from "./app/controllers/subscriberprofessionalinfocontroller.js";
 import subscriptionmastercontroller from "./app/controllers/subscriptionmastercontroller.js"
-import usercontroller from "./app/controllers/usercontroller.js";
+import usersamplecontroller from "./app/controllers/usersamplecontroller.js";
 import reviewcontroller from "./app/controllers/reviewcontroller.js"
 import photocontroller from "./app/controllers/photocontroller.js"
 import videocontroller from "./app/controllers/videocontroller.js"
-import personcontroller from "./app/controllers/personcontroller.js"
+import userscontroller from "./app/controllers/userscontroller.js"
 import rolecontroller from "./app/controllers/rolecontroller.js";
-import personrolecontroller from "./app/controllers/personrolecontroller.js";
 import subscriberdetailscontroller from "./app/controllers/subscriberdetailscontroller.js";
+import citycontroller from "./app/controllers/citycontroller.js";
+import audiocontroller from "./app/controllers/audiocontroller.js";
+import personcontroller from "./app/controllers/personcontroller.js";
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -48,13 +51,16 @@ const Subscribercontentauth001wb = db.subscribercontentauth001wb;
 const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
 const Subscriberprofessionalinfo002wb = db.subscriberprofessionalinfo002wb;
 const Subscriptionmaster001mb = db.subscriptionmaster001mb;
-const User001mb = db.user001mb;
+const Usersample001mb = db.usersample001mb;
 const Review001mb = db.review001mb;
-const Person001wb = db.person001wb;
+const Users001wb = db.users001wb;
 const Photo001wb = db.photo001wb;
 const Video001wb = db.video001wb;
 const Role001wb = db.role001wb;
-const Personrole001wb = db.personrole001wb;
+const City001mb = db.city001mb;
+const Audio001wb = db.audio001wb;
+const Person001mb = db.person001mb;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function initial() {
@@ -65,6 +71,26 @@ function initial() {
           'countryid': 123,
           'countryname': "palls",
           'countrydesc': "good",
+          'status': "good",
+          'inserteduser': "raj",
+          'inserteddatetime': 11 / 12 / 22,
+          'updateddatetime': 11 / 12 / 22,
+          'updateduser': "raj",
+
+        },
+      ])
+        .then(() => {
+        })
+        .catch((err) => console.log("error", err));
+    }
+  });
+  City001mb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      City001mb.insertMany([
+        {
+          'cityid': 123,
+          'cityname': "xyz",
+          'citydesc': "good",
           'status': "good",
           'inserteduser': "raj",
           'inserteddatetime': 11 / 12 / 22,
@@ -215,6 +241,7 @@ function initial() {
           'subscid': 434,
           'subscname': "RAJ",
           'age': 44,
+          'classificationid':898,
           'sex': "male",
           'subscdesc': "good",
           'aboutme': "good",
@@ -299,12 +326,13 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
-  User001mb.estimatedDocumentCount((err, count) => {
+  Usersample001mb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
-      User001mb.insertMany([{
-        'firstname': "Raj",
-        'lastname': "h",
-        'username': "RAJ"
+      Usersample001mb.insertMany([{
+        'username': "Raj",
+        'password': "****",
+        'securityquestion': "xys",
+        'securityanswer': "xys"
 
       }
 
@@ -318,9 +346,9 @@ function initial() {
   Review001mb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       Review001mb.insertMany([{
-        'body': "raj",
-        'lastname': "d",
-        'rating': 55
+        'comments': "good",
+        'rating': "9",
+        'status': "good"
       }
       ])
         .then(() => {
@@ -441,7 +469,7 @@ function initial() {
       Video001wb.insertMany([{
         'category': "s222",
         'filename': "img.png",
-        'originalfilename': "photo",
+        'originalfilename': "video",
         'status': "active",
         'content': "678667",
         'inserteduser': "raj",
@@ -462,7 +490,7 @@ function initial() {
       Photo001wb.insertMany([{
         'category': "s222",
         'filename': "img.png",
-        'originalfilename': "photo",
+        'originalname': "photo",
         'content': "678667",
         'status': "active",
         'inserteduser': "raj",
@@ -478,12 +506,31 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
-  Person001wb.estimatedDocumentCount((err, count) => {
+  Person001mb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
-      Person001wb.insertMany([{
+      Person001mb.insertMany([{
+        'status': "active",
+        'inserteduser': "raj",
+        'inserteddatetime': 5 / 11 / 22,
+        'updateduser': "raju",
+        'updateddatetime': 12 / 11 / 22
+      }
+
+    ])
+      .then(() => {
+
+      })
+      .catch((err) => console.log("error", err));
+  }
+});
+
+  Users001wb.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      Users001wb.insertMany([{
         'firstname': "RAJ",
         'lasttname': "d",
         'zipcode': 1223243,
+        'employeeid':8778,
         'dob': 3 / 11 / 2000,
         'email': "xyz@gmail.com",
         'confirmemail': "xyz@gmail.com",
@@ -550,14 +597,18 @@ function initial() {
         .catch((err) => console.log("error", err));
     }
   });
-  Personrole001wb.estimatedDocumentCount((err, count) => {
+  Audio001wb.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
-      Personrole001wb.insertMany([{
-        'personname': "sridharan",
-        'inserteduser': "aravindh",
-        'inserteddatetime': 3 / 11 / 22,
-        'updateduser': "selvam",
-        'updateddatetime': 3 / 11 / 22
+      Audio001wb.insertMany([{
+        'category': "s222",
+        'filename': "img.mp3",
+        'originalfilename': "audio",
+        'content': "678667",
+        'status': "active",
+        'inserteduser': "raj",
+        'inserteddatetime': 6 / 11 / 22,
+        'updateduser': "raju",
+        'updateddatetime': 7 / 11 / 22
       }
       ])
         .then(() => {
@@ -566,6 +617,8 @@ function initial() {
     }
   });
 }
+
+app.use("/api/personcontroller ", personcontroller );
 app.use("/api/countrycontroller", countrycontroller);
 app.use("/api/categorydetailcontroller", categorydetailcontroller);
 app.use("/api/companydetailscontroller", companydetailscontroller);
@@ -581,14 +634,15 @@ app.use("/api/subscribercontentcontroller", subscribercontentcontroller);
 app.use("/api/subscriberpersonalinfocontroller", subscriberpersonalinfocontroller);
 app.use("/api/subscriberprofessionalinfocontroller", subscriberprofessionalinfocontroller);
 app.use("/api/subscriptionmastercontroller", subscriptionmastercontroller);
-app.use("/api/usercontroller", usercontroller);
+app.use("/api/usersamplecontroller", usersamplecontroller);
 app.use("/api/reviewcontroller", reviewcontroller);
-app.use("/api/personcontroller", personcontroller);
+app.use("/api/userscontroller", userscontroller);
 app.use("/api/photocontroller", photocontroller);
 app.use("/api/videocontroller", videocontroller);
-app.use("/api/personrolecontroller", personrolecontroller);
 app.use("/api/rolecontroller", rolecontroller);
 app.use("/api/subscriberdetailscontroller", subscriberdetailscontroller);
+app.use("/api/citycontroller", citycontroller);
+app.use("/api/audiocontroller", audiocontroller);
 
 const PORT = process.env.PORT || 8081;
 
@@ -610,3 +664,5 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+
+ 

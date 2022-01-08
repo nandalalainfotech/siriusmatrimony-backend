@@ -2,12 +2,13 @@ import mongoose from "mongoose";
 
 mongoose.pluralize(null);
 
-const person001wb = mongoose.model(
-    "person001wb",
+const users001wb = mongoose.model(
+    "users001wb",
     new mongoose.Schema({
         'firstname': String,
         'lasttname': String,
         'zipcode': Number,
+        'employeeid': Number,
         'dob': Date,
         'email': String,
         'confirmemail': String,
@@ -33,4 +34,4 @@ const person001wb = mongoose.model(
         { timestamps: false })
 );
 
-export default person001wb;
+export default users001wb;
