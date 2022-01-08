@@ -6,25 +6,25 @@ const Country001mb = db.country001mb;
 
 export const list = async (req, res) => {
 
-    Companydetails001mb.find(err, Companydetails001mb)
-        .then(Country001mb => {
-            res.send(Country001mb);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message
-            });
-        });
-
-    // Companydetails001mb.find(function (err, companydetails001mb) {
-    //     if (err) {
-    //         return res.status(500).json({
-    //             message: 'Error when getting companydetails001mb.',
-    //             error: err
+    // Companydetails001mb.find(err, companydetails001mb)
+    //     .then(Country001mb => {
+    //         res.send(Country001mb);
+    //     }).catch(err => {
+    //         res.status(500).send({
+    //             message: err.message
     //         });
-    //     }
+    //     });
 
-    //     return res.json(companydetails001mb);
-    // });
+    Companydetails001mb.find(function (err, companydetails001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when getting companydetails001mb.',
+                error: err
+            });
+        }
+
+        return res.json(companydetails001mb);
+    });
 };
 export const show = async (req, res) => {
     var id = req.params.id;
