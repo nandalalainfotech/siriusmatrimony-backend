@@ -3,7 +3,7 @@ import db from "../models/main.js";
 const Regionaldetails001mb = db.regionaldetails001mb;
 
 export const list = async(req, res) => {
-    Regionaldetails001mb.find(function(err, regionaldetails001mbs) {
+    Regionaldetails001mb.find(function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -11,7 +11,7 @@ export const list = async(req, res) => {
             });
         }
 
-        return res.json(regionaldetails001mbs);
+        return res.json(regionaldetails001mb);
     });
 };
 export const show = (req, res) => {
