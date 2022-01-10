@@ -4,8 +4,8 @@ const Country001mb = db.country001mb;
 
 
 
-export const list = async (req, res) => {
-    Country001mb.find(function (err, country001mb) {
+export const list = async(req, res) => {
+    Country001mb.find(function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -18,22 +18,19 @@ export const list = async (req, res) => {
 };
 
 // export const list =  (req, res) => {
-//     console.log("result------findone person001wb",req.body.inserteduser);
 //     Person001wb.findOne({ firstname: req.body.inserteduser })
 //     .populate('photo001wb')
 //     .then((result) => {
-//         console.log("result------populate person001wb ",result);
 //             res.json(result);
-//             console.log("result------populate3 person001wb", result);
 //         })
 //         .catch((error) => {
 //             res.status(500).json({ error });
 //         });
 // };
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Country001mb.findOne({ _id: id }, function (err, country001mb) {
+    Country001mb.findOne({ _id: id }, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -51,11 +48,11 @@ export const show = async (req, res) => {
     });
 };
 
-export const create = async (req, res) => {
+export const create = async(req, res) => {
     console.log("res", res);
     const country001mb = new Country001mb();
 
-        country001mb.countryid = req.body.countryid,
+    country001mb.countryid = req.body.countryid,
         country001mb.countryname = req.body.countryname,
         country001mb.countrydesc = req.body.countrydesc,
         country001mb.status = req.body.status,
@@ -100,10 +97,10 @@ export const create = async (req, res) => {
 //     });
 // };
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Country001mb.findOne({ _id: id }, function (err, country001mb) {
+    Country001mb.findOne({ _id: id }, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb',
@@ -126,7 +123,7 @@ export const update = async (req, res) => {
         country001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : country001mb.updateddatetime;
         country001mb.updateduser = req.body.updateduser ? req.body.updateduser : country001mb.updateduser;
 
-        country001mb.save(function (err, country001mb) {
+        country001mb.save(function(err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -139,10 +136,10 @@ export const update = async (req, res) => {
     });
 };
 
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Country001mb.findByIdAndRemove(id, function (err, country001mb) {
+    Country001mb.findByIdAndRemove(id, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the country001mb.',
@@ -153,4 +150,3 @@ export const remove = async (req, res) => {
         return res.status(204).json();
     });
 };
-
