@@ -10,9 +10,9 @@ router.use(function (req, res, next) {
     next();
 });
 
- router.get('/list', reviewservice.list);
+router.get('/list', reviewservice.list);
 
-router.post('/createReview', reviewservice.createReview);
+router.post('/create', reviewservice.createReview);
 
 
 export default router;
