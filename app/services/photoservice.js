@@ -2,10 +2,10 @@ import db from "../models/main.js";
 
 const Photo001wb = db.photo001wb
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    Photo001wb.findOne({ _id: id }, function(err, photo001wb) {
+    Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb.',
@@ -23,9 +23,9 @@ export const show = async(req, res) => {
     });
 };
 
-export const list = async(req, res) => {
+export const list = async (req, res) => {
     console.log('req.body.id', req.params);
-    Photo001wb.find({ id: req.params.id }, function(err, results) {
+    Photo001wb.find({ id: req.params.id }, function (err, results) {
         if (err) {
             res.send(`error: ${err}`);
         } else {
@@ -34,16 +34,21 @@ export const list = async(req, res) => {
     });
 
 };
-export const upload = async(req, res, err) => {
+export const upload = async (req, res, err) => {
     console.log("upload--------->", req.file)
     const photo001wb = new Photo001wb({
         content: req.file.path,
         fieldname: req.file.fieldname,
         originalname: req.file.originalname,
         filename: req.file.filename,
-        status: req.file.status,
+        status: req.body.status,
+        inserteduser: req.body.insert,
+        inserteddatetime: req.body.newdate,
+        updateduser: req.body.update,
+        updateddatetime: req.body.updates
 
     });
+    console.log("req.text.status--------->", req.body.status)
     photo001wb
         .save()
         .then((result) => {
@@ -60,10 +65,10 @@ export const upload = async(req, res, err) => {
         });
 }
 
-export const update = async(req, res) => {
+export const update = async (req, res) => {
 
 
-    Photo001wb.findOne({ id: req.params.id }, function(err, photo001wb) {
+    Photo001wb.findOne({ id: req.params.id }, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb',
@@ -87,7 +92,7 @@ export const update = async(req, res) => {
         photo001wb.updateduser = req.body.updateduser ? req.body.updateduser : photo001wb.updateduser;
         photo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : photo001wb.updateddatetime;
 
-        photo001wb.save(function(err, photo001wb) {
+        photo001wb.save(function (err, photo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating photo001wb.',
@@ -99,10 +104,10 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    Photo001wb.findByIdAndRemove(id, function(err, photo001wb) {
+    Photo001wb.findByIdAndRemove(id, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the photo001wb.',

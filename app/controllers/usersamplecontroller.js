@@ -10,9 +10,11 @@ router.use(function (req, res, next) {
     next();
 });
 
+router.get('/list', usersampleservice.list);
+
 router.get('/username', usersampleservice.getUser);
 
-router.post('/createUser', usersampleservice.createUser);
+router.post('/create', usersampleservice.createUser);
 
 
 export default router;

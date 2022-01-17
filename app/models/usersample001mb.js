@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// mongoose.Types.ObjectId.isValid('your id here');
 mongoose.pluralize(null);
 
 const usersample001mb = mongoose.model(
@@ -10,10 +9,10 @@ const usersample001mb = mongoose.model(
         'password': String,
         'securityquestion': String,
         'securityanswer': String,
-  'reviews' : [{ type: mongoose.Types.ObjectId, ref: 'review001mb' }],
-    }, 
-   
-    { timestamps: false })
+        'reviews': [{ type: mongoose.Types.ObjectId, ref: 'review001mb' }],
+    },
+
+        { timestamps: false })
 );
 
 export default usersample001mb;
