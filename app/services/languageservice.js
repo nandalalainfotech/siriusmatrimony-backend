@@ -1,9 +1,10 @@
 import db from "../models/main.js";
 
 const Language001mb = db.language001mb;
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
-    Language001mb.find(function (err, language001mb) {
+    Language001mb.find(function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -17,7 +18,7 @@ export const list = async(req, res) => {
 export const show = (req, res) => {
     var id = req.params.id;
 
-    Language001mb.findOne({ _id: id }, function (err, language001mb) {
+    Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -34,33 +35,44 @@ export const show = (req, res) => {
         return res.json(language001mb);
     });
 };
-export const create = async (req, res) => {
-    var language001mb = new Language001mb({
-        languageid: req.body.languageid,
-        languagename: req.body.languagename,
-        languagedesc: req.body.languagedesc,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+export const create = async(req, res) => {
+    const language001mb = new Language001mb()
+    language001mb.subscid = req.body.subscid;
+    language001mb.languageid = req.body.languageid;
+    language001mb.languagename = req.body.languagename;
+    language001mb.languagedesc = req.body.languagedesc;
+    language001mb.status = req.body.status;
+    language001mb.inserteduser = req.body.inserteduser;
+    language001mb.inserteddatetime = req.body.inserteddatetime;
+    language001mb.updateduser = req.body.updateduser;
+    language001mb.updateddatetime = req.body.updateddatetime;
 
-    language001mb.save(function (err, language001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating language001mb',
-                error: err
+
+    language001mb.save()
+        .then((result) => {
+            console.log("req.body.user001mb result", req.body.subscid.id);
+            console.log("result------subscriberpersonalinfo", result);
+            Subsriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
+                console.log("result------username", language001mb.subscid);
+                if (user) {
+                    console.log("user------subscriberpersonalinfo", user);
+                    user.languageid.push(language001mb);
+                    user.save();
+                    console.log("user------subscriberpersonalinfo111111", user);
+                    res.json({ message: 'language created!' });
+                }
             });
-        }
-
-        return res.status(201).json(language001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
-export const update = async (req, res) => {
+
+
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Language001mb.findOne({ _id: id }, function (err, language001mb) {
+    Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb',
@@ -83,7 +95,7 @@ export const update = async (req, res) => {
         language001mb.updateduser = req.body.updateduser ? req.body.updateduser : language001mb.updateduser;
         language001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : language001mb.updateddatetime;
 
-        language001mb.save(function (err, language001mb) {
+        language001mb.save(function(err, language001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating language001mb.',
@@ -95,10 +107,10 @@ export const update = async (req, res) => {
         });
     });
 };
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Language001mb.findByIdAndRemove(id, function (err, language001mb) {
+    Language001mb.findByIdAndRemove(id, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the language001mb.',
@@ -109,4 +121,3 @@ export const remove = async (req, res) => {
         return res.status(204).json();
     });
 };
-

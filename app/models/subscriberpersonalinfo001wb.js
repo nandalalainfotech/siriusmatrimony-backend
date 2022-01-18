@@ -5,7 +5,6 @@ mongoose.pluralize(null);
 const subscriberpersonalinfo001wb = mongoose.model(
     "subscriberpersonalinfo001wb",
     new mongoose.Schema({
-        'subcid': Number,
         'personaldetails': String,
         'hobbies': String,
         'flex1': String,
@@ -23,7 +22,11 @@ const subscriberpersonalinfo001wb = mongoose.model(
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': Date,
+        'subscid': {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        }
     }, { timestamps: false })
 );
 

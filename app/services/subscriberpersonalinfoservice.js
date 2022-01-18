@@ -1,9 +1,10 @@
 import db from "../models/main.js";
 
-const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb
+const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 
-export const list = async (req, res) => {
-    Subscriberpersonalinfo001wb.find(function (err, subscriberpersonalinfo001wbs) {
+export const list = async(req, res) => {
+    Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -15,10 +16,10 @@ export const list = async (req, res) => {
     });
 };
 
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -36,45 +37,53 @@ export const show = async (req, res) => {
     });
 };
 
-export const create = async (req, res) => {
-    var subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb({
-        subcid: req.body.subcid,
-        personaldetails: req.body.personaldetails,
-        hobbies: req.body.hobbies,
-        flex1: req.body.flex1,
-        flex2: req.body.flex2,
-        flex3: req.body.flex3,
-        flex4: req.body.flex4,
-        flex5: req.body.flex5,
-        flex6: req.body.flex6,
-        flex7: req.body.flex7,
-        flex8: req.body.flex8,
-        flex9: req.body.flex9,
-        flex10: req.body.flex10,
-        flex11: req.body.flex11,
-        flex12: req.body.flex12,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+export const create = async(req, res) => {
+    const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
+    subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
+    subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
+    subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
+    subscriberpersonalinfo001wb.flex1 = req.body.flex1;
+    subscriberpersonalinfo001wb.flex2 = req.body.flex2;
+    subscriberpersonalinfo001wb.flex3 = req.body.flex3;
+    subscriberpersonalinfo001wb.flex4 = req.body.flex4;
+    subscriberpersonalinfo001wb.flex5 = req.body.flex5;
+    subscriberpersonalinfo001wb.flex6 = req.body.flex6;
+    subscriberpersonalinfo001wb.flex7 = req.body.flex7;
+    subscriberpersonalinfo001wb.flex8 = req.body.flex8;
+    subscriberpersonalinfo001wb.flex9 = req.body.flex9;
+    subscriberpersonalinfo001wb.flex10 = req.body.flex10;
+    subscriberpersonalinfo001wb.flex11 = req.body.flex11;
+    subscriberpersonalinfo001wb.flex12 = req.body.flex12;
+    subscriberpersonalinfo001wb.inserteduser = req.body.inserteduser;
+    subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
+    subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
+    subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
 
-    subscriberpersonalinfo001wb.save(function (err, subscriberpersonalinfo001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating subscriberpersonalinfo001wb',
-                error: err
+
+    subscriberpersonalinfo001wb.save()
+        .then((result) => {
+            console.log("req.body.user001mb result", req.body.subscid.id);
+            console.log("result------subscriberpersonalinfo", result);
+            Subsriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
+                console.log("result------username", subscriberpersonalinfo001wb.subscid);
+                if (user) {
+                    console.log("user------subscriberpersonalinfo", user);
+                    user.personalid.push(subscriberpersonalinfo001wb);
+                    user.save();
+                    console.log("user------subscriberpersonalinfo111111", user);
+                    res.json({ message: 'subscriberpersonalinfo created!' });
+                }
             });
-        }
-
-        return res.status(201).json(subscriberpersonalinfo001wb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb',
@@ -108,7 +117,7 @@ export const update = async (req, res) => {
         subscriberpersonalinfo001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberpersonalinfo001wb.updateduser;
         subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberpersonalinfo001wb.updateddatetime;
 
-        subscriberpersonalinfo001wb.save(function (err, subscriberpersonalinfo001wb) {
+        subscriberpersonalinfo001wb.save(function(err, subscriberpersonalinfo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberpersonalinfo001wb.',
@@ -121,10 +130,10 @@ export const update = async (req, res) => {
     });
 };
 
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberpersonalinfo001wb.',
