@@ -5,7 +5,10 @@ mongoose.pluralize(null);
 const subscribercontentauth001wb = mongoose.model(
     "subscribercontentauth001wb",
     new mongoose.Schema({
-        'subscid': Number,
+        'subscid':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        },
         'subscsubpid': Number,
         'subscsubpstatus': String,
         'subscsubpstartdate': Date,

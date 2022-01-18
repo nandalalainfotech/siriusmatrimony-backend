@@ -59,19 +59,15 @@ export const create = async (req, res) => {
     subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
     subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
     subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
-        subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
-        subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
-        subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
+    subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
+    subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
+    subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
     subscriberprofessionalinfo002wb.save()
         .then((result) => {
-            console.log("result------subscriberprofessionalinfo002wb", result);
             Subscriberdetails001wb.findOne({ _id: subscriberprofessionalinfo002wb.subscid }, (err, user) => {
-                console.log("result------subcid subscriberprofessionalinfo002wb", subscriberprofessionalinfo002wb.subscid);
                 if (user) {
-                    console.log("user------subscriberprofessionalinfo002wb", user);
                     user.professionalid.push(subscriberprofessionalinfo002wb);
                     user.save();
-                    console.log("user------review1111111", user);
                     res.json({ message: 'subscriberprofessional created!' });
                 }
             });

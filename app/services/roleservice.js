@@ -1,7 +1,7 @@
 import db from "../models/main.js";
 
 const Role001wb = db.role001wb;
-
+const Subscriberdetails001wb = db.subscriberdetails001wb
 export const list = async(req, res) => {
     Role001wb.find(function(err, role001wb) {
         if (err) {
@@ -36,29 +36,11 @@ export const show = async(req, res) => {
     });
 };
 
-// export const create = async(req, res) => {
-//     var role001wb = new Role001wb({
-//         rolename: req.body.rolename,
-//         status: req.body.status,
-//         inserteduser: req.body.inserteduser,
-//         inserteddatetime: req.body.inserteddatetime,
-//         updateduser: req.body.updateduser,
-//         updateddatetime: req.body.updateddatetime
-//     });
-
-//     role001wb.save(function(err, role001wb) {
-//         if (err) {
-//             return res.status(500).json({
-//                 message: 'Error when creating role001wb',
-//                 error: err
-//             });
-//         }
-
-//         return res.status(201).json(role001wb);
-//     });
-// };
 export const create = (req, res) => {
+
     const role001wb = new Role001wb();
+    role001wb.subscid = req.body.subscid.id;
+    role001wb.roleid = req.body.roleid;
     role001wb.rolename = req.body.rolename;
     role001wb.status = req.body.status;
     role001wb.inserteduser = req.body.inserteduser;
@@ -68,11 +50,14 @@ export const create = (req, res) => {
 
     role001wb.save()
         .then((result) => {
-            res.json({ message: 'User created!', result });
+            Subscriberdetails001wb.findOne({ _id: role001wb.subscid }, (err, user) => {
+                if (user) {
+                    user.roleid.push(role001wb);
+                    user.save();
+                    res.json({ message: 'Role created!' });
+                }
+            });
         })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
 };
 
 export const update = async(req, res) => {
@@ -91,8 +76,8 @@ export const update = async(req, res) => {
                 message: 'No such role001wb'
             });
         }
-
-
+        role001wb.subscid = req.body.subscid.id ? req.body.subscid.id : role001wb.subscid;
+        role001wb.roleid = req.body.roleid ? req.body.roleid : role001wb.roleid;
         role001wb.rolename = req.body.rolename ? req.body.rolename : role001wb.rolename;
         role001wb.status = req.body.status ? req.body.status : role001wb.status;
         role001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : role001wb.inserteduser;

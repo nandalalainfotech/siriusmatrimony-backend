@@ -39,15 +39,14 @@ export const show = async(req, res) => {
 
 
 export const create = async(req, res) => {
-    var person001mb = new Person001mb({
+    var person001mb = new Person001mb();
 
-        subscriberdetails: req.body.subscriberdetails,
-        user: req.body.user,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+    person001mb.subscid= req.body.subscid.id,
+    person001mb.userid= req.body.userid.id,
+    person001mb.inserteduser= req.body.inserteduser,
+    person001mb.inserteddatetime= req.body.inserteddatetime,
+    person001mb.updateduser= req.body.updateduser,
+    person001mb.updateddatetime= req.body.updateddatetime
 
     person001mb.save(function(err, person001mb) {
         if (err) {
@@ -78,8 +77,8 @@ export const update = async(req, res) => {
             });
         }
 
-        person001mb.subscriberdetails = req.body.subscriberdetails ? req.body.subscriberdetails : person001mb.subscriberdetails;
-        person001mb.user = req.body.user ? req.body.user : person001mb.user;
+        person001mb.subscid = req.body.subscid.id ? req.body.subscid.id : person001mb.subscid;
+        person001mb.user = req.body.userid.id ? req.body.userid.id : person001mb.user;
         person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
         person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
         person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;

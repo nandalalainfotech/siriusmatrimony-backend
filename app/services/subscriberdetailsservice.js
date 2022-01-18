@@ -58,8 +58,6 @@ export const create = async (req, res) => {
     subscriberdetails001wb.updateddatetime = req.body.updateddatetime;
     subscriberdetails001wb.save()
         .then((result) => {
-            console.log("result------subscriberdetails001wb", result);
-
             res.json({ message: 'subscriberdetails001wb created!' });
         })
         .catch((error) => {

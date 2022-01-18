@@ -37,19 +37,17 @@ export const show = (req, res) => {
 };
 
 export const create = async(req, res) => {
-    var subscribercontentauth001wb = new Subscribercontentauth001wb({
-        subscid: req.body.subscid,
-        subscsubpid: req.body.subscsubpid,
-        subscsubpstatus: req.body.subscsubpstatus,
-        subscsubpstartdate: req.body.subscsubpstartdate,
-        subscsupbenddate: req.body.subscsupbenddate,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
-
-    subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
+    const subscribercontentauth001wb = new Subscribercontentauth001wb();
+        subscribercontentauth001wb.subscid= req.body.subscid.id,
+        subscribercontentauth001wb.subscsubpid= req.body.subscsubpid,
+        subscribercontentauth001wb.subscsubpstatus= req.body.subscsubpstatus,
+        subscribercontentauth001wb.subscsubpstartdate= req.body.subscsubpstartdate,
+        subscribercontentauth001wb.subscsupbenddate= req.body.subscsupbenddate,
+        subscribercontentauth001wb.inserteduser= req.body.inserteduser,
+        subscribercontentauth001wb.inserteddatetime= req.body.inserteddatetime,
+        subscribercontentauth001wb.updateduser= req.body.updateduser,
+        subscribercontentauth001wb.updateddatetime= req.body.updateddatetime
+       subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when creating subscribercontentauth001wb',
@@ -78,7 +76,7 @@ export const update = (req, res) => {
             });
         }
 
-        subscribercontentauth001wb.subscid = req.body.subscid ? req.body.subscid : subscribercontentauth001wb.subscid;
+        subscribercontentauth001wb.subscid = req.body.subscid.id ? req.body.subscid.id : subscribercontentauth001wb.subscid;
         subscribercontentauth001wb.subscsubpid = req.body.subscsubpid ? req.body.subscsubpid : subscribercontentauth001wb.subscsubpid;
         subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus ? req.body.subscsubpstatus : subscribercontentauth001wb.subscsubpstatus;
         subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate ? req.body.subscsubpstartdate : subscribercontentauth001wb.subscsubpstartdate;

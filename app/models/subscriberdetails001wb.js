@@ -13,7 +13,7 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'companydetails001mb'
         }],
-        'role': [{
+        'roleid': [{
             type: mongoose.Types.ObjectId,
             ref: 'role001wb'
         }],
@@ -29,10 +29,10 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriberprofessionalinfo002wb'
         }],
-        // 'categoryid': [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'photo001wb'
-        // }],
+        'categoryid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'categorydetails001mb'
+        }],
 
         'subscid': Number,
 
