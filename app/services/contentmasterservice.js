@@ -58,15 +58,10 @@ export const create = async(req, res) => {
 
     contentmaster001mb.save()
         .then((result) => {
-            console.log("req.body.user001mb result", req.body.subscid.id);
-            console.log("result------contentmaster", result);
             Subscriberdetails001wb.findOne({ _id: contentmaster001mb.subscid }, (err, user) => {
-                console.log("result------username", contentmaster001mb.subscid);
                 if (user) {
-                    console.log("user------contentmaster", user);
                     user.contentmasterid.push(contentmaster001mb);
                     user.save();
-                    console.log("user------contentmaster111111", user);
                     res.json({ message: 'contentmaster created!' });
                 }
             });
@@ -93,7 +88,7 @@ export const update = async(req, res) => {
             });
         }
 
-        contentmaster001mb.contentid = req.body.contentid ? req.body.contentid : contentmaster001mb.contentid;
+        contentmaster001mb.contentid = req.body.contentid.id ? req.body.contentid : contentmaster001mb.contentid;
         contentmaster001mb.name = req.body.name ? req.body.name : contentmaster001mb.name;
         contentmaster001mb.description = req.body.description ? req.body.description : contentmaster001mb.description;
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;

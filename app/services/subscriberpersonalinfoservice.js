@@ -62,15 +62,11 @@ export const create = async(req, res) => {
 
     subscriberpersonalinfo001wb.save()
         .then((result) => {
-            console.log("req.body.user001mb result", req.body.subscid.id);
-            console.log("result------subscriberpersonalinfo", result);
+
             Subsriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
-                console.log("result------username", subscriberpersonalinfo001wb.subscid);
                 if (user) {
-                    console.log("user------subscriberpersonalinfo", user);
                     user.personalid.push(subscriberpersonalinfo001wb);
                     user.save();
-                    console.log("user------subscriberpersonalinfo111111", user);
                     res.json({ message: 'subscriberpersonalinfo created!' });
                 }
             });
@@ -97,7 +93,7 @@ export const update = async(req, res) => {
             });
         }
 
-        subscriberpersonalinfo001wb.subcid = req.body.subcid ? req.body.subcid : subscriberpersonalinfo001wb.subcid;
+        subscriberpersonalinfo001wb.subcid = req.body.subcid.id ? req.body.subcid : subscriberpersonalinfo001wb.subcid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;
