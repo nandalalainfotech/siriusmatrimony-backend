@@ -36,7 +36,7 @@ export const show = (req, res) => {
 };
 
 export const create = async(req, res) => {
-    var religion001mb = new Religion001mb();
+    const religion001mb = new Religion001mb();
     religion001mb.subscid = req.body.subscid;
     religion001mb.religionid = req.body.religionid;
     religion001mb.religionname = req.body.religionname;
@@ -49,15 +49,11 @@ export const create = async(req, res) => {
 
     religion001mb.save()
         .then((result) => {
-            console.log("req.body.user001mb result", req.body.subscid.id);
-            console.log("result------religion", result);
+
             Subsriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
-                console.log("result------username", religion001mb.subscid);
                 if (user) {
-                    console.log("user------religion", user);
-                    user.regionalid.push(religion001mb);
+                    user.religionid.push(religion001mb);
                     user.save();
-                    console.log("user------religion", user);
                     res.json({ message: 'religion created!' });
                 }
             });
@@ -83,7 +79,7 @@ export const update = async(req, res) => {
             });
         }
 
-        religion001mb.religionid = req.body.religionid ? req.body.religionid : religion001mb.religionid;
+        religion001mb.religionid = req.body.religionid.id ? req.body.religionid : religion001mb.religionid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;
@@ -116,5 +112,6 @@ export const remove = async(req, res) => {
         }
 
         return res.status(204).json();
+
     });
 };
