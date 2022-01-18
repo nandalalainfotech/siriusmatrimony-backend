@@ -28,7 +28,11 @@ const contentmaster001mb = mongoose.model(
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': Date,
+        'subscid': {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        }
     }, { timestamps: false })
 );
 export default contentmaster001mb;

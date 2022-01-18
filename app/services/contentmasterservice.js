@@ -1,6 +1,7 @@
 import db from "../models/main.js";
 
 const Contentmaster001mb = db.contentmaster001mb;
+const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Contentmaster001mb.find(function(err, contentmaster001mbs) {
@@ -37,34 +38,42 @@ export const show = async(req, res) => {
 };
 
 export const create = async(req, res) => {
-    var contentmaster001mb = new Contentmaster001mb({
-        contentid: req.body.contentid,
-        name: req.body.name,
-        description: req.body.description,
-        size: req.body.size,
-        quality: req.body.quality,
-        format: req.body.format,
-        photo: req.body.photo,
-        video: req.body.video,
-        audio: req.body.audio,
-        status: req.body.status,
-        discountflag: req.body.discountflag,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+    const contentmaster001mb = new Contentmaster001mb()
+    contentmaster001mb.contentid = req.body.contentid;
+    contentmaster001mb.name = req.body.name;
+    contentmaster001mb.description = req.body.description;
+    contentmaster001mb.size = req.body.size;
+    contentmaster001mb.quality = req.body.quality;
+    contentmaster001mb.format = req.body.format;
+    contentmaster001mb.photo = req.body.photo;
+    contentmaster001mb.video = req.body.video;
+    contentmaster001mb.audio = req.body.audio;
+    contentmaster001mb.status = req.body.status;
+    contentmaster001mb.discountflag = req.body.discountflag;
+    contentmaster001mb.inserteduser = req.body.inserteduser,
+        contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
+    contentmaster001mb.updateduser = req.body.updateduser;
+    contentmaster001mb.updateddatetime = req.body.updateddatetime;
+    contentmaster001mb.subscid = req.body.subscid;
 
-    contentmaster001mb.save(function(err, contentmaster001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating contentmaster001mb',
-                error: err
+    contentmaster001mb.save()
+        .then((result) => {
+            console.log("req.body.user001mb result", req.body.subscid.id);
+            console.log("result------contentmaster", result);
+            Subscriberdetails001wb.findOne({ _id: contentmaster001mb.subscid }, (err, user) => {
+                console.log("result------username", contentmaster001mb.subscid);
+                if (user) {
+                    console.log("user------contentmaster", user);
+                    user.contentmasterid.push(contentmaster001mb);
+                    user.save();
+                    console.log("user------contentmaster111111", user);
+                    res.json({ message: 'contentmaster created!' });
+                }
             });
-        }
-
-        return res.status(201).json(contentmaster001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
 
 export const update = async(req, res) => {

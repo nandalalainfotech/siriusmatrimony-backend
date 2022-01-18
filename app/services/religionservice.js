@@ -1,7 +1,7 @@
 import db from "../models/main.js";
 
 const Religion001mb = db.religion001mb;
-
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 export const list = async(req, res) => {
     Religion001mb.find(function(err, religion001mbs) {
         if (err) {
@@ -36,27 +36,35 @@ export const show = (req, res) => {
 };
 
 export const create = async(req, res) => {
-    var religion001mb = new Religion001mb({
-        religionid: req.body.religionid,
-        religionname: req.body.religionname,
-        religiondesc: req.body.religiondesc,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+    var religion001mb = new Religion001mb();
+    religion001mb.subscid = req.body.subscid;
+    religion001mb.religionid = req.body.religionid;
+    religion001mb.religionname = req.body.religionname;
+    religion001mb.religiondesc = req.body.religiondesc;
+    religion001mb.status = req.body.status;
+    religion001mb.inserteduser = req.body.inserteduser;
+    religion001mb.inserteddatetime = req.body.inserteddatetime;
+    religion001mb.updateduser = req.body.updateduser;
+    religion001mb.updateddatetime = req.body.updateddatetime;
 
-    religion001mb.save(function(err, religion001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating religion001mb',
-                error: err
+    religion001mb.save()
+        .then((result) => {
+            console.log("req.body.user001mb result", req.body.subscid.id);
+            console.log("result------religion", result);
+            Subsriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
+                console.log("result------username", religion001mb.subscid);
+                if (user) {
+                    console.log("user------religion", user);
+                    user.regionalid.push(religion001mb);
+                    user.save();
+                    console.log("user------religion", user);
+                    res.json({ message: 'religion created!' });
+                }
             });
-        }
-
-        return res.status(201).json(religion001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
 export const update = async(req, res) => {
     var id = req.params.id;
