@@ -46,19 +46,13 @@ export const create = async(req, res) => {
     language001mb.inserteddatetime = req.body.inserteddatetime;
     language001mb.updateduser = req.body.updateduser;
     language001mb.updateddatetime = req.body.updateddatetime;
-
-
+    
     language001mb.save()
         .then((result) => {
-            console.log("req.body.user001mb result", req.body.subscid.id);
-            console.log("result------subscriberpersonalinfo", result);
             Subsriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
-                console.log("result------username", language001mb.subscid);
                 if (user) {
-                    console.log("user------subscriberpersonalinfo", user);
                     user.languageid.push(language001mb);
                     user.save();
-                    console.log("user------subscriberpersonalinfo111111", user);
                     res.json({ message: 'language created!' });
                 }
             });
@@ -85,7 +79,7 @@ export const update = async(req, res) => {
                 message: 'No such language001mb'
             });
         }
-
+        language001mb.subscid = req.body.subscid.id ? req.body.subscid.id : language001mb.subscid;
         language001mb.languageid = req.body.languageid ? req.body.languageid : language001mb.languageid;
         language001mb.languagename = req.body.languagename ? req.body.languagename : language001mb.languagename;
         language001mb.languagedesc = req.body.languagedesc ? req.body.languagedesc : language001mb.languagedesc;
