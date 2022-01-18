@@ -112,5 +112,6 @@ export const remove = async(req, res) => {
         }
 
         return res.status(204).json();
+
     });
 };
