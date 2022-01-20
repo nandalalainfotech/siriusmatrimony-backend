@@ -52,13 +52,11 @@ export const upload = async (req, res, err) => {
     video001wb
         .save()
         .then((result) => {
-            console.log(result);
             res.status(201).json({
                 message: 'created succesfully',
             });
         })
         .catch((err) => {
-            console.log(err);
             res.status(500).json({
                 error: err,
             });

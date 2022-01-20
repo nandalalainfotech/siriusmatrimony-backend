@@ -13,7 +13,11 @@ const regionaldetails001mb = mongoose.model(
 			'inserteduser': String,
 			'inserteddatetime': Date,
 			'updateduser': String,
-			'updateddatetime': Date
+			'updateddatetime': Date,
+			'subscid':  {
+				type: mongoose.Types.ObjectId,
+				ref: 'subscriberdetails001wb'
+			},
 		},
 		{ timestamps: false }
 	)

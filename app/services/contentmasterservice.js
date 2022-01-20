@@ -1,6 +1,7 @@
 import db from "../models/main.js";
 
 const Contentmaster001mb = db.contentmaster001mb;
+
 const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
@@ -45,13 +46,10 @@ export const create = async(req, res) => {
     contentmaster001mb.size = req.body.size;
     contentmaster001mb.quality = req.body.quality;
     contentmaster001mb.format = req.body.format;
-    contentmaster001mb.photo = req.body.photo;
-    contentmaster001mb.video = req.body.video;
-    contentmaster001mb.audio = req.body.audio;
     contentmaster001mb.status = req.body.status;
     contentmaster001mb.discountflag = req.body.discountflag;
     contentmaster001mb.inserteduser = req.body.inserteduser,
-        contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
+    contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
     contentmaster001mb.subscid = req.body.subscid;
@@ -94,9 +92,6 @@ export const update = async(req, res) => {
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;
         contentmaster001mb.quality = req.body.quality ? req.body.quality : contentmaster001mb.quality;
         contentmaster001mb.format = req.body.format ? req.body.format : contentmaster001mb.format;
-        contentmaster001mb.photo = req.body.photo ? req.body.photo : contentmaster001mb.photo;
-        contentmaster001mb.video = req.body.video ? req.body.video : contentmaster001mb.video;
-        contentmaster001mb.audio = req.body.audio ? req.body.audio : contentmaster001mb.audio;
         contentmaster001mb.status = req.body.status ? req.body.status : contentmaster001mb.status;
         contentmaster001mb.discountflag = req.body.discountflag ? req.body.discountflag : contentmaster001mb.discountflag;
         contentmaster001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : contentmaster001mb.inserteduser;

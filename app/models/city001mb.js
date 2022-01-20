@@ -7,6 +7,10 @@ const city001mb = mongoose.model(
 	"city001mb",
 	new mongoose.Schema(
 		{
+			'stateid': {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "state001mb",
+			},
 			'cityid': Number,
 			'cityname': String,
 			'citydesc': String,
@@ -15,12 +19,7 @@ const city001mb = mongoose.model(
 			'inserteddatetime': Date,
 			'updateddatetime': Date,
 			'updateduser': String,
-			'state': [
-				{
-				  type: mongoose.Schema.Types.ObjectId,
-				  ref: "state001mb",
-				},
-			  ],
+
 		},
 		{ timestamps: false }
 	)

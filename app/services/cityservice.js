@@ -2,6 +2,8 @@ import db from "../models/main.js";
 
 const City001mb = db.city001mb;
 
+const State001mb = db.state001mb;
+
 export const list = async (req, res) => {
     City001mb.find(function (err, city001mb) {
         if (err) {
@@ -39,6 +41,8 @@ export const show = async (req, res) => {
 export const create = async (req, res) => {
 
     const city001mb = new City001mb();
+
+    city001mb.stateid = req.body.stateid.id,
     city001mb.cityid = req.body.cityid,
     city001mb.cityname = req.body.cityname,
     city001mb.citydesc = req.body.citydesc,
@@ -48,9 +52,15 @@ export const create = async (req, res) => {
     city001mb.updateddatetime = req.body.updateddatetime,
     city001mb.updateduser = req.body.updateduser
 
-        city001mb.save()
+    city001mb.save()
         .then((result) => {
-            res.json({ message: 'city001mb created!', result });
+            State001mb.findOne({ _id: city001mb.stateid }, (err, user) => {
+                if (user) {
+                    user.cityid.push(city001mb);
+                    user.save();
+                    res.json({ message: 'city created!' });
+                }
+            });
         })
         .catch((error) => {
             res.status(500).json({ error });
@@ -72,6 +82,7 @@ export const update = async (req, res) => {
                 message: 'No such city001mb'
             });
         }
+        city001mb.stateid = req.body.stateid.id ? req.body.stateid.id : city001mb.stateid;
         city001mb.cityid = req.body.cityid ? req.body.cityid : city001mb.cityid;
         city001mb.cityname = req.body.cityname ? req.body.cityname : city001mb.cityname;
         city001mb.citydesc = req.body.citydesc ? req.body.citydesc : city001mb.citydesc;

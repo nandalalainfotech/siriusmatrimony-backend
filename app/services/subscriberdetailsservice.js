@@ -39,6 +39,8 @@ export const show = async (req, res) => {
 
 export const create = async (req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
+    subscriberdetails001wb.cityid = req.body.cityid.id;
+    subscriberdetails001wb.stateid = req.body.stateid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
     subscriberdetails001wb.subscname = req.body.subscname;
     subscriberdetails001wb.age = req.body.age;
@@ -82,6 +84,8 @@ export const update = async (req, res) => {
             });
         }
 
+        subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
+        subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
         subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
         subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
