@@ -93,7 +93,8 @@ export const update = async(req, res) => {
             });
         }
 
-        subscriberpersonalinfo001wb.subcid = req.body.subcid.id ? req.body.subcid : subscriberpersonalinfo001wb.subcid;
+
+        subscriberpersonalinfo001wb.subcid = req.body.subcid.id ? req.body.subcid.id : subscriberpersonalinfo001wb.subcid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;

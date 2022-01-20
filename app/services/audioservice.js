@@ -1,6 +1,7 @@
 import db from "../models/main.js";
 
-const Audio001wb = db.audio001wb
+const Audio001wb = db.audio001wb;
+const Contentmaster001mb = db.contentmaster001mb;
 
 export const list = async(req, res) => {
     Audio001wb.find(function(err, audio001wb) {
@@ -37,8 +38,9 @@ export const show = async(req, res) => {
 };
 
 export const create = async(req, res) => {
-    var audio001wb = new Audio001wb();
+    const audio001wb = new Audio001wb();
     audio001wb.category = req.body.category;
+    audio001wb.contentid = req.body.contentid;
     audio001wb.filename = req.body.filename;
     audio001wb.originalfilename = req.body.originalfilename;
     audio001wb.status = req.body.status;
@@ -47,16 +49,19 @@ export const create = async(req, res) => {
     audio001wb.updateduser = req.body.updateduser;
     audio001wb.updateddatetime = req.body.updateddatetime;
     audio001wb.content = req.body.content,
-
-        audio001wb.save(function(err, audio001wb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating audio001wb',
-                    error: err
-                });
-            }
-
-            return res.status(201).json(audio001wb);
+        audio001wb.save()
+        .then((result) => {
+            console.log("result", result);
+            Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
+                if (user) {
+                    user.audio.push(audio001wb);
+                    user.save();
+                    res.json({ message: 'Video created!' });
+                }
+            });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
         });
 };
 
@@ -77,7 +82,8 @@ export const update = async(req, res) => {
             });
         }
 
-        audio001wb.category = req.body.category ? req.body.category : audio001wb.category;
+        audio001wb.contentid = req.body.contentid ? req.body.contentid : audio001wb.contentid;
+        audio001wb.fieldname = req.body.fieldname ? req.body.fieldname : audio001wb.fieldname;
         audio001wb.filename = req.body.filename ? req.body.filename : audio001wb.filename;
         audio001wb.originalfilename = req.body.originalfilename ? req.body.originalfilename : audio001wb.originalfilename;
         audio001wb.status = req.body.status ? req.body.status : audio001wb.status;

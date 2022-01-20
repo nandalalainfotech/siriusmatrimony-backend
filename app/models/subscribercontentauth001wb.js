@@ -5,7 +5,7 @@ mongoose.pluralize(null);
 const subscribercontentauth001wb = mongoose.model(
     "subscribercontentauth001wb",
     new mongoose.Schema({
-        'subscid':  {
+        'subscid': {
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
         },
