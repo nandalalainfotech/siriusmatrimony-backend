@@ -2,8 +2,8 @@ import db from "../models/main.js";
 
 const Subscriberdetails001wb = db.subscriberdetails001wb
 
-export const list = async (req, res) => {
-    Subscriberdetails001wb.find(function (err, subscriberdetails001wb) {
+export const list = async(req, res) => {
+    Subscriberdetails001wb.find(function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -15,10 +15,10 @@ export const list = async (req, res) => {
     });
 };
 
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberdetails001wb.findOne({ _id: id }, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -37,11 +37,10 @@ export const show = async (req, res) => {
 };
 
 
-export const create = async (req, res) => {
+export const create = async(req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
-    subscriberdetails001wb.cityid = req.body.cityid.id;
-    subscriberdetails001wb.stateid = req.body.stateid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
+    subscriberdetails001wb.countryid = req.body.countryid.id;
     subscriberdetails001wb.subscname = req.body.subscname;
     subscriberdetails001wb.age = req.body.age;
     subscriberdetails001wb.sex = req.body.sex;
@@ -67,10 +66,10 @@ export const create = async (req, res) => {
         });
 };
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberdetails001wb.findOne({ _id: id }, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb',
@@ -84,14 +83,13 @@ export const update = async (req, res) => {
             });
         }
 
-        subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
-        subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
         subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
         subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
         subscriberdetails001wb.sex = req.body.sex ? req.body.sex : subscriberdetails001wb.sex;
         subscriberdetails001wb.subscdesc = req.body.subscdesc ? req.body.subscdesc : subscriberdetails001wb.subscdesc;
         subscriberdetails001wb.aboutme = req.body.aboutme ? req.body.aboutme : subscriberdetails001wb.aboutme;
+        subscriberdetails001wb.countryid = req.body.countryid.id ? req.body.countryid.id : subscriberdetails001wb.countryid;
         subscriberdetails001wb.address = req.body.address ? req.body.address : subscriberdetails001wb.address;
         subscriberdetails001wb.phoneno = req.body.phoneno ? req.body.phoneno : subscriberdetails001wb.phoneno;
         subscriberdetails001wb.subscstatus = req.body.subscstatus ? req.body.subscstatus : subscriberdetails001wb.subscstatus;
@@ -102,7 +100,7 @@ export const update = async (req, res) => {
         subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberdetails001wb.inserteddatetime;
         subscriberdetails001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberdetails001wb.updateduser;
         subscriberdetails001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberdetails001wb.updateddatetime;
-        subscriberdetails001wb.save(function (err, subscriberdetails001wb) {
+        subscriberdetails001wb.save(function(err, subscriberdetails001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberdetails001wb.',
@@ -116,10 +114,10 @@ export const update = async (req, res) => {
 };
 
 
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Subscriberdetails001wb.findByIdAndRemove(id, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findByIdAndRemove(id, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberdetails001wb.',

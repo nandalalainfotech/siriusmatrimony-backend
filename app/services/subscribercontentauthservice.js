@@ -1,6 +1,7 @@
 import db from "../models/main.js";
 
-const Subscribercontentauth001wb = db.subscribercontentauth001wb
+const Subscribercontentauth001wb = db.subscribercontentauth001wb;
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Subscribercontentauth001wb.find(function(err, subscribercontentauth001wbs) {
@@ -38,27 +39,30 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const subscribercontentauth001wb = new Subscribercontentauth001wb();
-        subscribercontentauth001wb.subscid= req.body.subscid.id,
-        subscribercontentauth001wb.subscsubpid= req.body.subscsubpid,
-        subscribercontentauth001wb.subscsubpstatus= req.body.subscsubpstatus,
-        subscribercontentauth001wb.subscsubpstartdate= req.body.subscsubpstartdate,
-        subscribercontentauth001wb.subscsupbenddate= req.body.subscsupbenddate,
-        subscribercontentauth001wb.inserteduser= req.body.inserteduser,
-        subscribercontentauth001wb.inserteddatetime= req.body.inserteddatetime,
-        subscribercontentauth001wb.updateduser= req.body.updateduser,
-        subscribercontentauth001wb.updateddatetime= req.body.updateddatetime
-       subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating subscribercontentauth001wb',
-                error: err
+    subscribercontentauth001wb.subscid = req.body.subscid;
+    subscribercontentauth001wb.subscsubpid = req.body.subscsubpid;
+    subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
+    subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
+    subscribercontentauth001wb.subscsupbenddate = req.body.subscsupbenddate;
+    subscribercontentauth001wb.inserteduser = req.body.inserteduser;
+    subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
+    subscribercontentauth001wb.updateduser = req.body.updateduser;
+    subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
+    subscribercontentauth001wb.save()
+        .then((result) => {
+
+            Subsriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
+                if (user) {
+                    user.subsubpid.push(subscribercontentauth001wb);
+                    user.save();
+                    res.json({ message: 'religion created!' });
+                }
             });
-        }
-
-        return res.status(201).json(subscribercontentauth001wb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
-
 export const update = (req, res) => {
     var id = req.params.id;
 

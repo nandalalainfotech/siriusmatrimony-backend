@@ -79,7 +79,7 @@ export const update = async(req, res) => {
             });
         }
 
-        religion001mb.religionid = req.body.religionid.id ? req.body.religionid : religion001mb.religionid;
+        religion001mb.religionid = req.body.religionid.id ? req.body.religionid.id : religion001mb.religionid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;
