@@ -2,6 +2,8 @@ import db from "../models/main.js";
 
 const State001mb = db.state001mb;
 
+const Country001mb = db.country001mb;
+
 export const list = async(req, res) => {
     State001mb.find(function(err, state001mbs) {
         if (err) {
@@ -35,29 +37,64 @@ export const show = async(req, res) => {
         return res.json(state001mb);
     });
 };
+
+
 export const create = async(req, res) => {
-    var state001mb = new State001mb({
-        stateid: req.body.stateid,
-        statename: req.body.statename,
-        statedesc: req.body.statedesc,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+    const state001mb = new State001mb();
 
-    state001mb.save(function(err, state001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating state001mb',
-                error: err
+    state001mb.stateid = req.body.stateid,
+        state001mb.statename = req.body.statename,
+        state001mb.statedesc = req.body.statedesc,
+        state001mb.status = req.body.status,
+        state001mb.inserteduser = req.body.inserteduser,
+        state001mb.inserteddatetime = req.body.inserteddatetime,
+        state001mb.updateduser = req.body.updateduser,
+        state001mb.updateddatetime = req.body.updateddatetime
+    state001mb.save()
+        .then((result) => {
+            console.log("result------state001mb", result);
+            Country001mb.findOne({ _id: state001mb.stateid }, (err, user) => {
+                console.log("result------id state001mb", state001mb.state);
+                if (user) {
+                    // The below two lines will add the newly saved review's 
+                    // ObjectID to the the User's reviews array field
+                    console.log("user", user);
+                    user.stateid.push(state001mb);
+                    s
+                    user.save();
+                    res.json({ message: 'photo001wb created!' });
+                }
             });
-        }
-
-        return res.status(201).json(state001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
+
+
+// export const create = async(req, res) => {
+//     var state001mb = new State001mb({
+//         stateid: req.body.stateid,
+//         statename: req.body.statename,
+//         statedesc: req.body.statedesc,
+//         status: req.body.status,
+//         inserteduser: req.body.inserteduser,
+//         inserteddatetime: req.body.inserteddatetime,
+//         updateduser: req.body.updateduser,
+//         updateddatetime: req.body.updateddatetime
+//     });
+
+//     state001mb.save(function(err, state001mb) {
+//         if (err) {
+//             return res.status(500).json({
+//                 message: 'Error when creating state001mb',
+//                 error: err
+//             });
+//         }
+
+//         return res.status(201).json(state001mb);
+//     });
+// };
 
 export const update = async(req, res) => {
     var id = req.params.id;
