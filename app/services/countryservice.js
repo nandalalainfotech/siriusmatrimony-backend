@@ -49,53 +49,25 @@ export const show = async(req, res) => {
 };
 
 export const create = async(req, res) => {
-    console.log("res", res);
     const country001mb = new Country001mb();
 
     country001mb.countryid = req.body.countryid,
-        country001mb.countryname = req.body.countryname,
-        country001mb.countrydesc = req.body.countrydesc,
-        country001mb.status = req.body.status,
-        country001mb.inserteduser = req.body.inserteduser,
-        country001mb.inserteddatetime = req.body.inserteddatetime,
-        country001mb.updateddatetime = req.body.updateddatetime,
-        country001mb.updateduser = req.body.updateduser
+    country001mb.countryname = req.body.countryname,
+    country001mb.countrydesc = req.body.countrydesc,
+    country001mb.status = req.body.status,
+    country001mb.inserteduser = req.body.inserteduser,
+    country001mb.inserteddatetime = req.body.inserteddatetime,
+    country001mb.updateddatetime = req.body.updateddatetime,
+    country001mb.updateduser = req.body.updateduser
 
     country001mb.save()
         .then((result) => {
-            console.log("result------country001mb", result);
             res.json({ message: 'country001mb created!', result });
         })
         .catch((error) => {
             res.status(500).json({ error });
         });
 };
-
-
-// export const create = async (req, res) => {
-//     var country001mb = new Country001mb({
-//         countryid: req.body.countryid,
-//         countryname: req.body.countryname,
-//         countrydesc: req.body.countrydesc,
-//         status: req.body.status,
-//         inserteduser: req.body.inserteduser,
-//         inserteddatetime: req.body.inserteddatetime,
-//         updateddatetime: req.body.updateddatetime,
-//         updateduser: req.body.updateduser
-//     });
-
-//     country001mb.save(function (err, country001mb) {
-//         console.log("country", country001mb);
-//         if (err) {
-//             return res.status(500).json({
-//                 message: 'Error when creating country001mb',
-//                 error: err
-//             });
-//         }
-
-//         return res.status(201).json(country001mb);
-//     });
-// };
 
 export const update = async(req, res) => {
     var id = req.params.id;

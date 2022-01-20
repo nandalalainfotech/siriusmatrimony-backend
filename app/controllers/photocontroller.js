@@ -15,5 +15,5 @@ router.get('/:id', photoservice.show);
 router.put('/:id', photoservice.update);
 router.delete('/:id', photoservice.remove);
 
-router.post('/create',[upload.single("file")], photoservice.upload);
+router.post('/create',[upload.single("image")], photoservice.create);
 export default router;

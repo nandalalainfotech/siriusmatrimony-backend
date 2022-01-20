@@ -11,7 +11,7 @@ router.use(function(req, res, next) {
 
 router.get('/list', subcatclassificationservice.list);
 router.get('/:id', subcatclassificationservice.show);
-router.post('/show', subcatclassificationservice.create);
+router.post('/create', subcatclassificationservice.create);
 router.put('/:id', subcatclassificationservice.update);
 router.delete('/:id', subcatclassificationservice.remove);
 

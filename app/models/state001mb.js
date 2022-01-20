@@ -12,7 +12,11 @@ const state = mongoose.model(
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': Date,
+        'cityid': [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "state001mb",
+        }],
     }, { timestamps: false })
 );
 

@@ -33,13 +33,43 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'categorydetails001mb'
         }],
-
-        'subscid': Number,
-
+        'languageid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'language001mb'
+        }],
+        'personalid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriberpersonalinfo001wb'
+        }],
+        'contentmasterid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'contentmaster001mb'
+        }],
+        'religionid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'religion001mb'
+        }],
         'classificationid': [{
             type: mongoose.Types.ObjectId,
             ref: 'subcatclassification001mb'
         }],
+        'contentid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'contentmaster001mb'
+        }],
+        'subscsubspid': [{
+            type: mongoose.Types.ObjectId,
+            ref: 'subscribercontentauth001wb'
+        }],
+        'stateid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'state001mb'
+        },
+        'cityid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'city001mb'
+        },
+        'subscid': Number,
         'subscname': String,
         'age': Number,
         'sex': String,
@@ -57,20 +87,12 @@ const subscriberdetails001wb = mongoose.model(
         //     type: mongoose.Types.ObjectId,
         //     ref: 'audio001wb'
         // }],
-        'contentid': [{
-            type: mongoose.Types.ObjectId,
-            ref: 'contentmaster001mb'
-        }],
         'address': String,
         'phoneno': Number,
         'subscstatus': String,
         'subscapproval': Boolean,
         'approvedby': String,
         'approvedon': String,
-        'subscsubspid': [{
-            type: mongoose.Types.ObjectId,
-            ref: 'subscribercontentauth001wb'
-        }],
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,

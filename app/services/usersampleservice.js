@@ -33,13 +33,10 @@ export const list = async (req, res) => {
 
 
 export const getUser = (req, res) => {
-    console.log("result------findone", req.body.id);
     Usersample001mb.find({ id: req.body.id  })
         .populate('review001mb')
         .then((result) => {
-            console.log("result------populate", result);
             res.json(result);
-            console.log("result------populate3", result);
         })
         .catch((error) => {
             res.status(500).json({ error });

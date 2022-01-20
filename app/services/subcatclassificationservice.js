@@ -2,6 +2,8 @@ import db from "../models/main.js"
 
 const Subcatclassification001mb = db.subcatclassification001mb;
 
+const Subsriberdetails001wb = db.subscriberdetails001wb;
+
 export const list = async (req, res) => {
     Subcatclassification001mb.find(function (err, subcatclassification001mbs) {
         if (err) {
@@ -38,28 +40,29 @@ export const show = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-    var subcatclassification001mb = new Subcatclassification001mb({
-        catcode: req.body.catcode,
-        subcatcode: req.body.subcatcode,
-        classificationid: req.body.classificationid,
-        classificationname: req.body.classificationname,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
-
-    subcatclassification001mb.save(function (err, subcatclassification001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating subcatclassification001mb',
-                error: err
+    const subcatclassification001mb = new Subcatclassification001mb();
+    subcatclassification001mb.subscid = req.body.subscid.id,
+    subcatclassification001mb.catcode = req.body.catcode,
+    subcatclassification001mb.classificationid = req.body.classificationid,
+    subcatclassification001mb.classificationname = req.body.classificationname,
+    subcatclassification001mb.status = req.body.status,
+    subcatclassification001mb.inserteduser = req.body.inserteduser,
+    subcatclassification001mb.inserteddatetime = req.body.inserteddatetime,
+    subcatclassification001mb.updateduser = req.body.updateduser,
+    subcatclassification001mb.updateddatetime = req.body.updateddatetime
+    subcatclassification001mb.save()
+        .then((result) => {
+            Subsriberdetails001wb.findOne({ _id: subcatclassification001mb.subscid }, (err, user) => {
+                if (user) {
+                    user.classificationid.push(subcatclassification001mb);
+                    user.save();
+                    res.json({ message: 'subcatclassification created!' });
+                }
             });
-        }
-
-        return res.status(201).json(subcatclassification001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
 
 export const update = (req, res) => {
@@ -78,9 +81,8 @@ export const update = (req, res) => {
                 message: 'No such subcatclassification001mb'
             });
         }
-
+        subcatclassification001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcatclassification001mb.subscid;
         subcatclassification001mb.catcode = req.body.catcode ? req.body.catcode : subcatclassification001mb.catcode;
-        subcatclassification001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcatclassification001mb.subcatcode;
         subcatclassification001mb.classificationid = req.body.classificationid ? req.body.classificationid : subcatclassification001mb.classificationid;
         subcatclassification001mb.classificationname = req.body.classificationname ? req.body.classificationname : subcatclassification001mb.classificationname;
         subcatclassification001mb.status = req.body.status ? req.body.status : subcatclassification001mb.status;

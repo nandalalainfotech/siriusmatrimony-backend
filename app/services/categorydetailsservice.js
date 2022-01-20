@@ -41,7 +41,7 @@ export const show = async (req, res) => {
 
 
 export const create = async (req, res) => {
-    var categorydetails001mb = new Categorydetails001mb()
+    const categorydetails001mb = new Categorydetails001mb()
     categorydetails001mb.subscid = req.body.subscid.id;
     categorydetails001mb.catcode = req.body.catcode,
     categorydetails001mb.catname = req.body.catname,
@@ -50,7 +50,6 @@ export const create = async (req, res) => {
     categorydetails001mb.inserteddatetime = req.body.inserteddatetime,
     categorydetails001mb.updateduser = req.body.updateduser,
     categorydetails001mb.updateddatetime = req.body.updateddatetime
-
     categorydetails001mb.save()
         .then((result) => {
             Subsriberdetails001wb.findOne({ _id: categorydetails001mb.subscid }, (err, user) => {

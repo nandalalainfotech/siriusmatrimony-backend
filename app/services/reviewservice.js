@@ -12,15 +12,10 @@ export const createReview = async (req, res) => {
 
     review.save()
         .then((result) => {
-            console.log("req.body.user001mb result", req.body.user001mb.id);
-            console.log("result------review", result);
             Usersample001mb.findOne({ _id: review.user001mb }, (err, user) => {
-                console.log("result------username", review.user001mb);
                 if (user) {
-                    console.log("user------review", user);
                     user.reviews.push(review);
                     user.save();
-                    console.log("user------review11111", user);
                     res.json({ message: 'Review created!' });
                 }
             });

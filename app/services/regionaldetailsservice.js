@@ -2,8 +2,10 @@ import db from "../models/main.js";
 
 const Regionaldetails001mb = db.regionaldetails001mb;
 
-export const list = async(req, res) => {
-    Regionaldetails001mb.find(function(err, regionaldetails001mb) {
+const Subsriberdetails001wb = db.subscriberdetails001wb;
+
+export const list = async (req, res) => {
+    Regionaldetails001mb.find(function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -17,7 +19,7 @@ export const list = async(req, res) => {
 export const show = (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -35,33 +37,36 @@ export const show = (req, res) => {
     });
 };
 
-export const create = async(req, res) => {
-    var regionaldetails001mb = new Regionaldetails001mb({
-        regionalid: req.body.regionalid,
-        regionalname: req.body.regionalname,
-        regionaldesc: req.body.regionaldesc,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+export const create = async (req, res) => {
+    const regionaldetails001mb = new Regionaldetails001mb();
 
-    regionaldetails001mb.save(function(err, regionaldetails001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating regionaldetails001mb',
-                error: err
+    regionaldetails001mb.subscid = req.body.subscid.id,
+    regionaldetails001mb.regionalid = req.body.regionalid,
+    regionaldetails001mb.regionalname = req.body.regionalname,
+    regionaldetails001mb.regionaldesc = req.body.regionaldesc,
+    regionaldetails001mb.status = req.body.status,
+    regionaldetails001mb.inserteduser = req.body.inserteduser,
+    regionaldetails001mb.inserteddatetime = req.body.inserteddatetime,
+    regionaldetails001mb.updateduser = req.body.updateduser,
+    regionaldetails001mb.updateddatetime = req.body.updateddatetime
+    regionaldetails001mb.save()
+        .then((result) => {
+            Subsriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
+                if (user) {
+                    user.regionalid.push(regionaldetails001mb);
+                    user.save();
+                    res.json({ message: 'regionaldetails created!' });
+                }
             });
-        }
-
-        return res.status(201).json(regionaldetails001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb',
@@ -74,7 +79,7 @@ export const update = async(req, res) => {
                 message: 'No such regionaldetails001mb'
             });
         }
-
+        regionaldetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : regionaldetails001mb.subscid;
         regionaldetails001mb.regionalid = req.body.regionalid ? req.body.regionalid : regionaldetails001mb.regionalid;
         regionaldetails001mb.regionalname = req.body.regionalname ? req.body.regionalname : regionaldetails001mb.regionalname;
         regionaldetails001mb.regionaldesc = req.body.regionaldesc ? req.body.regionaldesc : regionaldetails001mb.regionaldesc;
@@ -84,7 +89,7 @@ export const update = async(req, res) => {
         regionaldetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : regionaldetails001mb.updateduser;
         regionaldetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : regionaldetails001mb.updateddatetime;
 
-        regionaldetails001mb.save(function(err, regionaldetails001mb) {
+        regionaldetails001mb.save(function (err, regionaldetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating regionaldetails001mb.',
@@ -96,10 +101,10 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findByIdAndRemove(id, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findByIdAndRemove(id, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the regionaldetails001mb.',

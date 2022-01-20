@@ -2,19 +2,9 @@ import db from "../models/main.js";
 
 const Companydetails001mb = db.companydetails001mb;
 
-const Country001mb = db.country001mb;
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async (req, res) => {
-
-    // Companydetails001mb.find(err, companydetails001mb)
-    //     .then(Country001mb => {
-    //         res.send(Country001mb);
-    //     }).catch(err => {
-    //         res.status(500).send({
-    //             message: err.message
-    //         });
-    //     });
-
     Companydetails001mb.find(function (err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
@@ -49,29 +39,31 @@ export const show = async (req, res) => {
 
 
 export const create = async (req, res) => {
-    var companydetails001mb = new Companydetails001mb({
-        companycode: req.body.companycode,
-        companyname: req.body.companyname,
-        address: req.body.address,
-        phonenumber: req.body.phonenumber,
-        regionalid: req.body.regionalid,
-        status: req.body.status,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
-
-    companydetails001mb.save(function (err, companydetails001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating companydetails001mb',
-                error: err
+    const companydetails001mb = new Companydetails001mb();
+    companydetails001mb.subscid = req.body.subscid.id,
+    companydetails001mb.companycode = req.body.companycode,
+    companydetails001mb.companyname = req.body.companyname,
+    companydetails001mb.address = req.body.address,
+    companydetails001mb.phonenumber = req.body.phonenumber,
+    companydetails001mb.regionalid = req.body.regionalid,
+    companydetails001mb.status = req.body.status,
+    companydetails001mb.inserteduser = req.body.inserteduser,
+    companydetails001mb.inserteddatetime = req.body.inserteddatetime,
+    companydetails001mb.updateduser = req.body.updateduser,
+    companydetails001mb.updateddatetime = req.body.updateddatetime
+    companydetails001mb.save()
+        .then((result) => {
+            Subsriberdetails001wb.findOne({ _id: companydetails001mb.subscid }, (err, user) => {
+                if (user) {
+                    user.companycode.push(companydetails001mb);
+                    user.save();
+                    res.json({ message: 'companydetails created!' });
+                }
             });
-        }
-
-        return res.status(201).json(companydetails001mb);
-    });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 };
 
 export const update = async (req, res) => {
@@ -90,7 +82,7 @@ export const update = async (req, res) => {
                 message: 'No such companydetails001mb'
             });
         }
-
+        companydetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : companydetails001mb.subscid;
         companydetails001mb.companycode = req.body.companycode ? req.body.companycode : companydetails001mb.companycode;
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;

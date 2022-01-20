@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
 
 router.get('/list', regionaldetailsservice.list);
 router.get('/:id', regionaldetailsservice.show);
-router.post('/crate', regionaldetailsservice.create);
+router.post('/create', regionaldetailsservice.create);
 router.put('/:id', regionaldetailsservice.update);
 router.delete('/:id', regionaldetailsservice.remove);
 
