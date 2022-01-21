@@ -28,6 +28,7 @@ import subscriberdetailscontroller from "./app/controllers/subscriberdetailscont
 import citycontroller from "./app/controllers/citycontroller.js";
 import audiocontroller from "./app/controllers/audiocontroller.js";
 import personcontroller from "./app/controllers/personcontroller.js";
+import logincontroller from "./app/controllers/logincontroller.js";
 
 const app = express();
 app.use(cors());
@@ -59,12 +60,28 @@ const Video001wb = db.video001wb;
 const Role001wb = db.role001wb;
 const City001mb = db.city001mb;
 const Audio001wb = db.audio001wb;
-const Person001mb = db.person001mb
+const Person001mb = db.person001mb;
+const Login001mb = db.login001mb;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function initial() {
+    Login001mb.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            Login001mb.insertMany([{
+                    // 'logintype': "mobile no ",
+                    // 'password': "xyz",
+                    // 'inserteduser': "raj",
+                    // 'inserteddatetime': 11 / 12 / 22,
+                    // 'updateddatetime': 11 / 12 / 22,
+                    // 'updateduser': "raj",
+
+                }, ])
+                .then(() => {})
+                .catch((err) => console.log("error", err));
+        }
+    });
     Country001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Country001mb.insertMany([{
@@ -593,6 +610,8 @@ function initial() {
     });
 }
 
+
+app.use("/api/logincontroller", logincontroller);
 app.use("/api/countrycontroller", countrycontroller);
 app.use("/api/categorydetailcontroller", categorydetailcontroller);
 app.use("/api/companydetailscontroller", companydetailscontroller);
