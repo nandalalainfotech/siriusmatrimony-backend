@@ -1,7 +1,9 @@
 import db from "../models/main.js";
 
 const Video001wb = db.video001wb
+
 const Contentmaster001mb = db.contentmaster001mb
+
 export const list = async(req, res) => {
     Video001wb.find(function(err, video001wb) {
         if (err) {
@@ -36,7 +38,7 @@ export const show = async(req, res) => {
     });
 };
 export const create = async(req, res, err) => {
-    console.log("req", req);
+
     const video001wb = new Video001wb();
     video001wb.contentid = req.body.contentid;
     video001wb.content = req.file.path;
@@ -51,7 +53,6 @@ export const create = async(req, res, err) => {
 
     video001wb.save()
         .then((result) => {
-            console.log("result", result);
             Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
                 if (user) {
                     user.video.push(video001wb);
@@ -83,15 +84,15 @@ export const update = async(req, res) => {
         }
 
         video001wb.contentid = req.body.contentid ? req.body.contentid : video001wb.contentid;
-        video001wb.fieldname = req.body.fieldname ? req.body.fieldname : video001wb.fieldname;
-        video001wb.filename = req.body.filename ? req.body.filename : video001wb.filename;
-        video001wb.originalfilename = req.body.originalfilename ? req.body.originalfilename : video001wb.originalfilename;
+        video001wb.fieldname = req.file.fieldname ? req.file.fieldname : video001wb.fieldname;
+        video001wb.filename = req.file.filename ? req.file.filename : video001wb.filename;
+        video001wb.originalname = req.file.originalname ? req.file.originalname : video001wb.originalname;
         video001wb.status = req.body.status ? req.body.status : video001wb.status;
-        video001wb.content = req.body.path ? req.body.path : video001wb.content;
-        video001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : video001wb.inserteduser;
-        video001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : video001wb.inserteddatetime;
-        video001wb.updateduser = req.body.updateduser ? req.body.updateduser : video001wb.updateduser;
-        video001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : video001wb.updateddatetime;
+        video001wb.content = req.file.path ? req.file.path : video001wb.content;
+        video001wb.inserteduser = req.body.insert ? req.body.insert : video001wb.inserteduser;
+        video001wb.inserteddatetime = req.body.newdate ? req.body.newdate : video001wb.inserteddatetime;
+        video001wb.updateduser = req.body.update ? req.body.update : video001wb.updateduser;
+        video001wb.updateddatetime = req.body.updates ? req.body.updates : video001wb.updateddatetime;
 
         video001wb.save(function(err, video001wb) {
             if (err) {

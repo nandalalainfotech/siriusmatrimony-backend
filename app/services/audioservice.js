@@ -51,7 +51,6 @@ export const create = async(req, res) => {
     audio001wb.content = req.body.content,
         audio001wb.save()
         .then((result) => {
-            console.log("result", result);
             Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
                 if (user) {
                     user.audio.push(audio001wb);
