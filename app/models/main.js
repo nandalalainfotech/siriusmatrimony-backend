@@ -21,9 +21,10 @@ import users001wb from "./users001wb.js";
 import photo001wb from "./photo001wb.js";
 import video001wb from "./video001wb.js";
 import role001wb from "./role001wb.js";
-import city001mb from "./city001mb.js"
-import audio001wb from "./audio001wb.js"
-import person001mb from "./person001mb.js"
+import city001mb from "./city001mb.js";
+import audio001wb from "./audio001wb.js";
+import person001mb from "./person001mb.js";
+import login001mb from "./login001mb.js";
 
 mongoose.Promise = global.Promise;
 const db = {};
@@ -53,5 +54,6 @@ db.video001wb = video001wb;
 db.role001wb = role001wb;
 db.city001mb = city001mb;
 db.audio001wb = audio001wb;
-db.person001mb = person001mb ;
+db.person001mb = person001mb;
+db.login001mb = login001mb;
 export default db;
