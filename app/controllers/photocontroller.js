@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
 
 router.get('/list', photoservice.list);
 router.get('/:id', photoservice.show);
-router.put('/:id', photoservice.update);
+router.put('/:id',[upload.single("image")], photoservice.update);
 router.delete('/:id', photoservice.remove);
 
 router.post('/create',[upload.single("image")], photoservice.create);
