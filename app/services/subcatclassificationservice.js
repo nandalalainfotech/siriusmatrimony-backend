@@ -42,7 +42,8 @@ export const show = async (req, res) => {
 export const create = async (req, res) => {
     const subcatclassification001mb = new Subcatclassification001mb();
     subcatclassification001mb.subscid = req.body.subscid.id,
-    subcatclassification001mb.catcode = req.body.catcode,
+    subcatclassification001mb.subcatcode = req.body.subcatcode.id,
+    // subcatclassification001mb.catcode = req.body.catcode,
     subcatclassification001mb.classificationid = req.body.classificationid,
     subcatclassification001mb.classificationname = req.body.classificationname,
     subcatclassification001mb.status = req.body.status,
@@ -81,8 +82,9 @@ export const update = (req, res) => {
                 message: 'No such subcatclassification001mb'
             });
         }
+        subcatclassification001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : subcatclassification001mb.subcatcode;
         subcatclassification001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcatclassification001mb.subscid;
-        subcatclassification001mb.catcode = req.body.catcode ? req.body.catcode : subcatclassification001mb.catcode;
+        // subcatclassification001mb.catcode = req.body.catcode ? req.body.catcode : subcatclassification001mb.catcode;
         subcatclassification001mb.classificationid = req.body.classificationid ? req.body.classificationid : subcatclassification001mb.classificationid;
         subcatclassification001mb.classificationname = req.body.classificationname ? req.body.classificationname : subcatclassification001mb.classificationname;
         subcatclassification001mb.status = req.body.status ? req.body.status : subcatclassification001mb.status;

@@ -5,11 +5,11 @@ mongoose.pluralize(null);
 const subcatclassification001mb = mongoose.model(
     "subcatclassification001mb",
     new mongoose.Schema({
-        'catcode': String,
-        'subcatcode':  [{
+        // 'catcode': String,
+        'subcatcode':  {
             type: mongoose.Types.ObjectId,
             ref: 'subcategory001mb'
-        }],
+        },
         'classificationid': Number,
         'classificationname': String,
         'status': String,

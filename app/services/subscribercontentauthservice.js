@@ -39,11 +39,11 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const subscribercontentauth001wb = new Subscribercontentauth001wb();
-    subscribercontentauth001wb.subscid = req.body.subscid;
+    subscribercontentauth001wb.subscid = req.body.subscid.id;
     subscribercontentauth001wb.subscsubpid = req.body.subscsubpid;
     subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
     subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
-    subscribercontentauth001wb.subscsupbenddate = req.body.subscsupbenddate;
+    subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
     subscribercontentauth001wb.inserteduser = req.body.inserteduser;
     subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
     subscribercontentauth001wb.updateduser = req.body.updateduser;
@@ -53,9 +53,9 @@ export const create = async(req, res) => {
 
             Subsriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
                 if (user) {
-                    user.subsubpid.push(subscribercontentauth001wb);
+                    user.subscsubspid.push(subscribercontentauth001wb);
                     user.save();
-                    res.json({ message: 'religion created!' });
+                    res.json({ message: 'subscribercontentauth created!' });
                 }
             });
         })
@@ -84,7 +84,7 @@ export const update = (req, res) => {
         subscribercontentauth001wb.subscsubpid = req.body.subscsubpid ? req.body.subscsubpid : subscribercontentauth001wb.subscsubpid;
         subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus ? req.body.subscsubpstatus : subscribercontentauth001wb.subscsubpstatus;
         subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate ? req.body.subscsubpstartdate : subscribercontentauth001wb.subscsubpstartdate;
-        subscribercontentauth001wb.subscsupbenddate = req.body.subscsupbenddate ? req.body.subscsupbenddate : subscribercontentauth001wb.subscsupbenddate;
+        subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate ? req.body.subscsubpenddate : subscribercontentauth001wb.subscsupbenddate;
         subscribercontentauth001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : subscribercontentauth001wb.inserteduser;
         subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscribercontentauth001wb.inserteddatetime;
         subscribercontentauth001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscribercontentauth001wb.updateduser;

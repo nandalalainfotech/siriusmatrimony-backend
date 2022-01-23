@@ -37,7 +37,7 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const religion001mb = new Religion001mb();
-    religion001mb.subscid = req.body.subscid;
+    religion001mb.subscid = req.body.subscid.id;
     religion001mb.religionid = req.body.religionid;
     religion001mb.religionname = req.body.religionname;
     religion001mb.religiondesc = req.body.religiondesc;
@@ -78,8 +78,8 @@ export const update = async(req, res) => {
                 message: 'No such religion001mb'
             });
         }
-
-        religion001mb.religionid = req.body.religionid.id ? req.body.religionid.id : religion001mb.religionid;
+        religion001mb.subscid = req.body.subscid.id ? req.body.subscid.id : religion001mb.religionid;
+        religion001mb.religionid = req.body.religionid ? req.body.religionid : religion001mb.religionid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;

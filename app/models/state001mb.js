@@ -15,8 +15,12 @@ const state = mongoose.model(
         'updateddatetime': Date,
         'cityid': [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "state001mb",
+            ref: "city001mb",
         }],
+        'countryid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'country001mb'
+        }
     }, { timestamps: false })
 );
 

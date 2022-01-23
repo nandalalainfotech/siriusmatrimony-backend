@@ -10,7 +10,10 @@ const companydetails001mb = mongoose.model(
 			'companyname': String,
 			'address': String,
 			'phonenumber': Number,
-			'regionalid': Number,
+			'regionalid': {
+				type: mongoose.Types.ObjectId,
+				ref: 'regionaldetails001mb'
+			},
 			'status': String,
 			'inserteduser': String,
 			'inserteddatetime': Date,

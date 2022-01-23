@@ -1,7 +1,6 @@
 import db from "../models/main.js";
 
 const Login001mb = db.login001mb;
-// const Subsriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Login001mb.find(function(err, login001mb) {
@@ -47,7 +46,7 @@ export const create = async(req, res) => {
 
     login001mb.save()
         .then((result) => {
-            res.json({ message: 'Login created!' });
+            res.json({ message: 'Login created' });
         })
         .catch((error) => {
             res.status(500).json({ error });

@@ -94,7 +94,7 @@ export const update = async (req, res) => {
             });
         }
         subscriberprofessionalinfo002wb.professionid = req.body.professionid ? req.body.professionid : subscriberprofessionalinfo002wb.professionid;
-        subscriberprofessionalinfo002wb.subcid = req.body.subcid ? req.body.subcid : subscriberprofessionalinfo002wb.subcid;
+        subscriberprofessionalinfo002wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberprofessionalinfo002wb.subcid;
         subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.personaldetails : subscriberprofessionalinfo002wb.professionaldetails;
         subscriberprofessionalinfo002wb.job = req.body.job ? req.body.job : subscriberprofessionalinfo002wb.job;
         subscriberprofessionalinfo002wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberprofessionalinfo002wb.flex1;

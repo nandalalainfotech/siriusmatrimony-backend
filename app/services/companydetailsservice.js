@@ -45,7 +45,7 @@ export const create = async (req, res) => {
     companydetails001mb.companyname = req.body.companyname,
     companydetails001mb.address = req.body.address,
     companydetails001mb.phonenumber = req.body.phonenumber,
-    companydetails001mb.regionalid = req.body.regionalid,
+    companydetails001mb.regionalid = req.body.regionalid.id,
     companydetails001mb.status = req.body.status,
     companydetails001mb.inserteduser = req.body.inserteduser,
     companydetails001mb.inserteddatetime = req.body.inserteddatetime,
@@ -87,7 +87,7 @@ export const update = async (req, res) => {
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;
         companydetails001mb.phonenumber = req.body.phonenumber ? req.body.phonenumber : companydetails001mb.phonenumber;
-        companydetails001mb.regionalid = req.body.regionalid ? req.body.regionalid : companydetails001mb.regionalid;
+        companydetails001mb.regionalid = req.body.regionalid.id ? req.body.regionalid.id : companydetails001mb.regionalid;
         companydetails001mb.status = req.body.status ? req.body.status : companydetails001mb.status;
         companydetails001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : companydetails001mb.inserteduser;
         companydetails001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : companydetails001mb.inserteddatetime;
