@@ -5,6 +5,7 @@ mongoose.pluralize(null);
 const subscriberpersonalinfo001wb = mongoose.model(
     "subscriberpersonalinfo001wb",
     new mongoose.Schema({
+        'personalid': Number,
         'personaldetails': String,
         'hobbies': String,
         'flex1': String,

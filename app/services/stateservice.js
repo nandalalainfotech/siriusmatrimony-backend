@@ -41,22 +41,22 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const state001mb = new State001mb();
-
+    state001mb.countryid = req.body.countryid.id,
     state001mb.stateid = req.body.stateid,
-        state001mb.statename = req.body.statename,
-        state001mb.statedesc = req.body.statedesc,
-        state001mb.status = req.body.status,
-        state001mb.inserteduser = req.body.inserteduser,
-        state001mb.inserteddatetime = req.body.inserteddatetime,
-        state001mb.updateduser = req.body.updateduser,
-        state001mb.updateddatetime = req.body.updateddatetime
+    state001mb.statename = req.body.statename,
+    state001mb.statedesc = req.body.statedesc,
+    state001mb.status = req.body.status,
+    state001mb.inserteduser = req.body.inserteduser,
+    state001mb.inserteddatetime = req.body.inserteddatetime,
+    state001mb.updateduser = req.body.updateduser,
+    state001mb.updateddatetime = req.body.updateddatetime
     state001mb.save()
         .then((result) => {
-            Country001mb.findOne({ _id: state001mb.stateid }, (err, user) => {
+            Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
                 if (user) {
                     user.stateid.push(state001mb);
                     user.save();
-                    res.json({ message: 'photo001wb created!' });
+                    res.json({ message: 'state created!' });
                 }
             });
         })
@@ -80,7 +80,7 @@ export const update = async(req, res) => {
                 message: 'No such state001mb'
             });
         }
-
+        state001mb.countryid = req.body.countryid.id ? req.body.countryid.id : state001mb.countryid;
         state001mb.stateid = req.body.stateid ? req.body.stateid : state001mb.stateid;
         state001mb.statename = req.body.statename ? req.body.statename : state001mb.statename;
         state001mb.statedesc = req.body.statedesc ? req.body.statedesc : state001mb.statedesc;

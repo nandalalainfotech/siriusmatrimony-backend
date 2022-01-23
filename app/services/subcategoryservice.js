@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Subcategory001mb = db.subcategory001mb
 
-const Subcatclassification001mb = db.subcatclassification001mb;
+const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async (req, res) => {
     Subcategory001mb.find(function (err, subcategory001mbs) {
@@ -39,7 +39,7 @@ export const show = async (req, res) => {
 
 export const create = async (req, res) => {
     const subcategory001mb = new Subcategory001mb()
-    subcategory001mb.classificationid= req.body.classificationid.id,
+    subcategory001mb.subscid= req.body.subscid.id,
     subcategory001mb.catcode= req.body.catcode.id,
     subcategory001mb.subcatcode= req.body.subcatcode,
     subcategory001mb.subcatname= req.body.subcatname,
@@ -51,11 +51,11 @@ export const create = async (req, res) => {
     subcategory001mb.updateddatetime= req.body.updateddatetime
     subcategory001mb.save()
     .then((result) => {
-        Subcatclassification001mb.findOne({ _id: subcategory001mb.classificationid }, (err, user) => {
+        Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
             if (user) {
                 user.subcatcode.push(subcategory001mb);
                 user.save();
-                res.json({ message: 'subcategory created!' });
+                res.json({ message: 'subcategory001mb created!' });
             }
         });
     })
@@ -81,7 +81,7 @@ export const update = async (req, res) => {
                 message: 'No such subcategory001mb'
             });
         }
-        subcategory001mb.classificationid = req.body.classificationid.id ? req.body.classificationid.id : subcategory001mb.classificationid;
+        subcategory001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcategory001mb.subscid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
         subcategory001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcategory001mb.subcatcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;

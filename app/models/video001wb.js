@@ -17,8 +17,7 @@ const video001wb = mongoose.model(
             'inserteduser': String,
             'inserteddatetime': Date,
             'updateduser': String,
-            'updateddatetime': Date,
-            'person': [{ type: mongoose.Types.ObjectId, ref: 'person' }],
+            'updateddatetime': Date
         },
 
         { timestamps: false })

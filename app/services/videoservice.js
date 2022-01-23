@@ -46,10 +46,10 @@ export const create = async(req, res, err) => {
     video001wb.originalname = req.file.originalname;
     video001wb.filename = req.file.filename;
     video001wb.status = req.body.status;
-    video001wb.inserteduser = req.body.insert;
-    video001wb.inserteddatetime = req.body.newdate;
-    video001wb.updateduser = req.body.update;
-    video001wb.updateddatetime = req.body.updates;
+    video001wb.inserteduser = req.body.inserteduser;
+    video001wb.inserteddatetime = req.body.inserteddatetime;
+    video001wb.updateduser = req.body.updateduser;
+    video001wb.updateddatetime = req.body.updateddatetime;
 
     video001wb.save()
         .then((result) => {
@@ -89,10 +89,10 @@ export const update = async(req, res) => {
         video001wb.originalname = req.file.originalname ? req.file.originalname : video001wb.originalname;
         video001wb.status = req.body.status ? req.body.status : video001wb.status;
         video001wb.content = req.file.path ? req.file.path : video001wb.content;
-        video001wb.inserteduser = req.body.insert ? req.body.insert : video001wb.inserteduser;
-        video001wb.inserteddatetime = req.body.newdate ? req.body.newdate : video001wb.inserteddatetime;
-        video001wb.updateduser = req.body.update ? req.body.update : video001wb.updateduser;
-        video001wb.updateddatetime = req.body.updates ? req.body.updates : video001wb.updateddatetime;
+        video001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : video001wb.inserteduser;
+        video001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : video001wb.inserteddatetime;
+        video001wb.updateduser = req.body.updateduser ? req.body.updateduser : video001wb.updateduser;
+        video001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : video001wb.updateddatetime;
 
         video001wb.save(function(err, video001wb) {
             if (err) {

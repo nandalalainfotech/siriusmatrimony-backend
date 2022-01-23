@@ -40,6 +40,7 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
     const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
     subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
+    subscriberpersonalinfo001wb.personalid = req.body.personalid;
     subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
     subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
     subscriberpersonalinfo001wb.flex1 = req.body.flex1;
@@ -93,8 +94,8 @@ export const update = async(req, res) => {
             });
         }
 
-
-        subscriberpersonalinfo001wb.subcid = req.body.subcid.id ? req.body.subcid.id : subscriberpersonalinfo001wb.subcid;
+        subscriberpersonalinfo001wb.personalid = req.body.personalid ? req.body.personalid : subscriberpersonalinfo001wb.personalid;
+        subscriberpersonalinfo001wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberpersonalinfo001wb.subcid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;

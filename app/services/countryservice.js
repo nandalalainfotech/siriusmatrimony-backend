@@ -1,8 +1,6 @@
 import db from "../models/main.js";
 
 const Country001mb = db.country001mb;
-const Subsriberdetails001wb = db.subscriberdetails001wb;
-
 
 export const list = async(req, res) => {
     Country001mb.find(function(err, country001mb) {
@@ -13,20 +11,10 @@ export const list = async(req, res) => {
             });
         }
 
-        return res.json(Country001mb);
+        return res.json(country001mb);
     });
 };
 
-// export const list =  (req, res) => {
-//     Person001wb.findOne({ firstname: req.body.inserteduser })
-//     .populate('photo001wb')
-//     .then((result) => {
-//             res.json(result);
-//         })
-//         .catch((error) => {
-//             res.status(500).json({ error });
-//         });
-// };
 export const show = async(req, res) => {
     var id = req.params.id;
 
@@ -52,7 +40,7 @@ export const create = async(req, res) => {
 
     const country001mb = new Country001mb();
 
-    country001mb.countryid = req.body.countryid.id,
+    country001mb.countryid = req.body.countryid,
     country001mb.countryname = req.body.countryname,
     country001mb.countrydesc = req.body.countrydesc,
     country001mb.status = req.body.status,
@@ -60,18 +48,13 @@ export const create = async(req, res) => {
     country001mb.inserteddatetime = req.body.inserteddatetime,
     country001mb.updateddatetime = req.body.updateddatetime,
     country001mb.updateduser = req.body.updateduser,
-    country001mb.subscid = req.body.subscid
-
     country001mb.save()
-        .then((result) => {
-            Subsriberdetails001wb.findOne({ _id: country001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.countryid.push(country001mb);
-                    user.save();
-                    res.json({ message: 'country created!' });
-                }
-            });
-        })
+    .then((result) => {
+        res.json({ message: 'country created' });
+    })
+    .catch((error) => {
+        res.status(500).json({ error });
+    });
 };
 
 export const update = async(req, res) => {
@@ -90,8 +73,7 @@ export const update = async(req, res) => {
                 message: 'No such country001mb'
             });
         }
-
-        country001mb.countryid = req.body.countryid.id ? req.body.countryid.id : country001mb.countryid;
+        country001mb.countryid = req.body.countryid ? req.body.countryid : country001mb.countryid;
         country001mb.countryname = req.body.countryname ? req.body.countryname : country001mb.countryname;
         country001mb.countrydesc = req.body.countrydesc ? req.body.countrydesc : country001mb.countrydesc;
         country001mb.status = req.body.status ? req.body.status : country001mb.status;

@@ -17,10 +17,10 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'role001wb'
         }],
-        'catcode': [{
-            type: mongoose.Types.ObjectId,
-            ref: 'categorydetails001mb'
-        }],
+        // 'catcode': [{
+        //     type: mongoose.Types.ObjectId,
+        //     ref: 'categorydetails001mb'
+        // }],
         'subcatcode': [{
             type: mongoose.Types.ObjectId,
             ref: 'subcategory001mb'
@@ -41,7 +41,7 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriberpersonalinfo001wb'
         }],
-        'contentmasterid': [{
+        'contentid': [{
             type: mongoose.Types.ObjectId,
             ref: 'contentmaster001mb'
         }],
@@ -69,24 +69,16 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'city001mb'
         },
+        'countryid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'country001mb'
+        },
         'subscid': Number,
         'subscname': String,
         'age': Number,
         'sex': String,
         'subscdesc': String,
         'aboutme': String,
-        // 'photo': [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'photo001wb'
-        // }],
-        // 'video': [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'video001wb'
-        // }],
-        // 'audio': [{
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'audio001wb'
-        // }],
         'address': String,
         'phoneno': Number,
         'subscstatus': String,

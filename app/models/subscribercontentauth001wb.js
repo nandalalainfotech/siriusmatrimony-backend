@@ -12,7 +12,7 @@ const subscribercontentauth001wb = mongoose.model(
         'subscsubpid': Number,
         'subscsubpstatus': String,
         'subscsubpstartdate': Date,
-        'subscsupbenddate': Date,
+        'subscsubpenddate': Date,
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,

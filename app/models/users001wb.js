@@ -30,9 +30,19 @@ const users001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
         },
-       'role': [{ type: mongoose.Types.ObjectId, ref: 'role' }],
-       'photo': [{ type: mongoose.Types.ObjectId, ref: 'photo' }],
-       'video': [{ type: mongoose.Types.ObjectId, ref: 'video' }],
+        'stateid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'state001mb'
+        },
+        'cityid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'city001mb'
+        },
+        'countryid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'country001mb'
+        },
+       'roleid': { type: mongoose.Types.ObjectId, ref: 'role001wb' },
     },
 
         { timestamps: false })

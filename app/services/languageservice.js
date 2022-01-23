@@ -37,7 +37,7 @@ export const show = (req, res) => {
 };
 export const create = async(req, res) => {
     const language001mb = new Language001mb()
-    language001mb.subscid = req.body.subscid;
+    language001mb.subscid = req.body.subscid.id;
     language001mb.languageid = req.body.languageid;
     language001mb.languagename = req.body.languagename;
     language001mb.languagedesc = req.body.languagedesc;

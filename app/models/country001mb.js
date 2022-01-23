@@ -17,11 +17,7 @@ const country001mb = mongoose.model(
         'stateid': [{
             type: mongoose.Types.ObjectId,
             ref: 'state001mb'
-        }],
-        'subscid': {
-            type: mongoose.Types.ObjectId,
-            ref: 'subscriberdetails001mb'
-        }
+        }]
 
     }, { timestamps: false })
 );

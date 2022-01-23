@@ -47,7 +47,6 @@ export const create = async(req, res) => {
     person001mb.inserteddatetime= req.body.inserteddatetime,
     person001mb.updateduser= req.body.updateduser,
     person001mb.updateddatetime= req.body.updateddatetime
-
     person001mb.save(function(err, person001mb) {
         if (err) {
             return res.status(500).json({
@@ -56,7 +55,7 @@ export const create = async(req, res) => {
             });
         }
 
-        return res.status(201).json(person001mb);
+        return res.status(201).json('person001mb Created!');
     });
 };
 

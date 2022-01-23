@@ -9,6 +9,10 @@ const subcategory001mb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'categorydetails001mb'
         },
+        'subscid':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        },
         'subcatcode': String,
         'subcatname': String,
         'subcatstatus': String,
@@ -16,11 +20,7 @@ const subcategory001mb = mongoose.model(
         'inserteduser': String,
         'inserteddatetime': Date,
         'updateduser': String,
-        'updateddatetime': Date,
-        'classificationid':  {
-            type: mongoose.Types.ObjectId,
-            ref: 'subcatclassification001mb'
-        },
+        'updateddatetime': Date
     }, { timestamps: false })
 );
 

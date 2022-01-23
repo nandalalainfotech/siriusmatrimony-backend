@@ -4,16 +4,20 @@ mongoose.pluralize(null);
 const audio001wb = mongoose.model(
     "audio001wb",
     new mongoose.Schema({
-            'category': String,
-            'filename': String,
-            'originalfilename': String,
-            'content': Buffer,
-            'status': String,
-            'inserteduser': String,
-            'inserteddatetime': Date,
-            'updateduser': String,
-            'updateddatetime': Date
+        'contentid': {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'contentmaster001mb'
         },
+        'fieldname': String,
+        'filename': String,
+        'originalname': String,
+        'content': Buffer,
+        'status': String,
+        'inserteduser': String,
+        'inserteddatetime': Date,
+        'updateduser': String,
+        'updateddatetime': Date
+    },
 
         { timestamps: false })
 );
