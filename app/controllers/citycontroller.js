@@ -1,4 +1,4 @@
-import * as citycontroller from "../services/cityservice.js";
+import * as countryservice from "../services/cityservice.js";
 
 import express from 'express';
 
@@ -10,10 +10,10 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/list', citycontroller.list);
-router.get('/:id', citycontroller.show);
-router.post('/create', citycontroller.create);
-router.put('/:id', citycontroller.update);
-router.delete('/:id', citycontroller.remove);
+router.get('/list', countryservice.list);
+router.get('/:id', countryservice.show);
+router.post('/create', countryservice.create);
+router.put('/:id', countryservice.update);
+router.delete('/:id', countryservice.remove);
 
 export default router;

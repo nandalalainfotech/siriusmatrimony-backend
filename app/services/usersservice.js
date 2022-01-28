@@ -1,5 +1,7 @@
 import db from "../models/main.js";
 
+import nodemailer from "nodemailer";
+
 const Users001wb = db.users001wb
 
 export const list = async (req, res) => {
@@ -61,6 +63,28 @@ export const create = async (req, res) => {
     users001wb.inserteddatetime = req.body.inserteddatetime,
     users001wb.updateduser = req.body.updateduser,
     users001wb.updateddatetime = req.body.updateddatetime
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gkraju987@gmail.com',
+            pass: '987654321@0'
+        }
+    });
+    console.log("email testing")
+    const mailOptions = {
+        from: 'gkraju987@gmail.com', 
+        to:  users001wb.email, 
+        subject: 'test mail', 
+        html: '<h1>Mail Tested </h1>'
+    };
+    console.log("to", users001wb.email);
+    transporter.sendMail(mailOptions, function (err, info) {
+        if (err)
+            console.log(err)
+        else
+            console.log(info);
+    })
     users001wb.save()
         .then((result) => {
             res.json({ message: 'user created' });

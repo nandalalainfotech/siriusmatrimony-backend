@@ -1,4 +1,4 @@
-import * as countrycontroller from "../services/countryservice.js";
+import * as countryservice from "../services/countryservice.js";
 
 import express from 'express';
 
@@ -10,10 +10,10 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/list', countrycontroller.list);
-router.get('/:id', countrycontroller.show);
-router.post('/create', countrycontroller.create);
-router.put('/:id', countrycontroller.update);
-router.delete('/:id', countrycontroller.remove);
+router.get('/list', countryservice.list);
+router.get('/:id', countryservice.show);
+router.post('/create', countryservice.create);
+router.put('/:id', countryservice.update);
+router.delete('/:id', countryservice.remove);
 
 export default router;
