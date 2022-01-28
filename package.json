@@ -27,8 +27,11 @@
     "multer-gridfs": "^0.0.1",
     "multer-gridfs-storage": "^5.0.2",
     "multiparty-streams": "^0.0.1",
-    "nodemailer": "^6.6.3",
+    "nodemailer": "^6.7.2",
     "nodemon": "^2.0.12",
-    "util": "^0.12.4"
+    "swagger-jsdoc": "^5.0.1",
+    "swagger-ui-express": "^4.3.0",
+    "util": "^0.12.4",
+    "yamljs": "^0.3.0"
   }
 }
