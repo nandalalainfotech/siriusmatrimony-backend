@@ -30,15 +30,17 @@ import audiocontroller from "./app/controllers/audiocontroller.js";
 import personcontroller from "./app/controllers/personcontroller.js";
 import logincontroller from "./app/controllers/logincontroller.js";
 import swaggerUi from "swagger-ui-express";
+import nodemailer from "nodemailer";
 // import swaggerDocument from "./swagger";
 import swaggerjsdoc from "swagger-jsdoc";
+import role001wb from "./app/models/role001wb.js";
 const app = express();
 app.use(cors());
 dotenv.config();
 
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type, Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS, HEAD")
@@ -80,6 +82,7 @@ const City001mb = db.city001mb;
 const Audio001wb = db.audio001wb;
 const Person001mb = db.person001mb;
 const Login001mb = db.login001mb;
+const Subsriberdetails001wb = db.subscriberdetails001wb;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -684,52 +687,104 @@ const options = {
         info: {
             title: 'API Testing on Swagger',
             version: '1.0.0',
-            description:
-                'Generate a Api',
+            description: 'Generate a Api',
         },
 
     },
-
     apis: ['index.js'],
 };
 const specs = swaggerjsdoc(options);
-console.log("specs", specs);
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
-console.log(" swaggerUi.setup(specs)", swaggerUi.setup(specs));
 
 // **********************schema method****************//
 /** 
  * @swagger
  * components:
- *    schemas:
- *      role001wb:
- *            type: object
- *            properties:
- *             roleid:
- *                type: number
- *             rolename:
- *                 type: string  
+ *    schemas:                 
+ *      users001wb:
+ *           type: object
+ *           properties:
+ *             firstname:
+ *                   type: string
+ *             lasttname:
+ *                   type: string
+ *             zipcode:                     
+ *                   type: number
+ *             employeeid:
+ *                   type: number
+ *             dob: 
+ *                   type: string
+ *             email:
+ *                   type: string 
+ *             confirmemail:
+ *                   type: string
+ *             sex:
+ *                   type: string
+ *             address1:
+ *                   type: string
+ *             address2:
+ *                   type: string
+ *             address3:
+ *                   type: string
+ *             city: 
+ *                   type: string
+ *             state: 
+ *                   type: string
+ *             country:
+ *                   type: string
+ *             mobile:
+ *                   type: number
+ *             landline:
+ *                   type: number
  *             status:
- *                 type: string
+ *                   type: string       
  *             inserteduser:
- *                 type: string
+ *                   type: string
  *             inserteddatetime:
- *                 type: string
+ *                   type: string
  *             updateduser:
- *                 type: string
+ *                   type: string
  *             updateddatetime:
- *                 type: string
+ *                   type: string     
  *             subscid:
- *                type: object
+ *                type: object 
  *                properties:
- *                    id: 
- *                     type: string      
+ *                    id:
+ *                     type: string
+ *             stateid:
+ *                type: object 
+ *                properties:
+ *                    id:
+ *                     type: string
+ *             cityid: 
+ *                type: object 
+ *                properties:
+ *                    id:
+ *                     type: string
+ *             countryid:
+ *                type: object 
+ *                properties:
+ *                    id:
+ *                     type: string  
+ *             roleid:
+ *                type: object 
+ *                properties:
+ *                    id:
+ *                     type: string    
+ * 
  */
+
+
+// ------------------ role001wb-----------------
+
+
 // **********************get method****************//
 /**
  * @swagger
  * /api/role001wb:
  *   get:
+ *     tags:
+ *       - Role001wb
  *     summary: Get Method
  *     description: Retrieve the list of data
  *     responses:
@@ -743,215 +798,275 @@ console.log(" swaggerUi.setup(specs)", swaggerUi.setup(specs));
  *                             $ref: '#/components/schemas/role001wb'
  */
 
-app.get('/api/role001wb', (req, res) => {
+// ------------------ users001wb -----------------
 
-    Role001wb.find(function (err, role001wb) {
-        console.log("role001wb", role001wb);
+// **********************get method****************//
+/**
+ * @swagger
+ * /api/users001wb:
+ *   get:
+ *     tags:
+ *       - Users001wb
+ *     summary: Get Method
+ *     description: Retrieve the list of data
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/users001wb'
+ */
+app.get('/api/users001wb', (req, res) => {
+    Users001wb.find(function(err, users001wb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb.',
+            return res.status(500).json({
+                message: 'Error when getting users001wb.',
                 error: err
             });
         }
 
-        return res.send(role001wb);
+        return res.json(users001wb);
     });
 });
 
 /**
-* @swagger
-* /api/role001wb/{id}:
-*   get:
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/role001wb'
-*/
+ * @swagger
+ * /api/users001wb/{id}:
+ *   get:
+ *     tags:
+ *       - Users001wb
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/users001wb'
+ */
 
-app.get('/api/role001wb/:id', (req, res) => {
-    console.log("req", req);
+app.get('/api/users001wb/:id', (req, res) => {
     var id = req.params.id;
-    Role001wb.findOne({ _id: id }, function (err, role001wb) {
+    Users001wb.findOne({ _id: id }, function(err, users001wb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb.',
+            return res.status(500).json({
+                message: 'Error when getting users001wb.',
                 error: err
             });
         }
 
-        if (!role001wb) {
-            return res.status(404).send({
-                message: 'No such role001wb'
+        if (!users001wb) {
+            return res.status(404).json({
+                message: 'No such users001wb'
             });
         }
 
-        return res.send(role001wb);
+        return res.json(users001wb);
     });
 });
 
 /**
-  * @swagger
-  * /api/role001wb/role:
-  *   post:
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/role001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  */
+ * @swagger
+ * /api/users001wb/{id}:
+ *   post:
+ *    tags:
+ *       [Users001wb]
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/users001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: 
+ */
+app.post('/api/users001wb/:id', (req, res) => {
 
-app.post('/api/role001wb/role', (req, res) => {
+    var users001wb = new Users001wb();
+    users001wb.subscid = req.body.subscid.id,
+        users001wb.roleid = req.body.roleid.id,
+        users001wb.firstname = req.body.firstname,
+        users001wb.lasttname = req.body.lasttname,
+        users001wb.zipcode = req.body.zipcode,
+        users001wb.employeeid = req.body.employeeid,
+        users001wb.dob = req.body.dob,
+        users001wb.email = req.body.email,
+        users001wb.confirmemail = req.body.confirmemail,
+        users001wb.sex = req.body.sex,
+        users001wb.address1 = req.body.address1,
+        users001wb.address2 = req.body.address2,
+        users001wb.address3 = req.body.address3,
+        users001wb.cityid = req.body.cityid.id,
+        users001wb.stateid = req.body.stateid.id,
+        users001wb.countryid = req.body.countryid.id,
+        users001wb.mobile = req.body.mobile,
+        users001wb.landline = req.body.landline,
+        users001wb.status = req.body.status,
+        users001wb.inserteduser = req.body.inserteduser,
+        users001wb.inserteddatetime = req.body.inserteddatetime,
+        users001wb.updateduser = req.body.updateduser,
+        users001wb.updateddatetime = req.body.updateddatetime
 
-    const role001wb = new Role001wb();
-    role001wb.subscid = req.body.subscid.id;
-    role001wb.roleid = req.body.roleid;
-    role001wb.rolename = req.body.rolename;
-    role001wb.status = req.body.status;
-    role001wb.inserteduser = req.body.inserteduser;
-    role001wb.inserteddatetime = req.body.inserteddatetime;
-    role001wb.updateduser = req.body.updateduser;
-    role001wb.updateddatetime = req.body.updateddatetime;
-    console.log(" role001wb.roleid111111111", role001wb.roleid)
-    role001wb.save()
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gkraju987@gmail.com',
+            pass: '987654321@0'
+        }
+    });
+    const mailOptions = {
+        from: 'gkraju987@gmail.com',
+        to: users001wb.email,
+        subject: 'test mail',
+        html: '<h1>Mail Tested </h1>'
+    };
+    transporter.sendMail(mailOptions, function(err, info) {
+        if (err)
+            console.log(err)
+        else
+            console.log(info);
+    })
+    users001wb.save()
         .then((result) => {
-            console.log(" role001wb.roleid", role001wb.roleid)
-            Subscriberdetails001wb.findOne({ _id: role001wb.subscid }, (err, user) => {
-                if (user) {
-                    user.roleid.push(role001wb);
-                    user.save();
-                    res.send({ message: 'Role created' });
-                }
-            });
+            res.json({ message: 'user created' });
         })
-
-})
-
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
+});
 
 /**
-  * @swagger
-  * /api/role001wb/{id}:
-  *   put:
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/role001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/role001wb'
-  */
-
-app.put('/api/role001wb/:id', (req, res) => {
-    console.log("req", req)
+ * @swagger
+ * /api/users001wb/{id}:
+ *   put:
+ *    tags:
+ *       [Users001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/users001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/users001wb'
+ */
+app.put('/api/users001wb/:id', (req, res) => {
     var id = req.params.id;
-    console.log("id put", id)
-    Role001wb.findOne({ _id: id }, function (err, role001wb) {
-        console.log("Role001wb put", role001wb)
+
+    Users001wb.findOne({ _id: id }, function(err, users001wb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb',
+            return res.status(500).json({
+                message: 'Error when getting users001wb',
                 error: err
             });
         }
 
-        if (!role001wb) {
-            return res.status(404).send({
-                message: 'No such role001wb'
+        if (!users001wb) {
+            return res.status(404).json({
+                message: 'No such users001wb'
             });
         }
-        role001wb.subscid = req.body.subscid.id ? req.body.subscid.id : role001wb.subscid;
-        role001wb.roleid = req.body.roleid ? req.body.roleid : role001wb.roleid;
-        role001wb.rolename = req.body.rolename ? req.body.rolename : role001wb.rolename;
-        role001wb.status = req.body.status ? req.body.status : role001wb.status;
-        role001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : role001wb.inserteduser;
-        role001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : role001wb.inserteddatetime;
-        role001wb.updateduser = req.body.updateduser ? req.body.updateduser : role001wb.updateduser;
-        role001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : role001wb.updateddatetime;
+        users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
+        users001wb.roleid = req.body.roleid.id ? req.body.roleid.id : users001wb.role;
+        users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
+        users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;
+        users001wb.zipcode = req.body.zipcode ? req.body.zipcode : users001wb.zipcode;
+        users001wb.employeeid = req.body.employeeid ? req.body.employeeid : users001wb.employeeid;
+        users001wb.dob = req.body.dob ? req.body.dob : users001wb.dob;
+        users001wb.email = req.body.email ? req.body.email : users001wb.email;
+        users001wb.confirmemail = req.body.confirmemail ? req.body.confirmemail : users001wb.confirmemail;
+        users001wb.sex = req.body.sex ? req.body.sex : users001wb.sex;
+        users001wb.address1 = req.body.address1 ? req.body.address1 : users001wb.address1;
+        users001wb.address2 = req.body.address2 ? req.body.address2 : users001wb.address2;
+        users001wb.address3 = req.body.address3 ? req.body.address3 : users001wb.address3;
+        users001wb.cityid = req.body.cityid.id ? req.body.cityid.id : users001wb.cityid;
+        users001wb.stateid = req.body.stateid.id ? req.body.stateid.id : users001wb.stateid;
+        users001wb.countryid = req.body.countryid.id ? req.body.countryid.id : users001wb.countryid;
+        users001wb.mobile = req.body.mobile ? req.body.mobile : users001wb.mobile;
+        users001wb.landline = req.body.landline ? req.body.landline : users001wb.landline;
+        users001wb.status = req.body.status ? req.body.status : users001wb.status;
+        users001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : users001wb.inserteduser;
+        users001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : users001wb.inserteddatetime;
+        users001wb.updateduser = req.body.updateduser ? req.body.updateduser : users001wb.updateduser;
+        users001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : users001wb.updateddatetime;
 
-        console.log(" role001wb.roleid", role001wb.roleid)
-        console.log(" role001wb.subscid", role001wb.subscid)
-        role001wb.save(function (err, role001wb) {
-            console.log(" role001wb.roleid********result", role001wb)
-
-            console.log(" role001wb.roleid********result", role001wb)
+        users001wb.save(function(err, users001wb) {
             if (err) {
-                return res.status(500).send({
-                    message: 'Error when updating role001wb.',
+                return res.status(500).json({
+                    message: 'Error when updating users001wb.',
                     error: err
                 });
             }
-            console.log(" role001wb.roleid", role001wb.roleid)
-            return res.send(role001wb);
+
+            return res.json(users001wb);
         });
     });
 });
 
-
-
 /**
-  * @swagger
-  * /api/role001wb/{id}:
-  *   delete:
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  */
-app.delete('/api/role001wb/:id', (req, res) => {
+ * @swagger
+ * /api/users001wb/{id}:
+ *   delete:
+ *    tags:
+ *        [Users001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ */
+app.delete('/api/users001wb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001wb.findByIdAndRemove(id, function (err, role001wb) {
+    Users001wb.findByIdAndRemove(id, function(err, users001wb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when deleting the role001wb.',
+            return res.status(500).json({
+                message: 'Error when deleting the users001wb.',
                 error: err
             });
         }
 
-        return res.send({ message: 'Deleted Sucessfully' });
+        return res.status(204).json();
     });
 });
