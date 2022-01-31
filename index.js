@@ -30,20 +30,13 @@ import audiocontroller from "./app/controllers/audiocontroller.js";
 import personcontroller from "./app/controllers/personcontroller.js";
 import logincontroller from "./app/controllers/logincontroller.js";
 import swaggerUi from "swagger-ui-express";
-import nodemailer from "nodemailer";
 import swaggerjsdoc from "swagger-jsdoc";
 import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
 const app = express();
 app.use(cors());
 dotenv.config();
-app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS, HEAD")
-    next();
-});
+app.use(bodyParser.json());
 
 const Country001mb = db.country001mb;
 const Categorydetails001mb = db.categorydetails001mb;
@@ -79,211 +72,211 @@ function initial() {
     Login001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Login001mb.insertMany([{
-                'logintype': "mobile no ",
-                'password': "xyz",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateddatetime': 11 / 12 / 22,
-                'updateduser': "raj",
+                    'logintype': "mobile no ",
+                    'password': "xyz",
+                    'inserteduser': "raj",
+                    'inserteddatetime': 11 / 12 / 22,
+                    'updateddatetime': 11 / 12 / 22,
+                    'updateduser': "raj",
 
-            },])
-                .then(() => { })
+                }, ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Country001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Country001mb.insertMany([{
-                'countryid': 123,
-                'countryname': "palls",
-                'countrydesc': "good",
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateddatetime': 11 / 12 / 22,
-                'updateduser': "raj",
+                    'countryid': 123,
+                    'countryname': "palls",
+                    'countrydesc': "good",
+                    'status': "good",
+                    'inserteduser': "raj",
+                    'inserteddatetime': 11 / 12 / 22,
+                    'updateddatetime': 11 / 12 / 22,
+                    'updateduser': "raj",
 
-            },])
-                .then(() => { })
+                }, ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     City001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             City001mb.insertMany([{
-                'cityid': 123,
-                'cityname': "xyz",
-                'citydesc': "good",
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateddatetime': 11 / 12 / 22,
-                'updateduser': "raj",
+                    'cityid': 123,
+                    'cityname': "xyz",
+                    'citydesc': "good",
+                    'status': "good",
+                    'inserteduser': "raj",
+                    'inserteddatetime': 11 / 12 / 22,
+                    'updateddatetime': 11 / 12 / 22,
+                    'updateduser': "raj",
 
-            },])
-                .then(() => { })
+                }, ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Categorydetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Categorydetails001mb.insertMany([{
-                'catcode': "T867",
-                'catname': "C22",
-                'status': "GOOD",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'catcode': "T867",
+                        'catname': "C22",
+                        'status': "GOOD",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Companydetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Companydetails001mb.insertMany([{
-                'companycode': "S33",
-                'companyname': "XYZ",
-                'address': "street",
-                'phonenumber': 78778876,
-                'regionalid': 98,
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'companycode': "S33",
+                        'companyname': "XYZ",
+                        'address': "street",
+                        'phonenumber': 78778876,
+                        'regionalid': 98,
+                        'status': "good",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Contentmaster001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Contentmaster001mb.insertMany([{
-                'contentid': 6767,
-                'name': "RAJ",
-                'description': "good",
-                'size': "222",
-                'quality': "good",
-                'format': "size",
-                'status': "good",
-                'discountflag': true,
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'contentid': 6767,
+                        'name': "RAJ",
+                        'description': "good",
+                        'size': "222",
+                        'quality': "good",
+                        'format': "size",
+                        'status': "good",
+                        'discountflag': true,
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Language001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Language001mb.insertMany([{
-                'languageid': 77,
-                'languagename': "raj",
-                'languagedesc': "ok",
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'languageid': 77,
+                        'languagename': "raj",
+                        'languagedesc': "ok",
+                        'status': "good",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Regionaldetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Regionaldetails001mb.insertMany([{
-                'regionalid': 544,
-                'regionalname': "RAJ",
-                'regionaldesc': "good",
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'regionalid': 544,
+                        'regionalname': "RAJ",
+                        'regionaldesc': "good",
+                        'status': "good",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Religion001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Religion001mb.insertMany([{
-                'regionalid': 666,
-                'regionalname': "RAJ",
-                'regionaldesc': "good",
-                'status': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                        'regionalid': 666,
+                        'regionalname': "RAJ",
+                        'regionaldesc': "good",
+                        'status': "good",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Subscriberdetails001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberdetails001wb.insertMany([{
-                'regionalid': 434,
-                'companycode': 3443,
-                'catcode': 4343,
-                'subcatcode': 4343,
-                'categoryid': 4343,
-                'subscid': 434,
-                'subscname': "RAJ",
-                '  classificationid': 898,
-                'sex': "male",
-                'subscdesc': "good",
-                'aboutme': "good",
-                'address': "street",
-                'phoneno': 77787,
-                'subscapproval': true,
-                'approvedby': "raj",
-                'approvedon': 11 / 12 / 2021,
-                'subscsubspid': 786,
-                'subscstatus': "good",
-                'inserteduser': "raj",
-                'inserteddatetime': 11 / 12 / 2021,
-                'updateduser': "raj",
-                'updateddatetime': 11 / 12 / 2021
-            }
+                         'regionalid': 434,
+                          'companycode': 3443,
+                             'catcode': 4343,
+                            'subcatcode': 4343,
+                           'categoryid': 4343,
+                            'subscid': 434,
+                            'subscname': "RAJ",
+                        '  classificationid': 898,
+                            'sex': "male",
+                            'subscdesc': "good",
+                            'aboutme': "good",
+                            'address': "street",
+                            'phoneno': 77787,
+                            'subscapproval': true,
+                            'approvedby': "raj",
+                            'approvedon': 11 / 12 / 2021,
+                            'subscsubspid': 786,
+                            'subscstatus': "good",
+                            'inserteduser': "raj",
+                            'inserteddatetime': 11 / 12 / 2021,
+                            'updateduser': "raj",
+                            'updateddatetime': 11 / 12 / 2021
+                    }
 
-            ])
-                .then(() => { })
+                ])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     State001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             State001mb.insertMany([{
-                'stateid': 123,
-                'statename': "sri",
-                'statedesc': "good",
-                'status': "active",
-                'inserteduser': "aravindh",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateduser': "sam",
-                'updateddatetime': 9 / 12 / 22,
-            }
+                        'stateid': 123,
+                        'statename': "sri",
+                        'statedesc': "good",
+                        'status': "active",
+                        'inserteduser': "aravindh",
+                        'inserteddatetime': 11 / 12 / 22,
+                        'updateduser': "sam",
+                        'updateddatetime': 9 / 12 / 22,
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -293,18 +286,18 @@ function initial() {
     Subcatclassification001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subcatclassification001mb.insertMany([{
-                'catcode': "ab12",
-                'subcatcode': "ab13",
-                'classificationid': 1234,
-                'classificationname': "dass",
-                'status': "good",
-                'inserteduser': "aravindh",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateduser': "chandru",
-                'updateddatetime': 6 / 12 / 22
-            }
+                        'catcode': "ab12",
+                        'subcatcode': "ab13",
+                        'classificationid': 1234,
+                        'classificationname': "dass",
+                        'status': "good",
+                        'inserteduser': "aravindh",
+                        'inserteddatetime': 11 / 12 / 22,
+                        'updateduser': "chandru",
+                        'updateddatetime': 6 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -314,18 +307,18 @@ function initial() {
     Subcategory001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subcategory001mb.insertMany([{
-                'catcode': "a2b",
-                'subcatcode': "s21",
-                'subcatname': "sri",
-                'subcatstatus': "active",
-                'status': "good",
-                'inserteduser': "aravind",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateduser': "chandru",
-                'updateddatetime': 9 / 12 / 22
-            }
+                        'catcode': "a2b",
+                        'subcatcode': "s21",
+                        'subcatname': "sri",
+                        'subcatstatus': "active",
+                        'status': "good",
+                        'inserteduser': "aravind",
+                        'inserteddatetime': 11 / 12 / 22,
+                        'updateduser': "chandru",
+                        'updateddatetime': 9 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -335,14 +328,14 @@ function initial() {
     Usersample001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Usersample001mb.insertMany([{
-                'username': "Raj",
-                'password': "****",
-                'securityquestion': "xys",
-                'securityanswer': "xys"
+                        'username': "Raj",
+                        'password': "****",
+                        'securityquestion': "xys",
+                        'securityanswer': "xys"
 
-            }
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -352,10 +345,10 @@ function initial() {
     Review001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Review001mb.insertMany([{
-                'comments': "good",
-                'rating': "9",
-                'status': "good"
-            }])
+                    'comments': "good",
+                    'rating': "9",
+                    'status': "good"
+                }])
                 .then(() => {
 
                 })
@@ -365,21 +358,21 @@ function initial() {
     Subscribercontent001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscribercontent001wb.insertMany([{
-                'subscid': 123,
-                'subsccontentid1': 12,
-                'subsccontentidattach1': 123,
-                'subsccontentidappovalflag1': true,
-                'subsccontentidattach2': 34,
-                'subsccontentidappovalflag2': false,
-                'subsccontentidattachn': 12,
-                'subsccontentidappovalflagn': false,
-                'inserteduser': "wedas",
-                'inserteddatetime': 11 / 12 / 22,
-                'updateduser': "fsdf",
-                'updateddatetime': 8 / 12 / 22
-            }
+                        'subscid': 123,
+                        'subsccontentid1': 12,
+                        'subsccontentidattach1': 123,
+                        'subsccontentidappovalflag1': true,
+                        'subsccontentidattach2': 34,
+                        'subsccontentidappovalflag2': false,
+                        'subsccontentidattachn': 12,
+                        'subsccontentidappovalflagn': false,
+                        'inserteduser': "wedas",
+                        'inserteddatetime': 11 / 12 / 22,
+                        'updateduser': "fsdf",
+                        'updateddatetime': 8 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -405,33 +398,33 @@ function initial() {
 
                 })
                 .catch((err) => console.log("error", err));
-        }
+    }
     });
     Subscriberpersonalinfo001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberpersonalinfo001wb.insertMany([{
-                'subcid': 12,
-                'personaldetails': "my details?",
-                'hobbies': "playing",
-                'flex1': "flex1",
-                'flex2': "flex2",
-                'flex3': "flex3",
-                'flex4': "flex4",
-                'flex5': "flex5",
-                'flex6': "flex6",
-                'flex7': "flex7",
-                'flex8': "flex8",
-                'flex9': "flex9",
-                'flex10': "flex10",
-                'flex11': "flex11",
-                'flex12': "flex12",
-                'inserteduser': "aravindh",
-                'inserteddatetime': 3 / 11 / 22,
-                'updateduser': "chandru",
-                'updateddatetime': 4 / 12 / 22
-            }
+                        'subcid': 12,
+                        'personaldetails': "my details?",
+                        'hobbies': "playing",
+                        'flex1': "flex1",
+                        'flex2': "flex2",
+                        'flex3': "flex3",
+                        'flex4': "flex4",
+                        'flex5': "flex5",
+                        'flex6': "flex6",
+                        'flex7': "flex7",
+                        'flex8': "flex8",
+                        'flex9': "flex9",
+                        'flex10': "flex10",
+                        'flex11': "flex11",
+                        'flex12': "flex12",
+                        'inserteduser': "aravindh",
+                        'inserteddatetime': 3 / 11 / 22,
+                        'updateduser': "chandru",
+                        'updateddatetime': 4 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -441,28 +434,28 @@ function initial() {
     Subscriberprofessionalinfo002wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberprofessionalinfo002wb.insertMany([{
-                'subcid': 12,
-                'professionaldetails': "hi",
-                'job': "engineer",
-                'flex1': "flex1",
-                'flex2': "flex2",
-                'flex3': "flex3",
-                'flex4': "flex4",
-                'flex5': "flex5",
-                'flex6': "flex6",
-                'flex7': "flex7",
-                'flex8': "flex8",
-                'flex9': "flex9",
-                'flex10': "flex10",
-                'flex11': "flex11",
-                'flex12': "flex12",
-                'inserteduser': "raj",
-                'inserteddatetime': 3 / 11 / 22,
-                'updateduser': "sri",
-                'updateddatetime': 4 / 12 / 22
-            }
+                         'subcid': 12,
+                        'professionaldetails': "hi",
+                        'job': "engineer",
+                        'flex1': "flex1",
+                        'flex2': "flex2",
+                        'flex3': "flex3",
+                        'flex4': "flex4",
+                        'flex5': "flex5",
+                        'flex6': "flex6",
+                        'flex7': "flex7",
+                        'flex8': "flex8",
+                        'flex9': "flex9",
+                        'flex10': "flex10",
+                        'flex11': "flex11",
+                        'flex12': "flex12",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 3 / 11 / 22,
+                        'updateduser': "sri",
+                        'updateddatetime': 4 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -472,18 +465,18 @@ function initial() {
     Video001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Video001wb.insertMany([{
-                'category': "s222",
-                'filename': "img.png",
-                'originalfilename': "video",
-                'status': "active",
-                'content': "678667",
-                'inserteduser': "raj",
-                'inserteddatetime': 6 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 7 / 11 / 22
-            }
+                        'category': "s222",
+                        'filename': "img.png",
+                        'originalfilename': "video",
+                        'status': "active",
+                        'content': "678667",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 6 / 11 / 22,
+                        'updateduser': "raju",
+                        'updateddatetime': 7 / 11 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -493,18 +486,18 @@ function initial() {
     Photo001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Photo001wb.insertMany([{
-                'category': "s222",
-                'filename': "img.png",
-                'originalname': "photo",
-                'content': "678667",
-                'status': "active",
-                'inserteduser': "raj",
-                'inserteddatetime': 6 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 7 / 11 / 22
-            }
+                        'category': "s222",
+                        'filename': "img.png",
+                        'originalname': "photo",
+                        'content': "678667",
+                        'status': "active",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 6 / 11 / 22,
+                        'updateduser': "raju",
+                        'updateddatetime': 7 / 11 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -514,14 +507,14 @@ function initial() {
     Person001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Person001mb.insertMany([{
-                'status': "active",
-                'inserteduser': "raj",
-                'inserteddatetime': 5 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 12 / 11 / 22
-            }
+                        'status': "active",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 5 / 11 / 22,
+                        'updateduser': "raju",
+                        'updateddatetime': 12 / 11 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -532,30 +525,30 @@ function initial() {
     Users001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Users001wb.insertMany([{
-                'firstname': "RAJ",
-                'lasttname': "d",
-                'zipcode': 1223243,
-                'employeeid': 8778,
-                'dob': 3 / 11 / 2000,
-                'email': "xyz@gmail.com",
-                'confirmemail': "xyz@gmail.com",
-                'sex': "male",
-                'address1': "xyz",
-                'address2': "xyz",
-                'address3': "xyz",
-                'city': "chennai",
-                'state': "tn",
-                'country': "india",
-                'mobile': 76886797974,
-                'landline': 423321211,
-                'status': "active",
-                'inserteduser': "raj",
-                'inserteddatetime': 5 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 12 / 11 / 22
-            }
+                        'firstname': "RAJ",
+                        'lasttname': "d",
+                        'zipcode': 1223243,
+                        'employeeid': 8778,
+                        'dob': 3 / 11 / 2000,
+                        'email': "xyz@gmail.com",
+                        'confirmemail': "xyz@gmail.com",
+                        'sex': "male",
+                        'address1': "xyz",
+                        'address2': "xyz",
+                        'address3': "xyz",
+                        'city': "chennai",
+                        'state': "tn",
+                        'country': "india",
+                        'mobile': 76886797974,
+                        'landline': 423321211,
+                        'status': "active",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 5 / 11 / 22,
+                        'updateduser': "raju",
+                        'updateddatetime': 12 / 11 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -565,20 +558,20 @@ function initial() {
     Subscriptionmaster001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriptionmaster001mb.insertMany([{
-                'subpid': 1212,
-                'subpname': "sri",
-                'description': "good",
-                'tenure': "3 years",
-                'amount': 23,
-                'status': "active",
-                'discountflag': true,
-                'inserteduser': "aravindh",
-                'inserteddatetime': 3 / 11 / 22,
-                'updateduser': "selvam",
-                'updateddatetime': 3 / 11 / 22
-            }
+                        'subpid': 1212,
+                        'subpname': "sri",
+                        'description': "good",
+                        'tenure': "3 years",
+                        'amount': 23,
+                        'status': "active",
+                        'discountflag': true,
+                        'inserteduser': "aravindh",
+                        'inserteddatetime': 3 / 11 / 22,
+                        'updateduser': "selvam",
+                        'updateddatetime': 3 / 11 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
@@ -588,32 +581,32 @@ function initial() {
     Role001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Role001wb.insertMany([{
-                'rolename': "farmer",
-                'status': "active",
-                'discountflag': true,
-                'inserteduser': "aravindh",
-                'inserteddatetime': 3 / 11 / 22,
-                'updateduser': "selvam",
-                'updateddatetime': 3 / 11 / 22
-            }])
-                .then(() => { })
+                    'rolename': "farmer",
+                    'status': "active",
+                    'discountflag': true,
+                    'inserteduser': "aravindh",
+                    'inserteddatetime': 3 / 11 / 22,
+                    'updateduser': "selvam",
+                    'updateddatetime': 3 / 11 / 22
+                }])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
     Audio001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Audio001wb.insertMany([{
-                'category': "s222",
-                'filename': "img.mp3",
-                'originalfilename': "audio",
-                'content': "678667",
-                'status': "active",
-                'inserteduser': "raj",
-                'inserteddatetime': 6 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 7 / 11 / 22
-            }])
-                .then(() => { })
+                    'category': "s222",
+                    'filename': "img.mp3",
+                    'originalfilename': "audio",
+                    'content': "678667",
+                    'status': "active",
+                    'inserteduser': "raj",
+                    'inserteddatetime': 6 / 11 / 22,
+                    'updateduser': "raju",
+                    'updateddatetime': 7 / 11 / 22
+                }])
+                .then(() => {})
                 .catch((err) => console.log("error", err));
         }
     });
@@ -669,6 +662,12 @@ db.mongoose
     });
 
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS, HEAD")
+    next();
+});
 const options = {
     swaggerDefinition: {
         openapi: '3.0.0',
@@ -685,360 +684,7 @@ const options = {
     apis: ['index.js'],
 };
 const specs = swaggerjsdoc(options);
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
-
-// **********************schema method****************//
-/** 
- * @swagger
- * components:
- *    schemas:                 
- *      users001wb:
- *           type: object
- *           properties:
- *             firstname:
- *                   type: string
- *             lasttname:
- *                   type: string
- *             zipcode:                     
- *                   type: number
- *             employeeid:
- *                   type: number
- *             dob: 
- *                   type: string
- *             email:
- *                   type: string 
- *             confirmemail:
- *                   type: string
- *             sex:
- *                   type: string
- *             address1:
- *                   type: string
- *             address2:
- *                   type: string
- *             address3:
- *                   type: string
- *             city: 
- *                   type: string
- *             state: 
- *                   type: string
- *             country:
- *                   type: string
- *             mobile:
- *                   type: number
- *             landline:
- *                   type: number
- *             status:
- *                   type: string       
- *             inserteduser:
- *                   type: string
- *             inserteddatetime:
- *                   type: string
- *             updateduser:
- *                   type: string
- *             updateddatetime:
- *                   type: string     
- *             subscid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             stateid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             cityid: 
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             countryid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string  
- *             roleid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string    
- * 
- */
-
-// ********************** users001wb get method****************//
-/**
- * @swagger
- * /api/users001wb:
- *   get:
- *     tags: [users001wb]
- *     summary: Get Method
- *     description: Retrieve the list of data
- *     responses:
- *       200:
- *         description: Success
- *       500:
-*         description: failed
- *         content:
- *             application/json:
- *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/users001wb'
- */
-app.get('/api/users001wb', (req, res) => {
-    Users001wb.find(function (err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when getting users001wb.',
-                error: err
-            });
-        }
-
-        return res.json(users001wb);
-    });
-});
-
-/**
- * @swagger
- * /api/users001wb/{id}:
- *   get:
- *     tags: [users001wb]
- *     summary: Retrieve a data by id.
- *     description: Retrieve a data by id.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Sucess
- *       500:
-*         description: failed
- *         content:
- *             application/json:
- *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/users001wb'
- */
-
-app.get('/api/users001wb/:id', (req, res) => {
-    var id = req.params.id;
-    Users001wb.findOne({ _id: id }, function (err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when getting users001wb.',
-                error: err
-            });
-        }
-
-        if (!users001wb) {
-            return res.status(404).json({
-                message: 'No such users001wb'
-            });
-        }
-
-        return res.json(users001wb);
-    });
-});
-
-/**
- * @swagger
- * /api/users001wb/{id}:
- *   post:
- *    tags: [users001wb]
- *    summary: Post Method
- *    description: Retrieve the list of data
- *    requestBody:
- *         required: true
- *         content:
- *             application/json:
- *                       schema:
- *                          $ref: '#/components/schemas/users001wb'
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description:failed
- */
-app.post('/api/users001wb/:id', (req, res) => {
-
-    var users001wb = new Users001wb();
-    users001wb.subscid = req.body.subscid.id,
-    users001wb.roleid = req.body.roleid.id,
-    users001wb.firstname = req.body.firstname,
-    users001wb.lasttname = req.body.lasttname,
-    users001wb.zipcode = req.body.zipcode,
-    users001wb.employeeid = req.body.employeeid,
-    users001wb.dob = req.body.dob,
-    users001wb.email = req.body.email,
-    users001wb.confirmemail = req.body.confirmemail,
-    users001wb.sex = req.body.sex,
-    users001wb.address1 = req.body.address1,
-    users001wb.address2 = req.body.address2,
-    users001wb.address3 = req.body.address3,
-    users001wb.cityid = req.body.cityid.id,
-    users001wb.stateid = req.body.stateid.id,
-    users001wb.countryid = req.body.countryid.id,
-    users001wb.mobile = req.body.mobile,
-    users001wb.landline = req.body.landline,
-    users001wb.status = req.body.status,
-    users001wb.inserteduser = req.body.inserteduser,
-    users001wb.inserteddatetime = req.body.inserteddatetime,
-    users001wb.updateduser = req.body.updateduser,
-    users001wb.updateddatetime = req.body.updateddatetime
-
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'gkraju987@gmail.com',
-            pass: '987654321@0'
-        }
-    });
-    const mailOptions = {
-        from: 'gkraju987@gmail.com',
-        to: users001wb.email,
-        subject: 'test mail',
-        html: '<h1>Mail Tested </h1>'
-    };
-    transporter.sendMail(mailOptions, function (err, info) {
-        if (err)
-            console.log(err)
-        else
-            console.log(info);
-    })
-    users001wb.save()
-        .then((result) => {
-            res.json({ message: 'user created' });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-});
-
-/**
- * @swagger
- * /api/users001wb/{id}:
- *   put:
- *    tags: [users001wb]
- *    summary: Put Method
- *    description: Retrieve the list of data
- *    parameters:
- *      - in: path
- *        name: id
- *        required: true
- *        description: Numeric ID of the user to retrieve.
- *        schema:
- *           type: string
- *    requestBody:
- *         required: true
- *         content:
- *             application/json:
- *                       schema:
- *                         $ref: '#/components/schemas/users001wb'
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
- *         content:
- *             application/json:
- *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/users001wb'
- */
-app.put('/api/users001wb/:id', (req, res) => {
-    var id = req.params.id;
-
-    Users001wb.findOne({ _id: id }, function (err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when getting users001wb',
-                error: err
-            });
-        }
-
-        if (!users001wb) {
-            return res.status(404).json({
-                message: 'No such users001wb'
-            });
-        }
-        users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
-        users001wb.roleid = req.body.roleid.id ? req.body.roleid.id : users001wb.role;
-        users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
-        users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;
-        users001wb.zipcode = req.body.zipcode ? req.body.zipcode : users001wb.zipcode;
-        users001wb.employeeid = req.body.employeeid ? req.body.employeeid : users001wb.employeeid;
-        users001wb.dob = req.body.dob ? req.body.dob : users001wb.dob;
-        users001wb.email = req.body.email ? req.body.email : users001wb.email;
-        users001wb.confirmemail = req.body.confirmemail ? req.body.confirmemail : users001wb.confirmemail;
-        users001wb.sex = req.body.sex ? req.body.sex : users001wb.sex;
-        users001wb.address1 = req.body.address1 ? req.body.address1 : users001wb.address1;
-        users001wb.address2 = req.body.address2 ? req.body.address2 : users001wb.address2;
-        users001wb.address3 = req.body.address3 ? req.body.address3 : users001wb.address3;
-        users001wb.cityid = req.body.cityid.id ? req.body.cityid.id : users001wb.cityid;
-        users001wb.stateid = req.body.stateid.id ? req.body.stateid.id : users001wb.stateid;
-        users001wb.countryid = req.body.countryid.id ? req.body.countryid.id : users001wb.countryid;
-        users001wb.mobile = req.body.mobile ? req.body.mobile : users001wb.mobile;
-        users001wb.landline = req.body.landline ? req.body.landline : users001wb.landline;
-        users001wb.status = req.body.status ? req.body.status : users001wb.status;
-        users001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : users001wb.inserteduser;
-        users001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : users001wb.inserteddatetime;
-        users001wb.updateduser = req.body.updateduser ? req.body.updateduser : users001wb.updateduser;
-        users001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : users001wb.updateddatetime;
-
-        users001wb.save(function (err, users001wb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when updating users001wb.',
-                    error: err
-                });
-            }
-
-            return res.json(users001wb);
-        });
-    });
-});
-
-/**
- * @swagger
- * /api/users001wb/{id}:
- *   delete:
- *    tags: [users001wb]
- *    summary: Delete Method
- *    description: Delete the list of data
- *    parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
- *           type: string
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
- */
-app.delete('/api/users001wb/:id', (req, res) => {
-    var id = req.params.id;
-
-    Users001wb.findByIdAndRemove(id, function (err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when deleting the users001wb.',
-                error: err
-            });
-        }
-
-        return res.json({message:'Deleted Sucessfully'});
-    });
-});
-
+app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
 
 // **********************schema method****************//
 /** 
@@ -1067,24 +713,6 @@ app.delete('/api/users001wb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                     type: string      
- */
-
-/**
- * @swagger
- * /api/role001wb:
- *   get:
- *     tags: [role001wb]
- *     summary: Get Method
- *     description: Retrieve the list of data
- *     responses:
- *       200:
- *         description: Sucess
- *         content:
- *             application/json:
- *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/role001wb'
  */
 
 app.get('/api/role001wb', (req, res) => {
@@ -2224,19 +1852,19 @@ app.get('/api/photo001wb/:id', (req, res) => {
   *         description: failed
   */
 
-app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
-    console.log("req", req);
+app.post('/api/photo001wb/photo',[upload.single("content")], (req, res) => {
+    console.log("req",req);
     const photo001wb = new Photo001wb();
     photo001wb.content = req.file.path,
-        photo001wb.fieldname = req.file.fieldname,
-        photo001wb.originalname = req.file.originalname,
-        photo001wb.filename = req.file.filename,
-        photo001wb.status = req.body.status,
-        photo001wb.contentid = req.body.contentid,
-        photo001wb.inserteduser = req.body.inserteduser,
-        photo001wb.inserteddatetime = req.body.inserteddatetime,
-        photo001wb.updateduser = req.body.updateduser,
-        photo001wb.updateddatetime = req.body.updateddatetime
+    photo001wb.fieldname = req.file.fieldname,
+    photo001wb.originalname = req.file.originalname,
+    photo001wb.filename = req.file.filename,
+    photo001wb.status = req.body.status,
+    photo001wb.contentid = req.body.contentid,
+    photo001wb.inserteduser = req.body.inserteduser,
+    photo001wb.inserteddatetime = req.body.inserteddatetime,
+    photo001wb.updateduser = req.body.updateduser,
+    photo001wb.updateddatetime = req.body.updateddatetime
     photo001wb.save()
         .then((result) => {
             Contentmaster001mb.findOne({ _id: photo001wb.contentid }, (err, user) => {
