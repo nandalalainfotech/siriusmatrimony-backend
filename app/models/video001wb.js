@@ -15,9 +15,9 @@ const video001wb = mongoose.model(
             'status': String,
             'content': Buffer,
             'inserteduser': String,
-            'inserteddatetime': Date,
+            'inserteddatetime': String,
             'updateduser': String,
-            'updateddatetime': Date
+            'updateddatetime': String
         },
 
         { timestamps: false })

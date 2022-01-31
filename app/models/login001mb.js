@@ -7,9 +7,9 @@ const login001mb = mongoose.model(
         'password': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
     }, { timestamps: false })
 );
 export default login001mb;

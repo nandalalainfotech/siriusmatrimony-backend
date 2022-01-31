@@ -10,9 +10,9 @@ const state = mongoose.model(
         'statedesc': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'cityid': [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "city001mb",

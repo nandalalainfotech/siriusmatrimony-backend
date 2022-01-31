@@ -8,9 +8,10 @@ const person001mb = mongoose.model(
             'subscid': { type: mongoose.Types.ObjectId, ref: 'subscriberdetails001mb' },
             'userid': { type: mongoose.Types.ObjectId, ref: 'user001mb' },
             'inserteduser': String,
-            'inserteddatetime': Date,
+            'status': String,
+            'inserteddatetime': String,
             'updateduser': String,
-            'updateddatetime': Date,
+            'updateddatetime': String,
         },
 
         { timestamps: false })

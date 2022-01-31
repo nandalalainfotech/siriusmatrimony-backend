@@ -13,9 +13,9 @@ const photo001wb = mongoose.model(
         'content': Buffer,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': String
     },
 
         { timestamps: false })

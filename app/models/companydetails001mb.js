@@ -16,9 +16,9 @@ const companydetails001mb = mongoose.model(
 			},
 			'status': String,
 			'inserteduser': String,
-			'inserteddatetime': Date,
+			'inserteddatetime': String,
 			'updateduser': String,
-			'updateddatetime': Date,
+			'updateddatetime': String,
 			'subscid':  {
 				type: mongoose.Types.ObjectId,
 				ref: 'subscriberdetails001wb'

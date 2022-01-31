@@ -26,9 +26,9 @@ const contentmaster001mb = mongoose.model(
         'status': String,
         'discountflag': Boolean,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid': {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'subscriberdetails001wb'

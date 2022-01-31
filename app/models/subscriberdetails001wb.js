@@ -53,10 +53,6 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subcatclassification001mb'
         }],
-        'contentid': [{
-            type: mongoose.Types.ObjectId,
-            ref: 'contentmaster001mb'
-        }],
         'subscsubspid': [{
             type: mongoose.Types.ObjectId,
             ref: 'subscribercontentauth001wb'
