@@ -47,6 +47,7 @@ export const create = async(req, res) => {
     subscribercontentauth001wb.inserteduser = req.body.inserteduser;
     subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
     subscribercontentauth001wb.updateduser = req.body.updateduser;
+    subscribercontentauth001wb.status = req.body.status;
     subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
     subscribercontentauth001wb.save()
         .then((result) => {
@@ -89,7 +90,7 @@ export const update = (req, res) => {
         subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscribercontentauth001wb.inserteddatetime;
         subscribercontentauth001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscribercontentauth001wb.updateduser;
         subscribercontentauth001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscribercontentauth001wb.updateddatetime;
-
+        subscribercontentauth001wb.status = req.body.status ? req.body.status : subscribercontentauth001wb.status;
         subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
             if (err) {
                 return res.status(500).json({

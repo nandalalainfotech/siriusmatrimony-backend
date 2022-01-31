@@ -16,8 +16,8 @@ const city001mb = mongoose.model(
 			'citydesc': String,
 			'status': String,
 			'inserteduser': String,
-			'inserteddatetime': Date,
-			'updateddatetime': Date,
+			'inserteddatetime': String,
+			'updateddatetime': String,
 			'updateduser': String,
 
 		},

@@ -21,9 +21,9 @@ const subscriberprofessionalinfo002wb = mongoose.model(
         'flex11': String,
         'flex12': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid': {
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'

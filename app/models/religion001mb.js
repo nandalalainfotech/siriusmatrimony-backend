@@ -10,9 +10,9 @@ const religion001mb = mongoose.model(
         'religiondesc': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid': {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'subscriberdetails001wb'

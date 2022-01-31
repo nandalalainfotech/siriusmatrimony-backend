@@ -8,9 +8,9 @@ const language001mb = mongoose.model(
         'languagedesc': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid': {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'subscriberdetails001wb'
@@ -18,4 +18,3 @@ const language001mb = mongoose.model(
     }, { timestamps: false })
 );
 export default language001mb;
-// module.exports = mongoose.model('language001mb', language001mbSchema);

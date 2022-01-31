@@ -40,12 +40,12 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     var person001mb = new Person001mb();
-
     person001mb.subscid= req.body.subscid.id,
     person001mb.userid= req.body.userid.id,
     person001mb.inserteduser= req.body.inserteduser,
     person001mb.inserteddatetime= req.body.inserteddatetime,
     person001mb.updateduser= req.body.updateduser,
+    person001mb.status= req.body.status,
     person001mb.updateddatetime= req.body.updateddatetime
     person001mb.save(function(err, person001mb) {
         if (err) {
@@ -80,6 +80,7 @@ export const update = async(req, res) => {
         person001mb.user = req.body.userid.id ? req.body.userid.id : person001mb.user;
         person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
         person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
+        person001mb.status = req.body.status ? req.body.status : person001mb.status;
         person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
         person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
 

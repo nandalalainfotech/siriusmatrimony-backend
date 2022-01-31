@@ -11,8 +11,8 @@ const country001mb = mongoose.model(
         'countrydesc': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
-        'updateddatetime': Date,
+        'inserteddatetime': String,
+        'updateddatetime': String,
         'updateduser': String,
         'stateid': [{
             type: mongoose.Types.ObjectId,

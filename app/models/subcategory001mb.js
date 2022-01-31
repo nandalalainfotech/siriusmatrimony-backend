@@ -18,9 +18,9 @@ const subcategory001mb = mongoose.model(
         'subcatstatus': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': String
     }, { timestamps: false })
 );
 

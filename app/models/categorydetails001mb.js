@@ -14,9 +14,9 @@ const categorydetails001mb = mongoose.model(
 			'catname': String,
 			'status': String,
 			'inserteduser': String,
-			'inserteddatetime': Date,
+			'inserteddatetime': String,
 			'updateduser': String,
-			'updateddatetime': Date
+			'updateddatetime': String
 		},
 		{ timestamps: false }
 	)

@@ -14,9 +14,9 @@ const subcatclassification001mb = mongoose.model(
         'classificationname': String,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid':  {
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
