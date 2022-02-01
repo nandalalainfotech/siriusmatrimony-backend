@@ -41,10 +41,10 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriberpersonalinfo001wb'
         }],
-        'contentid': [{
+        'contentid': {
             type: mongoose.Types.ObjectId,
             ref: 'contentmaster001mb'
-        }],
+        },
         'religionid': [{
             type: mongoose.Types.ObjectId,
             ref: 'religion001mb'
@@ -82,9 +82,9 @@ const subscriberdetails001wb = mongoose.model(
         'approvedby': String,
         'approvedon': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'status': String
     },
         { timestamps: false }));

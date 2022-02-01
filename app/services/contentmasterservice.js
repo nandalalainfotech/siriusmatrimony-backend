@@ -2,7 +2,6 @@ import db from "../models/main.js";
 
 const Contentmaster001mb = db.contentmaster001mb;
 
-const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Contentmaster001mb.find(function(err, contentmaster001mbs) {
@@ -53,19 +52,14 @@ export const create = async(req, res) => {
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
     contentmaster001mb.subscid = req.body.subscid.id;
-
-    contentmaster001mb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: contentmaster001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.contentid.push(contentmaster001mb);
-                    user.save();
-                    res.json({ message: 'contentmaster created!' });
-                }
-            });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
+    contentmaster001mb.save(function(err, contentmaster001mb) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when creating contentmaster001mb',
+                    error: err
+                });
+            }
+            return res.status(201).json('Contentmaster001mb Created! ');
         });
 };
 

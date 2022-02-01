@@ -1,7 +1,7 @@
 import db from "../models/main.js";
 
 const Language001mb = db.language001mb;
-const Subsriberdetails001wb = db.subscriberdetails001wb;
+const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Language001mb.find(function(err, language001mb) {
@@ -49,7 +49,7 @@ export const create = async(req, res) => {
     
     language001mb.save()
         .then((result) => {
-            Subsriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
+            Subscriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
                 if (user) {
                     user.languageid.push(language001mb);
                     user.save();

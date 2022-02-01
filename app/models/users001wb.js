@@ -9,7 +9,7 @@ const users001wb = mongoose.model(
         'lasttname': String,
         'zipcode': Number,
         'employeeid': Number,
-        'dob': Date,
+        'dob': String,
         'email': String,
         'confirmemail': String,
         'sex': String,
@@ -23,9 +23,9 @@ const users001wb = mongoose.model(
         'landline': Number,
         'status': String,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date,
+        'updateddatetime': String,
         'subscid':  {
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'

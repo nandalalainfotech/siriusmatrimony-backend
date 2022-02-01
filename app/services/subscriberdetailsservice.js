@@ -41,6 +41,7 @@ export const create = async(req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
     subscriberdetails001wb.subscid = req.body.subscid;
     subscriberdetails001wb.countryid = req.body.countryid.id;
+    subscriberdetails001wb.contentid = req.body.contentid.id;
     subscriberdetails001wb.cityid = req.body.cityid.id;
     subscriberdetails001wb.stateid = req.body.stateid.id;
     subscriberdetails001wb.subscname = req.body.subscname;
@@ -84,7 +85,7 @@ export const update = async(req, res) => {
                 message: 'No such subscriberdetails001wb'
             });
         }
-        subscriberdetails001wb.countryid = req.body.countryid.id ? req.body.countryid.id : subscriberdetails001wb.countryid;
+        subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
         subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
         subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;

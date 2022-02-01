@@ -28,7 +28,7 @@ export const show = async(req, res) => {
             });
         }
 
-        if (!person001mb) {
+        if (!video001wb) {
             return res.status(404).json({
                 message: 'No such video001wb'
             });

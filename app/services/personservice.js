@@ -55,7 +55,7 @@ export const create = async(req, res) => {
             });
         }
 
-        return res.status(201).json('person001mb Created!');
+        return res.status(201).json('Person001mb Created!');
     });
 };
 

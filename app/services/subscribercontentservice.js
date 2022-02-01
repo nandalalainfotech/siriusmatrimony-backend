@@ -38,18 +38,18 @@ export const show = async (req, res) => {
 
 export const create = async (req, res) => {
     var subscribercontent001wb = new Subscribercontent001wb({
-        subscid: req.body.subscid,
-        subsccontentid1: req.body.subsccontentid1,
-        subsccontentidattach1: req.body.subsccontentidattach1,
-        subsccontentidappovalflag1: req.body.subsccontentidappovalflag1,
-        subsccontentidattach2: req.body.subsccontentidattach2,
-        subsccontentidappovalflag2: req.body.subsccontentidappovalflag2,
-        subsccontentidattachn: req.body.subsccontentidattachn,
-        subsccontentidappovalflagn: req.body.subsccontentidappovalflagn,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
+    subscid: req.body.subscid,
+    subsccontentid1: req.body.subsccontentid1,
+    subsccontentidattach1: req.body.subsccontentidattach1,
+    subsccontentidappovalflag1: req.body.subsccontentidappovalflag1,
+    subsccontentidattach2: req.body.subsccontentidattach2,
+    subsccontentidappovalflag2: req.body.subsccontentidappovalflag2,
+    subsccontentidattachn: req.body.subsccontentidattachn,
+    subsccontentidappovalflagn: req.body.subsccontentidappovalflagn,
+    inserteduser: req.body.inserteduser,
+    inserteddatetime: req.body.inserteddatetime,
+    updateduser: req.body.updateduser,
+    updateddatetime: req.body.updateddatetime
     });
 
     subscribercontent001wb.save(function (err, subscribercontent001wb) {
