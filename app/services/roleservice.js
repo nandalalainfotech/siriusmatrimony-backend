@@ -1,7 +1,9 @@
 import db from "../models/main.js";
 
 const Role001wb = db.role001wb;
+
 const Subscriberdetails001wb = db.subscriberdetails001wb
+
 export const list = async(req, res) => {
     Role001wb.find(function(err, role001wb) {
         if (err) {

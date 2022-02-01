@@ -1,7 +1,9 @@
 import db from "../models/main.js";
 
 const Religion001mb = db.religion001mb;
-const Subsriberdetails001wb = db.subscriberdetails001wb;
+
+const Subscriberdetails001wb = db.subscriberdetails001wb;
+
 export const list = async(req, res) => {
     Religion001mb.find(function(err, religion001mbs) {
         if (err) {
@@ -50,7 +52,7 @@ export const create = async(req, res) => {
     religion001mb.save()
         .then((result) => {
 
-            Subsriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
+            Subscriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
                 if (user) {
                     user.religionid.push(religion001mb);
                     user.save();

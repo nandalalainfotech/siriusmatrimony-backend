@@ -1,7 +1,8 @@
 import db from "../models/main.js";
 
 const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
-const Subsriberdetails001wb = db.subscriberdetails001wb;
+
+const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
@@ -59,12 +60,10 @@ export const create = async(req, res) => {
     subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
     subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
     subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
-
-
     subscriberpersonalinfo001wb.save()
         .then((result) => {
 
-            Subsriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
+            Subscriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
                 if (user) {
                     user.personalid.push(subscriberpersonalinfo001wb);
                     user.save();

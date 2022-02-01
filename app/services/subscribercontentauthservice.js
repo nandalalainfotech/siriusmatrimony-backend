@@ -1,7 +1,8 @@
 import db from "../models/main.js";
 
 const Subscribercontentauth001wb = db.subscribercontentauth001wb;
-const Subsriberdetails001wb = db.subscriberdetails001wb;
+
+const Subscriberdetails001wb = db.subscriberdetails001wb;
 
 export const list = async(req, res) => {
     Subscribercontentauth001wb.find(function(err, subscribercontentauth001wbs) {
@@ -52,7 +53,7 @@ export const create = async(req, res) => {
     subscribercontentauth001wb.save()
         .then((result) => {
 
-            Subsriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
+            Subscriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
                 if (user) {
                     user.subscsubspid.push(subscribercontentauth001wb);
                     user.save();

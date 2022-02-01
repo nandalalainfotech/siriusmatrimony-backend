@@ -13,9 +13,9 @@ const subscriptionmaster001mb = mongoose.model(
         'status': String,
         'discountflag': Boolean,
         'inserteduser': String,
-        'inserteddatetime': Date,
+        'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': Date
+        'updateddatetime': String
     }, { timestamps: false })
 );
 
