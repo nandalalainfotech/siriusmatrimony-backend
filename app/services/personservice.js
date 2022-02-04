@@ -18,7 +18,6 @@ export const list = async(req, res) => {
 
 export const show = async(req, res) => {
     var id = req.params.id;
-
     Person001mb.findOne({ _id: id }, function(err, person001mb) {
         if (err) {
             return res.status(500).json({
@@ -40,6 +39,7 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     var person001mb = new Person001mb();
+    person001mb.personid= req.body.personid,
     person001mb.subscid= req.body.subscid.id,
     person001mb.userid= req.body.userid.id,
     person001mb.inserteduser= req.body.inserteduser,
@@ -78,6 +78,7 @@ export const update = async(req, res) => {
 
         person001mb.subscid = req.body.subscid.id ? req.body.subscid.id : person001mb.subscid;
         person001mb.user = req.body.userid.id ? req.body.userid.id : person001mb.user;
+        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
         person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
         person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
         person001mb.status = req.body.status ? req.body.status : person001mb.status;
