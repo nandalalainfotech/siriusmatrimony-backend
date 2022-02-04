@@ -2,6 +2,10 @@ import db from "../models/main.js";
 
 import nodemailer from "nodemailer";
 
+import hbs from "nodemailer-express-handlebars";
+
+import path from "path";
+
 const Users001wb = db.users001wb
 
 export const list = async (req, res) => {
@@ -38,53 +42,66 @@ export const show = async (req, res) => {
     });
 };
 
-export const create = async (req, res) => {
-    var users001wb = new Users001wb();
-    users001wb.subscid = req.body.subscid.id,
-    users001wb.roleid = req.body.roleid.id,
-    users001wb.firstname = req.body.firstname,
-    users001wb.lasttname = req.body.lasttname,
-    users001wb.zipcode = req.body.zipcode,
-    users001wb.employeeid = req.body.employeeid,
-    users001wb.dob = req.body.dob,
-    users001wb.email = req.body.email,
-    users001wb.confirmemail = req.body.confirmemail,
-    users001wb.sex = req.body.sex,
-    users001wb.address1 = req.body.address1,
-    users001wb.address2 = req.body.address2,
-    users001wb.address3 = req.body.address3,
-    users001wb.cityid = req.body.cityid.id,
-    users001wb.stateid = req.body.stateid.id,
-    users001wb.countryid = req.body.countryid.id,
-    users001wb.mobile = req.body.mobile,
-    users001wb.landline = req.body.landline,
-    users001wb.status = req.body.status,
-    users001wb.inserteduser = req.body.inserteduser,
-    users001wb.inserteddatetime = req.body.inserteddatetime,
-    users001wb.updateduser = req.body.updateduser,
-    users001wb.updateddatetime = req.body.updateddatetime
+export const create = async (req, res, err) => {
 
+    var users001wb = new Users001wb();
+    users001wb.subscid = req.body.subscid.id;
+    users001wb.personid = req.body.personid.id;
+    users001wb.roleid = req.body.roleid.id;
+    users001wb.password = req.body.password;
+    users001wb.firstname = req.body.firstname;
+    users001wb.lasttname = req.body.lasttname;
+    users001wb.zipcode = req.body.zipcode;
+    users001wb.employeeid = req.body.employeeid;
+    users001wb.dob = req.body.dob;
+    users001wb.email = req.body.email;
+    users001wb.confirmemail = req.body.confirmemail;
+    users001wb.sex = req.body.sex;
+    users001wb.address1 = req.body.address1;
+    users001wb.address2 = req.body.address2;
+    users001wb.address3 = req.body.address3,
+    users001wb.cityid = req.body.cityid.id;
+    users001wb.stateid = req.body.stateid.id;
+    users001wb.countryid = req.body.countryid.id;
+    users001wb.mobile = req.body.mobile;
+    users001wb.landline = req.body.landline;
+    users001wb.status = req.body.status;
+    users001wb.inserteduser = req.body.inserteduser;
+    users001wb.inserteddatetime = req.body.inserteddatetime;
+    users001wb.updateduser = req.body.updateduser;
+    users001wb.updateddatetime = req.body.updateddatetime;
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'gkraju987@gmail.com',
-            pass: '987654321@0'
+            user: 'siriusmatrimoney@gmail.com',
+            pass: 'Welcome!23'
         }
     });
-    console.log("email testing")
-    const mailOptions = {
-        from: 'gkraju987@gmail.com', 
-        to:  users001wb.email, 
-        subject: 'test mail', 
-        html: '<h1>Mail Tested </h1>'
+    const handlebarOptions = {
+        viewEngine: {
+            partialsDir: path.resolve('./app/templates'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('./app/templates'),
+        extName: ".handlebars"
     };
-    console.log("to", users001wb.email);
+    transporter.use('compile', hbs(handlebarOptions))
+    const mailOptions = {
+        from: 'siriusmatrimoney@gmail.com',
+        to: users001wb.email,
+        subject: 'Sirius Matrimony Confirmation',
+        template: 'mail',
+        context: {
+            name: "Sirius Matrimony"
+        }
+    };
     transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
         else
-            console.log(info);
+            console.log('email sent' + info.response);
     })
+
     users001wb.save()
         .then((result) => {
             res.json({ message: 'user created' });
@@ -110,7 +127,9 @@ export const update = async (req, res) => {
                 message: 'No such users001wb'
             });
         }
+        users001wb.password = req.body.password ? req.body.password : users001wb.password;
         users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
+        users001wb.personid = req.body.personid.id ? req.body.personid.id : users001wb.personid;
         users001wb.roleid = req.body.roleid.id ? req.body.roleid.id : users001wb.role;
         users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
         users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;

@@ -39,8 +39,10 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
+    subscriberdetails001wb.personid = req.body.personid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
     subscriberdetails001wb.countryid = req.body.countryid.id;
+    subscriberdetails001wb.roleid = req.body.roleid.id;
     subscriberdetails001wb.contentid = req.body.contentid.id;
     subscriberdetails001wb.cityid = req.body.cityid.id;
     subscriberdetails001wb.stateid = req.body.stateid.id;
@@ -67,6 +69,8 @@ export const create = async(req, res) => {
         .catch((error) => {
             res.status(500).json({ error });
         });
+
+
 };
 
 export const update = async(req, res) => {
@@ -86,9 +90,11 @@ export const update = async(req, res) => {
             });
         }
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
+        subscriberdetails001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberdetails001wb.personid;
         subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
         subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
+        subscriberdetails001wb.roleid = req.body.roleid.id ? req.body.roleid.id : subscriberdetails001wb.roleid;
         subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
         subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
         subscriberdetails001wb.sex = req.body.sex ? req.body.sex : subscriberdetails001wb.sex;

@@ -16,6 +16,10 @@ const role001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
         },
+        'userid':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'users001wb'
+        },
     }, { timestamps: false })
 );
 

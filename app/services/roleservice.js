@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Role001wb = db.role001wb;
 
-const Subscriberdetails001wb = db.subscriberdetails001wb
+
 
 export const list = async(req, res) => {
     Role001wb.find(function(err, role001wb) {
@@ -42,6 +42,7 @@ export const create = (req, res) => {
 
     const role001wb = new Role001wb();
     role001wb.subscid = req.body.subscid.id;
+    role001wb.userid = req.body.userid.id;
     role001wb.roleid = req.body.roleid;
     role001wb.rolename = req.body.rolename;
     role001wb.status = req.body.status;
@@ -49,17 +50,16 @@ export const create = (req, res) => {
     role001wb.inserteddatetime = req.body.inserteddatetime;
     role001wb.updateduser = req.body.updateduser;
     role001wb.updateddatetime = req.body.updateddatetime;
-
-    role001wb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: role001wb.subscid }, (err, user) => {
-                if (user) {
-                    user.roleid.push(role001wb);
-                    user.save();
-                    res.json({ message: 'Role created!' });
-                }
-            });
-        })
+        role001wb.save(function(err, role001wb) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when creating role001wb',
+                    error: err
+                });
+            }
+    
+            return res.status(201).json('role001wb Created!');
+        });
 };
 
 export const update = async(req, res) => {
@@ -79,6 +79,7 @@ export const update = async(req, res) => {
             });
         }
         role001wb.subscid = req.body.subscid.id ? req.body.subscid.id : role001wb.subscid;
+        role001wb.userid = req.body.userid.id ? req.body.userid.id : role001wb.userid;
         role001wb.roleid = req.body.roleid ? req.body.roleid : role001wb.roleid;
         role001wb.rolename = req.body.rolename ? req.body.rolename : role001wb.rolename;
         role001wb.status = req.body.status ? req.body.status : role001wb.status;

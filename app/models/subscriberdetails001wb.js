@@ -5,6 +5,10 @@ mongoose.pluralize(null);
 const subscriberdetails001wb = mongoose.model(
     "subscriberdetails001wb",
     new mongoose.Schema({
+        'personid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
+        },
         'regionalid': [{
             type: mongoose.Types.ObjectId,
             ref: 'regionaldetails001mb'
@@ -13,10 +17,10 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'companydetails001mb'
         }],
-        'roleid': [{
+        'roleid': {
             type: mongoose.Types.ObjectId,
             ref: 'role001wb'
-        }],
+        },
         // 'catcode': [{
         //     type: mongoose.Types.ObjectId,
         //     ref: 'categorydetails001mb'

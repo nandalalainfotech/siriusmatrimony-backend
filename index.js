@@ -35,6 +35,8 @@ import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
 import videoUpload from "../siriusmatrimony-backend/app/middleware/videoUpload.js";
 import audio from "../siriusmatrimony-backend/app/middleware/audio.js";
 import nodemailer from "nodemailer";
+import hbs  from "nodemailer-express-handlebars";
+import path  from "path";
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -689,7 +691,7 @@ const options = {
 const specs = swaggerjsdoc(options);
 app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
 
-// **********************schema method****************//
+// **********************role001wb schema method****************//
 /** 
  * @swagger
  * components:
@@ -715,7 +717,12 @@ app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
  *                type: object
  *                properties:
  *                    id: 
- *                     type: string      
+ *                     type: string   
+ *             userid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                     type: string     
  */
 
 /**
@@ -776,7 +783,6 @@ app.get('/api/role001wb', (req, res) => {
 */
 
 app.get('/api/role001wb/:id', (req, res) => {
-    console.log("req", req);
     var id = req.params.id;
     Role001wb.findOne({ _id: id }, function (err, role001wb) {
         if (err) {
@@ -820,6 +826,7 @@ app.post('/api/role001wb/role', (req, res) => {
 
     const role001wb = new Role001wb();
     role001wb.subscid = req.body.subscid.id;
+    role001wb.userid = req.body.userid.id;
     role001wb.roleid = req.body.roleid;
     role001wb.rolename = req.body.rolename;
     role001wb.status = req.body.status;
@@ -827,16 +834,16 @@ app.post('/api/role001wb/role', (req, res) => {
     role001wb.inserteddatetime = req.body.inserteddatetime;
     role001wb.updateduser = req.body.updateduser;
     role001wb.updateddatetime = req.body.updateddatetime;
-    role001wb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: role001wb.subscid }, (err, user) => {
-                if (user) {
-                    user.roleid.push(role001wb);
-                    user.save();
-                    res.json({ message: 'Role created' });
-                }
+    role001wb.save(function(err, role001wb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when creating role001wb',
+                error: err
             });
-        })
+        }
+
+        return res.status(201).json('role001wb Created!');
+    });
 
 })
 
@@ -891,6 +898,7 @@ app.put('/api/role001wb/:id', (req, res) => {
             });
         }
         role001wb.subscid = req.body.subscid.id ? req.body.subscid.id : role001wb.subscid;
+        role001wb.userid = req.body.userid.id ? req.body.userid.id : role001wb.userid;
         role001wb.roleid = req.body.roleid ? req.body.roleid : role001wb.roleid;
         role001wb.rolename = req.body.rolename ? req.body.rolename : role001wb.rolename;
         role001wb.status = req.body.status ? req.body.status : role001wb.status;
@@ -905,7 +913,6 @@ app.put('/api/role001wb/:id', (req, res) => {
                     error: err
                 });
             }
-            console.log(" role001wb.roleid", role001wb.roleid)
             return res.json(role001wb);
         });
     });
@@ -4157,7 +4164,9 @@ app.delete('/api/login001mb/:id', (req, res) => {
  *                 type: object
  *                 properties:
  *                    id: 
- *                      type: string   
+ *                      type: string  
+ *             personid:   
+ *                 type: number 
  *             status:
  *                 type: string
  *             inserteduser:
@@ -4273,6 +4282,7 @@ app.get('/api/person001mb/:id', (req, res) => {
 
 app.post('/api/person001mb/person', (req, res) => {
     var person001mb = new Person001mb();
+    person001mb.personid = req.body.personid,
     person001mb.subscid = req.body.subscid.id,
     person001mb.userid = req.body.userid.id,
     person001mb.inserteduser = req.body.inserteduser,
@@ -4340,6 +4350,7 @@ app.put('/api/person001mb/:id', (req, res) => {
             });
         }
 
+        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
         person001mb.subscid = req.body.subscid.id ? req.body.subscid.id : person001mb.subscid;
         person001mb.user = req.body.userid.id ? req.body.userid.id : person001mb.user;
         person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
@@ -5529,6 +5540,11 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                      type: string 
+ *             personid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
  *             stateid:
  *                type: object
  *                properties:
@@ -5537,7 +5553,10 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *             companycode:
  *                 type: array
  *             roleid:
- *                 type: array
+ *                 type: object
+ *                 properties:
+ *                    id: 
+ *                      type: string 
  *             subcatcode:
  *                 type: array
  *             professionalid:
@@ -5667,8 +5686,10 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
 app.post('/api/subscriberdetails001wb/subscriberdetails', (req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
     subscriberdetails001wb.contentid = req.body.contentid.id;
+    subscriberdetails001wb.personid = req.body.personid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
     subscriberdetails001wb.countryid = req.body.countryid.id;
+    subscriberdetails001wb.roleid = req.body.roleid.id
     subscriberdetails001wb.cityid = req.body.cityid.id;
     subscriberdetails001wb.stateid = req.body.stateid.id;
     subscriberdetails001wb.subscname = req.body.subscname;
@@ -5746,8 +5767,10 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
         }
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
         subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
+        subscriberdetails001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberdetails001wb.personid;
         subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
+        subscriberdetails001wb.roleid = req.body.roleid.id ? req.body.roleid.id : subscriberdetails001wb.roleid;
         subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
         subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
         subscriberdetails001wb.sex = req.body.sex ? req.body.sex : subscriberdetails001wb.sex;
@@ -6770,7 +6793,12 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *                type: object 
  *                properties:
  *                    id:
- *                     type: string  
+ *                     type: string 
+ *             personid:
+ *                type: object 
+ *                properties:
+ *                    id:
+ *                     type: string 
  *             roleid:
  *                type: object 
  *                properties:
@@ -6876,6 +6904,7 @@ app.post('/api/users001wb/user', (req, res) => {
     var users001wb = new Users001wb();
     users001wb.subscid = req.body.subscid.id,
     users001wb.roleid = req.body.roleid.id,
+    users001wb.personid = req.body.personid.id,
     users001wb.firstname = req.body.firstname,
     users001wb.lasttname = req.body.lasttname,
     users001wb.zipcode = req.body.zipcode,
@@ -6897,24 +6926,37 @@ app.post('/api/users001wb/user', (req, res) => {
     users001wb.inserteddatetime = req.body.inserteddatetime,
     users001wb.updateduser = req.body.updateduser,
     users001wb.updateddatetime = req.body.updateddatetime
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'gkraju987@gmail.com',
-            pass: '987654321@0'
+            user: 'siriusmatrimoney@gmail.com',
+            pass: 'Welcome!23'
         }
     });
-    const mailOptions = {
-        from: 'gkraju987@gmail.com',
-        to: users001wb.email,
-        subject: 'test mail',
-        html: '<h1>Mail Tested </h1>'
+     const handlebarOptions = {
+        viewEngine: {
+            partialsDir: path.resolve('./app/templates'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('./app/templates'),
+        extName:".handlebars"
     };
-    transporter.sendMail(mailOptions, function(err, info) {
+    transporter.use('compile', hbs(handlebarOptions))
+    const mailOptions = {
+        from: 'siriusmatrimoney@gmail.com', 
+        to:  users001wb.email, 
+        subject: 'Sirius Matrimony Confirmation', 
+        template: 'mail',
+        context:{
+            name: "Sirius Matrimony"
+        }
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
         else
-            console.log(info);
+            console.log('email sent' + info.response);
     })
     users001wb.save()
         .then((result) => {
@@ -6971,6 +7013,7 @@ app.put('/api/users001wb/:id', (req, res) => {
             });
         }
         users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
+        users001wb.personid = req.body.personid.id ? req.body.personid.id : users001wb.personid;
         users001wb.roleid = req.body.roleid.id ? req.body.roleid.id : users001wb.role;
         users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
         users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;

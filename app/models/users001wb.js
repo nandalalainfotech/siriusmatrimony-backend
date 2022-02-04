@@ -6,11 +6,12 @@ const users001wb = mongoose.model(
     "users001wb",
     new mongoose.Schema({
         'firstname': String,
+        'password': String,
         'lasttname': String,
         'zipcode': Number,
         'employeeid': Number,
         'dob': String,
-        'email': String,
+        'email': String ,
         'confirmemail': String,
         'sex': String,
         'address1': String,
@@ -22,6 +23,7 @@ const users001wb = mongoose.model(
         'mobile': Number,
         'landline': Number,
         'status': String,
+        'token':String,
         'inserteduser': String,
         'inserteddatetime': String,
         'updateduser': String,
@@ -41,6 +43,10 @@ const users001wb = mongoose.model(
         'countryid': {
             type: mongoose.Types.ObjectId,
             ref: 'country001mb'
+        },
+        'personid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
         },
        'roleid': { type: mongoose.Types.ObjectId, ref: 'role001wb' },
     },
