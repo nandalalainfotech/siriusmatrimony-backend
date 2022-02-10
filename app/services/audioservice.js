@@ -40,17 +40,17 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const audio001wb = new Audio001wb();
-    audio001wb.content = req.file.path,
-    audio001wb.fieldname = req.file.fieldname,
-    audio001wb.originalname = req.file.originalname,
-    audio001wb.filename = req.file.filename,
-    audio001wb.status = req.body.status,
-    audio001wb.contentid = req.body.contentid,
-    audio001wb.inserteduser = req.body.inserteduser,
-    audio001wb.inserteddatetime = req.body.inserteddatetime,
-    audio001wb.updateduser = req.body.updateduser,
-    audio001wb.updateddatetime = req.body.updateddatetime
-        audio001wb.save()
+    audio001wb.content = req.file.path;
+    audio001wb.fieldname = req.file.fieldname;
+    audio001wb.originalname = req.file.originalname;
+    audio001wb.filename = req.file.filename;
+    audio001wb.status = req.body.status;
+    audio001wb.contentid = req.body.contentid;
+    audio001wb.inserteduser = req.body.inserteduser;
+    audio001wb.inserteddatetime = req.body.inserteddatetime;
+    audio001wb.updateduser = req.body.updateduser;
+    audio001wb.updateddatetime = req.body.updateddatetime;
+    audio001wb.save()
         .then((result) => {
             Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
                 if (user) {

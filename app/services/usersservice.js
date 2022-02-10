@@ -8,8 +8,8 @@ import path from "path";
 
 const Users001wb = db.users001wb
 
-export const list = async (req, res) => {
-    Users001wb.find(function (err, users001wb) {
+export const list = async(req, res) => {
+    Users001wb.find(function(err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -21,10 +21,10 @@ export const list = async (req, res) => {
     });
 };
 
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Users001wb.findOne({ _id: id }, function (err, users001wb) {
+    Users001wb.findOne({ _id: id }, function(err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -42,12 +42,12 @@ export const show = async (req, res) => {
     });
 };
 
-export const create = async (req, res, err) => {
+export const create = async(req, res, err) => {
 
-    var users001wb = new Users001wb();
+    const users001wb = new Users001wb();
     users001wb.subscid = req.body.subscid.id;
     users001wb.personid = req.body.personid.id;
-    users001wb.roleid = req.body.roleid.id;
+    users001wb.rolename = req.body.rolename.rolename;
     users001wb.password = req.body.password;
     users001wb.firstname = req.body.firstname;
     users001wb.lasttname = req.body.lasttname;
@@ -59,7 +59,7 @@ export const create = async (req, res, err) => {
     users001wb.sex = req.body.sex;
     users001wb.address1 = req.body.address1;
     users001wb.address2 = req.body.address2;
-    users001wb.address3 = req.body.address3,
+    users001wb.address3 = req.body.address3;
     users001wb.cityid = req.body.cityid.id;
     users001wb.stateid = req.body.stateid.id;
     users001wb.countryid = req.body.countryid.id;
@@ -70,6 +70,11 @@ export const create = async (req, res, err) => {
     users001wb.inserteddatetime = req.body.inserteddatetime;
     users001wb.updateduser = req.body.updateduser;
     users001wb.updateddatetime = req.body.updateddatetime;
+
+    const oldUser = await Users001wb.findOne({ email: users001wb.email });
+    if (oldUser) {
+        return res.status(409).send("User Already Exist. Please Login");
+    }
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -95,7 +100,7 @@ export const create = async (req, res, err) => {
             name: "Sirius Matrimony"
         }
     };
-    transporter.sendMail(mailOptions, function (err, info) {
+    transporter.sendMail(mailOptions, function(err, info) {
         if (err)
             console.log(err)
         else
@@ -111,10 +116,10 @@ export const create = async (req, res, err) => {
         });
 };
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Users001wb.findOne({ _id: id }, function (err, users001wb) {
+    Users001wb.findOne({ _id: id }, function(err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb',
@@ -130,7 +135,7 @@ export const update = async (req, res) => {
         users001wb.password = req.body.password ? req.body.password : users001wb.password;
         users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
         users001wb.personid = req.body.personid.id ? req.body.personid.id : users001wb.personid;
-        users001wb.roleid = req.body.roleid.id ? req.body.roleid.id : users001wb.role;
+        users001wb.rolename = req.body.rolename.rolename ? req.body.rolename.rolename : users001wb.rolename;
         users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
         users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;
         users001wb.zipcode = req.body.zipcode ? req.body.zipcode : users001wb.zipcode;
@@ -153,7 +158,7 @@ export const update = async (req, res) => {
         users001wb.updateduser = req.body.updateduser ? req.body.updateduser : users001wb.updateduser;
         users001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : users001wb.updateddatetime;
 
-        users001wb.save(function (err, users001wb) {
+        users001wb.save(function(err, users001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating users001wb.',
@@ -165,10 +170,10 @@ export const update = async (req, res) => {
         });
     });
 };
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Users001wb.findByIdAndRemove(id, function (err, users001wb) {
+    Users001wb.findByIdAndRemove(id, function(err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the users001wb.',

@@ -5,8 +5,8 @@ const login001mb = mongoose.model(
     new mongoose.Schema({
         'email': String,
         'password': String,
-        'role':String,
-        'token':String,
+        'rolename': { type: String, ref: 'role001wb' },
+        'token': String,
         'status': String,
         'inserteduser': String,
         'inserteddatetime': String,

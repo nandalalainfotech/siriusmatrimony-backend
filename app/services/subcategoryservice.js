@@ -4,8 +4,8 @@ const Subcategory001mb = db.subcategory001mb
 
 const Subscriberdetails001wb = db.subscriberdetails001wb;
 
-export const list = async (req, res) => {
-    Subcategory001mb.find(function (err, subcategory001mbs) {
+export const list = async(req, res) => {
+    Subcategory001mb.find(function(err, subcategory001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -16,10 +16,10 @@ export const list = async (req, res) => {
         return res.json(subcategory001mbs);
     });
 };
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
+    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -37,38 +37,38 @@ export const show = async (req, res) => {
     });
 };
 
-export const create = async (req, res) => {
-    const subcategory001mb = new Subcategory001mb()
-    subcategory001mb.subscid= req.body.subscid.id,
-    subcategory001mb.catcode= req.body.catcode.id,
-    subcategory001mb.subcatcode= req.body.subcatcode,
-    subcategory001mb.subcatname= req.body.subcatname,
-    subcategory001mb.subcatstatus= req.body.subcatstatus,
-    subcategory001mb.status= req.body.status,
-    subcategory001mb.inserteduser= req.body.inserteduser,
-    subcategory001mb.inserteddatetime= req.body.inserteddatetime,
-    subcategory001mb.updateduser= req.body.updateduser,
-    subcategory001mb.updateddatetime= req.body.updateddatetime
+export const create = async(req, res) => {
+    const subcategory001mb = new Subcategory001mb();
+    subcategory001mb.subscid = req.body.subscid.id;
+    subcategory001mb.catcode = req.body.catcode.id;
+    subcategory001mb.subcatcode = req.body.subcatcode;
+    subcategory001mb.subcatname = req.body.subcatname;
+    subcategory001mb.subcatstatus = req.body.subcatstatus;
+    subcategory001mb.status = req.body.status;
+    subcategory001mb.inserteduser = req.body.inserteduser;
+    subcategory001mb.inserteddatetime = req.body.inserteddatetime;
+    subcategory001mb.updateduser = req.body.updateduser;
+    subcategory001mb.updateddatetime = req.body.updateddatetime;
     subcategory001mb.save()
-    .then((result) => {
-        Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
-            if (user) {
-                user.subcatcode.push(subcategory001mb);
-                user.save();
-                res.json({ message: 'subcategory001mb created!' });
-            }
+        .then((result) => {
+            Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
+                if (user) {
+                    user.subcatcode.push(subcategory001mb);
+                    user.save();
+                    res.json({ message: 'subcategory001mb created!' });
+                }
+            });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
         });
-    })
-    .catch((error) => {
-        res.status(500).json({ error });
-    });
 };
 
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
+    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb',
@@ -92,7 +92,7 @@ export const update = async (req, res) => {
         subcategory001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcategory001mb.updateduser;
         subcategory001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcategory001mb.updateddatetime;
 
-        subcategory001mb.save(function (err, subcategory001mb) {
+        subcategory001mb.save(function(err, subcategory001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subcategory001mb.',
@@ -104,10 +104,10 @@ export const update = async (req, res) => {
         });
     });
 };
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Subcategory001mb.findByIdAndRemove(id, function (err, subcategory001mb) {
+    Subcategory001mb.findByIdAndRemove(id, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subcategory001mb.',

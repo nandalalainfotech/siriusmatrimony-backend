@@ -47,20 +47,20 @@ export const create = async(req, res) => {
     contentmaster001mb.format = req.body.format;
     contentmaster001mb.status = req.body.status;
     contentmaster001mb.discountflag = req.body.discountflag;
-    contentmaster001mb.inserteduser = req.body.inserteduser,
+    contentmaster001mb.inserteduser = req.body.inserteduser;
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
     contentmaster001mb.subscid = req.body.subscid.id;
     contentmaster001mb.save(function(err, contentmaster001mb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating contentmaster001mb',
-                    error: err
-                });
-            }
-            return res.status(201).json('Contentmaster001mb Created! ');
-        });
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when creating contentmaster001mb',
+                error: err
+            });
+        }
+        return res.status(201).json('Contentmaster001mb Created! ');
+    });
 };
 
 export const update = async(req, res) => {
