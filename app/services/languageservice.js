@@ -46,7 +46,7 @@ export const create = async(req, res) => {
     language001mb.inserteddatetime = req.body.inserteddatetime;
     language001mb.updateduser = req.body.updateduser;
     language001mb.updateddatetime = req.body.updateddatetime;
-    
+
     language001mb.save()
         .then((result) => {
             Subscriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {

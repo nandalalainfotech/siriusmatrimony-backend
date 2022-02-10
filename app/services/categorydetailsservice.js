@@ -4,8 +4,8 @@ const Categorydetails001mb = db.categorydetails001mb;
 
 const Subscriberdetails001wb = db.subscriberdetails001wb;
 
-export const list = async (req, res) => {
-    Categorydetails001mb.find(function (err, categorydetails001mb) {
+export const list = async(req, res) => {
+    Categorydetails001mb.find(function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -18,10 +18,10 @@ export const list = async (req, res) => {
 };
 
 
-export const show = async (req, res) => {
+export const show = async(req, res) => {
     var id = req.params.id;
 
-    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -40,16 +40,16 @@ export const show = async (req, res) => {
 };
 
 
-export const create = async (req, res) => {
+export const create = async(req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
     categorydetails001mb.subscid = req.body.subscid.id;
-    categorydetails001mb.catcode = req.body.catcode,
-    categorydetails001mb.catname = req.body.catname,
-    categorydetails001mb.status = req.body.status,
-    categorydetails001mb.inserteduser = req.body.inserteduser,
-    categorydetails001mb.inserteddatetime = req.body.inserteddatetime,
-    categorydetails001mb.updateduser = req.body.updateduser,
-    categorydetails001mb.updateddatetime = req.body.updateddatetime
+    categorydetails001mb.catcode = req.body.catcode;
+    categorydetails001mb.catname = req.body.catname;
+    categorydetails001mb.status = req.body.status;
+    categorydetails001mb.inserteduser = req.body.inserteduser;
+    categorydetails001mb.inserteddatetime = req.body.inserteddatetime;
+    categorydetails001mb.updateduser = req.body.updateduser;
+    categorydetails001mb.updateddatetime = req.body.updateddatetime;
     categorydetails001mb.save()
         .then((result) => {
             Subscriberdetails001wb.findOne({ _id: categorydetails001mb.subscid }, (err, user) => {
@@ -66,10 +66,10 @@ export const create = async (req, res) => {
 };
 
 
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb',
@@ -91,7 +91,7 @@ export const update = async (req, res) => {
         categorydetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : categorydetails001mb.updateduser;
         categorydetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : categorydetails001mb.updateddatetime;
 
-        categorydetails001mb.save(function (err, categorydetails001mb) {
+        categorydetails001mb.save(function(err, categorydetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating categorydetails001mb.',
@@ -103,10 +103,10 @@ export const update = async (req, res) => {
         });
     });
 };
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Categorydetails001mb.findByIdAndRemove(id, function (err, categorydetails001mb) {
+    Categorydetails001mb.findByIdAndRemove(id, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the categorydetails001mb.',
@@ -117,4 +117,3 @@ export const remove = async (req, res) => {
         return res.status(204).json();
     });
 };
-

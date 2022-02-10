@@ -6,7 +6,7 @@ const video001wb = mongoose.model(
     "video001wb",
     new mongoose.Schema({
             'contentid': {
-                type: mongoose.Schema.Types.ObjectId,
+                type: mongoose.Types.ObjectId,
                 ref: 'contentmaster001mb'
             },
             'fieldname': String,

@@ -4,8 +4,8 @@ const Regionaldetails001mb = db.regionaldetails001mb;
 
 const Subscriberdetails001wb = db.subscriberdetails001wb;
 
-export const list = async (req, res) => {
-    Regionaldetails001mb.find(function (err, regionaldetails001mb) {
+export const list = async(req, res) => {
+    Regionaldetails001mb.find(function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -19,7 +19,7 @@ export const list = async (req, res) => {
 export const show = (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -37,18 +37,18 @@ export const show = (req, res) => {
     });
 };
 
-export const create = async (req, res) => {
-    const regionaldetails001mb = new Regionaldetails001mb();
+export const create = async(req, res) => {
 
-    regionaldetails001mb.subscid = req.body.subscid.id,
-    regionaldetails001mb.regionalid = req.body.regionalid,
-    regionaldetails001mb.regionalname = req.body.regionalname,
-    regionaldetails001mb.regionaldesc = req.body.regionaldesc,
-    regionaldetails001mb.status = req.body.status,
-    regionaldetails001mb.inserteduser = req.body.inserteduser,
-    regionaldetails001mb.inserteddatetime = req.body.inserteddatetime,
-    regionaldetails001mb.updateduser = req.body.updateduser,
-    regionaldetails001mb.updateddatetime = req.body.updateddatetime
+    const regionaldetails001mb = new Regionaldetails001mb();
+    regionaldetails001mb.subscid = req.body.subscid.id;
+    regionaldetails001mb.regionalid = req.body.regionalid;
+    regionaldetails001mb.regionalname = req.body.regionalname;
+    regionaldetails001mb.regionaldesc = req.body.regionaldesc;
+    regionaldetails001mb.status = req.body.status;
+    regionaldetails001mb.inserteduser = req.body.inserteduser;
+    regionaldetails001mb.inserteddatetime = req.body.inserteddatetime;
+    regionaldetails001mb.updateduser = req.body.updateduser;
+    regionaldetails001mb.updateddatetime = req.body.updateddatetime;
     regionaldetails001mb.save()
         .then((result) => {
             Subscriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
@@ -63,10 +63,10 @@ export const create = async (req, res) => {
             res.status(500).json({ error });
         });
 };
-export const update = async (req, res) => {
+export const update = async(req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb',
@@ -89,7 +89,7 @@ export const update = async (req, res) => {
         regionaldetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : regionaldetails001mb.updateduser;
         regionaldetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : regionaldetails001mb.updateddatetime;
 
-        regionaldetails001mb.save(function (err, regionaldetails001mb) {
+        regionaldetails001mb.save(function(err, regionaldetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating regionaldetails001mb.',
@@ -101,10 +101,10 @@ export const update = async (req, res) => {
         });
     });
 };
-export const remove = async (req, res) => {
+export const remove = async(req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findByIdAndRemove(id, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findByIdAndRemove(id, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the regionaldetails001mb.',

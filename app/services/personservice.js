@@ -38,15 +38,15 @@ export const show = async(req, res) => {
 
 
 export const create = async(req, res) => {
-    var person001mb = new Person001mb();
-    person001mb.personid= req.body.personid,
-    person001mb.subscid= req.body.subscid.id,
-    person001mb.userid= req.body.userid.id,
-    person001mb.inserteduser= req.body.inserteduser,
-    person001mb.inserteddatetime= req.body.inserteddatetime,
-    person001mb.updateduser= req.body.updateduser,
-    person001mb.status= req.body.status,
-    person001mb.updateddatetime= req.body.updateddatetime
+    const person001mb = new Person001mb();
+    person001mb.personid = req.body.personid;
+    person001mb.subscid = req.body.subscid.id;
+    person001mb.userid = req.body.userid.id;
+    person001mb.inserteduser = req.body.inserteduser;
+    person001mb.inserteddatetime = req.body.inserteddatetime;
+    person001mb.updateduser = req.body.updateduser;
+    person001mb.status = req.body.status;
+    person001mb.updateddatetime = req.body.updateddatetime;
     person001mb.save(function(err, person001mb) {
         if (err) {
             return res.status(500).json({

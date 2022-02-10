@@ -35,8 +35,8 @@ import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
 import videoUpload from "../siriusmatrimony-backend/app/middleware/videoUpload.js";
 import audio from "../siriusmatrimony-backend/app/middleware/audio.js";
 import nodemailer from "nodemailer";
-import hbs  from "nodemailer-express-handlebars";
-import path  from "path";
+import hbs from "nodemailer-express-handlebars";
+import path from "path";
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -245,28 +245,28 @@ function initial() {
     Subscriberdetails001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberdetails001wb.insertMany([{
-                         'regionalid': 434,
-                          'companycode': 3443,
-                             'catcode': 4343,
-                            'subcatcode': 4343,
-                           'categoryid': 4343,
-                            'subscid': 434,
-                            'subscname': "RAJ",
+                        'regionalid': 434,
+                        'companycode': 3443,
+                        'catcode': 4343,
+                        'subcatcode': 4343,
+                        'categoryid': 4343,
+                        'subscid': 434,
+                        'subscname': "RAJ",
                         '  classificationid': 898,
-                            'sex': "male",
-                            'subscdesc': "good",
-                            'aboutme': "good",
-                            'address': "street",
-                            'phoneno': 77787,
-                            'subscapproval': true,
-                            'approvedby': "raj",
-                            'approvedon': 11 / 12 / 2021,
-                            'subscsubspid': 786,
-                            'subscstatus': "good",
-                            'inserteduser': "raj",
-                            'inserteddatetime': 11 / 12 / 2021,
-                            'updateduser': "raj",
-                            'updateddatetime': 11 / 12 / 2021
+                        'sex': "male",
+                        'subscdesc': "good",
+                        'aboutme': "good",
+                        'address': "street",
+                        'phoneno': 77787,
+                        'subscapproval': true,
+                        'approvedby': "raj",
+                        'approvedon': 11 / 12 / 2021,
+                        'subscsubspid': 786,
+                        'subscstatus': "good",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 11 / 12 / 2021,
+                        'updateduser': "raj",
+                        'updateddatetime': 11 / 12 / 2021
                     }
 
                 ])
@@ -393,23 +393,23 @@ function initial() {
     Subscribercontentauth001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscribercontentauth001wb.insertMany([{
-                'subscid': 123,
-                'subscsubpid': 12,
-                'subscsubpstatus': "good",
-                'subscsubpstartdate': 1 / 12 / 22,
-                'subscsupbenddate': 2 / 12 / 22,
-                'inserteduser': "aravindh",
-                'inserteddatetime': 3 / 12 / 22,
-                'updateduser': "chandru",
-                'updateddatetime': 4 / 12 / 22
-            }
+                        'subscid': 123,
+                        'subscsubpid': 12,
+                        'subscsubpstatus': "good",
+                        'subscsubpstartdate': 1 / 12 / 22,
+                        'subscsupbenddate': 2 / 12 / 22,
+                        'inserteduser': "aravindh",
+                        'inserteddatetime': 3 / 12 / 22,
+                        'updateduser': "chandru",
+                        'updateddatetime': 4 / 12 / 22
+                    }
 
-            ])
+                ])
                 .then(() => {
 
                 })
                 .catch((err) => console.log("error", err));
-    }
+        }
     });
     Subscriberpersonalinfo001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
@@ -445,7 +445,7 @@ function initial() {
     Subscriberprofessionalinfo002wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberprofessionalinfo002wb.insertMany([{
-                         'subcid': 12,
+                        'subcid': 12,
                         'professionaldetails': "hi",
                         'job': "engineer",
                         'flex1': "flex1",
@@ -680,10 +680,9 @@ const options = {
             title: 'Sirius Matrimony API Generation',
             version: '1.0.0'
         },
-        tags:
-            [{
-                name: " API Generation",
-            }]
+        tags: [{
+            name: " API Generation",
+        }]
     },
 
     apis: ['index.js'],
@@ -743,7 +742,7 @@ app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
  *                             $ref: '#/components/schemas/role001wb'
  */
 app.get('/api/role001wb', (req, res) => {
-    Role001wb.find(function (err, role001wb) {
+    Role001wb.find(function(err, role001wb) {
         if (err) {
             return res.status(500).send({
                 message: 'Error when getting role001wb.',
@@ -756,35 +755,35 @@ app.get('/api/role001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/role001wb/{id}:
-*   get:
-*     tags: [role001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/role001wb'
-*/
+ * @swagger
+ * /api/role001wb/{id}:
+ *   get:
+ *     tags: [role001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/role001wb'
+ */
 
 app.get('/api/role001wb/:id', (req, res) => {
     var id = req.params.id;
-    Role001wb.findOne({ _id: id }, function (err, role001wb) {
+    Role001wb.findOne({ _id: id }, function(err, role001wb) {
         if (err) {
             return res.status(500).send({
                 message: 'Error when getting role001wb.',
@@ -803,24 +802,24 @@ app.get('/api/role001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/role001wb/role:
-  *   post:
-  *    tags: [role001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/role001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/role001wb/role:
+ *   post:
+ *    tags: [role001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/role001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/role001wb/role', (req, res) => {
 
@@ -849,41 +848,41 @@ app.post('/api/role001wb/role', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/role001wb/{id}:
-  *   put:
-  *    tags: [role001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/role001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/role001wb'
-  */
+ * @swagger
+ * /api/role001wb/{id}:
+ *   put:
+ *    tags: [role001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/role001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/role001wb'
+ */
 
 app.put('/api/role001wb/:id', (req, res) => {
     var id = req.params.id;
-    Role001wb.findOne({ _id: id }, function (err, role001wb) {
+    Role001wb.findOne({ _id: id }, function(err, role001wb) {
         console.log("Role001wb put", role001wb)
         if (err) {
             return res.status(500).send({
@@ -906,7 +905,7 @@ app.put('/api/role001wb/:id', (req, res) => {
         role001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : role001wb.inserteddatetime;
         role001wb.updateduser = req.body.updateduser ? req.body.updateduser : role001wb.updateduser;
         role001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : role001wb.updateddatetime;
-        role001wb.save(function (err, role001wb) {
+        role001wb.save(function(err, role001wb) {
             if (err) {
                 return res.status(500).send({
                     message: 'Error when updating role001wb.',
@@ -921,29 +920,29 @@ app.put('/api/role001wb/:id', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/role001wb/{id}:
-  *   delete:
-  *    tags: [role001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/role001wb/{id}:
+ *   delete:
+ *    tags: [role001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/role001wb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001wb.findByIdAndRemove(id, function (err, role001wb) {
+    Role001wb.findByIdAndRemove(id, function(err, role001wb) {
         if (err) {
             return res.status(500).send({
                 message: 'Error when deleting the role001wb.',
@@ -1005,7 +1004,7 @@ app.delete('/api/role001wb/:id', (req, res) => {
  */
 
 app.get('/api/country001mb', (req, res) => {
-    Country001mb.find(function (err, country001mb) {
+    Country001mb.find(function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -1018,35 +1017,35 @@ app.get('/api/country001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/country001mb/{id}:
-*   get:
-*     tags: [country001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/country001mb'
-*/
+ * @swagger
+ * /api/country001mb/{id}:
+ *   get:
+ *     tags: [country001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/country001mb'
+ */
 
 app.get('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
-    Country001mb.findOne({ _id: id }, function (err, country001mb) {
+    Country001mb.findOne({ _id: id }, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -1065,24 +1064,24 @@ app.get('/api/country001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/country001mb/country:
-  *   post:
-  *    tags: [country001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/country001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/country001mb/country:
+ *   post:
+ *    tags: [country001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/country001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/country001mb/country', (req, res) => {
     const country001mb = new Country001mb();
@@ -1095,52 +1094,52 @@ app.post('/api/country001mb/country', (req, res) => {
         country001mb.updateddatetime = req.body.updateddatetime,
         country001mb.updateduser = req.body.updateduser,
         country001mb.save()
-            .then((result) => {
-                res.json({ message: 'country created' });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
-            });
+        .then((result) => {
+            res.json({ message: 'country created' });
+        })
+        .catch((error) => {
+            res.status(500).json({ error });
+        });
 })
 
 
 /**
-  * @swagger
-  * /api/country001mb/{id}:
-  *   put:
-  *    tags: [country001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/country001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/country001mb'
-  */
+ * @swagger
+ * /api/country001mb/{id}:
+ *   put:
+ *    tags: [country001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/country001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/country001mb'
+ */
 
 app.put('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Country001mb.findOne({ _id: id }, function (err, country001mb) {
+    Country001mb.findOne({ _id: id }, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb',
@@ -1162,7 +1161,7 @@ app.put('/api/country001mb/:id', (req, res) => {
         country001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : country001mb.updateddatetime;
         country001mb.updateduser = req.body.updateduser ? req.body.updateduser : country001mb.updateduser;
 
-        country001mb.save(function (err, country001mb) {
+        country001mb.save(function(err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -1178,28 +1177,28 @@ app.put('/api/country001mb/:id', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/country001mb/{id}:
-  *   delete:
-  *    tags: [country001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/country001mb/{id}:
+ *   delete:
+ *    tags: [country001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
-    Country001mb.findByIdAndRemove(id, function (err, country001mb) {
+    Country001mb.findByIdAndRemove(id, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the country001mb.',
@@ -1266,7 +1265,7 @@ app.delete('/api/country001mb/:id', (req, res) => {
  */
 
 app.get('/api/state001mb', (req, res) => {
-    State001mb.find(function (err, state001mbs) {
+    State001mb.find(function(err, state001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -1279,35 +1278,35 @@ app.get('/api/state001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/state001mb/{id}:
-*   get:
-*     tags: [state001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/state001mb'
-*/
+ * @swagger
+ * /api/state001mb/{id}:
+ *   get:
+ *     tags: [state001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/state001mb'
+ */
 
 app.get('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
-    State001mb.findOne({ _id: id }, function (err, state001mb) {
+    State001mb.findOne({ _id: id }, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -1326,36 +1325,36 @@ app.get('/api/state001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/state001mb/state:
-  *   post:
-  *    tags: [state001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/state001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/state001mb/state:
+ *   post:
+ *    tags: [state001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/state001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/state001mb/state', (req, res) => {
     const state001mb = new State001mb();
-    state001mb.countryid = req.body.countryid.id,
-    state001mb.stateid = req.body.stateid,
-    state001mb.statename = req.body.statename,
-    state001mb.statedesc = req.body.statedesc,
-    state001mb.status = req.body.status,
-    state001mb.inserteduser = req.body.inserteduser,
-    state001mb.inserteddatetime = req.body.inserteddatetime,
-    state001mb.updateduser = req.body.updateduser,
-    state001mb.updateddatetime = req.body.updateddatetime
+    state001mb.countryid = req.body.countryid.id;
+    state001mb.stateid = req.body.stateid;
+    state001mb.statename = req.body.statename;
+    state001mb.statedesc = req.body.statedesc;
+    state001mb.status = req.body.status;
+    state001mb.inserteduser = req.body.inserteduser;
+    state001mb.inserteddatetime = req.body.inserteddatetime;
+    state001mb.updateduser = req.body.updateduser;
+    state001mb.updateddatetime = req.body.updateddatetime;
     state001mb.save()
         .then((result) => {
             Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
@@ -1373,41 +1372,41 @@ app.post('/api/state001mb/state', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/state001mb/{id}:
-  *   put:
-  *    tags: [state001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/state001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/state001mb'
-  */
+ * @swagger
+ * /api/state001mb/{id}:
+ *   put:
+ *    tags: [state001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/state001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/state001mb'
+ */
 
 app.put('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
-    State001mb.findOne({ _id: id }, function (err, state001mb) {
+    State001mb.findOne({ _id: id }, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb',
@@ -1430,7 +1429,7 @@ app.put('/api/state001mb/:id', (req, res) => {
         state001mb.updateduser = req.body.updateduser ? req.body.updateduser : state001mb.updateduser;
         state001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : state001mb.updateddatetime;
 
-        state001mb.save(function (err, state001mb) {
+        state001mb.save(function(err, state001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating state001mb.',
@@ -1446,28 +1445,28 @@ app.put('/api/state001mb/:id', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/state001mb/{id}:
-  *   delete:
-  *    tags: [state001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/state001mb/{id}:
+ *   delete:
+ *    tags: [state001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
-    State001mb.findByIdAndRemove(id, function (err, state001mb) {
+    State001mb.findByIdAndRemove(id, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the state001mb.',
@@ -1533,7 +1532,7 @@ app.delete('/api/state001mb/:id', (req, res) => {
  */
 
 app.get('/api/city001mb', (req, res) => {
-    City001mb.find(function (err, city001mb) {
+    City001mb.find(function(err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -1546,35 +1545,35 @@ app.get('/api/city001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/city001mb/{id}:
-*   get:
-*     tags: [city001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/city001mb'
-*/
+ * @swagger
+ * /api/city001mb/{id}:
+ *   get:
+ *     tags: [city001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/city001mb'
+ */
 
 app.get('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
-    City001mb.findOne({ _id: id }, function (err, city001mb) {
+    City001mb.findOne({ _id: id }, function(err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -1593,36 +1592,36 @@ app.get('/api/city001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/city001mb/city:
-  *   post:
-  *    tags: [city001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/city001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/city001mb/city:
+ *   post:
+ *    tags: [city001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/city001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/city001mb/city', (req, res) => {
     const city001mb = new City001mb();
-    city001mb.stateid = req.body.stateid.id,
-        city001mb.cityid = req.body.cityid,
-        city001mb.cityname = req.body.cityname,
-        city001mb.citydesc = req.body.citydesc,
-        city001mb.status = req.body.status,
-        city001mb.inserteduser = req.body.inserteduser,
-        city001mb.inserteddatetime = req.body.inserteddatetime,
-        city001mb.updateddatetime = req.body.updateddatetime,
-        city001mb.updateduser = req.body.updateduser
+    city001mb.stateid = req.body.stateid.id;
+    city001mb.cityid = req.body.cityid;
+    city001mb.cityname = req.body.cityname;
+    city001mb.citydesc = req.body.citydesc;
+    city001mb.status = req.body.status;
+    city001mb.inserteduser = req.body.inserteduser;
+    city001mb.inserteddatetime = req.body.inserteddatetime;
+    city001mb.updateddatetime = req.body.updateddatetime;
+    city001mb.updateduser = req.body.updateduser;
 
     city001mb.save()
         .then((result) => {
@@ -1641,41 +1640,41 @@ app.post('/api/city001mb/city', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/city001mb/{id}:
-  *   put:
-  *    tags: [city001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/city001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/city001mb'
-  */
+ * @swagger
+ * /api/city001mb/{id}:
+ *   put:
+ *    tags: [city001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/city001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/city001mb'
+ */
 
 app.put('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
-    City001mb.findOne({ _id: id }, function (err, city001mb) {
+    City001mb.findOne({ _id: id }, function(err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb',
@@ -1698,7 +1697,7 @@ app.put('/api/city001mb/:id', (req, res) => {
         city001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : city001mb.updateddatetime;
         city001mb.updateduser = req.body.updateduser ? req.body.updateduser : city001mb.updateduser;
 
-        city001mb.save(function (err, country001mb) {
+        city001mb.save(function(err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -1714,28 +1713,28 @@ app.put('/api/city001mb/:id', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/city001mb/{id}:
-  *   delete:
-  *    tags: [city001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/city001mb/{id}:
+ *   delete:
+ *    tags: [city001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
-    City001mb.findByIdAndRemove(id, function (err, city001mb) {
+    City001mb.findByIdAndRemove(id, function(err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the city001mb.',
@@ -1780,6 +1779,7 @@ app.delete('/api/city001mb/:id', (req, res) => {
  *                 type: string
  *             contentid:
  *                type: string   
+ *                format: uuid
  */
 // ********************** photo001wb get method****************//
 /**
@@ -1803,7 +1803,7 @@ app.delete('/api/city001mb/:id', (req, res) => {
  */
 
 app.get('/api/photo001wb', (req, res) => {
-    Photo001wb.find({ id: req.params.id }, function (err, results) {
+    Photo001wb.find({ id: req.params.id }, function(err, results) {
         if (err) {
             res.send(`error: ${err}`);
         } else {
@@ -1813,35 +1813,35 @@ app.get('/api/photo001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/photo001wb/{id}:
-*   get:
-*     tags: [photo001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/photo001wb'
-*/
+ * @swagger
+ * /api/photo001wb/{id}:
+ *   get:
+ *     tags: [photo001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/photo001wb'
+ */
 
 app.get('/api/photo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
+    Photo001wb.findOne({ _id: id }, function(err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb.',
@@ -1860,38 +1860,38 @@ app.get('/api/photo001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/photo001wb/photo:
-  *   post:
-  *    tags: [photo001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                          $ref: '#/components/schemas/photo001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/photo001wb/photo:
+ *   post:
+ *    tags: [photo001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                          $ref: '#/components/schemas/photo001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
-app.post('/api/photo001wb/photo',[upload.single("content")], (req, res) => {
-    console.log("req",req);
+app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
+    console.log("req", req);
     const photo001wb = new Photo001wb();
-    photo001wb.content = req.file.path,
-    photo001wb.fieldname = req.file.fieldname,
-    photo001wb.originalname = req.file.originalname,
-    photo001wb.filename = req.file.filename,
-    photo001wb.status = req.body.status,
-    photo001wb.contentid = req.body.contentid,
-    photo001wb.inserteduser = req.body.inserteduser,
-    photo001wb.inserteddatetime = req.body.inserteddatetime,
-    photo001wb.updateduser = req.body.updateduser,
-    photo001wb.updateddatetime = req.body.updateddatetime
+    photo001wb.content = req.file.path;
+    photo001wb.fieldname = req.file.fieldname;
+    photo001wb.originalname = req.file.originalname;
+    photo001wb.filename = req.file.filename;
+    photo001wb.status = req.body.status;
+    photo001wb.contentid = req.body.contentid;
+    photo001wb.inserteduser = req.body.inserteduser;
+    photo001wb.inserteddatetime = req.body.inserteddatetime;
+    photo001wb.updateduser = req.body.updateduser;
+    photo001wb.updateddatetime = req.body.updateddatetime;
     photo001wb.save()
         .then((result) => {
             Contentmaster001mb.findOne({ _id: photo001wb.contentid }, (err, user) => {
@@ -1909,41 +1909,41 @@ app.post('/api/photo001wb/photo',[upload.single("content")], (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/photo001wb/{id}:
-  *   put:
-  *    tags: [photo001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                         $ref: '#/components/schemas/photo001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/photo001wb'
-  */
+ * @swagger
+ * /api/photo001wb/{id}:
+ *   put:
+ *    tags: [photo001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                         $ref: '#/components/schemas/photo001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/photo001wb'
+ */
 
-app.put('/api/photo001wb/:id',[upload.single("content")], (req, res) => {
+app.put('/api/photo001wb/:id', [upload.single("content")], (req, res) => {
     var id = req.params.id;
-    Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
+    Photo001wb.findOne({ _id: id }, function(err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb',
@@ -1966,7 +1966,7 @@ app.put('/api/photo001wb/:id',[upload.single("content")], (req, res) => {
         photo001wb.updateduser = req.body.updateduser ? req.body.updateduser : photo001wb.updateduser;
         photo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : photo001wb.updateddatetime;
 
-        photo001wb.save(function (err, photo001wb) {
+        photo001wb.save(function(err, photo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating photo001wb.',
@@ -1980,28 +1980,28 @@ app.put('/api/photo001wb/:id',[upload.single("content")], (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/photo001wb/{id}:
-  *   delete:
-  *    tags: [photo001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/photo001wb/{id}:
+ *   delete:
+ *    tags: [photo001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/photo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Photo001wb.findByIdAndRemove(id, function (err, photo001wb) {
+    Photo001wb.findByIdAndRemove(id, function(err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the photo001wb.',
@@ -2047,6 +2047,7 @@ app.delete('/api/photo001wb/:id', (req, res) => {
  *                 type: string
  *             contentid:
  *                type: string 
+ *                format: uuid
  */
 // ********************** video001wb get method****************//
 /**
@@ -2070,7 +2071,7 @@ app.delete('/api/photo001wb/:id', (req, res) => {
  */
 
 app.get('/api/video001wb', (req, res) => {
-    Video001wb.find(function (err, video001wb) {
+    Video001wb.find(function(err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -2083,35 +2084,35 @@ app.get('/api/video001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/video001wb/{id}:
-*   get:
-*     tags: [video001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/video001wb'
-*/
+ * @swagger
+ * /api/video001wb/{id}:
+ *   get:
+ *     tags: [video001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/video001wb'
+ */
 
 app.get('/api/video001wb/:id', (req, res) => {
     var id = req.params.id;
-    Video001wb.findOne({ _id: id }, function (err, video001wb) {
+    Video001wb.findOne({ _id: id }, function(err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -2130,24 +2131,24 @@ app.get('/api/video001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/video001wb/video:
-  *   post:
-  *    tags: [video001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                          $ref: '#/components/schemas/video001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/video001wb/video:
+ *   post:
+ *    tags: [video001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                          $ref: '#/components/schemas/video001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) => {
     const video001wb = new Video001wb();
@@ -2179,42 +2180,42 @@ app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) =>
 
 
 /**
-  * @swagger
-  * /api/video001wb/{id}:
-  *   put:
-  *    tags: [video001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                         $ref: '#/components/schemas/video001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/video001wb'
-  */
+ * @swagger
+ * /api/video001wb/{id}:
+ *   put:
+ *    tags: [video001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                         $ref: '#/components/schemas/video001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/video001wb'
+ */
 
 app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
     var id = req.params.id;
 
-    Video001wb.findOne({ _id: id }, function (err, video001wb) {
+    Video001wb.findOne({ _id: id }, function(err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb',
@@ -2239,7 +2240,7 @@ app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
         video001wb.updateduser = req.body.updateduser ? req.body.updateduser : video001wb.updateduser;
         video001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : video001wb.updateddatetime;
 
-        video001wb.save(function (err, video001wb) {
+        video001wb.save(function(err, video001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating video001wb.',
@@ -2254,28 +2255,28 @@ app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/video001wb/{id}:
-  *   delete:
-  *    tags: [video001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/video001wb/{id}:
+ *   delete:
+ *    tags: [video001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/video001wb/:id', (req, res) => {
     var id = req.params.id;
-    Video001wb.findByIdAndRemove(id, function (err, video001wb) {
+    Video001wb.findByIdAndRemove(id, function(err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the video001wb.',
@@ -2320,6 +2321,7 @@ app.delete('/api/video001wb/:id', (req, res) => {
  *                 type: string
  *             contentid:
  *                type: string 
+ *                format: uuid
  */
 // ********************** audio001wb get method****************//
 /**
@@ -2343,7 +2345,7 @@ app.delete('/api/video001wb/:id', (req, res) => {
  */
 
 app.get('/api/audio001wb', (req, res) => {
-    Audio001wb.find(function (err, audio001wb) {
+    Audio001wb.find(function(err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb.',
@@ -2356,35 +2358,35 @@ app.get('/api/audio001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/audio001wb/{id}:
-*   get:
-*     tags: [audio001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/audio001wb'
-*/
+ * @swagger
+ * /api/audio001wb/{id}:
+ *   get:
+ *     tags: [audio001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/audio001wb'
+ */
 
 app.get('/api/audio001wb/:id', (req, res) => {
     var id = req.params.id;
-    Audio001wb.findOne({ _id: id }, function (err, audio001wb) {
+    Audio001wb.findOne({ _id: id }, function(err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb.',
@@ -2403,37 +2405,37 @@ app.get('/api/audio001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/audio001wb/audio:
-  *   post:
-  *    tags: [audio001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                          $ref: '#/components/schemas/audio001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/audio001wb/audio:
+ *   post:
+ *    tags: [audio001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                          $ref: '#/components/schemas/audio001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
-app.post('/api/audio001wb/audio',[audio.single("content")], (req, res) => {
+app.post('/api/audio001wb/audio', [audio.single("content")], (req, res) => {
     const audio001wb = new Audio001wb();
-    audio001wb.content = req.file.path,
-    audio001wb.fieldname = req.file.fieldname,
-    audio001wb.originalname = req.file.originalname,
-    audio001wb.filename = req.file.filename,
-    audio001wb.status = req.body.status,
-    audio001wb.contentid = req.body.contentid,
-    audio001wb.inserteduser = req.body.inserteduser,
-    audio001wb.inserteddatetime = req.body.inserteddatetime,
-    audio001wb.updateduser = req.body.updateduser,
-    audio001wb.updateddatetime = req.body.updateddatetime
+    audio001wb.content = req.file.path;
+    audio001wb.fieldname = req.file.fieldname;
+    audio001wb.originalname = req.file.originalname;
+    audio001wb.filename = req.file.filename;
+    audio001wb.status = req.body.status;
+    audio001wb.contentid = req.body.contentid;
+    audio001wb.inserteduser = req.body.inserteduser;
+    audio001wb.inserteddatetime = req.body.inserteddatetime;
+    audio001wb.updateduser = req.body.updateduser;
+    audio001wb.updateddatetime = req.body.updateddatetime;
     audio001wb.save()
         .then((result) => {
             Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
@@ -2451,41 +2453,41 @@ app.post('/api/audio001wb/audio',[audio.single("content")], (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/audio001wb/{id}:
-  *   put:
-  *    tags: [audio001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             multipart/form-data:
-  *                       schema:
-  *                         $ref: '#/components/schemas/audio001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/audio001wb'
-  */
+ * @swagger
+ * /api/audio001wb/{id}:
+ *   put:
+ *    tags: [audio001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             multipart/form-data:
+ *                       schema:
+ *                         $ref: '#/components/schemas/audio001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/audio001wb'
+ */
 
-app.put('/api/audio001wb/:id',[audio.single("content")], (req, res) => {
+app.put('/api/audio001wb/:id', [audio.single("content")], (req, res) => {
     var id = req.params.id;
-    Audio001wb.findOne({ _id: id }, function (err, audio001wb) {
+    Audio001wb.findOne({ _id: id }, function(err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb',
@@ -2510,7 +2512,7 @@ app.put('/api/audio001wb/:id',[audio.single("content")], (req, res) => {
         audio001wb.updateduser = req.body.updateduser ? req.body.updateduser : audio001wb.updateduser;
         audio001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : audio001wb.updateddatetime;
 
-        audio001wb.save(function (err, audio001wb) {
+        audio001wb.save(function(err, audio001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating audio001wb.',
@@ -2523,28 +2525,28 @@ app.put('/api/audio001wb/:id',[audio.single("content")], (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/audio001wb/{id}:
-  *   delete:
-  *    tags: [audio001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/audio001wb/{id}:
+ *   delete:
+ *    tags: [audio001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/audio001wb/:id', (req, res) => {
     var id = req.params.id;
-    Audio001wb.findByIdAndRemove(id, function (err, audio001wb) {
+    Audio001wb.findByIdAndRemove(id, function(err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the audio001wb.',
@@ -2626,7 +2628,7 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  */
 
 app.get('/api/contentmaster001mb', (req, res) => {
-    Contentmaster001mb.find(function (err, contentmaster001mbs) {
+    Contentmaster001mb.find(function(err, contentmaster001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb.',
@@ -2639,35 +2641,35 @@ app.get('/api/contentmaster001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/contentmaster001mb/{id}:
-*   get:
-*     tags: [contentmaster001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/contentmaster001mb'
-*/
+ * @swagger
+ * /api/contentmaster001mb/{id}:
+ *   get:
+ *     tags: [contentmaster001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/contentmaster001mb'
+ */
 
 app.get('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Contentmaster001mb.findOne({ _id: id }, function (err, contentmaster001mb) {
+    Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb.',
@@ -2686,24 +2688,24 @@ app.get('/api/contentmaster001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/contentmaster001mb/master:
-  *   post:
-  *    tags: [contentmaster001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/contentmaster001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/contentmaster001mb/master:
+ *   post:
+ *    tags: [contentmaster001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/contentmaster001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/contentmaster001mb/master', (req, res) => {
     const contentmaster001mb = new Contentmaster001mb()
@@ -2715,7 +2717,7 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
     contentmaster001mb.format = req.body.format;
     contentmaster001mb.status = req.body.status;
     contentmaster001mb.discountflag = req.body.discountflag;
-    contentmaster001mb.inserteduser = req.body.inserteduser,
+    contentmaster001mb.inserteduser = req.body.inserteduser;
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
@@ -2733,41 +2735,41 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/contentmaster001mb/{id}:
-  *   put:
-  *    tags: [contentmaster001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/contentmaster001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/contentmaster001mb'
-  */
+ * @swagger
+ * /api/contentmaster001mb/{id}:
+ *   put:
+ *    tags: [contentmaster001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/contentmaster001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/contentmaster001mb'
+ */
 
 app.put('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Contentmaster001mb.findOne({ _id: id }, function (err, contentmaster001mb) {
+    Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb',
@@ -2795,7 +2797,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
         contentmaster001mb.updateduser = req.body.updateduser ? req.body.updateduser : contentmaster001mb.updateduser;
         contentmaster001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : contentmaster001mb.updateddatetime;
 
-        contentmaster001mb.save(function (err, contentmaster001mb) {
+        contentmaster001mb.save(function(err, contentmaster001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating contentmaster001mb.',
@@ -2808,28 +2810,28 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/contentmaster001mb/{id}:
-  *   delete:
-  *    tags: [contentmaster001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/contentmaster001mb/{id}:
+ *   delete:
+ *    tags: [contentmaster001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Contentmaster001mb.findByIdAndRemove(id, function (err, contentmaster001mb) {
+    Contentmaster001mb.findByIdAndRemove(id, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the contentmaster001mb.',
@@ -2893,7 +2895,7 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  */
 
 app.get('/api/categorydetails001mb', (req, res) => {
-    Categorydetails001mb.find(function (err, categorydetails001mb) {
+    Categorydetails001mb.find(function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -2906,35 +2908,35 @@ app.get('/api/categorydetails001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/categorydetails001mb/{id}:
-*   get:
-*     tags: [categorydetails001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/categorydetails001mb'
-*/
+ * @swagger
+ * /api/categorydetails001mb/{id}:
+ *   get:
+ *     tags: [categorydetails001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/categorydetails001mb'
+ */
 
 app.get('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -2953,35 +2955,35 @@ app.get('/api/categorydetails001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/categorydetails001mb/category:
-  *   post:
-  *    tags: [categorydetails001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/categorydetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/categorydetails001mb/category:
+ *   post:
+ *    tags: [categorydetails001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/categorydetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/categorydetails001mb/category', (req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
     categorydetails001mb.subscid = req.body.subscid.id;
-    categorydetails001mb.catcode = req.body.catcode,
-    categorydetails001mb.catname = req.body.catname,
-    categorydetails001mb.status = req.body.status,
-    categorydetails001mb.inserteduser = req.body.inserteduser,
-    categorydetails001mb.inserteddatetime = req.body.inserteddatetime,
-    categorydetails001mb.updateduser = req.body.updateduser,
-    categorydetails001mb.updateddatetime = req.body.updateddatetime
+    categorydetails001mb.catcode = req.body.catcode;
+    categorydetails001mb.catname = req.body.catname;
+    categorydetails001mb.status = req.body.status;
+    categorydetails001mb.inserteduser = req.body.inserteduser;
+    categorydetails001mb.inserteddatetime = req.body.inserteddatetime;
+    categorydetails001mb.updateduser = req.body.updateduser;
+    categorydetails001mb.updateddatetime = req.body.updateddatetime;
     categorydetails001mb.save()
         .then((result) => {
             Subscriberdetails001wb.findOne({ _id: categorydetails001mb.subscid }, (err, user) => {
@@ -2999,41 +3001,41 @@ app.post('/api/categorydetails001mb/category', (req, res) => {
 
 
 /**
-  * @swagger
-  * /api/categorydetails001mb/{id}:
-  *   put:
-  *    tags: [categorydetails001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/categorydetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/categorydetails001mb'
-  */
+ * @swagger
+ * /api/categorydetails001mb/{id}:
+ *   put:
+ *    tags: [categorydetails001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/categorydetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/categorydetails001mb'
+ */
 
 app.put('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb',
@@ -3055,7 +3057,7 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
         categorydetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : categorydetails001mb.updateduser;
         categorydetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : categorydetails001mb.updateddatetime;
 
-        categorydetails001mb.save(function (err, categorydetails001mb) {
+        categorydetails001mb.save(function(err, categorydetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating categorydetails001mb.',
@@ -3068,28 +3070,28 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/categorydetails001mb/{id}:
-  *   delete:
-  *    tags: [categorydetails001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/categorydetails001mb/{id}:
+ *   delete:
+ *    tags: [categorydetails001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Categorydetails001mb.findByIdAndRemove(id, function (err, categorydetails001mb) {
+    Categorydetails001mb.findByIdAndRemove(id, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the categorydetails001mb.',
@@ -3161,7 +3163,7 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  */
 
 app.get('/api/companydetails001mb', (req, res) => {
-    Companydetails001mb.find(function (err, companydetails001mb) {
+    Companydetails001mb.find(function(err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb.',
@@ -3174,35 +3176,35 @@ app.get('/api/companydetails001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/companydetails001mb/{id}:
-*   get:
-*     tags: [companydetails001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/companydetails001mb'
-*/
+ * @swagger
+ * /api/companydetails001mb/{id}:
+ *   get:
+ *     tags: [companydetails001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/companydetails001mb'
+ */
 
 app.get('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findOne({ _id: id }, function (err, companydetails001mb) {
+    Companydetails001mb.findOne({ _id: id }, function(err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb.',
@@ -3221,88 +3223,88 @@ app.get('/api/companydetails001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/companydetails001mb/company:
-  *   post:
-  *    tags: [companydetails001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/companydetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/companydetails001mb/company:
+ *   post:
+ *    tags: [companydetails001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/companydetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/companydetails001mb/company', (req, res) => {
-    const companydetails001mb = new Companydetails001mb();
-    companydetails001mb.subscid = req.body.subscid.id,
-    companydetails001mb.companycode = req.body.companycode,
-    companydetails001mb.companyname = req.body.companyname,
-    companydetails001mb.address = req.body.address,
-    companydetails001mb.phonenumber = req.body.phonenumber,
-    companydetails001mb.regionalid = req.body.regionalid.id,
-    companydetails001mb.status = req.body.status,
-    companydetails001mb.inserteduser = req.body.inserteduser,
-    companydetails001mb.inserteddatetime = req.body.inserteddatetime,
-    companydetails001mb.updateduser = req.body.updateduser,
-    companydetails001mb.updateddatetime = req.body.updateddatetime
-    companydetails001mb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: companydetails001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.companycode.push(companydetails001mb);
-                    user.save();
-                    res.json({ message: 'companydetails created!' });
-                }
+        const companydetails001mb = new Companydetails001mb();
+        companydetails001mb.subscid = req.body.subscid.id;
+        companydetails001mb.companycode = req.body.companycode;
+        companydetails001mb.companyname = req.body.companyname;
+        companydetails001mb.address = req.body.address;
+        companydetails001mb.phonenumber = req.body.phonenumber;
+        companydetails001mb.regionalid = req.body.regionalid.id;
+        companydetails001mb.status = req.body.status;
+        companydetails001mb.inserteduser = req.body.inserteduser;
+        companydetails001mb.inserteddatetime = req.body.inserteddatetime;
+        companydetails001mb.updateduser = req.body.updateduser;
+        companydetails001mb.updateddatetime = req.body.updateddatetime;
+        companydetails001mb.save()
+            .then((result) => {
+                Subscriberdetails001wb.findOne({ _id: companydetails001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.companycode.push(companydetails001mb);
+                        user.save();
+                        res.json({ message: 'companydetails created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/companydetails001mb/{id}:
-  *   put:
-  *    tags: [companydetails001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/companydetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/companydetails001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/companydetails001mb/{id}:
+     *   put:
+     *    tags: [companydetails001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/companydetails001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/companydetails001mb'
+     */
 
 app.put('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findOne({ _id: id }, function (err, companydetails001mb) {
+    Companydetails001mb.findOne({ _id: id }, function(err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb',
@@ -3327,7 +3329,7 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
         companydetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : companydetails001mb.updateduser;
         companydetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : companydetails001mb.updateddatetime;
 
-        companydetails001mb.save(function (err, companydetails001mb) {
+        companydetails001mb.save(function(err, companydetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating companydetails001mb.',
@@ -3340,28 +3342,28 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/companydetails001mb/{id}:
-  *   delete:
-  *    tags: [companydetails001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/companydetails001mb/{id}:
+ *   delete:
+ *    tags: [companydetails001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findByIdAndRemove(id, function (err, companydetails001mb) {
+    Companydetails001mb.findByIdAndRemove(id, function(err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the companydetails001mb.',
@@ -3428,7 +3430,7 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  */
 
 app.get('/api/language001mb', (req, res) => {
-    Language001mb.find(function (err, language001mb) {
+    Language001mb.find(function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -3441,35 +3443,35 @@ app.get('/api/language001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/language001mb/{id}:
-*   get:
-*     tags: [language001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/language001mb'
-*/
+ * @swagger
+ * /api/language001mb/{id}:
+ *   get:
+ *     tags: [language001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/language001mb'
+ */
 
 app.get('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
-    Language001mb.findOne({ _id: id }, function (err, language001mb) {
+    Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -3488,86 +3490,86 @@ app.get('/api/language001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/language001mb/language:
-  *   post:
-  *    tags: [language001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/language001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/language001mb/language:
+ *   post:
+ *    tags: [language001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/language001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/language001mb/language', (req, res) => {
-    const language001mb = new Language001mb()
-    language001mb.subscid = req.body.subscid.id;
-    language001mb.languageid = req.body.languageid;
-    language001mb.languagename = req.body.languagename;
-    language001mb.languagedesc = req.body.languagedesc;
-    language001mb.status = req.body.status;
-    language001mb.inserteduser = req.body.inserteduser;
-    language001mb.inserteddatetime = req.body.inserteddatetime;
-    language001mb.updateduser = req.body.updateduser;
-    language001mb.updateddatetime = req.body.updateddatetime;
-    language001mb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.languageid.push(language001mb);
-                    user.save();
-                    res.json({ message: 'language created!' });
-                }
+        const language001mb = new Language001mb()
+        language001mb.subscid = req.body.subscid.id;
+        language001mb.languageid = req.body.languageid;
+        language001mb.languagename = req.body.languagename;
+        language001mb.languagedesc = req.body.languagedesc;
+        language001mb.status = req.body.status;
+        language001mb.inserteduser = req.body.inserteduser;
+        language001mb.inserteddatetime = req.body.inserteddatetime;
+        language001mb.updateduser = req.body.updateduser;
+        language001mb.updateddatetime = req.body.updateddatetime;
+        language001mb.save()
+            .then((result) => {
+                Subscriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.languageid.push(language001mb);
+                        user.save();
+                        res.json({ message: 'language created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/language001mb/{id}:
-  *   put:
-  *    tags: [language001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/language001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/language001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/language001mb/{id}:
+     *   put:
+     *    tags: [language001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/language001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/language001mb'
+     */
 
 app.put('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
-    Language001mb.findOne({ _id: id }, function (err, language001mb) {
+    Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb',
@@ -3590,7 +3592,7 @@ app.put('/api/language001mb/:id', (req, res) => {
         language001mb.updateduser = req.body.updateduser ? req.body.updateduser : language001mb.updateduser;
         language001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : language001mb.updateddatetime;
 
-        language001mb.save(function (err, language001mb) {
+        language001mb.save(function(err, language001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating language001mb.',
@@ -3603,28 +3605,28 @@ app.put('/api/language001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/language001mb/{id}:
-  *   delete:
-  *    tags: [language001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/language001mb/{id}:
+ *   delete:
+ *    tags: [language001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
-    Language001mb.findByIdAndRemove(id, function (err, language001mb) {
+    Language001mb.findByIdAndRemove(id, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the language001mb.',
@@ -3692,7 +3694,7 @@ app.delete('/api/language001mb/:id', (req, res) => {
  */
 
 app.get('/api/regionaldetails001mb', (req, res) => {
-    Regionaldetails001mb.find(function (err, regionaldetails001mb) {
+    Regionaldetails001mb.find(function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -3705,35 +3707,35 @@ app.get('/api/regionaldetails001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/regionaldetails001mb/{id}:
-*   get:
-*     tags: [regionaldetails001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/regionaldetails001mb'
-*/
+ * @swagger
+ * /api/regionaldetails001mb/{id}:
+ *   get:
+ *     tags: [regionaldetails001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/regionaldetails001mb'
+ */
 
 app.get('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -3752,86 +3754,86 @@ app.get('/api/regionaldetails001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/regionaldetails001mb/regional:
-  *   post:
-  *    tags: [regionaldetails001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/regionaldetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/regionaldetails001mb/regional:
+ *   post:
+ *    tags: [regionaldetails001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/regionaldetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/regionaldetails001mb/regional', (req, res) => {
-    const regionaldetails001mb = new Regionaldetails001mb();
-    regionaldetails001mb.subscid = req.body.subscid.id,
-    regionaldetails001mb.regionalid = req.body.regionalid,
-    regionaldetails001mb.regionalname = req.body.regionalname,
-    regionaldetails001mb.regionaldesc = req.body.regionaldesc,
-    regionaldetails001mb.status = req.body.status,
-    regionaldetails001mb.inserteduser = req.body.inserteduser,
-    regionaldetails001mb.inserteddatetime = req.body.inserteddatetime,
-    regionaldetails001mb.updateduser = req.body.updateduser,
-    regionaldetails001mb.updateddatetime = req.body.updateddatetime
-    regionaldetails001mb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.regionalid.push(regionaldetails001mb);
-                    user.save();
-                    res.json({ message: 'regionaldetails created!' });
-                }
+        const regionaldetails001mb = new Regionaldetails001mb();
+        regionaldetails001mb.subscid = req.body.subscid.id;
+        regionaldetails001mb.regionalid = req.body.regionalid;
+        regionaldetails001mb.regionalname = req.body.regionalname;
+        regionaldetails001mb.regionaldesc = req.body.regionaldesc;
+        regionaldetails001mb.status = req.body.status;
+        regionaldetails001mb.inserteduser = req.body.inserteduser;
+        regionaldetails001mb.inserteddatetime = req.body.inserteddatetime;
+        regionaldetails001mb.updateduser = req.body.updateduser;
+        regionaldetails001mb.updateddatetime = req.body.updateddatetime;
+        regionaldetails001mb.save()
+            .then((result) => {
+                Subscriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.regionalid.push(regionaldetails001mb);
+                        user.save();
+                        res.json({ message: 'regionaldetails created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/regionaldetails001mb/{id}:
-  *   put:
-  *    tags: [regionaldetails001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/regionaldetails001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/regionaldetails001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/regionaldetails001mb/{id}:
+     *   put:
+     *    tags: [regionaldetails001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/regionaldetails001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/regionaldetails001mb'
+     */
 
 app.put('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb',
@@ -3853,7 +3855,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
         regionaldetails001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : regionaldetails001mb.inserteddatetime;
         regionaldetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : regionaldetails001mb.updateduser;
         regionaldetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : regionaldetails001mb.updateddatetime;
-        regionaldetails001mb.save(function (err, regionaldetails001mb) {
+        regionaldetails001mb.save(function(err, regionaldetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating regionaldetails001mb.',
@@ -3866,28 +3868,28 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/regionaldetails001mb/{id}:
-  *   delete:
-  *    tags: [regionaldetails001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/regionaldetails001mb/{id}:
+ *   delete:
+ *    tags: [regionaldetails001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Regionaldetails001mb.findByIdAndRemove(id, function (err, regionaldetails001mb) {
+    Regionaldetails001mb.findByIdAndRemove(id, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the regionaldetails001mb.',
@@ -3946,7 +3948,7 @@ app.delete('/api/regionaldetails001mb/:id', (req, res) => {
  */
 
 app.get('/api/login001mb', (req, res) => {
-    Login001mb.find(function (err, login001mb) {
+    Login001mb.find(function(err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -3959,35 +3961,35 @@ app.get('/api/login001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/login001mb/{id}:
-*   get:
-*     tags: [login001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/login001mb'
-*/
+ * @swagger
+ * /api/login001mb/{id}:
+ *   get:
+ *     tags: [login001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/login001mb'
+ */
 
 app.get('/api/login001mb/:id', (req, res) => {
     var id = req.params.id;
-    Login001mb.findOne({ _id: id }, function (err, login001mb) {
+    Login001mb.findOne({ _id: id }, function(err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -4006,79 +4008,79 @@ app.get('/api/login001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/login001mb/login:
-  *   post:
-  *    tags: [login001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/login001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/login001mb/login:
+ *   post:
+ *    tags: [login001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/login001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/login001mb/login', (req, res) => {
-    const login001mb = new Login001mb()
-    login001mb.logintype = req.body.logintype;
-    login001mb.password = req.body.password;
-    login001mb.status = req.body.status;
-    login001mb.inserteduser = req.body.inserteduser;
-    login001mb.inserteddatetime = req.body.inserteddatetime;
-    login001mb.updateduser = req.body.updateduser;
-    login001mb.updateddatetime = req.body.updateddatetime;
+        const login001mb = new Login001mb()
+        login001mb.logintype = req.body.logintype;
+        login001mb.password = req.body.password;
+        login001mb.status = req.body.status;
+        login001mb.inserteduser = req.body.inserteduser;
+        login001mb.inserteddatetime = req.body.inserteddatetime;
+        login001mb.updateduser = req.body.updateduser;
+        login001mb.updateddatetime = req.body.updateddatetime;
 
-    login001mb.save()
-        .then((result) => {
-            res.json({ message: 'Login created' });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/login001mb/{id}:
-  *   put:
-  *    tags: [login001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/login001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/login001mb'
-  */
+        login001mb.save()
+            .then((result) => {
+                res.json({ message: 'Login created' });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
+            });
+    })
+    /**
+     * @swagger
+     * /api/login001mb/{id}:
+     *   put:
+     *    tags: [login001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/login001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/login001mb'
+     */
 
 app.put('/api/login001mb/:id', (req, res) => {
     var id = req.params.id;
-    Login001mb.findOne({ _id: id }, function (err, login001mb) {
+    Login001mb.findOne({ _id: id }, function(err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb',
@@ -4099,7 +4101,7 @@ app.put('/api/login001mb/:id', (req, res) => {
         login001mb.updateduser = req.body.updateduser ? req.body.updateduser : login001mb.updateduser;
         login001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : login001mb.updateddatetime;
 
-        login001mb.save(function (err, login001mb) {
+        login001mb.save(function(err, login001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating login001mb.',
@@ -4112,28 +4114,28 @@ app.put('/api/login001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/login001mb/{id}:
-  *   delete:
-  *    tags: [login001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/login001mb/{id}:
+ *   delete:
+ *    tags: [login001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/login001mb/:id', (req, res) => {
     var id = req.params.id;
-    Login001mb.findByIdAndRemove(id, function (err, login001mb) {
+    Login001mb.findByIdAndRemove(id, function(err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the login001mb.',
@@ -4201,7 +4203,7 @@ app.delete('/api/login001mb/:id', (req, res) => {
  */
 
 app.get('/api/person001mb', (req, res) => {
-    Person001mb.find(function (err, person001mb) {
+    Person001mb.find(function(err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting person001mb.',
@@ -4214,35 +4216,35 @@ app.get('/api/person001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/person001mb/{id}:
-*   get:
-*     tags: [person001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/person001mb'
-*/
+ * @swagger
+ * /api/person001mb/{id}:
+ *   get:
+ *     tags: [person001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/person001mb'
+ */
 
 app.get('/api/person001mb/:id', (req, res) => {
     var id = req.params.id;
-    Person001mb.findOne({ _id: id }, function (err, person001mb) {
+    Person001mb.findOne({ _id: id }, function(err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting person001mb.',
@@ -4261,82 +4263,82 @@ app.get('/api/person001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/person001mb/person:
-  *   post:
-  *    tags: [person001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/person001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/person001mb/person:
+ *   post:
+ *    tags: [person001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/person001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/person001mb/person', (req, res) => {
-    var person001mb = new Person001mb();
-    person001mb.personid = req.body.personid,
-    person001mb.subscid = req.body.subscid.id,
-    person001mb.userid = req.body.userid.id,
-    person001mb.inserteduser = req.body.inserteduser,
-    person001mb.inserteddatetime = req.body.inserteddatetime,
-    person001mb.updateduser = req.body.updateduser,
-    person001mb.status = req.body.status,
-    person001mb.updateddatetime = req.body.updateddatetime
-    person001mb.save(function (err, person001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating person001mb',
-                error: err
-            });
-        }
+        const person001mb = new Person001mb();
+        person001mb.personid = req.body.personid;
+        person001mb.subscid = req.body.subscid.id;
+        person001mb.userid = req.body.userid.id;
+        person001mb.inserteduser = req.body.inserteduser;
+        person001mb.inserteddatetime = req.body.inserteddatetime;
+        person001mb.updateduser = req.body.updateduser;
+        person001mb.status = req.body.status;
+        person001mb.updateddatetime = req.body.updateddatetime;
+        person001mb.save(function(err, person001mb) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when creating person001mb',
+                    error: err
+                });
+            }
 
-        return res.status(201).json('Person001mb Created!');
-    });
-})
-/**
-  * @swagger
-  * /api/person001mb/{id}:
-  *   put:
-  *    tags: [person001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/person001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/person001mb'
-  */
+            return res.status(201).json('Person001mb Created!');
+        });
+    })
+    /**
+     * @swagger
+     * /api/person001mb/{id}:
+     *   put:
+     *    tags: [person001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/person001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/person001mb'
+     */
 
 app.put('/api/person001mb/:id', (req, res) => {
     var id = req.params.id;
-    Person001mb.findOne({ _id: id }, function (err, person001mb) {
+    Person001mb.findOne({ _id: id }, function(err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting person001mb',
@@ -4359,7 +4361,7 @@ app.put('/api/person001mb/:id', (req, res) => {
         person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
         person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
 
-        person001mb.save(function (err, person001mb) {
+        person001mb.save(function(err, person001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating person001mb.',
@@ -4372,28 +4374,28 @@ app.put('/api/person001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/person001mb/{id}:
-  *   delete:
-  *    tags: [person001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/person001mb/{id}:
+ *   delete:
+ *    tags: [person001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/person001mb/:id', (req, res) => {
     var id = req.params.id;
-    Person001mb.findByIdAndRemove(id, function (err, person001mb) {
+    Person001mb.findByIdAndRemove(id, function(err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the person001mb.',
@@ -4461,7 +4463,7 @@ app.delete('/api/person001mb/:id', (req, res) => {
  */
 
 app.get('/api/religion001mb', (req, res) => {
-    Religion001mb.find(function (err, religion001mbs) {
+    Religion001mb.find(function(err, religion001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb.',
@@ -4474,35 +4476,35 @@ app.get('/api/religion001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/religion001mb/{id}:
-*   get:
-*     tags: [religion001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/religion001mb'
-*/
+ * @swagger
+ * /api/religion001mb/{id}:
+ *   get:
+ *     tags: [religion001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/religion001mb'
+ */
 
 app.get('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findOne({ _id: id }, function (err, religion001mb) {
+    Religion001mb.findOne({ _id: id }, function(err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb.',
@@ -4521,88 +4523,88 @@ app.get('/api/religion001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/religion001mb/religion:
-  *   post:
-  *    tags: [religion001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/religion001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/religion001mb/religion:
+ *   post:
+ *    tags: [religion001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/religion001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/religion001mb/religion', (req, res) => {
-    const religion001mb = new Religion001mb();
-    religion001mb.subscid = req.body.subscid.id;
-    religion001mb.religionid = req.body.religionid;
-    religion001mb.religionname = req.body.religionname;
-    religion001mb.religiondesc = req.body.religiondesc;
-    religion001mb.status = req.body.status;
-    religion001mb.inserteduser = req.body.inserteduser;
-    religion001mb.inserteddatetime = req.body.inserteddatetime;
-    religion001mb.updateduser = req.body.updateduser;
-    religion001mb.updateddatetime = req.body.updateddatetime;
+        const religion001mb = new Religion001mb();
+        religion001mb.subscid = req.body.subscid.id;
+        religion001mb.religionid = req.body.religionid;
+        religion001mb.religionname = req.body.religionname;
+        religion001mb.religiondesc = req.body.religiondesc;
+        religion001mb.status = req.body.status;
+        religion001mb.inserteduser = req.body.inserteduser;
+        religion001mb.inserteddatetime = req.body.inserteddatetime;
+        religion001mb.updateduser = req.body.updateduser;
+        religion001mb.updateddatetime = req.body.updateddatetime;
 
-    religion001mb.save()
-        .then((result) => {
+        religion001mb.save()
+            .then((result) => {
 
-            Subscriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.religionid.push(religion001mb);
-                    user.save();
-                    res.json({ message: 'religion created!' });
-                }
+                Subscriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.religionid.push(religion001mb);
+                        user.save();
+                        res.json({ message: 'religion created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/religion001mb/{id}:
-  *   put:
-  *    tags: [religion001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/religion001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/religion001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/religion001mb/{id}:
+     *   put:
+     *    tags: [religion001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/religion001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/religion001mb'
+     */
 
 app.put('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findOne({ _id: id }, function (err, religion001mb) {
+    Religion001mb.findOne({ _id: id }, function(err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb',
@@ -4625,7 +4627,7 @@ app.put('/api/religion001mb/:id', (req, res) => {
         religion001mb.updateduser = req.body.updateduser ? req.body.updateduser : religion001mb.updateduser;
         religion001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : religion001mb.updateddatetime;
 
-        religion001mb.save(function (err, religion001mb) {
+        religion001mb.save(function(err, religion001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating religion001mb.',
@@ -4638,28 +4640,28 @@ app.put('/api/religion001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/religion001mb/{id}:
-  *   delete:
-  *    tags: [religion001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/religion001mb/{id}:
+ *   delete:
+ *    tags: [religion001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findByIdAndRemove(id, function (err, religion001mb) {
+    Religion001mb.findByIdAndRemove(id, function(err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the religion001mb.',
@@ -4733,7 +4735,7 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  */
 
 app.get('/api/subcatclassification001mb', (req, res) => {
-    Subcatclassification001mb.find(function (err, subcatclassification001mbs) {
+    Subcatclassification001mb.find(function(err, subcatclassification001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb.',
@@ -4746,35 +4748,35 @@ app.get('/api/subcatclassification001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subcatclassification001mb/{id}:
-*   get:
-*     tags: [subcatclassification001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subcatclassification001mb'
-*/
+ * @swagger
+ * /api/subcatclassification001mb/{id}:
+ *   get:
+ *     tags: [subcatclassification001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subcatclassification001mb'
+ */
 
 app.get('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findOne({ _id: id }, function (err, subcatclassification001mb) {
+    Subcatclassification001mb.findOne({ _id: id }, function(err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb.',
@@ -4793,87 +4795,87 @@ app.get('/api/subcatclassification001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subcatclassification001mb/subcatclassification:
-  *   post:
-  *    tags: [subcatclassification001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subcatclassification001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subcatclassification001mb/subcatclassification:
+ *   post:
+ *    tags: [subcatclassification001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subcatclassification001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subcatclassification001mb/subcatclassification', (req, res) => {
-    const subcatclassification001mb = new Subcatclassification001mb();
-    subcatclassification001mb.subscid = req.body.subscid.id,
-        subcatclassification001mb.subcatcode = req.body.subcatcode.id,
-        // subcatclassification001mb.catcode = req.body.catcode,
-        subcatclassification001mb.classificationid = req.body.classificationid,
-        subcatclassification001mb.classificationname = req.body.classificationname,
-        subcatclassification001mb.status = req.body.status,
-        subcatclassification001mb.inserteduser = req.body.inserteduser,
-        subcatclassification001mb.inserteddatetime = req.body.inserteddatetime,
-        subcatclassification001mb.updateduser = req.body.updateduser,
-        subcatclassification001mb.updateddatetime = req.body.updateddatetime
-    subcatclassification001mb.save()
-        .then((result) => {
-            Subsriberdetails001wb.findOne({ _id: subcatclassification001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.classificationid.push(subcatclassification001mb);
-                    user.save();
-                    res.json({ message: 'subcatclassification created!' });
-                }
+        const subcatclassification001mb = new Subcatclassification001mb();
+        subcatclassification001mb.subscid = req.body.subscid.id,
+            subcatclassification001mb.subcatcode = req.body.subcatcode.id,
+            // subcatclassification001mb.catcode = req.body.catcode,
+            subcatclassification001mb.classificationid = req.body.classificationid,
+            subcatclassification001mb.classificationname = req.body.classificationname,
+            subcatclassification001mb.status = req.body.status,
+            subcatclassification001mb.inserteduser = req.body.inserteduser,
+            subcatclassification001mb.inserteddatetime = req.body.inserteddatetime,
+            subcatclassification001mb.updateduser = req.body.updateduser,
+            subcatclassification001mb.updateddatetime = req.body.updateddatetime
+        subcatclassification001mb.save()
+            .then((result) => {
+                Subsriberdetails001wb.findOne({ _id: subcatclassification001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.classificationid.push(subcatclassification001mb);
+                        user.save();
+                        res.json({ message: 'subcatclassification created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subcatclassification001mb/{id}:
-  *   put:
-  *    tags: [subcatclassification001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subcatclassification001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subcatclassification001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/subcatclassification001mb/{id}:
+     *   put:
+     *    tags: [subcatclassification001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subcatclassification001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subcatclassification001mb'
+     */
 
 app.put('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findOne({ _id: id }, function (err, subcatclassification001mb) {
+    Subcatclassification001mb.findOne({ _id: id }, function(err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb',
@@ -4897,7 +4899,7 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
         subcatclassification001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcatclassification001mb.updateduser;
         subcatclassification001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcatclassification001mb.updateddatetime;
 
-        subcatclassification001mb.save(function (err, subcatclassification001mb) {
+        subcatclassification001mb.save(function(err, subcatclassification001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subcatclassification001mb.',
@@ -4910,28 +4912,28 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subcatclassification001mb/{id}:
-  *   delete:
-  *    tags: [subcatclassification001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subcatclassification001mb/{id}:
+ *   delete:
+ *    tags: [subcatclassification001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findByIdAndRemove(id, function (err, subcatclassification001mb) {
+    Subcatclassification001mb.findByIdAndRemove(id, function(err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subcatclassification001mb.',
@@ -5004,7 +5006,7 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  */
 
 app.get('/api/subcategory001mb', (req, res) => {
-    Subcategory001mb.find(function (err, subcategory001mbs) {
+    Subcategory001mb.find(function(err, subcategory001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -5017,35 +5019,35 @@ app.get('/api/subcategory001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subcategory001mb/{id}:
-*   get:
-*     tags: [subcategory001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subcategory001mb'
-*/
+ * @swagger
+ * /api/subcategory001mb/{id}:
+ *   get:
+ *     tags: [subcategory001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subcategory001mb'
+ */
 
 app.get('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
+    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -5064,87 +5066,87 @@ app.get('/api/subcategory001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subcategory001mb/subcategory:
-  *   post:
-  *    tags: [subcategory001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subcategory001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subcategory001mb/subcategory:
+ *   post:
+ *    tags: [subcategory001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subcategory001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subcategory001mb/subcategory', (req, res) => {
-    const subcategory001mb = new Subcategory001mb()
-    subcategory001mb.subscid = req.body.subscid.id,
-    subcategory001mb.catcode = req.body.catcode.id,
-    subcategory001mb.subcatcode = req.body.subcatcode,
-    subcategory001mb.subcatname = req.body.subcatname,
-    subcategory001mb.subcatstatus = req.body.subcatstatus,
-    subcategory001mb.status = req.body.status,
-    subcategory001mb.inserteduser = req.body.inserteduser,
-    subcategory001mb.inserteddatetime = req.body.inserteddatetime,
-    subcategory001mb.updateduser = req.body.updateduser,
-    subcategory001mb.updateddatetime = req.body.updateddatetime
-    subcategory001mb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
-                if (user) {
-                    user.subcatcode.push(subcategory001mb);
-                    user.save();
-                    res.json({ message: 'subcategory001mb created!' });
-                }
+        const subcategory001mb = new Subcategory001mb();
+        subcategory001mb.subscid = req.body.subscid.id;
+        subcategory001mb.catcode = req.body.catcode.id;
+        subcategory001mb.subcatcode = req.body.subcatcode;
+        subcategory001mb.subcatname = req.body.subcatname;
+        subcategory001mb.subcatstatus = req.body.subcatstatus;
+        subcategory001mb.status = req.body.status;
+        subcategory001mb.inserteduser = req.body.inserteduser;
+        subcategory001mb.inserteddatetime = req.body.inserteddatetime;
+        subcategory001mb.updateduser = req.body.updateduser;
+        subcategory001mb.updateddatetime = req.body.updateddatetime;
+        subcategory001mb.save()
+            .then((result) => {
+                Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
+                    if (user) {
+                        user.subcatcode.push(subcategory001mb);
+                        user.save();
+                        res.json({ message: 'subcategory001mb created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subcategory001mb/{id}:
-  *   put:
-  *    tags: [subcategory001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subcategory001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subcategory001mb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/subcategory001mb/{id}:
+     *   put:
+     *    tags: [subcategory001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subcategory001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subcategory001mb'
+     */
 
 app.put('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
+    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb',
@@ -5168,7 +5170,7 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
         subcategory001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcategory001mb.updateduser;
         subcategory001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcategory001mb.updateddatetime;
 
-        subcategory001mb.save(function (err, subcategory001mb) {
+        subcategory001mb.save(function(err, subcategory001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subcategory001mb.',
@@ -5181,28 +5183,28 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subcategory001mb/{id}:
-  *   delete:
-  *    tags: [subcategory001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subcategory001mb/{id}:
+ *   delete:
+ *    tags: [subcategory001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findByIdAndRemove(id, function (err, subcategory001mb) {
+    Subcategory001mb.findByIdAndRemove(id, function(err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subcategory001mb.',
@@ -5272,7 +5274,7 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
  */
 
 app.get('/api/subscribercontentauth001wb', (req, res) => {
-    Subscribercontentauth001wb.find(function (err, subscribercontentauth001wbs) {
+    Subscribercontentauth001wb.find(function(err, subscribercontentauth001wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb.',
@@ -5285,35 +5287,35 @@ app.get('/api/subscribercontentauth001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subscribercontentauth001wb/{id}:
-*   get:
-*     tags: [subscribercontentauth001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subscribercontentauth001wb'
-*/
+ * @swagger
+ * /api/subscribercontentauth001wb/{id}:
+ *   get:
+ *     tags: [subscribercontentauth001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subscribercontentauth001wb'
+ */
 
 app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscribercontentauth001wb.findOne({ _id: id }, function (err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findOne({ _id: id }, function(err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb.',
@@ -5332,89 +5334,89 @@ app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subscribercontentauth001wb/subscribercontent:
-  *   post:
-  *    tags: [subscribercontentauth001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subscribercontentauth001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscribercontentauth001wb/subscribercontent:
+ *   post:
+ *    tags: [subscribercontentauth001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subscribercontentauth001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subscribercontentauth001wb/subscribercontent', (req, res) => {
-    const subscribercontentauth001wb = new Subscribercontentauth001wb();
-    subscribercontentauth001wb.subscid = req.body.subscid.id;
-    subscribercontentauth001wb.subscsubpid = req.body.subscsubpid;
-    subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
-    subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
-    subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
-    subscribercontentauth001wb.inserteduser = req.body.inserteduser;
-    subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
-    subscribercontentauth001wb.updateduser = req.body.updateduser;
-    subscribercontentauth001wb.status = req.body.status;
-    subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
-    subscribercontentauth001wb.save()
-        .then((result) => {
+        const subscribercontentauth001wb = new Subscribercontentauth001wb();
+        subscribercontentauth001wb.subscid = req.body.subscid.id;
+        subscribercontentauth001wb.subscsubpid = req.body.subscsubpid;
+        subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
+        subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
+        subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
+        subscribercontentauth001wb.inserteduser = req.body.inserteduser;
+        subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
+        subscribercontentauth001wb.updateduser = req.body.updateduser;
+        subscribercontentauth001wb.status = req.body.status;
+        subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
+        subscribercontentauth001wb.save()
+            .then((result) => {
 
-            Subscriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
-                if (user) {
-                    user.subscsubspid.push(subscribercontentauth001wb);
-                    user.save();
-                    res.json({ message: 'subscribercontentauth created!' });
-                }
+                Subscriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
+                    if (user) {
+                        user.subscsubspid.push(subscribercontentauth001wb);
+                        user.save();
+                        res.json({ message: 'subscribercontentauth created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subscribercontentauth001wb/{id}:
-  *   put:
-  *    tags: [subscribercontentauth001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subscribercontentauth001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subscribercontentauth001wb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/subscribercontentauth001wb/{id}:
+     *   put:
+     *    tags: [subscribercontentauth001wb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subscribercontentauth001wb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subscribercontentauth001wb'
+     */
 
 app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
 
-    Subscribercontentauth001wb.findOne({ _id: id }, function (err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findOne({ _id: id }, function(err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb',
@@ -5438,7 +5440,7 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
         subscribercontentauth001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscribercontentauth001wb.updateduser;
         subscribercontentauth001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscribercontentauth001wb.updateddatetime;
         subscribercontentauth001wb.status = req.body.status ? req.body.status : subscribercontentauth001wb.status;
-        subscribercontentauth001wb.save(function (err, subscribercontentauth001wb) {
+        subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscribercontentauth001wb.',
@@ -5451,28 +5453,28 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subscribercontentauth001wb/{id}:
-  *   delete:
-  *    tags: [subscribercontentauth001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscribercontentauth001wb/{id}:
+ *   delete:
+ *    tags: [subscribercontentauth001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscribercontentauth001wb.findByIdAndRemove(id, function (err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findByIdAndRemove(id, function(err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscribercontentauth001wb.',
@@ -5604,7 +5606,7 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  */
 
 app.get('/api/subscriberdetails001wb', (req, res) => {
-    Subscriberdetails001wb.find(function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.find(function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -5617,35 +5619,35 @@ app.get('/api/subscriberdetails001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subscriberdetails001wb/{id}:
-*   get:
-*     tags: [subscriberdetails001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subscriberdetails001wb'
-*/
+ * @swagger
+ * /api/subscriberdetails001wb/{id}:
+ *   get:
+ *     tags: [subscriberdetails001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subscriberdetails001wb'
+ */
 
 app.get('/api/subscriberdetails001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberdetails001wb.findOne({ _id: id }, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -5664,95 +5666,95 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subscriberdetails001wb/subscriberdetails:
-  *   post:
-  *    tags: [subscriberdetails001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subscriberdetails001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberdetails001wb/subscriberdetails:
+ *   post:
+ *    tags: [subscriberdetails001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subscriberdetails001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subscriberdetails001wb/subscriberdetails', (req, res) => {
-    const subscriberdetails001wb = new Subscriberdetails001wb();
-    subscriberdetails001wb.contentid = req.body.contentid.id;
-    subscriberdetails001wb.personid = req.body.personid.id;
-    subscriberdetails001wb.subscid = req.body.subscid;
-    subscriberdetails001wb.countryid = req.body.countryid.id;
-    subscriberdetails001wb.roleid = req.body.roleid.id
-    subscriberdetails001wb.cityid = req.body.cityid.id;
-    subscriberdetails001wb.stateid = req.body.stateid.id;
-    subscriberdetails001wb.subscname = req.body.subscname;
-    subscriberdetails001wb.age = req.body.age;
-    subscriberdetails001wb.sex = req.body.sex;
-    subscriberdetails001wb.subscdesc = req.body.subscdesc;
-    subscriberdetails001wb.aboutme = req.body.aboutme;
-    subscriberdetails001wb.address = req.body.address;
-    subscriberdetails001wb.phoneno = req.body.phoneno;
-    subscriberdetails001wb.subscstatus = req.body.subscstatus;
-    subscriberdetails001wb.subscapproval = req.body.subscapproval;
-    subscriberdetails001wb.approvedby = req.body.approvedby;
-    subscriberdetails001wb.approvedon = req.body.approvedon;
-    subscriberdetails001wb.approvedby = req.body.approvedby;
-    subscriberdetails001wb.inserteduser = req.body.inserteduser;
-    subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
-    subscriberdetails001wb.updateduser = req.body.updateduser;
-    subscriberdetails001wb.updateddatetime = req.body.updateddatetime;
-    subscriberdetails001wb.save()
-        .then((result) => {
-            res.json({ message: 'subscriberdetails001wb created!' });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subscriberdetails001wb/{id}:
-  *   put:
-  *    tags: [subscriberdetails001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subscriberdetails001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subscriberdetails001wb'
-  */
+        const subscriberdetails001wb = new Subscriberdetails001wb();
+        subscriberdetails001wb.contentid = req.body.contentid.id;
+        subscriberdetails001wb.personid = req.body.personid.id;
+        subscriberdetails001wb.subscid = req.body.subscid;
+        subscriberdetails001wb.countryid = req.body.countryid.id;
+        subscriberdetails001wb.roleid = req.body.roleid.id
+        subscriberdetails001wb.cityid = req.body.cityid.id;
+        subscriberdetails001wb.stateid = req.body.stateid.id;
+        subscriberdetails001wb.subscname = req.body.subscname;
+        subscriberdetails001wb.age = req.body.age;
+        subscriberdetails001wb.sex = req.body.sex;
+        subscriberdetails001wb.subscdesc = req.body.subscdesc;
+        subscriberdetails001wb.aboutme = req.body.aboutme;
+        subscriberdetails001wb.address = req.body.address;
+        subscriberdetails001wb.phoneno = req.body.phoneno;
+        subscriberdetails001wb.subscstatus = req.body.subscstatus;
+        subscriberdetails001wb.subscapproval = req.body.subscapproval;
+        subscriberdetails001wb.approvedby = req.body.approvedby;
+        subscriberdetails001wb.approvedon = req.body.approvedon;
+        subscriberdetails001wb.approvedby = req.body.approvedby;
+        subscriberdetails001wb.inserteduser = req.body.inserteduser;
+        subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
+        subscriberdetails001wb.updateduser = req.body.updateduser;
+        subscriberdetails001wb.updateddatetime = req.body.updateddatetime;
+        subscriberdetails001wb.save()
+            .then((result) => {
+                res.json({ message: 'subscriberdetails001wb created!' });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
+            });
+    })
+    /**
+     * @swagger
+     * /api/subscriberdetails001wb/{id}:
+     *   put:
+     *    tags: [subscriberdetails001wb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subscriberdetails001wb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subscriberdetails001wb'
+     */
 
 app.put('/api/subscriberdetails001wb/:id', (req, res) => {
     var id = req.params.id;
 
-    Subscriberdetails001wb.findOne({ _id: id }, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb',
@@ -5787,7 +5789,7 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
         subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberdetails001wb.inserteddatetime;
         subscriberdetails001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberdetails001wb.updateduser;
         subscriberdetails001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberdetails001wb.updateddatetime;
-        subscriberdetails001wb.save(function (err, subscriberdetails001wb) {
+        subscriberdetails001wb.save(function(err, subscriberdetails001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberdetails001wb.',
@@ -5800,28 +5802,28 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subscriberdetails001wb/{id}:
-  *   delete:
-  *    tags: [subscriberdetails001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberdetails001wb/{id}:
+ *   delete:
+ *    tags: [subscriberdetails001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberdetails001wb.findByIdAndRemove(id, function (err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findByIdAndRemove(id, function(err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberdetails001wb.',
@@ -5911,7 +5913,7 @@ app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
  */
 
 app.get('/api/subscriberpersonalinfo001wb', (req, res) => {
-    Subscriberpersonalinfo001wb.find(function (err, subscriberpersonalinfo001wbs) {
+    Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -5924,35 +5926,35 @@ app.get('/api/subscriberpersonalinfo001wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subscriberpersonalinfo001wb/{id}:
-*   get:
-*     tags: [subscriberpersonalinfo001wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-*/
+ * @swagger
+ * /api/subscriberpersonalinfo001wb/{id}:
+ *   get:
+ *     tags: [subscriberpersonalinfo001wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+ */
 
 app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -5971,100 +5973,100 @@ app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subscriberpersonalinfo001wb/personal:
-  *   post:
-  *    tags: [subscriberpersonalinfo001wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberpersonalinfo001wb/personal:
+ *   post:
+ *    tags: [subscriberpersonalinfo001wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subscriberpersonalinfo001wb/personal', (req, res) => {
-    const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
-    subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
-    subscriberpersonalinfo001wb.personalid = req.body.personalid;
-    subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
-    subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
-    subscriberpersonalinfo001wb.flex1 = req.body.flex1;
-    subscriberpersonalinfo001wb.flex2 = req.body.flex2;
-    subscriberpersonalinfo001wb.flex3 = req.body.flex3;
-    subscriberpersonalinfo001wb.flex4 = req.body.flex4;
-    subscriberpersonalinfo001wb.flex5 = req.body.flex5;
-    subscriberpersonalinfo001wb.flex6 = req.body.flex6;
-    subscriberpersonalinfo001wb.flex7 = req.body.flex7;
-    subscriberpersonalinfo001wb.flex8 = req.body.flex8;
-    subscriberpersonalinfo001wb.flex9 = req.body.flex9;
-    subscriberpersonalinfo001wb.flex10 = req.body.flex10;
-    subscriberpersonalinfo001wb.flex11 = req.body.flex11;
-    subscriberpersonalinfo001wb.flex12 = req.body.flex12;
-    subscriberpersonalinfo001wb.inserteduser = req.body.inserteduser;
-    subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
-    subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
-    subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
+        const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
+        subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
+        subscriberpersonalinfo001wb.personalid = req.body.personalid;
+        subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
+        subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
+        subscriberpersonalinfo001wb.flex1 = req.body.flex1;
+        subscriberpersonalinfo001wb.flex2 = req.body.flex2;
+        subscriberpersonalinfo001wb.flex3 = req.body.flex3;
+        subscriberpersonalinfo001wb.flex4 = req.body.flex4;
+        subscriberpersonalinfo001wb.flex5 = req.body.flex5;
+        subscriberpersonalinfo001wb.flex6 = req.body.flex6;
+        subscriberpersonalinfo001wb.flex7 = req.body.flex7;
+        subscriberpersonalinfo001wb.flex8 = req.body.flex8;
+        subscriberpersonalinfo001wb.flex9 = req.body.flex9;
+        subscriberpersonalinfo001wb.flex10 = req.body.flex10;
+        subscriberpersonalinfo001wb.flex11 = req.body.flex11;
+        subscriberpersonalinfo001wb.flex12 = req.body.flex12;
+        subscriberpersonalinfo001wb.inserteduser = req.body.inserteduser;
+        subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
+        subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
+        subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
 
 
-    subscriberpersonalinfo001wb.save()
-        .then((result) => {
+        subscriberpersonalinfo001wb.save()
+            .then((result) => {
 
-            Subscriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
-                if (user) {
-                    user.personalid.push(subscriberpersonalinfo001wb);
-                    user.save();
-                    res.json({ message: 'subscriberpersonalinfo created!' });
-                }
+                Subscriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
+                    if (user) {
+                        user.personalid.push(subscriberpersonalinfo001wb);
+                        user.save();
+                        res.json({ message: 'subscriberpersonalinfo created!' });
+                    }
+                });
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subscriberpersonalinfo001wb/{id}:
-  *   put:
-  *    tags: [subscriberpersonalinfo001wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-  */
+    })
+    /**
+     * @swagger
+     * /api/subscriberpersonalinfo001wb/{id}:
+     *   put:
+     *    tags: [subscriberpersonalinfo001wb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+     */
 
 app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb',
@@ -6099,7 +6101,7 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
         subscriberpersonalinfo001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberpersonalinfo001wb.updateduser;
         subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberpersonalinfo001wb.updateddatetime;
 
-        subscriberpersonalinfo001wb.save(function (err, subscriberpersonalinfo001wb) {
+        subscriberpersonalinfo001wb.save(function(err, subscriberpersonalinfo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberpersonalinfo001wb.',
@@ -6112,28 +6114,28 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subscriberpersonalinfo001wb/{id}:
-  *   delete:
-  *    tags: [subscriberpersonalinfo001wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberpersonalinfo001wb/{id}:
+ *   delete:
+ *    tags: [subscriberpersonalinfo001wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function (err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function(err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberpersonalinfo001wb.',
@@ -6224,7 +6226,7 @@ app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  */
 
 app.get('/api/subscriberprofessionalinfo002wb', (req, res) => {
-    Subscriberprofessionalinfo002wb.find(function (err, subscriberprofessionalinfo002wbs) {
+    Subscriberprofessionalinfo002wb.find(function(err, subscriberprofessionalinfo002wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb.',
@@ -6237,35 +6239,35 @@ app.get('/api/subscriberprofessionalinfo002wb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subscriberprofessionalinfo002wb/{id}:
-*   get:
-*     tags: [subscriberprofessionalinfo002wb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-*/
+ * @swagger
+ * /api/subscriberprofessionalinfo002wb/{id}:
+ *   get:
+ *     tags: [subscriberprofessionalinfo002wb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+ */
 
 app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function (err, subscriberprofessionalinfo002wb) {
+    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function(err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb.',
@@ -6284,98 +6286,98 @@ app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subscriberprofessionalinfo002wb/professional:
-  *   post:
-  *    tags: [subscriberprofessionalinfo002wb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberprofessionalinfo002wb/professional:
+ *   post:
+ *    tags: [subscriberprofessionalinfo002wb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subscriberprofessionalinfo002wb/professional', (req, res) => {
-    const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
-    subscriberprofessionalinfo002wb.subscid = req.body.subscid.id;
-    subscriberprofessionalinfo002wb.professionid = req.body.professionid;
-    subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
-    subscriberprofessionalinfo002wb.job = req.body.job;
-    subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
-    subscriberprofessionalinfo002wb.flex2 = req.body.flex2;
-    subscriberprofessionalinfo002wb.flex3 = req.body.flex3;
-    subscriberprofessionalinfo002wb.flex4 = req.body.flex4;
-    subscriberprofessionalinfo002wb.flex5 = req.body.flex5;
-    subscriberprofessionalinfo002wb.flex6 = req.body.flex6;
-    subscriberprofessionalinfo002wb.flex7 = req.body.flex7;
-    subscriberprofessionalinfo002wb.flex8 = req.body.flex8;
-    subscriberprofessionalinfo002wb.flex9 = req.body.flex9;
-    subscriberprofessionalinfo002wb.flex10 = req.body.flex10;
-    subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
-    subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
-    subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
-    subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
-    subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
-    subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
-    subscriberprofessionalinfo002wb.save()
-        .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: subscriberprofessionalinfo002wb.subscid }, (err, user) => {
-                if (user) {
-                    user.professionalid.push(subscriberprofessionalinfo002wb);
-                    user.save();
-                    res.json({ message: 'subscriberprofessional created!' });
-                }
-            });
+        const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
+        subscriberprofessionalinfo002wb.subscid = req.body.subscid.id;
+        subscriberprofessionalinfo002wb.professionid = req.body.professionid;
+        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
+        subscriberprofessionalinfo002wb.job = req.body.job;
+        subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
+        subscriberprofessionalinfo002wb.flex2 = req.body.flex2;
+        subscriberprofessionalinfo002wb.flex3 = req.body.flex3;
+        subscriberprofessionalinfo002wb.flex4 = req.body.flex4;
+        subscriberprofessionalinfo002wb.flex5 = req.body.flex5;
+        subscriberprofessionalinfo002wb.flex6 = req.body.flex6;
+        subscriberprofessionalinfo002wb.flex7 = req.body.flex7;
+        subscriberprofessionalinfo002wb.flex8 = req.body.flex8;
+        subscriberprofessionalinfo002wb.flex9 = req.body.flex9;
+        subscriberprofessionalinfo002wb.flex10 = req.body.flex10;
+        subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
+        subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
+        subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
+            subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
+            subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
+            subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
+        subscriberprofessionalinfo002wb.save()
+            .then((result) => {
+                Subscriberdetails001wb.findOne({ _id: subscriberprofessionalinfo002wb.subscid }, (err, user) => {
+                    if (user) {
+                        user.professionalid.push(subscriberprofessionalinfo002wb);
+                        user.save();
+                        res.json({ message: 'subscriberprofessional created!' });
+                    }
+                });
 
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
-})
-/**
-  * @swagger
-  * /api/subscriberprofessionalinfo002wb/{id}:
-  *   put:
-  *    tags: [subscriberprofessionalinfo002wb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-  */
+            })
+            .catch((error) => {
+                res.status(500).json({ error });
+            });
+    })
+    /**
+     * @swagger
+     * /api/subscriberprofessionalinfo002wb/{id}:
+     *   put:
+     *    tags: [subscriberprofessionalinfo002wb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+     */
 
 app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function (err, subscriberprofessionalinfo002wb) {
+    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function(err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb',
@@ -6409,7 +6411,7 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
         subscriberprofessionalinfo002wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberprofessionalinfo002wb.updateduser;
         subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberprofessionalinfo002wb.updateddatetime;
 
-        subscriberprofessionalinfo002wb.save(function (err, subscriberprofessionalinfo002wb) {
+        subscriberprofessionalinfo002wb.save(function(err, subscriberprofessionalinfo002wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberprofessionalinfo002wb.',
@@ -6422,28 +6424,28 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subscriberprofessionalinfo002wb/{id}:
-  *   delete:
-  *    tags: [subscriberprofessionalinfo002wb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriberprofessionalinfo002wb/{id}:
+ *   delete:
+ *    tags: [subscriberprofessionalinfo002wb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findByIdAndRemove(id, function (err, subscriberprofessionalinfo002wb) {
+    Subscriberprofessionalinfo002wb.findByIdAndRemove(id, function(err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberprofessionalinfo002wb.',
@@ -6511,7 +6513,7 @@ app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  */
 
 app.get('/api/subscriptionmaster001mb', (req, res) => {
-    Subscriptionmaster001mb.find(function (err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.find(function(err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -6524,35 +6526,35 @@ app.get('/api/subscriptionmaster001mb', (req, res) => {
 });
 
 /**
-* @swagger
-* /api/subscriptionmaster001mb/{id}:
-*   get:
-*     tags: [subscriptionmaster001mb]
-*     summary: Retrieve a data by id.
-*     description: Retrieve a data by id.
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: Numeric ID of the user to retrieve.
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Sucess
-*       500:
-*         description: failed
-*         content:
-*             application/json:
-*                       schema:
-*                          type: array
-*                          items:
-*                             $ref: '#/components/schemas/subscriptionmaster001mb'
-*/
+ * @swagger
+ * /api/subscriptionmaster001mb/{id}:
+ *   get:
+ *     tags: [subscriptionmaster001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/subscriptionmaster001mb'
+ */
 
 app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -6571,88 +6573,88 @@ app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
 });
 
 /**
-  * @swagger
-  * /api/subscriptionmaster001mb/master:
-  *   post:
-  *    tags: [subscriptionmaster001mb]  
-  *    summary: Post Method
-  *    description: Retrieve the list of data
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          $ref: '#/components/schemas/subscriptionmaster001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriptionmaster001mb/master:
+ *   post:
+ *    tags: [subscriptionmaster001mb]  
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/subscriptionmaster001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 
 app.post('/api/subscriptionmaster001mb/master', (req, res) => {
-    var subscriptionmaster001mb = new Subscriptionmaster001mb({
-        subpid: req.body.subpid,
-        subpname: req.body.subpname,
-        description: req.body.description,
-        tenure: req.body.tenure,
-        amount: req.body.amount,
-        status: req.body.status,
-        discountflag: req.body.discountflag,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
+        const subscriptionmaster001mb = new Subscriptionmaster001mb({
+            subpid: req.body.subpid,
+            subpname: req.body.subpname,
+            description: req.body.description,
+            tenure: req.body.tenure,
+            amount: req.body.amount,
+            status: req.body.status,
+            discountflag: req.body.discountflag,
+            inserteduser: req.body.inserteduser,
+            inserteddatetime: req.body.inserteddatetime,
+            updateduser: req.body.updateduser,
+            updateddatetime: req.body.updateddatetime
+        });
 
-    subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when creating subscriptionmaster001mb',
-                error: err
-            });
-        }
+        subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when creating subscriptionmaster001mb',
+                    error: err
+                });
+            }
 
-        return res.json({messsage:'Subscriptionmaster Created'});
-    });
-})
-/**
-  * @swagger
-  * /api/subscriptionmaster001mb/{id}:
-  *   put:
-  *    tags: [subscriptionmaster001mb]
-  *    summary: Put Method
-  *    description: Retrieve the list of data
-  *    parameters:
-  *      - in: path
-  *        name: id
-  *        required: true
-  *        description: Numeric ID of the user to retrieve.
-  *        schema:
-  *           type: string
-  *    requestBody:
-  *         required: true
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                         $ref: '#/components/schemas/subscriptionmaster001mb'
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  *         content:
-  *             application/json:
-  *                       schema:
-  *                          type: array
-  *                          items:
-  *                             $ref: '#/components/schemas/subscriptionmaster001mb'
-  */
+            return res.json({ messsage: 'Subscriptionmaster Created' });
+        });
+    })
+    /**
+     * @swagger
+     * /api/subscriptionmaster001mb/{id}:
+     *   put:
+     *    tags: [subscriptionmaster001mb]
+     *    summary: Put Method
+     *    description: Retrieve the list of data
+     *    parameters:
+     *      - in: path
+     *        name: id
+     *        required: true
+     *        description: Numeric ID of the user to retrieve.
+     *        schema:
+     *           type: string
+     *    requestBody:
+     *         required: true
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                         $ref: '#/components/schemas/subscriptionmaster001mb'
+     *    responses:
+     *       200:
+     *         description: Sucess
+     *       500:
+     *         description: failed
+     *         content:
+     *             application/json:
+     *                       schema:
+     *                          type: array
+     *                          items:
+     *                             $ref: '#/components/schemas/subscriptionmaster001mb'
+     */
 
 app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb',
@@ -6678,7 +6680,7 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
         subscriptionmaster001mb.updateduser = req.body.updateduser ? req.body.updateduser : subscriptionmaster001mb.updateduser;
         subscriptionmaster001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriptionmaster001mb.updateddatetime;
 
-        subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
+        subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriptionmaster001mb.',
@@ -6691,28 +6693,28 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
     });
 });
 /**
-  * @swagger
-  * /api/subscriptionmaster001mb/{id}:
-  *   delete:
-  *    tags: [subscriptionmaster001mb]
-  *    summary: Delete Method
-  *    description: Delete the list of data
-  *    parameters:
-  *       - in: path
-  *         name: id
-  *         required: true
-  *         description: Numeric ID of the user to retrieve.
-  *         schema:
-  *           type: string
-  *    responses:
-  *       200:
-  *         description: Sucess
-  *       500:
-  *         description: failed
-  */
+ * @swagger
+ * /api/subscriptionmaster001mb/{id}:
+ *   delete:
+ *    tags: [subscriptionmaster001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
 app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriptionmaster001mb.findByIdAndRemove(id, function (err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findByIdAndRemove(id, function(err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriptionmaster001mb.',
@@ -6827,7 +6829,7 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *                             $ref: '#/components/schemas/users001wb'
  */
 
- app.get('/api/users001wb', (req, res) => {
+app.get('/api/users001wb', (req, res) => {
     Users001wb.find(function(err, users001wb) {
         if (err) {
             return res.status(500).json({
@@ -6901,31 +6903,31 @@ app.get('/api/users001wb/:id', (req, res) => {
  *         description: failed
  */
 app.post('/api/users001wb/user', (req, res) => {
-    var users001wb = new Users001wb();
-    users001wb.subscid = req.body.subscid.id,
-    users001wb.roleid = req.body.roleid.id,
-    users001wb.personid = req.body.personid.id,
-    users001wb.firstname = req.body.firstname,
-    users001wb.lasttname = req.body.lasttname,
-    users001wb.zipcode = req.body.zipcode,
-    users001wb.employeeid = req.body.employeeid,
-    users001wb.dob = req.body.dob,
-    users001wb.email = req.body.email,
-    users001wb.confirmemail = req.body.confirmemail,
-    users001wb.sex = req.body.sex,
-    users001wb.address1 = req.body.address1,
-    users001wb.address2 = req.body.address2,
-    users001wb.address3 = req.body.address3,
-    users001wb.cityid = req.body.cityid.id,
-    users001wb.stateid = req.body.stateid.id,
-    users001wb.countryid = req.body.countryid.id,
-    users001wb.mobile = req.body.mobile,
-    users001wb.landline = req.body.landline,
-    users001wb.status = req.body.status,
-    users001wb.inserteduser = req.body.inserteduser,
-    users001wb.inserteddatetime = req.body.inserteddatetime,
-    users001wb.updateduser = req.body.updateduser,
-    users001wb.updateddatetime = req.body.updateddatetime
+    const users001wb = new Users001wb();
+    users001wb.subscid = req.body.subscid.id;
+    users001wb.roleid = req.body.roleid.id;
+    users001wb.personid = req.body.personid.id;
+    users001wb.firstname = req.body.firstname;
+    users001wb.lasttname = req.body.lasttname;
+    users001wb.zipcode = req.body.zipcode;
+    users001wb.employeeid = req.body.employeeid;
+    users001wb.dob = req.body.dob;
+    users001wb.email = req.body.email;
+    users001wb.confirmemail = req.body.confirmemail;
+    users001wb.sex = req.body.sex;
+    users001wb.address1 = req.body.address1;
+    users001wb.address2 = req.body.address2;
+    users001wb.address3 = req.body.address3;
+    users001wb.cityid = req.body.cityid.id;
+    users001wb.stateid = req.body.stateid.id;
+    users001wb.countryid = req.body.countryid.id;
+    users001wb.mobile = req.body.mobile;
+    users001wb.landline = req.body.landline;
+    users001wb.status = req.body.status;
+    users001wb.inserteduser = req.body.inserteduser;
+    users001wb.inserteddatetime = req.body.inserteddatetime;
+    users001wb.updateduser = req.body.updateduser;
+    users001wb.updateddatetime = req.body.updateddatetime;
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -6934,25 +6936,25 @@ app.post('/api/users001wb/user', (req, res) => {
             pass: 'Welcome!23'
         }
     });
-     const handlebarOptions = {
+    const handlebarOptions = {
         viewEngine: {
             partialsDir: path.resolve('./app/templates'),
             defaultLayout: false,
         },
         viewPath: path.resolve('./app/templates'),
-        extName:".handlebars"
+        extName: ".handlebars"
     };
     transporter.use('compile', hbs(handlebarOptions))
     const mailOptions = {
-        from: 'siriusmatrimoney@gmail.com', 
-        to:  users001wb.email, 
-        subject: 'Sirius Matrimony Confirmation', 
+        from: 'siriusmatrimoney@gmail.com',
+        to: users001wb.email,
+        subject: 'Sirius Matrimony Confirmation',
         template: 'mail',
-        context:{
+        context: {
             name: "Sirius Matrimony"
         }
     };
-    transporter.sendMail(mailOptions, function (err, info) {
+    transporter.sendMail(mailOptions, function(err, info) {
         if (err)
             console.log(err)
         else
@@ -7079,12 +7081,3 @@ app.delete('/api/users001wb/:id', (req, res) => {
         return res.json({ message: 'Deleted successfully' });
     });
 });
-
-
-
-
-
-
-
-
-
