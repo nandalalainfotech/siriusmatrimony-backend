@@ -17,8 +17,8 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'companydetails001mb'
         }],
-        'roleid': {
-            type: mongoose.Types.ObjectId,
+        'rolename': {
+            type: String,
             ref: 'role001wb'
         },
         // 'catcode': [{
@@ -79,6 +79,8 @@ const subscriberdetails001wb = mongoose.model(
         'sex': String,
         'subscdesc': String,
         'aboutme': String,
+        'email': String,
+        'password': String,
         'address': String,
         'phoneno': Number,
         'subscstatus': String,

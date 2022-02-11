@@ -1,5 +1,11 @@
 import db from "../models/main.js";
 
+import nodemailer from "nodemailer";
+
+import hbs from "nodemailer-express-handlebars";
+
+import path from "path";
+
 const Subscriberdetails001wb = db.subscriberdetails001wb
 
 export const list = async(req, res) => {
@@ -42,10 +48,12 @@ export const create = async(req, res) => {
     subscriberdetails001wb.personid = req.body.personid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
     subscriberdetails001wb.countryid = req.body.countryid.id;
-    subscriberdetails001wb.roleid = req.body.roleid.id;
+    subscriberdetails001wb.rolename = req.body.rolename.rolename;
     subscriberdetails001wb.contentid = req.body.contentid.id;
     subscriberdetails001wb.cityid = req.body.cityid.id;
     subscriberdetails001wb.stateid = req.body.stateid.id;
+    subscriberdetails001wb.email = req.body.email;
+    subscriberdetails001wb.password = req.body.password;
     subscriberdetails001wb.subscname = req.body.subscname;
     subscriberdetails001wb.age = req.body.age;
     subscriberdetails001wb.sex = req.body.sex;
@@ -62,6 +70,42 @@ export const create = async(req, res) => {
     subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
     subscriberdetails001wb.updateduser = req.body.updateduser;
     subscriberdetails001wb.updateddatetime = req.body.updateddatetime;
+
+    const oldUser = await Subscriberdetails001wb.findOne({ email: subscriberdetails001wb.email });
+    if (oldUser) {
+        return res.status(409).send("User Already Exist. Please Login");
+    }
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'siriusmatrimoney@gmail.com',
+            pass: 'Welcome!23'
+        }
+    });
+    const handlebarOptions = {
+        viewEngine: {
+            partialsDir: path.resolve('./app/templates'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('./app/templates'),
+        extName: ".handlebars"
+    };
+    transporter.use('compile', hbs(handlebarOptions))
+    const mailOptions = {
+        from: 'siriusmatrimoney@gmail.com',
+        to: subscriberdetails001wb.email,
+        subject: 'Sirius Matrimony Confirmation',
+        template: 'mail',
+        context: {
+            name: "Sirius Matrimony"
+        }
+    };
+    transporter.sendMail(mailOptions, function(err, info) {
+        if (err)
+            console.log(err)
+        else
+            console.log('email sent' + info.response);
+    })
     subscriberdetails001wb.save()
         .then((result) => {
             res.json({ message: 'subscriberdetails001wb created!' });
@@ -89,12 +133,14 @@ export const update = async(req, res) => {
                 message: 'No such subscriberdetails001wb'
             });
         }
+        subscriberdetails001wb.password = req.body.password ? req.body.password : subscriberdetails001wb.password;
+        subscriberdetails001wb.email = req.body.email ? req.body.email : subscriberdetails001wb.email;
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
         subscriberdetails001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberdetails001wb.personid;
         subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
         subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
         subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
-        subscriberdetails001wb.roleid = req.body.roleid.id ? req.body.roleid.id : subscriberdetails001wb.roleid;
+        subscriberdetails001wb.rolename = req.body.rolename.rolename ? req.body.rolename.id : subscriberdetails001wb.rolename;
         subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
         subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
         subscriberdetails001wb.sex = req.body.sex ? req.body.sex : subscriberdetails001wb.sex;
