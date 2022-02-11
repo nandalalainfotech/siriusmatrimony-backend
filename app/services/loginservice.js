@@ -60,7 +60,6 @@ export const create = async(req, res) => {
                         expiresIn: "4h",
                     }
                 );
-                const decoded = jwt.verify(token, process.env.TOKEN_KEY);
                 login001mb.token = token;
                 login001mb.save()
                     .then((result) => {
