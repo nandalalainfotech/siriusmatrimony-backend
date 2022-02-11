@@ -46,7 +46,9 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
     subscriberdetails001wb.personid = req.body.personid.id;
+    subscriberdetails001wb.payid = req.body.payid.id;
     subscriberdetails001wb.subscid = req.body.subscid;
+    subscriberdetails001wb.subpid = req.body.subpid.id;
     subscriberdetails001wb.countryid = req.body.countryid.id;
     subscriberdetails001wb.rolename = req.body.rolename.rolename;
     subscriberdetails001wb.contentid = req.body.contentid.id;
@@ -133,6 +135,8 @@ export const update = async(req, res) => {
                 message: 'No such subscriberdetails001wb'
             });
         }
+        subscriberdetails001wb.payid = req.body.payid.id ? req.body.payid.id : subscriberdetails001wb.payid;
+        subscriberdetails001wb.subpid = req.body.subpid.id ? req.body.subpid.id : subscriberdetails001wb.subpid;
         subscriberdetails001wb.password = req.body.password ? req.body.password : subscriberdetails001wb.password;
         subscriberdetails001wb.email = req.body.email ? req.body.email : subscriberdetails001wb.email;
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;

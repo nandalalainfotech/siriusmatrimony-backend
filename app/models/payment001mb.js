@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 
 mongoose.pluralize(null);
 
-const subscriptionmaster001mb = mongoose.model(
-    "subscriptionmaster001mb",
+const payment001mb = mongoose.model(
+    "payment001mb",
     new mongoose.Schema({
-        'subpid': Number,
-        'subpname': String,
-        'description': String,
-        'tenure': String,
-        'amount': Number,
+        'subpid':{
+            type:mongoose.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        },
+        'payid': Number,
+        'payement': String,
         'status': String,
-        'discountflag': Boolean,
         'inserteduser': String,
         'inserteddatetime': String,
         'updateduser': String,
@@ -23,4 +23,4 @@ const subscriptionmaster001mb = mongoose.model(
     }, { timestamps: false })
 );
 
-export default subscriptionmaster001mb;
+export default payment001mb;

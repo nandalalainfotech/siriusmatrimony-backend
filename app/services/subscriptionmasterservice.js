@@ -2,8 +2,8 @@ import db from "../models/main.js";
 
 const Subscriptionmaster001mb = db.subscriptionmaster001mb
 
-export const list = async(req, res) => {
-    Subscriptionmaster001mb.find(function(err, subscriptionmaster001mb) {
+export const list = async (req, res) => {
+    Subscriptionmaster001mb.find(function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -15,10 +15,10 @@ export const list = async(req, res) => {
     });
 };
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -36,22 +36,21 @@ export const show = async(req, res) => {
     });
 };
 
-export const create = async(req, res) => {
-    var subscriptionmaster001mb = new Subscriptionmaster001mb({
-        subpid: req.body.subpid,
-        subpname: req.body.subpname,
-        description: req.body.description,
-        tenure: req.body.tenure,
-        amount: req.body.amount,
-        status: req.body.status,
-        discountflag: req.body.discountflag,
-        inserteduser: req.body.inserteduser,
-        inserteddatetime: req.body.inserteddatetime,
-        updateduser: req.body.updateduser,
-        updateddatetime: req.body.updateddatetime
-    });
-
-    subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
+export const create = async (req, res) => {
+    const subscriptionmaster001mb = new Subscriptionmaster001mb();
+    subscriptionmaster001mb.subpid = req.body.subpid;
+    subscriptionmaster001mb.subscid = req.body.subscid.id;
+    subscriptionmaster001mb.subpname = req.body.subpname;
+    subscriptionmaster001mb.description = req.body.description;
+    subscriptionmaster001mb.tenure = req.body.tenure;
+    subscriptionmaster001mb.amount = req.body.amount;
+    subscriptionmaster001mb.status = req.body.status;
+    subscriptionmaster001mb.discountflag = req.body.discountflag;
+    subscriptionmaster001mb.inserteduser = req.body.inserteduser;
+    subscriptionmaster001mb.inserteddatetime = req.body.inserteddatetime;
+    subscriptionmaster001mb.updateduser = req.body.updateduser;
+    subscriptionmaster001mb.updateddatetime = req.body.updateddatetime;
+    subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when creating subscriptionmaster001mb',
@@ -63,10 +62,10 @@ export const create = async(req, res) => {
     });
 };
 
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
 
-    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb',
@@ -79,7 +78,7 @@ export const update = async(req, res) => {
                 message: 'No such subscriptionmaster001mb'
             });
         }
-
+        subscriptionmaster001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subscriptionmaster001mb.subscid;
         subscriptionmaster001mb.subpid = req.body.subpid ? req.body.subpid : subscriptionmaster001mb.subpid;
         subscriptionmaster001mb.subpname = req.body.subpname ? req.body.subpname : subscriptionmaster001mb.subpname;
         subscriptionmaster001mb.description = req.body.description ? req.body.description : subscriptionmaster001mb.description;
@@ -92,7 +91,7 @@ export const update = async(req, res) => {
         subscriptionmaster001mb.updateduser = req.body.updateduser ? req.body.updateduser : subscriptionmaster001mb.updateduser;
         subscriptionmaster001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriptionmaster001mb.updateddatetime;
 
-        subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
+        subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriptionmaster001mb.',
@@ -104,10 +103,10 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    Subscriptionmaster001mb.findByIdAndRemove(id, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findByIdAndRemove(id, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriptionmaster001mb.',
