@@ -5,19 +5,19 @@ mongoose.pluralize(null);
 const payment001mb = mongoose.model(
     "payment001mb",
     new mongoose.Schema({
-        'subpid':{
-            type:mongoose.Types.ObjectId,
+        'subpid': {
+            type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
         },
         'payid': Number,
-        'payement': String,
+        'payment': String,
         'status': String,
         'inserteduser': String,
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid':{
-            type:mongoose.Types.ObjectId,
+        'subscid': {
+            type: mongoose.Types.ObjectId,
             ref: 'subscriberdetails001wb'
         }
     }, { timestamps: false })

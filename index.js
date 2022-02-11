@@ -536,14 +536,14 @@ function initial() {
     Payment001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Payment001mb.insertMany([{
-                'subpid': 7878,
-                'payid': 88,
-                'payement': "card",
-                'status': "active",
-                'inserteduser': "raj",
-                'inserteddatetime': 5 / 11 / 22,
-                'updateduser': "raju",
-                'updateddatetime': 12 / 11 / 22
+                        'subpid': 7878,
+                        'payid': 88,
+                        'payment': "card",
+                        'status': "active",
+                        'inserteduser': "raj",
+                        'inserteddatetime': 5 / 11 / 22,
+                        'updateduser': "raju",
+                        'updateddatetime': 12 / 11 / 22
                     }
 
                 ])
@@ -682,7 +682,7 @@ db.mongoose
     .then(() => {
 
         console.log(`Successfully connect to MongoDB .`);
-    //   initial();
+        //   initial();
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}.`);
         });
@@ -7167,6 +7167,262 @@ app.delete('/api/users001wb/:id', (req, res) => {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the users001wb.',
+                error: err
+            });
+        }
+        return res.json({ message: 'Deleted successfully' });
+    });
+});
+
+// ********************** payment001mb schema method****************//
+/** 
+ * @swagger
+ * components:
+ *    schemas:
+ *      payment001mb:
+ *            type: object
+ *            properties:    
+ *             payid:
+ *                 type: number
+ *             subpid:
+ *                 type: object
+ *                 properties:
+ *                    id: 
+ *                      type: string
+ *             subscid:
+ *                 type: object
+ *                 properties:
+ *                    id: 
+ *                      type: string  
+ *             payment:
+ *                 type: string
+ *             status:
+ *                 type: string
+ *             inserteduser:
+ *                 type: string
+ *             inserteddatetime:
+ *                 type: string
+ *             updateduser:
+ *                 type: string
+ *             updateddatetime:
+ *                 type: string   
+ */
+// ********************** payment001mb get method****************//
+/**
+ * @swagger
+ * /api/payment001mb:
+ *   get:
+ *     tags: [payment001mb]
+ *     summary: Get Method
+ *     description: Retrieve the list of data
+ *     responses:
+ *       200:
+ *         description: Success
+ *       500:
+ *         description: failed 
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/payment001mb'
+ */
+
+app.get('/api/payment001mb', (req, res) => {
+    Payment001mb.find(function(err, payment001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when getting payment001mb.',
+                error: err
+            });
+        }
+        return res.json(payment001mb);
+    });
+});
+/**
+ * @swagger
+ * /api/payment001mb/{id}:
+ *   get:
+ *     tags: [payment001mb]
+ *     summary: Retrieve a data by id.
+ *     description: Retrieve a data by id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed 
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/payment001mb'
+ */
+app.get('/api/payment001mb/:id', (req, res) => {
+    var id = req.params.id;
+    Payment001mb.findOne({ _id: id }, function(err, payment001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when getting payment001mb.',
+                error: err
+            });
+        }
+        if (!payment001mb) {
+            return res.status(404).json({
+                message: 'No such payment001mb'
+            });
+        }
+        return res.json(payment001mb);
+    });
+});
+
+/**
+ * @swagger
+ * /api/payment001mb/payment:
+ *   post:
+ *    tags: [payment001mb]
+ *    summary: Post Method
+ *    description: Retrieve the list of data
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/payment001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ */
+app.post('/api/payment001mb/payment', async(req, res) => {
+    const payment001mb = new Payment001mb();
+    payment001mb.subpid = req.body.subpid.id;
+    payment001mb.subscid = req.body.subscid.id;
+    payment001mb.payid = req.body.payid;
+    payment001mb.payment = req.body.payment;
+    payment001mb.status = req.body.status;
+    payment001mb.inserteduser = req.body.inserteduser;
+    payment001mb.inserteddatetime = req.body.inserteddatetime;
+    payment001mb.updateduser = req.body.updateduser;
+    payment001mb.updateddatetime = req.body.updateddatetime;
+    payment001mb.save(function(err, payment001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when creating payment001mb',
+                error: err
+            });
+        }
+
+        return res.json({ messsage: 'payment is Created' });
+    });
+});
+
+/**
+ * @swagger
+ * /api/payment001mb/{id}:
+ *   put:
+ *    tags: [payment001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/payment001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed 
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          type: array
+ *                          items:
+ *                             $ref: '#/components/schemas/payment001mb'
+ */
+app.put('/api/payment001mb/:id', (req, res) => {
+
+    var id = req.params.id;
+
+    Payment001mb.findOne({ _id: id }, function(err, payment001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when getting payment001mb',
+                error: err
+            });
+        }
+
+        if (!payment001mb) {
+            return res.status(404).json({
+                message: 'No such payment001mb'
+            });
+        }
+        payment001mb.payment = req.body.payment ? req.body.payment : payment001mb.payment;
+        payment001mb.payid = req.body.payid ? req.body.payid : payment001mb.payid;
+        payment001mb.subscid = req.body.subscid.id ? req.body.subscid.id : payment001mb.subscid;
+        payment001mb.subpid = req.body.subpid.id ? req.body.subpid.id : payment001mb.subpid;
+        payment001mb.status = req.body.status ? req.body.status : payment001mb.status;
+        payment001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : payment001mb.inserteduser;
+        payment001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : payment001mb.inserteddatetime;
+        payment001mb.updateduser = req.body.updateduser ? req.body.updateduser : payment001mb.updateduser;
+        payment001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : payment001mb.updateddatetime;
+
+        payment001mb.save(function(err, payment001mb) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when updating payment001mb.',
+                    error: err
+                });
+            }
+
+            return res.json(payment001mb);
+        });
+    });
+});
+
+/**
+ * @swagger
+ * /api/payment001mb/{id}:
+ *   delete:
+ *    tags: [payment001mb]
+ *    summary: Delete Method
+ *    description: Delete the list of data
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: string
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed 
+ */
+app.delete('/api/payment001mb/:id', (req, res) => {
+    var id = req.params.id;
+    Payment001mb.findByIdAndRemove(id, function(err, payment001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when deleting the payment001mb.',
                 error: err
             });
         }
