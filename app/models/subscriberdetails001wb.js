@@ -73,6 +73,14 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'country001mb'
         },
+        'subpid':{
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriptionmaster001mb'
+        },
+        'payid':{
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriptionmaster001mb'
+        },
         'subscid': Number,
         'subscname': String,
         'age': Number,

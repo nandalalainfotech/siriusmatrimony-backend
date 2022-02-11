@@ -25,6 +25,7 @@ import city001mb from "./city001mb.js";
 import audio001wb from "./audio001wb.js";
 import person001mb from "./person001mb.js";
 import login001mb from "./login001mb.js";
+import payment001mb from "./payment001mb.js";
 
 mongoose.Promise = global.Promise;
 const db = {};
@@ -56,4 +57,5 @@ db.city001mb = city001mb;
 db.audio001wb = audio001wb;
 db.person001mb = person001mb;
 db.login001mb = login001mb;
+db.payment001mb = payment001mb;
 export default db;

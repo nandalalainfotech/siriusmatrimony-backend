@@ -34,6 +34,7 @@ import swaggerjsdoc from "swagger-jsdoc";
 import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
 import videoUpload from "../siriusmatrimony-backend/app/middleware/videoUpload.js";
 import audio from "../siriusmatrimony-backend/app/middleware/audio.js";
+import paymentcontroller from "./app/controllers/paymentcontroller.js";
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import path from "path";
@@ -75,7 +76,7 @@ const City001mb = db.city001mb;
 const Audio001wb = db.audio001wb;
 const Person001mb = db.person001mb;
 const Login001mb = db.login001mb;
-
+const Payment001mb = db.payment001mb;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -532,7 +533,26 @@ function initial() {
                 .catch((err) => console.log("error", err));
         }
     });
+    Payment001mb.estimatedDocumentCount((err, count) => {
+        if (!err && count === 0) {
+            Payment001mb.insertMany([{
+                'subpid': 7878,
+                'payid': 88,
+                'payement': "card",
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 5 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 12 / 11 / 22
+                    }
 
+                ])
+                .then(() => {
+
+                })
+                .catch((err) => console.log("error", err));
+        }
+    });
     Users001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Users001wb.insertMany([{
@@ -650,7 +670,7 @@ app.use("/api/subscriberdetailscontroller", subscriberdetailscontroller);
 app.use("/api/citycontroller", citycontroller);
 app.use("/api/audiocontroller", audiocontroller);
 app.use("/api/personcontroller", personcontroller);
-
+app.use("/api/paymentcontroller", paymentcontroller);
 const PORT = process.env.PORT || 8081;
 
 db.mongoose
@@ -662,7 +682,7 @@ db.mongoose
     .then(() => {
 
         console.log(`Successfully connect to MongoDB .`);
-        // initial();
+    //   initial();
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}.`);
         });
@@ -5563,6 +5583,11 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                      type: string 
+ *             payid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
  *             companycode:
  *                 type: array
  *             rolename:
@@ -5698,6 +5723,7 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
 
 app.post('/api/subscriberdetails001wb/subscriberdetails', async(req, res) => {
         const subscriberdetails001wb = new Subscriberdetails001wb();
+        subscriberdetails001wb.payid = req.body.payid.id;
         subscriberdetails001wb.personid = req.body.personid.id;
         subscriberdetails001wb.subscid = req.body.subscid;
         subscriberdetails001wb.subpid = req.body.subpid.id;
@@ -5819,6 +5845,7 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
                 message: 'No such subscriberdetails001wb'
             });
         }
+        subscriberdetails001wb.payid = req.body.payid.id ? req.body.payid.id : subscriberdetails001wb.payid;
         subscriberdetails001wb.password = req.body.password ? req.body.password : subscriberdetails001wb.password;
         subscriberdetails001wb.subpid = req.body.subpid.id ? req.body.subpid.id : subscriberdetails001wb.subpid;
         subscriberdetails001wb.email = req.body.email ? req.body.email : subscriberdetails001wb.email;
