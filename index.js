@@ -35,6 +35,7 @@ import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
 import videoUpload from "../siriusmatrimony-backend/app/middleware/videoUpload.js";
 import audio from "../siriusmatrimony-backend/app/middleware/audio.js";
 import paymentcontroller from "./app/controllers/paymentcontroller.js";
+import verifyToken from "./app/middleware/auth.js";
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import path from "path";
@@ -643,7 +644,6 @@ function initial() {
     });
 }
 
-
 app.use("/api/logincontroller", logincontroller);
 app.use("/api/countrycontroller", countrycontroller);
 app.use("/api/categorydetailcontroller", categorydetailcontroller);
@@ -671,6 +671,8 @@ app.use("/api/citycontroller", citycontroller);
 app.use("/api/audiocontroller", audiocontroller);
 app.use("/api/personcontroller", personcontroller);
 app.use("/api/paymentcontroller", paymentcontroller);
+app.use("/api/verifyToken", verifyToken);
+
 const PORT = process.env.PORT || 8081;
 
 db.mongoose
@@ -7060,6 +7062,7 @@ app.post('/api/users001wb/user', async(req, res) => {
             res.status(500).json({ error });
         });
 });
+
 /**
  * @swagger
  * /api/users001wb/{id}:

@@ -8,8 +8,10 @@ import path from "path";
 
 const Users001wb = db.users001wb
 
-export const list = async(req, res) => {
-    Users001wb.find(function(err, users001wb) {
+import jwt from "jsonwebtoken";
+
+export const list = async (req, res) => {
+    Users001wb.find(function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -21,10 +23,10 @@ export const list = async(req, res) => {
     });
 };
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    Users001wb.findOne({ _id: id }, function(err, users001wb) {
+    Users001wb.findOne({ _id: id }, function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -42,8 +44,7 @@ export const show = async(req, res) => {
     });
 };
 
-export const create = async(req, res, err) => {
-
+export const create = async (req, res, err) => {
     const users001wb = new Users001wb();
     users001wb.subscid = req.body.subscid.id;
     users001wb.personid = req.body.personid.id;
@@ -70,11 +71,20 @@ export const create = async(req, res, err) => {
     users001wb.inserteddatetime = req.body.inserteddatetime;
     users001wb.updateduser = req.body.updateduser;
     users001wb.updateddatetime = req.body.updateddatetime;
-
+    users001wb.verified = false;
+    if (!(users001wb.email && users001wb.password && users001wb.rolename)) {
+        return res.status(402).json("Enter a Required Field");
+    }
     const oldUser = await Users001wb.findOne({ email: users001wb.email });
     if (oldUser) {
         return res.status(409).send("User Already Exist. Please Login");
     }
+    const token = jwt.sign({ email: users001wb.email, rolename: users001wb.rolename }, process.env.TOKEN_KEY,
+        {
+            expiresIn: "6h",
+        }
+    );
+    users001wb.token = token;
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -90,6 +100,7 @@ export const create = async(req, res, err) => {
         viewPath: path.resolve('./app/templates'),
         extName: ".handlebars"
     };
+
     transporter.use('compile', hbs(handlebarOptions))
     const mailOptions = {
         from: 'siriusmatrimoney@gmail.com',
@@ -97,29 +108,49 @@ export const create = async(req, res, err) => {
         subject: 'Sirius Matrimony Confirmation',
         template: 'mail',
         context: {
-            name: "Sirius Matrimony"
+            name: "Sirius Matrimony",
+            url: `http://localhost:8081/api/userscontroller/verify?token=${token}`
         }
     };
-    transporter.sendMail(mailOptions, function(err, info) {
+
+    transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
         else
             console.log('email sent' + info.response);
     })
-
     users001wb.save()
         .then((result) => {
-            res.json({ message: 'user created' });
+            return res.json({ message: 'user created' });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+           return res.status(500).json({ error });
         });
 };
 
-export const update = async(req, res) => {
+export const verify = async (req, res) => {
+    const token = req.query.token;
+    if (!token) {
+        return res.status(403).send("A token is required for authentication");
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        req.verifydecode = decoded;
+        const user = await Users001wb.findOne({ email: decoded.email });
+        if (user) {
+            user.verified = true;
+            user.save();
+           
+             return res.status(200).send({ message: "Account Verified"});
+        } 
+    } catch (err) {
+        return res.status(401).send("Invalid Token");
+    }
+};
+export const update = async (req, res) => {
     var id = req.params.id;
 
-    Users001wb.findOne({ _id: id }, function(err, users001wb) {
+    Users001wb.findOne({ _id: id }, function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb',
@@ -158,7 +189,7 @@ export const update = async(req, res) => {
         users001wb.updateduser = req.body.updateduser ? req.body.updateduser : users001wb.updateduser;
         users001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : users001wb.updateddatetime;
 
-        users001wb.save(function(err, users001wb) {
+        users001wb.save(function (err, users001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating users001wb.',
@@ -170,10 +201,10 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    Users001wb.findByIdAndRemove(id, function(err, users001wb) {
+    Users001wb.findByIdAndRemove(id, function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the users001wb.',
