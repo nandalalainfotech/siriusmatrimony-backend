@@ -1,12 +1,11 @@
 import db from "../models/main.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 const Users001wb = db.users001wb
 const Login001mb = db.login001mb;
 
-export const list = async(req, res) => {
-    Login001mb.find(function(err, login001mb) {
+export const list = async (req, res) => {
+    Login001mb.find(function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -19,7 +18,7 @@ export const list = async(req, res) => {
 export const show = (req, res) => {
     var id = req.params.id;
 
-    Login001mb.findOne({ _id: id }, function(err, login001mb) {
+    Login001mb.findOne({ _id: id }, function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -34,14 +33,12 @@ export const show = (req, res) => {
         return res.json(login001mb);
     });
 };
-export const create = async(req, res) => {
-
+export const create = async (req, res) => {
     const login001mb = new Login001mb()
     login001mb.email = req.body.email;
     login001mb.password = bcrypt.hashSync(req.body.password, 10);
     login001mb.status = req.body.status;
     login001mb.rolename = req.body.rolename.rolename;
-    login001mb.token = req.body.token;
     login001mb.inserteduser = req.body.inserteduser;
     login001mb.inserteddatetime = req.body.inserteddatetime;
     login001mb.updateduser = req.body.updateduser;
@@ -55,19 +52,18 @@ export const create = async(req, res) => {
         if (security) {
             const rolecheck = await Users001wb.findOne({ rolename: login001mb.rolename })
             if (rolecheck) {
-                const token = jwt.sign({ email: login001mb.email, rolename: login001mb.rolename },
-                    process.env.TOKEN_KEY, {
-                        expiresIn: "4h",
-                    }
-                );
-                login001mb.token = token;
-                login001mb.save()
-                    .then((result) => {
-                        res.json({ message: 'Login created' });
-                    })
-                    .catch((error) => {
-                        res.status(500).json({ error });
-                    });
+                if (!login.verified) {
+                   return res.status(500).json("verify your account");
+                } else {
+                    login001mb.save()
+                        .then((result) => {
+                            res.json({ message: 'Login created' });
+                        })
+                        .catch((error) => {
+                            res.status(500).json({ error });
+
+                        });
+                }
             } else {
                 return res.status(500).json({
                     message: 'invalid role'
@@ -83,10 +79,11 @@ export const create = async(req, res) => {
             message: 'invalid mail'
         });
     }
+
 };
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
-    Login001mb.findOne({ _id: id }, function(err, login001mb) {
+    Login001mb.findOne({ _id: id }, function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb',
@@ -107,7 +104,7 @@ export const update = async(req, res) => {
         login001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : login001mb.inserteddatetime;
         login001mb.updateduser = req.body.updateduser ? req.body.updateduser : login001mb.updateduser;
         login001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : login001mb.updateddatetime;
-        login001mb.save(function(err, login001mb) {
+        login001mb.save(function (err, login001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating login001mb.',
@@ -118,9 +115,9 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
-    Login001mb.findByIdAndRemove(id, function(err, login001mb) {
+    Login001mb.findByIdAndRemove(id, function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the login001mb.',
