@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 mongoose.pluralize(null);
 
 const role001wb = mongoose.model(
-    "role001wb",
+    "role001mb",
     new mongoose.Schema({
         'rolename': String
     }, { timestamps: false })
