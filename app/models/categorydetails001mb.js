@@ -10,7 +10,6 @@ const categorydetails001mb = mongoose.model(
 				type: mongoose.Types.ObjectId,
 				ref: 'person001mb'
 			},
-			// 'catcode': String,
 			'catname': String,
 			'status': String,
 			'inserteduser': String,

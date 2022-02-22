@@ -43,7 +43,6 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
     categorydetails001mb.personid = req.body.personid.id;
-    // categorydetails001mb.catcode = req.body.catcode;
     categorydetails001mb.catname = req.body.catname;
     categorydetails001mb.status = req.body.status;
     categorydetails001mb.inserteduser = req.body.inserteduser;
@@ -83,7 +82,6 @@ export const update = async(req, res) => {
             });
         }
         categorydetails001mb.personid = req.body.personid.id ? req.body.personid.id : categorydetails001mb.personid;
-        // categorydetails001mb.catcode = req.body.catcode ? req.body.catcode : categorydetails001mb.catcode;
         categorydetails001mb.catname = req.body.catname ? req.body.catname : categorydetails001mb.catname;
         categorydetails001mb.status = req.body.status ? req.body.status : categorydetails001mb.status;
         categorydetails001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : categorydetails001mb.inserteduser;

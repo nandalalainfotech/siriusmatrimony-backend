@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const Login001mb = db.login001mb;
 const Person001mb = db.person001mb
-const Role001wb = db.role001wb;
+const Role001mb = db.role001mb;
 
 export const list = async (req, res) => {
     Login001mb.find(function (err, login001mb) {
@@ -39,7 +39,7 @@ export const show = (req, res) => {
 export const loginauth = async (req, res) => {
    var username = req.params.username;
    var password = req.params.password;
-    const loginperson = await Login001mb.findOne({ username:username }).populate({path:'roleid',model: Role001wb});
+    const loginperson = await Login001mb.findOne({ username:username }).populate({path:'roleid',model: Role001mb});
     if (loginperson) {
         const security = await bcrypt.compare(password, loginperson.password)
         if(security){

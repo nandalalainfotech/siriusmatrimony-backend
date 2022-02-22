@@ -13,7 +13,6 @@ const subcategory001mb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'person001mb'
         },
-        // 'subcatcode': String,
         'subcatname': String,
         'subcatstatus': String,
         'status': String,
