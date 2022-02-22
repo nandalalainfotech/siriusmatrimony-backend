@@ -5,21 +5,23 @@ mongoose.pluralize(null);
 const subcatclassification001mb = mongoose.model(
     "subcatclassification001mb",
     new mongoose.Schema({
-        // 'catcode': String,
+        'catcode':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'categorydetails001mb'
+        },
         'subcatcode':  {
             type: mongoose.Types.ObjectId,
             ref: 'subcategory001mb'
         },
-        'classificationid': Number,
         'classificationname': String,
         'status': String,
         'inserteduser': String,
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid':  {
+        'personid': {
             type: mongoose.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+            ref: 'person001mb'
         },
     }, { timestamps: false })
 );

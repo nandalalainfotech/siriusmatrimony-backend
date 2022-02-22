@@ -6,11 +6,11 @@ const categorydetails001mb = mongoose.model(
 	"categorydetails001mb",
 	new mongoose.Schema(
 		{
-			'subscid':  {
+			'personid':  {
 				type: mongoose.Types.ObjectId,
-				ref: 'subscriberdetails001wb'
+				ref: 'person001mb'
 			},
-			'catcode': String,
+			// 'catcode': String,
 			'catname': String,
 			'status': String,
 			'inserteduser': String,

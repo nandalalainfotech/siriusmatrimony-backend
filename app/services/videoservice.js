@@ -50,19 +50,18 @@ export const create = async(req, res, err) => {
     video001wb.inserteddatetime = req.body.inserteddatetime;
     video001wb.updateduser = req.body.updateduser;
     video001wb.updateddatetime = req.body.updateddatetime;
-
     video001wb.save()
         .then((result) => {
             Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
                 if (user) {
                     user.video.push(video001wb);
                     user.save();
-                    res.json({ message: 'Video created!' });
+                    return res.json({ message: 'Video created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 
@@ -117,6 +116,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

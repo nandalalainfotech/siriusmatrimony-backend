@@ -5,7 +5,6 @@ mongoose.pluralize(null);
 const state = mongoose.model(
     "state001mb",
     new mongoose.Schema({
-        'stateid': Number,
         'statename': String,
         'statedesc': String,
         'status': String,

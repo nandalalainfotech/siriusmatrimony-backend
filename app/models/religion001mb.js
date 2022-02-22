@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 mongoose.pluralize(null);
@@ -5,7 +6,6 @@ mongoose.pluralize(null);
 const religion001mb = mongoose.model(
     "religion001mb",
     new mongoose.Schema({
-        'religionid': Number,
         'religionname': String,
         'religiondesc': String,
         'status': String,
@@ -13,9 +13,9 @@ const religion001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid': {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+        'personid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
         }
     }, { timestamps: false })
 );

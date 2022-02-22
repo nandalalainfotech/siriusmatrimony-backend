@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
 
-const Subscriberdetails001wb = db.subscriberdetails001wb;
+const Person001mb = db.person001mb
 
 export const list = async(req, res) => {
     Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
@@ -40,8 +40,7 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
-    subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
-    subscriberpersonalinfo001wb.personalid = req.body.personalid;
+    subscriberpersonalinfo001wb.personid = req.body.personid.id;
     subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
     subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
     subscriberpersonalinfo001wb.flex1 = req.body.flex1;
@@ -63,16 +62,16 @@ export const create = async(req, res) => {
     subscriberpersonalinfo001wb.save()
         .then((result) => {
 
-            Subscriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: subscriberpersonalinfo001wb.personid }, (err, user) => {
                 if (user) {
                     user.personalid.push(subscriberpersonalinfo001wb);
                     user.save();
-                    res.json({ message: 'subscriberpersonalinfo created!' });
+                    return res.json({ message: 'subscriberpersonalinfo created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 
@@ -93,8 +92,7 @@ export const update = async(req, res) => {
             });
         }
 
-        subscriberpersonalinfo001wb.personalid = req.body.personalid ? req.body.personalid : subscriberpersonalinfo001wb.personalid;
-        subscriberpersonalinfo001wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberpersonalinfo001wb.subcid;
+        subscriberpersonalinfo001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberpersonalinfo001wb.personid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;
@@ -138,6 +136,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({message:"Deleted Sucessfully"});
     });
 };

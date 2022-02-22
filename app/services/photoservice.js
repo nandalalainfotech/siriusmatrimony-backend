@@ -54,12 +54,12 @@ export const create = async(req, res, err) => {
                 if (user) {
                     user.photo.push(photo001wb);
                     user.save();
-                    res.json({ message: 'photo created!' });
+                    return res.json({ message: 'photo created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 }
 
@@ -111,6 +111,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

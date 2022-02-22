@@ -56,12 +56,12 @@ export const create = async(req, res) => {
                 if (user) {
                     user.audio.push(audio001wb);
                     user.save();
-                    res.json({ message: 'Audio created!' });
+                    return res.json({ message: 'Audio created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 
@@ -116,6 +116,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

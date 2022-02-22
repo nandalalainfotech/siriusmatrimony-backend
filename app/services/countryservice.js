@@ -39,8 +39,6 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
 
     const country001mb = new Country001mb();
-
-    country001mb.countryid = req.body.countryid,
     country001mb.countryname = req.body.countryname,
     country001mb.countrydesc = req.body.countrydesc,
     country001mb.status = req.body.status,
@@ -50,10 +48,10 @@ export const create = async(req, res) => {
     country001mb.updateduser = req.body.updateduser,
     country001mb.save()
     .then((result) => {
-        res.json({ message: 'country created' });
+        return res.json({ message: 'country created' });
     })
     .catch((error) => {
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     });
 };
 
@@ -73,7 +71,6 @@ export const update = async(req, res) => {
                 message: 'No such country001mb'
             });
         }
-        country001mb.countryid = req.body.countryid ? req.body.countryid : country001mb.countryid;
         country001mb.countryname = req.body.countryname ? req.body.countryname : country001mb.countryname;
         country001mb.countrydesc = req.body.countrydesc ? req.body.countrydesc : country001mb.countrydesc;
         country001mb.status = req.body.status ? req.body.status : country001mb.status;
@@ -106,6 +103,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

@@ -5,7 +5,6 @@ mongoose.pluralize(null);
 const contentmaster001mb = mongoose.model(
     "contentmaster001mb",
     new mongoose.Schema({
-        'contentid': Number,
         'name': String,
         'description': String,
         'size': String,
@@ -29,9 +28,9 @@ const contentmaster001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid': {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+        'personid':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
         }
     }, { timestamps: false })
 );

@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Subcategory001mb = db.subcategory001mb
 
-const Subscriberdetails001wb = db.subscriberdetails001wb;
+const Person001mb = db.person001mb
 
 export const list = async(req, res) => {
     Subcategory001mb.find(function(err, subcategory001mbs) {
@@ -39,9 +39,9 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const subcategory001mb = new Subcategory001mb();
-    subcategory001mb.subscid = req.body.subscid.id;
+    subcategory001mb.personid = req.body.personid.id;
     subcategory001mb.catcode = req.body.catcode.id;
-    subcategory001mb.subcatcode = req.body.subcatcode;
+    // subcategory001mb.subcatcode = req.body.subcatcode;
     subcategory001mb.subcatname = req.body.subcatname;
     subcategory001mb.subcatstatus = req.body.subcatstatus;
     subcategory001mb.status = req.body.status;
@@ -51,16 +51,16 @@ export const create = async(req, res) => {
     subcategory001mb.updateddatetime = req.body.updateddatetime;
     subcategory001mb.save()
         .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: subcategory001mb.personid }, (err, user) => {
                 if (user) {
                     user.subcatcode.push(subcategory001mb);
                     user.save();
-                    res.json({ message: 'subcategory001mb created!' });
+                    return res.json({ message: 'subcategory001mb created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 
@@ -81,9 +81,9 @@ export const update = async(req, res) => {
                 message: 'No such subcategory001mb'
             });
         }
-        subcategory001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcategory001mb.subscid;
+        subcategory001mb.personid = req.body.personid.id ? req.body.personid.id : subcategory001mb.personid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
-        subcategory001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcategory001mb.subcatcode;
+        // subcategory001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcategory001mb.subcatcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;
         subcategory001mb.subcatstatus = req.body.subcatstatus ? req.body.subcatstatus : subcategory001mb.subcatstatus;
         subcategory001mb.status = req.body.status ? req.body.status : subcategory001mb.status;
@@ -91,7 +91,6 @@ export const update = async(req, res) => {
         subcategory001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subcategory001mb.inserteddatetime;
         subcategory001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcategory001mb.updateduser;
         subcategory001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcategory001mb.updateddatetime;
-
         subcategory001mb.save(function(err, subcategory001mb) {
             if (err) {
                 return res.status(500).json({
@@ -115,6 +114,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

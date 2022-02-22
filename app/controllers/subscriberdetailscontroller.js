@@ -10,6 +10,7 @@ router.use(function(req, res, next) {
     next();
 });
 
+router.get('/verify',subscriberdetails.verify)
 router.get('/list', subscriberdetails.list);
 router.get('/:id', subscriberdetails.show);
 router.post('/create', subscriberdetails.create);
