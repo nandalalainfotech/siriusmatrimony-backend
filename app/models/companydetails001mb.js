@@ -6,7 +6,6 @@ const companydetails001mb = mongoose.model(
 	"companydetails001mb",
 	new mongoose.Schema(
 		{
-			'companycode': String,
 			'companyname': String,
 			'address': String,
 			'phonenumber': Number,

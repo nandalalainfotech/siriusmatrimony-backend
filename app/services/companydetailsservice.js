@@ -42,7 +42,6 @@ export const create = async(req, res) => {
     const companydetails001mb = new Companydetails001mb();
     companydetails001mb.personid = req.body.personid.id;
     companydetails001mb.regionalid = req.body.regionalid.id;
-    companydetails001mb.companycode = req.body.companycode;
     companydetails001mb.companyname = req.body.companyname;
     companydetails001mb.address = req.body.address;
     companydetails001mb.phonenumber = req.body.phonenumber;
@@ -84,7 +83,6 @@ export const update = async(req, res) => {
             });
         }
         companydetails001mb.personid = req.body.personid.id ? req.body.personid.id : companydetails001mb.personid;
-        companydetails001mb.companycode = req.body.companycode ? req.body.companycode : companydetails001mb.companycode;
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;
         companydetails001mb.phonenumber = req.body.phonenumber ? req.body.phonenumber : companydetails001mb.phonenumber;
