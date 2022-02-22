@@ -11,7 +11,6 @@ const city001mb = mongoose.model(
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "state001mb",
 			},
-			'cityid': Number,
 			'cityname': String,
 			'citydesc': String,
 			'status': String,

@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Religion001mb = db.religion001mb;
 
-const Subscriberdetails001wb = db.subscriberdetails001wb;
+const Person001mb = db.person001mb
 
 export const list = async(req, res) => {
     Religion001mb.find(function(err, religion001mbs) {
@@ -39,8 +39,7 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const religion001mb = new Religion001mb();
-    religion001mb.subscid = req.body.subscid.id;
-    religion001mb.religionid = req.body.religionid;
+    religion001mb.personid = req.body.personid.id;
     religion001mb.religionname = req.body.religionname;
     religion001mb.religiondesc = req.body.religiondesc;
     religion001mb.status = req.body.status;
@@ -52,16 +51,16 @@ export const create = async(req, res) => {
     religion001mb.save()
         .then((result) => {
 
-            Subscriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: religion001mb.personid }, (err, user) => {
                 if (user) {
                     user.religionid.push(religion001mb);
                     user.save();
-                    res.json({ message: 'religion created!' });
+                    return res.json({ message: 'religion created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 export const update = async(req, res) => {
@@ -80,8 +79,7 @@ export const update = async(req, res) => {
                 message: 'No such religion001mb'
             });
         }
-        religion001mb.subscid = req.body.subscid.id ? req.body.subscid.id : religion001mb.religionid;
-        religion001mb.religionid = req.body.religionid ? req.body.religionid : religion001mb.religionid;
+        religion001mb.personid = req.body.personid.id ? req.body.personid.id : religion001mb.personid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;
@@ -113,7 +111,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
-
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

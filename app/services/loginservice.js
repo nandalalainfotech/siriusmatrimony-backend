@@ -1,8 +1,11 @@
 import db from "../models/main.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-const Users001wb = db.users001wb
+
 const Login001mb = db.login001mb;
+const Person001mb = db.person001mb
+const Role001wb = db.role001wb;
 
 export const list = async (req, res) => {
     Login001mb.find(function (err, login001mb) {
@@ -33,54 +36,55 @@ export const show = (req, res) => {
         return res.json(login001mb);
     });
 };
-export const create = async (req, res) => {
-    const login001mb = new Login001mb()
-    login001mb.email = req.body.email;
-    login001mb.password = bcrypt.hashSync(req.body.password, 10);
-    login001mb.status = req.body.status;
-    login001mb.rolename = req.body.rolename.rolename;
-    login001mb.inserteduser = req.body.inserteduser;
-    login001mb.inserteddatetime = req.body.inserteddatetime;
-    login001mb.updateduser = req.body.updateduser;
-    login001mb.updateddatetime = req.body.updateddatetime;
-    if (!(login001mb.email && login001mb.password && login001mb.rolename)) {
-        res.status(400).send("All input is required");
-    }
-    const login = await Users001wb.findOne({ email: login001mb.email });
-    if (login) {
-        const security = await bcrypt.compare(login.password, login001mb.password)
-        if (security) {
-            const rolecheck = await Users001wb.findOne({ rolename: login001mb.rolename })
-            if (rolecheck) {
-                if (!login.verified) {
-                   return res.status(500).json("verify your account");
-                } else {
-                    login001mb.save()
-                        .then((result) => {
-                            res.json({ message: 'Login created' });
-                        })
-                        .catch((error) => {
-                            res.status(500).json({ error });
-
-                        });
+export const loginauth = async (req, res) => {
+   var username = req.params.username;
+   var password = req.params.password;
+    const loginperson = await Login001mb.findOne({ username:username }).populate({path:'roleid',model: Role001wb});
+    if (loginperson) {
+        const security = await bcrypt.compare(password, loginperson.password)
+        if(security){
+            const person = await Person001mb.findOne({ _id: loginperson.personid });
+            const token = jwt.sign({ username: loginperson.username, rolename: loginperson.roleid.rolename }, process.env.TOKEN_KEY,
+                {
+                    expiresIn: "6h",
                 }
-            } else {
+            );
                 return res.status(500).json({
-                    message: 'invalid role'
+                    data: {person:person, token:token }
+                });
+               
+            }else {
+                return res.status(500).json({
+                    message: 'invalid password'
                 });
             }
-        } else {
-            return res.status(500).json({
-                message: 'invalid password'
-            });
-        }
     } else {
         return res.status(500).json({
-            message: 'invalid mail'
+            message: 'invalid username'
         });
     }
-
 };
+
+// export const create = async (req, res) => {
+//     const login001mb = new Login001mb()
+//     login001mb.username = req.body.username;
+//     login001mb.personid = req.body.personid.id;
+//     login001mb.password = bcrypt.hashSync(req.body.password, 10);
+//     login001mb.status = req.body.status;
+//     login001mb.rolename = req.body.rolename.rolename;
+//     login001mb.inserteduser = req.body.inserteduser;
+//     login001mb.inserteddatetime = req.body.inserteddatetime;
+//     login001mb.updateduser = req.body.updateduser;
+//     login001mb.updateddatetime = req.body.updateddatetime;
+//     login001mb.save()
+//         .then((result) => {
+//             res.json({ message: 'Login created' });
+//         })
+//         .catch((error) => {
+//             res.status(500).json({ error });
+//         });
+
+// };
 export const update = async (req, res) => {
     var id = req.params.id;
     Login001mb.findOne({ _id: id }, function (err, login001mb) {
@@ -95,9 +99,11 @@ export const update = async (req, res) => {
                 message: 'No such login001mb'
             });
         }
-        login001mb.logintype = req.body.logintype ? req.body.logintype : login001mb.logintype;
+        login001mb.personid = req.body.personid.id ? req.body.personid.id : login001mb.personid;
+        login001mb.username = req.body.username ? req.body.username : login001mb.username;
         login001mb.password = req.body.password ? req.body.password : login001mb.password;
         login001mb.role = req.body.role ? req.body.role : login001mb.role;
+        login001mb.username = req.body.username ? req.body.username : login001mb.username;
         login001mb.token = req.body.token ? req.body.token : login001mb.token;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
@@ -124,6 +130,7 @@ export const remove = async (req, res) => {
                 error: err
             });
         }
-        return res.status(204).json();
+       
+        return res.json({message:"Deleted Sucessfully"});
     });
 };

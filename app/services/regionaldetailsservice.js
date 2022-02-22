@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Regionaldetails001mb = db.regionaldetails001mb;
 
-const Subscriberdetails001wb = db.subscriberdetails001wb;
+const Person001mb = db.person001mb
 
 export const list = async(req, res) => {
     Regionaldetails001mb.find(function(err, regionaldetails001mb) {
@@ -40,8 +40,7 @@ export const show = (req, res) => {
 export const create = async(req, res) => {
 
     const regionaldetails001mb = new Regionaldetails001mb();
-    regionaldetails001mb.subscid = req.body.subscid.id;
-    regionaldetails001mb.regionalid = req.body.regionalid;
+    regionaldetails001mb.personid = req.body.personid.id;
     regionaldetails001mb.regionalname = req.body.regionalname;
     regionaldetails001mb.regionaldesc = req.body.regionaldesc;
     regionaldetails001mb.status = req.body.status;
@@ -51,16 +50,16 @@ export const create = async(req, res) => {
     regionaldetails001mb.updateddatetime = req.body.updateddatetime;
     regionaldetails001mb.save()
         .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: regionaldetails001mb.personid }, (err, user) => {
                 if (user) {
                     user.regionalid.push(regionaldetails001mb);
                     user.save();
-                    res.json({ message: 'regionaldetails created!' });
+                    return res.json({ message: 'regionaldetails created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 export const update = async(req, res) => {
@@ -79,8 +78,7 @@ export const update = async(req, res) => {
                 message: 'No such regionaldetails001mb'
             });
         }
-        regionaldetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : regionaldetails001mb.subscid;
-        regionaldetails001mb.regionalid = req.body.regionalid ? req.body.regionalid : regionaldetails001mb.regionalid;
+        regionaldetails001mb.personid = req.body.personid.id ? req.body.personid.id : regionaldetails001mb.personid;
         regionaldetails001mb.regionalname = req.body.regionalname ? req.body.regionalname : regionaldetails001mb.regionalname;
         regionaldetails001mb.regionaldesc = req.body.regionaldesc ? req.body.regionaldesc : regionaldetails001mb.regionaldesc;
         regionaldetails001mb.status = req.body.status ? req.body.status : regionaldetails001mb.status;
@@ -112,6 +110,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

@@ -6,7 +6,6 @@ mongoose.pluralize(null);
 const country001mb = mongoose.model(
     "country001mb",
     new mongoose.Schema({
-        'countryid': Number,
         'countryname': String,
         'countrydesc': String,
         'status': String,

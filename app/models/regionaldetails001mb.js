@@ -6,7 +6,6 @@ const regionaldetails001mb = mongoose.model(
 	"regionaldetails001mb",
 	new mongoose.Schema(
 		{
-			'regionalid': Number,
 			'regionalname': String,
 			'regionaldesc': String,
 			'status': String,
@@ -14,9 +13,9 @@ const regionaldetails001mb = mongoose.model(
 			'inserteddatetime': String,
 			'updateduser': String,
 			'updateddatetime': String,
-			'subscid':  {
+			'personid': {
 				type: mongoose.Types.ObjectId,
-				ref: 'subscriberdetails001wb'
+				ref: 'person001mb'
 			},
 		},
 		{ timestamps: false }

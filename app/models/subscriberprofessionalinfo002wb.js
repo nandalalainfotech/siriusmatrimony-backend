@@ -6,7 +6,6 @@ const subscriberprofessionalinfo002wb = mongoose.model(
     "subscriberprofessionalinfo002wb",
     new mongoose.Schema({
         'professionaldetails': String,
-        'professionid': Number,
         'job': String,
         'flex1': String,
         'flex2': String,
@@ -24,9 +23,9 @@ const subscriberprofessionalinfo002wb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid': {
+        'personid': {
             type: mongoose.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+            ref: 'person001mb'
         },
     }, { timestamps: false })
 );

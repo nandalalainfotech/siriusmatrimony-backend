@@ -5,7 +5,6 @@ mongoose.pluralize(null);
 const subscriptionmaster001mb = mongoose.model(
     "subscriptionmaster001mb",
     new mongoose.Schema({
-        'subpid': Number,
         'subpname': String,
         'description': String,
         'tenure': String,
@@ -16,9 +15,9 @@ const subscriptionmaster001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid':{
-            type:mongoose.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+        'personid': {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
         }
     }, { timestamps: false })
 );

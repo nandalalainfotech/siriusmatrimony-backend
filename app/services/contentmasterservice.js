@@ -39,7 +39,6 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const contentmaster001mb = new Contentmaster001mb()
-    contentmaster001mb.contentid = req.body.contentid;
     contentmaster001mb.name = req.body.name;
     contentmaster001mb.description = req.body.description;
     contentmaster001mb.size = req.body.size;
@@ -51,7 +50,7 @@ export const create = async(req, res) => {
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
-    contentmaster001mb.subscid = req.body.subscid.id;
+    contentmaster001mb.personid = req.body.personid.id;
     contentmaster001mb.save(function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -80,8 +79,7 @@ export const update = async(req, res) => {
             });
         }
 
-        contentmaster001mb.subscid = req.body.subscid.id ? req.body.subscid.id : contentmaster001mb.subscid;
-        contentmaster001mb.contentid = req.body.contentid ? req.body.contentid : contentmaster001mb.contentid;
+        contentmaster001mb.personid = req.body.personid.id ? req.body.personid.id : contentmaster001mb.personid;
         contentmaster001mb.name = req.body.name ? req.body.name : contentmaster001mb.name;
         contentmaster001mb.description = req.body.description ? req.body.description : contentmaster001mb.description;
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;
@@ -118,6 +116,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

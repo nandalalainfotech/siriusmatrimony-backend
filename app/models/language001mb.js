@@ -3,7 +3,6 @@ mongoose.pluralize(null);
 const language001mb = mongoose.model(
     "language001mb",
     new mongoose.Schema({
-        'languageid': Number,
         'languagename': String,
         'languagedesc': String,
         'status': String,
@@ -11,9 +10,9 @@ const language001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'subscid': {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'subscriberdetails001wb'
+        'personid':  {
+            type: mongoose.Types.ObjectId,
+            ref: 'person001mb'
         }
     }, { timestamps: false })
 );

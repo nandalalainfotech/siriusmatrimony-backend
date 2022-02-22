@@ -42,7 +42,6 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
     const state001mb = new State001mb();
     state001mb.countryid = req.body.countryid.id,
-    state001mb.stateid = req.body.stateid,
     state001mb.statename = req.body.statename,
     state001mb.statedesc = req.body.statedesc,
     state001mb.status = req.body.status,
@@ -56,12 +55,12 @@ export const create = async(req, res) => {
                 if (user) {
                     user.stateid.push(state001mb);
                     user.save();
-                    res.json({ message: 'state created!' });
+                    return res.json({ message: 'state created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 export const update = async(req, res) => {
@@ -89,7 +88,6 @@ export const update = async(req, res) => {
         state001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : state001mb.inserteddatetime;
         state001mb.updateduser = req.body.updateduser ? req.body.updateduser : state001mb.updateduser;
         state001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : state001mb.updateddatetime;
-
         state001mb.save(function(err, state001mb) {
             if (err) {
                 return res.status(500).json({
@@ -115,6 +113,6 @@ export const remove = async(req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

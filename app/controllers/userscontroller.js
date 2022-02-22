@@ -10,7 +10,7 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.get('/verify', usersservice.verify);
+router.get('/verify',usersservice.verify)
 router.get('/list', usersservice.list);
 router.get('/:id', usersservice.show);
 router.post('/create', usersservice.create);

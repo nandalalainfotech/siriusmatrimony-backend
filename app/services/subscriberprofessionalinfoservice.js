@@ -2,7 +2,7 @@ import db from "../models/main.js";
 
 const Subscriberprofessionalinfo002wb = db.subscriberprofessionalinfo002wb
 
-const Subscriberdetails001wb = db.subscriberdetails001wb
+const Person001mb = db.person001mb
 
 export const list = async (req, res) => {
     Subscriberprofessionalinfo002wb.find(function (err, subscriberprofessionalinfo002wbs) {
@@ -42,8 +42,7 @@ export const show = async (req, res) => {
 export const create = async (req, res) => {
 
     const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
-    subscriberprofessionalinfo002wb.subscid = req.body.subscid.id;
-    subscriberprofessionalinfo002wb.professionid = req.body.professionid;
+    subscriberprofessionalinfo002wb.personid = req.body.personid.id;
     subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
     subscriberprofessionalinfo002wb.job = req.body.job;
     subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
@@ -64,17 +63,17 @@ export const create = async (req, res) => {
     subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
     subscriberprofessionalinfo002wb.save()
         .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: subscriberprofessionalinfo002wb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: subscriberprofessionalinfo002wb.personid }, (err, user) => {
                 if (user) {
                     user.professionalid.push(subscriberprofessionalinfo002wb);
                     user.save();
-                    res.json({ message: 'subscriberprofessional created!' });
+                    return res.json({ message: 'subscriberprofessional created!' });
                 }
             });
 
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 };
 export const update = async (req, res) => {
@@ -93,9 +92,8 @@ export const update = async (req, res) => {
                 message: 'No such subscriberprofessionalinfo002wb'
             });
         }
-        subscriberprofessionalinfo002wb.professionid = req.body.professionid ? req.body.professionid : subscriberprofessionalinfo002wb.professionid;
-        subscriberprofessionalinfo002wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberprofessionalinfo002wb.subcid;
-        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.personaldetails : subscriberprofessionalinfo002wb.professionaldetails;
+        subscriberprofessionalinfo002wb.personid = req.body.personid.id ? req.body.personid.id : subscriberprofessionalinfo002wb.personid;
+        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.professionaldetails : subscriberprofessionalinfo002wb.professionaldetails;
         subscriberprofessionalinfo002wb.job = req.body.job ? req.body.job : subscriberprofessionalinfo002wb.job;
         subscriberprofessionalinfo002wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberprofessionalinfo002wb.flex1;
         subscriberprofessionalinfo002wb.flex2 = req.body.flex2 ? req.body.flex2 : subscriberprofessionalinfo002wb.flex2;
@@ -113,7 +111,6 @@ export const update = async (req, res) => {
         subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberprofessionalinfo002wb.inserteddatetime;
         subscriberprofessionalinfo002wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberprofessionalinfo002wb.updateduser;
         subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberprofessionalinfo002wb.updateddatetime;
-
         subscriberprofessionalinfo002wb.save(function (err, subscriberprofessionalinfo002wb) {
             if (err) {
                 return res.status(500).json({
@@ -138,6 +135,6 @@ export const remove = async (req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };

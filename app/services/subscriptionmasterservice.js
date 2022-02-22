@@ -38,8 +38,7 @@ export const show = async (req, res) => {
 
 export const create = async (req, res) => {
     const subscriptionmaster001mb = new Subscriptionmaster001mb();
-    subscriptionmaster001mb.subpid = req.body.subpid;
-    subscriptionmaster001mb.subscid = req.body.subscid.id;
+    subscriptionmaster001mb.personid = req.body.personid.id;
     subscriptionmaster001mb.subpname = req.body.subpname;
     subscriptionmaster001mb.description = req.body.description;
     subscriptionmaster001mb.tenure = req.body.tenure;
@@ -58,7 +57,7 @@ export const create = async (req, res) => {
             });
         }
 
-        return res.status(201).json(subscriptionmaster001mb);
+        return res.json("subscriptionmaster001mb created");
     });
 };
 
@@ -78,8 +77,7 @@ export const update = async (req, res) => {
                 message: 'No such subscriptionmaster001mb'
             });
         }
-        subscriptionmaster001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subscriptionmaster001mb.subscid;
-        subscriptionmaster001mb.subpid = req.body.subpid ? req.body.subpid : subscriptionmaster001mb.subpid;
+        subscriptionmaster001mb.personid = req.body.personid.id ? req.body.personid.id : subscriptionmaster001mb.personid;
         subscriptionmaster001mb.subpname = req.body.subpname ? req.body.subpname : subscriptionmaster001mb.subpname;
         subscriptionmaster001mb.description = req.body.description ? req.body.description : subscriptionmaster001mb.description;
         subscriptionmaster001mb.tenure = req.body.tenure ? req.body.tenure : subscriptionmaster001mb.tenure;
@@ -114,6 +112,6 @@ export const remove = async (req, res) => {
             });
         }
 
-        return res.status(204).json();
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 };
