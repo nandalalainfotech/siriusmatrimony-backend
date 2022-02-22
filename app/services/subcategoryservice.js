@@ -41,7 +41,6 @@ export const create = async(req, res) => {
     const subcategory001mb = new Subcategory001mb();
     subcategory001mb.personid = req.body.personid.id;
     subcategory001mb.catcode = req.body.catcode.id;
-    // subcategory001mb.subcatcode = req.body.subcatcode;
     subcategory001mb.subcatname = req.body.subcatname;
     subcategory001mb.subcatstatus = req.body.subcatstatus;
     subcategory001mb.status = req.body.status;
@@ -83,7 +82,6 @@ export const update = async(req, res) => {
         }
         subcategory001mb.personid = req.body.personid.id ? req.body.personid.id : subcategory001mb.personid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
-        // subcategory001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcategory001mb.subcatcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;
         subcategory001mb.subcatstatus = req.body.subcatstatus ? req.body.subcatstatus : subcategory001mb.subcatstatus;
         subcategory001mb.status = req.body.status ? req.body.status : subcategory001mb.status;
