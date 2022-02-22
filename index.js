@@ -72,7 +72,7 @@ const Review001mb = db.review001mb;
 const Users001wb = db.users001wb;
 const Photo001wb = db.photo001wb;
 const Video001wb = db.video001wb;
-const Role001wb = db.role001wb;
+const Role001mb = db.role001mb;
 const City001mb = db.city001mb;
 const Audio001wb = db.audio001wb;
 const Person001mb = db.person001mb;
@@ -610,9 +610,9 @@ function initial() {
                 .catch((err) => console.log("error", err));
         }
     });
-    Role001wb.estimatedDocumentCount((err, count) => {
+    Role001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
-            Role001wb.insertMany([{
+            Role001mb.insertMany([{
                     'rolename': "farmer",
                     'status': "active",
                     'discountflag': true,
