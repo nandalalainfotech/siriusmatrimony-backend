@@ -39,20 +39,20 @@ export const show = async(req, res) => {
 export const create = async(req, res) => {
 
     const country001mb = new Country001mb();
-    country001mb.countryname = req.body.countryname,
-    country001mb.countrydesc = req.body.countrydesc,
-    country001mb.status = req.body.status,
-    country001mb.inserteduser = req.body.inserteduser,
-    country001mb.inserteddatetime = req.body.inserteddatetime,
-    country001mb.updateddatetime = req.body.updateddatetime,
-    country001mb.updateduser = req.body.updateduser,
+    country001mb.countryname = req.body.countryname;
+    country001mb.countrydesc = req.body.countrydesc;
+    country001mb.status = req.body.status;
+    country001mb.inserteduser = req.body.inserteduser;
+    country001mb.inserteddatetime = req.body.inserteddatetime;
+    country001mb.updateddatetime = req.body.updateddatetime;
+    country001mb.updateduser = req.body.updateduser;
     country001mb.save()
-    .then((result) => {
-        return res.json({ message: 'country created' });
-    })
-    .catch((error) => {
-        return res.status(500).json({ error });
-    });
+        .then((result) => {
+            return res.json({ message: 'country created' });
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
 };
 
 export const update = async(req, res) => {

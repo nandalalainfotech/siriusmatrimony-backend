@@ -38,7 +38,7 @@ export const show = async(req, res) => {
 };
 
 export const create = async(req, res) => {
-    const contentmaster001mb = new Contentmaster001mb()
+    const contentmaster001mb = new Contentmaster001mb();
     contentmaster001mb.name = req.body.name;
     contentmaster001mb.description = req.body.description;
     contentmaster001mb.size = req.body.size;

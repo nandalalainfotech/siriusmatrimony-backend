@@ -41,14 +41,14 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const state001mb = new State001mb();
-    state001mb.countryid = req.body.countryid.id,
-    state001mb.statename = req.body.statename,
-    state001mb.statedesc = req.body.statedesc,
-    state001mb.status = req.body.status,
-    state001mb.inserteduser = req.body.inserteduser,
-    state001mb.inserteddatetime = req.body.inserteddatetime,
-    state001mb.updateduser = req.body.updateduser,
-    state001mb.updateddatetime = req.body.updateddatetime
+    state001mb.countryid = req.body.countryid.id;
+    state001mb.statename = req.body.statename;
+    state001mb.statedesc = req.body.statedesc;
+    state001mb.status = req.body.status;
+    state001mb.inserteduser = req.body.inserteduser;
+    state001mb.inserteddatetime = req.body.inserteddatetime;
+    state001mb.updateduser = req.body.updateduser;
+    state001mb.updateddatetime = req.body.updateddatetime;
     state001mb.save()
         .then((result) => {
             Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {

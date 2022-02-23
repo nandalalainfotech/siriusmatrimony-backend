@@ -712,45 +712,23 @@ const options = {
 const specs = swaggerjsdoc(options);
 app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
 
-// **********************role001wb schema method****************//
+// **********************role001mb schema method****************//
 /** 
  * @swagger
  * components:
  *    schemas:
- *      role001wb:
+ *      role001mb:
  *            type: object
  *            properties:
- *             roleid:
- *                type: number
  *             rolename:
- *                 type: string  
- *             status:
- *                 type: string
- *             inserteduser:
- *                 type: string
- *             inserteddatetime:
- *                 type: string
- *             updateduser:
- *                 type: string
- *             updateddatetime:
- *                 type: string
- *             subscid:
- *                type: object
- *                properties:
- *                    id: 
- *                     type: string   
- *             userid:
- *                type: object
- *                properties:
- *                    id: 
- *                     type: string     
+ *                 type: string       
  */
 
 /**
  * @swagger
- * /api/role001wb:
+ * /api/role001mb:
  *   get:
- *     tags: [role001wb]
+ *     tags: [role001mb]
  *     summary: Get Method
  *     description: Retrieve the list of data
  *     responses:
@@ -761,26 +739,26 @@ app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
  *                       schema:
  *                          type: array
  *                          items:
- *                             $ref: '#/components/schemas/role001wb'
+ *                             $ref: '#/components/schemas/role001mb'
  */
-app.get('/api/role001wb', (req, res) => {
-    Role001wb.find(function(err, role001wb) {
+app.get('/api/role001mb', (req, res) => {
+    Role001mb.find(function(err, role001mb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb.',
+            return res.status(500).json({
+                message: 'Error when getting role001mb.',
                 error: err
             });
         }
 
-        return res.json(role001wb);
+        return res.json(role001mb);
     });
 });
 
 /**
  * @swagger
- * /api/role001wb/{id}:
+ * /api/role001mb/{id}:
  *   get:
- *     tags: [role001wb]
+ *     tags: [role001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
  *     parameters:
@@ -800,34 +778,35 @@ app.get('/api/role001wb', (req, res) => {
  *                       schema:
  *                          type: array
  *                          items:
- *                             $ref: '#/components/schemas/role001wb'
+ *                             $ref: '#/components/schemas/role001mb'
  */
 
-app.get('/api/role001wb/:id', (req, res) => {
+app.get('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
-    Role001wb.findOne({ _id: id }, function(err, role001wb) {
+
+    Role001mb.findOne({ _id: id }, function(err, role001mb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb.',
+            return res.status(500).json({
+                message: 'Error when getting role001mb.',
                 error: err
             });
         }
 
-        if (!role001wb) {
-            return res.status(404).send({
-                message: 'No such role001wb'
+        if (!role001mb) {
+            return res.status(404).json({
+                message: 'No such role001mb'
             });
         }
 
-        return res.json(role001wb);
+        return res.json(role001mb);
     });
 });
 
 /**
  * @swagger
- * /api/role001wb/role:
+ * /api/role001mb/role:
  *   post:
- *    tags: [role001wb]  
+ *    tags: [role001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
  *    requestBody:
@@ -835,7 +814,7 @@ app.get('/api/role001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          $ref: '#/components/schemas/role001wb'
+ *                          $ref: '#/components/schemas/role001mb'
  *    responses:
  *       200:
  *         description: Sucess
@@ -843,27 +822,19 @@ app.get('/api/role001wb/:id', (req, res) => {
  *         description: failed
  */
 
-app.post('/api/role001wb/role', (req, res) => {
+app.post('/api/role001mb/role', (req, res) => {
 
-    const role001wb = new Role001wb();
-    role001wb.subscid = req.body.subscid.id;
-    role001wb.userid = req.body.userid.id;
-    role001wb.roleid = req.body.roleid;
-    role001wb.rolename = req.body.rolename;
-    role001wb.status = req.body.status;
-    role001wb.inserteduser = req.body.inserteduser;
-    role001wb.inserteddatetime = req.body.inserteddatetime;
-    role001wb.updateduser = req.body.updateduser;
-    role001wb.updateddatetime = req.body.updateddatetime;
-    role001wb.save(function(err, role001wb) {
+    const role001mb = new Role001mb();
+    role001mb.rolename = req.body.rolename;
+    role001mb.save(function(err, role001mb) {
         if (err) {
             return res.status(500).json({
-                message: 'Error when creating role001wb',
+                message: 'Error when creating role001mb',
                 error: err
             });
         }
 
-        return res.status(201).json('role001wb Created!');
+        return res.status(201).json('role001mb Created!');
     });
 
 })
@@ -871,9 +842,9 @@ app.post('/api/role001wb/role', (req, res) => {
 
 /**
  * @swagger
- * /api/role001wb/{id}:
+ * /api/role001mb/{id}:
  *   put:
- *    tags: [role001wb]
+ *    tags: [role001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
  *    parameters:
@@ -888,7 +859,7 @@ app.post('/api/role001wb/role', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                         $ref: '#/components/schemas/role001wb'
+ *                         $ref: '#/components/schemas/role001mb'
  *    responses:
  *       200:
  *         description: Sucess
@@ -899,42 +870,35 @@ app.post('/api/role001wb/role', (req, res) => {
  *                       schema:
  *                          type: array
  *                          items:
- *                             $ref: '#/components/schemas/role001wb'
+ *                             $ref: '#/components/schemas/role001mb'
  */
 
-app.put('/api/role001wb/:id', (req, res) => {
+app.put('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
-    Role001wb.findOne({ _id: id }, function(err, role001wb) {
-        console.log("Role001wb put", role001wb)
+
+    Role001mb.findOne({ _id: id }, function(err, role001mb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when getting role001wb',
+            return res.status(500).json({
+                message: 'Error when getting role001mb',
                 error: err
             });
         }
 
-        if (!role001wb) {
-            return res.status(404).send({
-                message: 'No such role001wb'
+        if (!role001mb) {
+            return res.status(404).json({
+                message: 'No such role001mb'
             });
         }
-        role001wb.subscid = req.body.subscid.id ? req.body.subscid.id : role001wb.subscid;
-        role001wb.userid = req.body.userid.id ? req.body.userid.id : role001wb.userid;
-        role001wb.roleid = req.body.roleid ? req.body.roleid : role001wb.roleid;
-        role001wb.rolename = req.body.rolename ? req.body.rolename : role001wb.rolename;
-        role001wb.status = req.body.status ? req.body.status : role001wb.status;
-        role001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : role001wb.inserteduser;
-        role001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : role001wb.inserteddatetime;
-        role001wb.updateduser = req.body.updateduser ? req.body.updateduser : role001wb.updateduser;
-        role001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : role001wb.updateddatetime;
-        role001wb.save(function(err, role001wb) {
+        role001mb.rolename = req.body.rolename ? req.body.rolename : role001mb.rolename;
+        role001mb.save(function(err, role001mb) {
             if (err) {
-                return res.status(500).send({
-                    message: 'Error when updating role001wb.',
+                return res.status(500).json({
+                    message: 'Error when updating role001mb.',
                     error: err
                 });
             }
-            return res.json(role001wb);
+
+            return res.json(role001mb);
         });
     });
 });
@@ -943,9 +907,9 @@ app.put('/api/role001wb/:id', (req, res) => {
 
 /**
  * @swagger
- * /api/role001wb/{id}:
+ * /api/role001mb/{id}:
  *   delete:
- *    tags: [role001wb]
+ *    tags: [role001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
  *    parameters:
@@ -961,13 +925,13 @@ app.put('/api/role001wb/:id', (req, res) => {
  *       500:
  *         description: failed
  */
-app.delete('/api/role001wb/:id', (req, res) => {
+app.delete('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001wb.findByIdAndRemove(id, function(err, role001wb) {
+    Role001mb.findByIdAndRemove(id, function(err, role001mb) {
         if (err) {
-            return res.status(500).send({
-                message: 'Error when deleting the role001wb.',
+            return res.status(500).json({
+                message: 'Error when deleting the role001mb.',
                 error: err
             });
         }
@@ -985,8 +949,6 @@ app.delete('/api/role001wb/:id', (req, res) => {
  *      country001mb:
  *            type: object
  *            properties:
- *             countryid:
- *                type: number
  *             countryname:
  *                 type: string  
  *             countrydesc:
@@ -1067,6 +1029,7 @@ app.get('/api/country001mb', (req, res) => {
 
 app.get('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Country001mb.findOne({ _id: id }, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
@@ -1107,20 +1070,19 @@ app.get('/api/country001mb/:id', (req, res) => {
 
 app.post('/api/country001mb/country', (req, res) => {
     const country001mb = new Country001mb();
-    country001mb.countryid = req.body.countryid,
-        country001mb.countryname = req.body.countryname,
-        country001mb.countrydesc = req.body.countrydesc,
-        country001mb.status = req.body.status,
-        country001mb.inserteduser = req.body.inserteduser,
-        country001mb.inserteddatetime = req.body.inserteddatetime,
-        country001mb.updateddatetime = req.body.updateddatetime,
-        country001mb.updateduser = req.body.updateduser,
-        country001mb.save()
+    country001mb.countryname = req.body.countryname;
+    country001mb.countrydesc = req.body.countrydesc;
+    country001mb.status = req.body.status;
+    country001mb.inserteduser = req.body.inserteduser;
+    country001mb.inserteddatetime = req.body.inserteddatetime;
+    country001mb.updateddatetime = req.body.updateddatetime;
+    country001mb.updateduser = req.body.updateduser;
+    country001mb.save()
         .then((result) => {
-            res.json({ message: 'country created' });
+            return res.json({ message: 'country created' });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 })
 
@@ -1174,7 +1136,6 @@ app.put('/api/country001mb/:id', (req, res) => {
                 message: 'No such country001mb'
             });
         }
-        country001mb.countryid = req.body.countryid ? req.body.countryid : country001mb.countryid;
         country001mb.countryname = req.body.countryname ? req.body.countryname : country001mb.countryname;
         country001mb.countrydesc = req.body.countrydesc ? req.body.countrydesc : country001mb.countrydesc;
         country001mb.status = req.body.status ? req.body.status : country001mb.status;
@@ -1220,6 +1181,7 @@ app.put('/api/country001mb/:id', (req, res) => {
  */
 app.delete('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Country001mb.findByIdAndRemove(id, function(err, country001mb) {
         if (err) {
             return res.status(500).json({
@@ -1228,7 +1190,7 @@ app.delete('/api/country001mb/:id', (req, res) => {
             });
         }
 
-        return res.json({ message: "Deleted Sucessfully" });
+        return res.json({ message: 'Deleted Sucessfully' });
     });
 });
 
@@ -1241,8 +1203,6 @@ app.delete('/api/country001mb/:id', (req, res) => {
  *      state001mb:
  *            type: object
  *            properties:
- *             stateid:
- *                type: number
  *             statename:
  *                 type: string  
  *             statedesc:
@@ -1328,6 +1288,7 @@ app.get('/api/state001mb', (req, res) => {
 
 app.get('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
+
     State001mb.findOne({ _id: id }, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
@@ -1369,7 +1330,6 @@ app.get('/api/state001mb/:id', (req, res) => {
 app.post('/api/state001mb/state', (req, res) => {
     const state001mb = new State001mb();
     state001mb.countryid = req.body.countryid.id;
-    state001mb.stateid = req.body.stateid;
     state001mb.statename = req.body.statename;
     state001mb.statedesc = req.body.statedesc;
     state001mb.status = req.body.status;
@@ -1383,12 +1343,12 @@ app.post('/api/state001mb/state', (req, res) => {
                 if (user) {
                     user.stateid.push(state001mb);
                     user.save();
-                    res.json({ message: 'state created!' });
+                    return res.json({ message: 'state created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 })
 
@@ -1428,6 +1388,7 @@ app.post('/api/state001mb/state', (req, res) => {
 
 app.put('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
+
     State001mb.findOne({ _id: id }, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
@@ -1450,7 +1411,6 @@ app.put('/api/state001mb/:id', (req, res) => {
         state001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : state001mb.inserteddatetime;
         state001mb.updateduser = req.body.updateduser ? req.body.updateduser : state001mb.updateduser;
         state001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : state001mb.updateddatetime;
-
         state001mb.save(function(err, state001mb) {
             if (err) {
                 return res.status(500).json({
@@ -1488,6 +1448,7 @@ app.put('/api/state001mb/:id', (req, res) => {
  */
 app.delete('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
+
     State001mb.findByIdAndRemove(id, function(err, state001mb) {
         if (err) {
             return res.status(500).json({
@@ -1508,8 +1469,6 @@ app.delete('/api/state001mb/:id', (req, res) => {
  *      city001mb:
  *            type: object
  *            properties:
- *             cityid:
- *                type: number
  *             cityname:
  *                 type: string  
  *             citydesc:
@@ -1595,6 +1554,7 @@ app.get('/api/city001mb', (req, res) => {
 
 app.get('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
+
     City001mb.findOne({ _id: id }, function(err, city001mb) {
         if (err) {
             return res.status(500).json({
@@ -1635,8 +1595,8 @@ app.get('/api/city001mb/:id', (req, res) => {
 
 app.post('/api/city001mb/city', (req, res) => {
     const city001mb = new City001mb();
+
     city001mb.stateid = req.body.stateid.id;
-    city001mb.cityid = req.body.cityid;
     city001mb.cityname = req.body.cityname;
     city001mb.citydesc = req.body.citydesc;
     city001mb.status = req.body.status;
@@ -1651,12 +1611,12 @@ app.post('/api/city001mb/city', (req, res) => {
                 if (user) {
                     user.cityid.push(city001mb);
                     user.save();
-                    res.json({ message: 'city created!' });
+                    return res.json({ message: 'city created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 })
 
@@ -1710,7 +1670,6 @@ app.put('/api/city001mb/:id', (req, res) => {
             });
         }
         city001mb.stateid = req.body.stateid.id ? req.body.stateid.id : city001mb.stateid;
-        city001mb.cityid = req.body.cityid ? req.body.cityid : city001mb.cityid;
         city001mb.cityname = req.body.cityname ? req.body.cityname : city001mb.cityname;
         city001mb.citydesc = req.body.citydesc ? req.body.citydesc : city001mb.citydesc;
         city001mb.status = req.body.status ? req.body.status : city001mb.status;
@@ -1756,6 +1715,7 @@ app.put('/api/city001mb/:id', (req, res) => {
  */
 app.delete('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
+
     City001mb.findByIdAndRemove(id, function(err, city001mb) {
         if (err) {
             return res.status(500).json({
@@ -2589,8 +2549,6 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  *      contentmaster001mb:
  *            type: object
  *            properties:
- *             contentid:
- *                type: number
  *             name:
  *                 type: string  
  *             description:
@@ -2613,7 +2571,7 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             subscid:
+ *             personid:
  *                type: object 
  *                properties:
  *                   id:
@@ -2690,6 +2648,7 @@ app.get('/api/contentmaster001mb', (req, res) => {
 
 app.get('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -2729,8 +2688,7 @@ app.get('/api/contentmaster001mb/:id', (req, res) => {
  */
 
 app.post('/api/contentmaster001mb/master', (req, res) => {
-    const contentmaster001mb = new Contentmaster001mb()
-    contentmaster001mb.contentid = req.body.contentid;
+    const contentmaster001mb = new Contentmaster001mb();
     contentmaster001mb.name = req.body.name;
     contentmaster001mb.description = req.body.description;
     contentmaster001mb.size = req.body.size;
@@ -2742,7 +2700,7 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
-    contentmaster001mb.subscid = req.body.subscid.id;
+    contentmaster001mb.personid = req.body.personid.id;
     contentmaster001mb.save(function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -2790,6 +2748,7 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
 
 app.put('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -2804,8 +2763,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
             });
         }
 
-        contentmaster001mb.subscid = req.body.subscid.id ? req.body.subscid.id : contentmaster001mb.subscid;
-        contentmaster001mb.contentid = req.body.contentid ? req.body.contentid : contentmaster001mb.contentid;
+        contentmaster001mb.personid = req.body.personid.id ? req.body.personid.id : contentmaster001mb.personid;
         contentmaster001mb.name = req.body.name ? req.body.name : contentmaster001mb.name;
         contentmaster001mb.description = req.body.description ? req.body.description : contentmaster001mb.description;
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;
@@ -2852,6 +2810,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
  */
 app.delete('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Contentmaster001mb.findByIdAndRemove(id, function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -2874,8 +2833,6 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  *      categorydetails001mb:
  *            type: object
  *            properties:
- *             catcode:
- *                type: number
  *             catname:
  *                 type: string  
  *             status:
@@ -2888,7 +2845,7 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -2957,6 +2914,7 @@ app.get('/api/categorydetails001mb', (req, res) => {
 
 app.get('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
@@ -2997,8 +2955,7 @@ app.get('/api/categorydetails001mb/:id', (req, res) => {
 
 app.post('/api/categorydetails001mb/category', (req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
-    categorydetails001mb.subscid = req.body.subscid.id;
-    categorydetails001mb.catcode = req.body.catcode;
+    categorydetails001mb.personid = req.body.personid.id;
     categorydetails001mb.catname = req.body.catname;
     categorydetails001mb.status = req.body.status;
     categorydetails001mb.inserteduser = req.body.inserteduser;
@@ -3007,16 +2964,16 @@ app.post('/api/categorydetails001mb/category', (req, res) => {
     categorydetails001mb.updateddatetime = req.body.updateddatetime;
     categorydetails001mb.save()
         .then((result) => {
-            Subscriberdetails001wb.findOne({ _id: categorydetails001mb.subscid }, (err, user) => {
+            Person001mb.findOne({ _id: categorydetails001mb.personid }, (err, user) => {
                 if (user) {
                     user.categoryid.push(categorydetails001mb);
                     user.save();
-                    res.json({ message: 'categorydetails created!' });
+                    return res.json({ message: 'categorydetails created!' });
                 }
             });
         })
         .catch((error) => {
-            res.status(500).json({ error });
+            return res.status(500).json({ error });
         });
 })
 
@@ -3069,8 +3026,7 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
                 message: 'No such categorydetails001mb'
             });
         }
-        categorydetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : categorydetails001mb.catcode;
-        categorydetails001mb.catcode = req.body.catcode ? req.body.catcode : categorydetails001mb.catcode;
+        categorydetails001mb.personid = req.body.personid.id ? req.body.personid.id : categorydetails001mb.personid;
         categorydetails001mb.catname = req.body.catname ? req.body.catname : categorydetails001mb.catname;
         categorydetails001mb.status = req.body.status ? req.body.status : categorydetails001mb.status;
         categorydetails001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : categorydetails001mb.inserteduser;
@@ -3112,6 +3068,7 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
  */
 app.delete('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Categorydetails001mb.findByIdAndRemove(id, function(err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
@@ -3406,8 +3363,6 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  *      language001mb:
  *            type: object
  *            properties:
- *             languageid:
- *                type: number
  *             languagename:
  *                 type: string
  *             languagedesc:
@@ -3422,7 +3377,7 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -3492,6 +3447,7 @@ app.get('/api/language001mb', (req, res) => {
 
 app.get('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
@@ -3532,8 +3488,7 @@ app.get('/api/language001mb/:id', (req, res) => {
 
 app.post('/api/language001mb/language', (req, res) => {
         const language001mb = new Language001mb()
-        language001mb.subscid = req.body.subscid.id;
-        language001mb.languageid = req.body.languageid;
+        language001mb.personid = req.body.personid.id;
         language001mb.languagename = req.body.languagename;
         language001mb.languagedesc = req.body.languagedesc;
         language001mb.status = req.body.status;
@@ -3541,18 +3496,19 @@ app.post('/api/language001mb/language', (req, res) => {
         language001mb.inserteddatetime = req.body.inserteddatetime;
         language001mb.updateduser = req.body.updateduser;
         language001mb.updateddatetime = req.body.updateddatetime;
+
         language001mb.save()
             .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: language001mb.subscid }, (err, user) => {
+                Person001mb.findOne({ _id: language001mb.personid }, (err, user) => {
                     if (user) {
                         user.languageid.push(language001mb);
                         user.save();
-                        res.json({ message: 'language created!' });
+                        return res.json({ message: 'language created!' });
                     }
                 });
             })
             .catch((error) => {
-                res.status(500).json({ error });
+                return res.status(500).json({ error });
             });
     })
     /**
@@ -3590,6 +3546,7 @@ app.post('/api/language001mb/language', (req, res) => {
 
 app.put('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Language001mb.findOne({ _id: id }, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
@@ -3597,14 +3554,12 @@ app.put('/api/language001mb/:id', (req, res) => {
                 error: err
             });
         }
-
         if (!language001mb) {
             return res.status(404).json({
                 message: 'No such language001mb'
             });
         }
-        language001mb.subscid = req.body.subscid.id ? req.body.subscid.id : language001mb.subscid;
-        language001mb.languageid = req.body.languageid ? req.body.languageid : language001mb.languageid;
+        language001mb.personid = req.body.personid.id ? req.body.personid.id : language001mb.personid;
         language001mb.languagename = req.body.languagename ? req.body.languagename : language001mb.languagename;
         language001mb.languagedesc = req.body.languagedesc ? req.body.languagedesc : language001mb.languagedesc;
         language001mb.status = req.body.status ? req.body.status : language001mb.status;
@@ -3612,7 +3567,6 @@ app.put('/api/language001mb/:id', (req, res) => {
         language001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : language001mb.inserteddatetime;
         language001mb.updateduser = req.body.updateduser ? req.body.updateduser : language001mb.updateduser;
         language001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : language001mb.updateddatetime;
-
         language001mb.save(function(err, language001mb) {
             if (err) {
                 return res.status(500).json({
@@ -3647,6 +3601,7 @@ app.put('/api/language001mb/:id', (req, res) => {
  */
 app.delete('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Language001mb.findByIdAndRemove(id, function(err, language001mb) {
         if (err) {
             return res.status(500).json({
@@ -3670,8 +3625,6 @@ app.delete('/api/language001mb/:id', (req, res) => {
  *      regionaldetails001mb:
  *            type: object
  *            properties:
- *             regionalid:
- *                type: number
  *             regionalname:
  *                 type: string
  *             regionaldesc:
@@ -3686,7 +3639,7 @@ app.delete('/api/language001mb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -3756,6 +3709,7 @@ app.get('/api/regionaldetails001mb', (req, res) => {
 
 app.get('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
@@ -3796,8 +3750,7 @@ app.get('/api/regionaldetails001mb/:id', (req, res) => {
 
 app.post('/api/regionaldetails001mb/regional', (req, res) => {
         const regionaldetails001mb = new Regionaldetails001mb();
-        regionaldetails001mb.subscid = req.body.subscid.id;
-        regionaldetails001mb.regionalid = req.body.regionalid;
+        regionaldetails001mb.personid = req.body.personid.id;
         regionaldetails001mb.regionalname = req.body.regionalname;
         regionaldetails001mb.regionaldesc = req.body.regionaldesc;
         regionaldetails001mb.status = req.body.status;
@@ -3807,16 +3760,16 @@ app.post('/api/regionaldetails001mb/regional', (req, res) => {
         regionaldetails001mb.updateddatetime = req.body.updateddatetime;
         regionaldetails001mb.save()
             .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: regionaldetails001mb.subscid }, (err, user) => {
+                Person001mb.findOne({ _id: regionaldetails001mb.personid }, (err, user) => {
                     if (user) {
                         user.regionalid.push(regionaldetails001mb);
                         user.save();
-                        res.json({ message: 'regionaldetails created!' });
+                        return res.json({ message: 'regionaldetails created!' });
                     }
                 });
             })
             .catch((error) => {
-                res.status(500).json({ error });
+                return res.status(500).json({ error });
             });
     })
     /**
@@ -3854,6 +3807,7 @@ app.post('/api/regionaldetails001mb/regional', (req, res) => {
 
 app.put('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
@@ -3867,8 +3821,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
                 message: 'No such regionaldetails001mb'
             });
         }
-        regionaldetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : regionaldetails001mb.subscid;
-        regionaldetails001mb.regionalid = req.body.regionalid ? req.body.regionalid : regionaldetails001mb.regionalid;
+        regionaldetails001mb.personid = req.body.personid.id ? req.body.personid.id : regionaldetails001mb.personid;
         regionaldetails001mb.regionalname = req.body.regionalname ? req.body.regionalname : regionaldetails001mb.regionalname;
         regionaldetails001mb.regionaldesc = req.body.regionaldesc ? req.body.regionaldesc : regionaldetails001mb.regionaldesc;
         regionaldetails001mb.status = req.body.status ? req.body.status : regionaldetails001mb.status;
@@ -3876,6 +3829,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
         regionaldetails001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : regionaldetails001mb.inserteddatetime;
         regionaldetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : regionaldetails001mb.updateduser;
         regionaldetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : regionaldetails001mb.updateddatetime;
+
         regionaldetails001mb.save(function(err, regionaldetails001mb) {
             if (err) {
                 return res.status(500).json({
@@ -3910,6 +3864,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
  */
 app.delete('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
+
     Regionaldetails001mb.findByIdAndRemove(id, function(err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
