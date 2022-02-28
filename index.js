@@ -39,11 +39,14 @@ import verifyToken from "./app/middleware/auth.js";
 import nodemailer from "nodemailer";
 import hbs from "nodemailer-express-handlebars";
 import path from "path";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import rolebaseauth from "../siriusmatrimony-backend/app/middleware/roleauth.js";
 const app = express();
 app.use(cors());
 dotenv.config();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type, Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS, HEAD")
@@ -85,211 +88,211 @@ function initial() {
     Login001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Login001mb.insertMany([{
-                    'logintype': "mobile no ",
-                    'password': "xyz",
-                    'inserteduser': "raj",
-                    'inserteddatetime': 11 / 12 / 22,
-                    'updateddatetime': 11 / 12 / 22,
-                    'updateduser': "raj",
+                'logintype': "mobile no ",
+                'password': "xyz",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateddatetime': 11 / 12 / 22,
+                'updateduser': "raj",
 
-                }, ])
-                .then(() => {})
+            },])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Country001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Country001mb.insertMany([{
-                    'countryid': 123,
-                    'countryname': "palls",
-                    'countrydesc': "good",
-                    'status': "good",
-                    'inserteduser': "raj",
-                    'inserteddatetime': 11 / 12 / 22,
-                    'updateddatetime': 11 / 12 / 22,
-                    'updateduser': "raj",
+                'countryid': 123,
+                'countryname': "palls",
+                'countrydesc': "good",
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateddatetime': 11 / 12 / 22,
+                'updateduser': "raj",
 
-                }, ])
-                .then(() => {})
+            },])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     City001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             City001mb.insertMany([{
-                    'cityid': 123,
-                    'cityname': "xyz",
-                    'citydesc': "good",
-                    'status': "good",
-                    'inserteduser': "raj",
-                    'inserteddatetime': 11 / 12 / 22,
-                    'updateddatetime': 11 / 12 / 22,
-                    'updateduser': "raj",
+                'cityid': 123,
+                'cityname': "xyz",
+                'citydesc': "good",
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateddatetime': 11 / 12 / 22,
+                'updateduser': "raj",
 
-                }, ])
-                .then(() => {})
+            },])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Categorydetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Categorydetails001mb.insertMany([{
-                        'catcode': "T867",
-                        'catname': "C22",
-                        'status': "GOOD",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'catcode': "T867",
+                'catname': "C22",
+                'status': "GOOD",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Companydetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Companydetails001mb.insertMany([{
-                        'companycode': "S33",
-                        'companyname': "XYZ",
-                        'address': "street",
-                        'phonenumber': 78778876,
-                        'regionalid': 98,
-                        'status': "good",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'companycode': "S33",
+                'companyname': "XYZ",
+                'address': "street",
+                'phonenumber': 78778876,
+                'regionalid': 98,
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Contentmaster001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Contentmaster001mb.insertMany([{
-                        'contentid': 6767,
-                        'name': "RAJ",
-                        'description': "good",
-                        'size': "222",
-                        'quality': "good",
-                        'format': "size",
-                        'status': "good",
-                        'discountflag': true,
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'contentid': 6767,
+                'name': "RAJ",
+                'description': "good",
+                'size': "222",
+                'quality': "good",
+                'format': "size",
+                'status': "good",
+                'discountflag': true,
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Language001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Language001mb.insertMany([{
-                        'languageid': 77,
-                        'languagename': "raj",
-                        'languagedesc': "ok",
-                        'status': "good",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'languageid': 77,
+                'languagename': "raj",
+                'languagedesc': "ok",
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Regionaldetails001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Regionaldetails001mb.insertMany([{
-                        'regionalid': 544,
-                        'regionalname': "RAJ",
-                        'regionaldesc': "good",
-                        'status': "good",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'regionalid': 544,
+                'regionalname': "RAJ",
+                'regionaldesc': "good",
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Religion001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Religion001mb.insertMany([{
-                        'regionalid': 666,
-                        'regionalname': "RAJ",
-                        'regionaldesc': "good",
-                        'status': "good",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'regionalid': 666,
+                'regionalname': "RAJ",
+                'regionaldesc': "good",
+                'status': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Subscriberdetails001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberdetails001wb.insertMany([{
-                        'regionalid': 434,
-                        'companycode': 3443,
-                        'catcode': 4343,
-                        'subcatcode': 4343,
-                        'categoryid': 4343,
-                        'subscid': 434,
-                        'subscname': "RAJ",
-                        '  classificationid': 898,
-                        'sex': "male",
-                        'subscdesc': "good",
-                        'aboutme': "good",
-                        'address': "street",
-                        'phoneno': 77787,
-                        'subscapproval': true,
-                        'approvedby': "raj",
-                        'approvedon': 11 / 12 / 2021,
-                        'subscsubspid': 786,
-                        'subscstatus': "good",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 11 / 12 / 2021,
-                        'updateduser': "raj",
-                        'updateddatetime': 11 / 12 / 2021
-                    }
+                'regionalid': 434,
+                'companycode': 3443,
+                'catcode': 4343,
+                'subcatcode': 4343,
+                'categoryid': 4343,
+                'subscid': 434,
+                'subscname': "RAJ",
+                '  classificationid': 898,
+                'sex': "male",
+                'subscdesc': "good",
+                'aboutme': "good",
+                'address': "street",
+                'phoneno': 77787,
+                'subscapproval': true,
+                'approvedby': "raj",
+                'approvedon': 11 / 12 / 2021,
+                'subscsubspid': 786,
+                'subscstatus': "good",
+                'inserteduser': "raj",
+                'inserteddatetime': 11 / 12 / 2021,
+                'updateduser': "raj",
+                'updateddatetime': 11 / 12 / 2021
+            }
 
-                ])
-                .then(() => {})
+            ])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     State001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             State001mb.insertMany([{
-                        'stateid': 123,
-                        'statename': "sri",
-                        'statedesc': "good",
-                        'status': "active",
-                        'inserteduser': "aravindh",
-                        'inserteddatetime': 11 / 12 / 22,
-                        'updateduser': "sam",
-                        'updateddatetime': 9 / 12 / 22,
-                    }
+                'stateid': 123,
+                'statename': "sri",
+                'statedesc': "good",
+                'status': "active",
+                'inserteduser': "aravindh",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateduser': "sam",
+                'updateddatetime': 9 / 12 / 22,
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -299,18 +302,18 @@ function initial() {
     Subcatclassification001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subcatclassification001mb.insertMany([{
-                        'catcode': "ab12",
-                        'subcatcode': "ab13",
-                        'classificationid': 1234,
-                        'classificationname': "dass",
-                        'status': "good",
-                        'inserteduser': "aravindh",
-                        'inserteddatetime': 11 / 12 / 22,
-                        'updateduser': "chandru",
-                        'updateddatetime': 6 / 12 / 22
-                    }
+                'catcode': "ab12",
+                'subcatcode': "ab13",
+                'classificationid': 1234,
+                'classificationname': "dass",
+                'status': "good",
+                'inserteduser': "aravindh",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateduser': "chandru",
+                'updateddatetime': 6 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -320,18 +323,18 @@ function initial() {
     Subcategory001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subcategory001mb.insertMany([{
-                        'catcode': "a2b",
-                        'subcatcode': "s21",
-                        'subcatname': "sri",
-                        'subcatstatus': "active",
-                        'status': "good",
-                        'inserteduser': "aravind",
-                        'inserteddatetime': 11 / 12 / 22,
-                        'updateduser': "chandru",
-                        'updateddatetime': 9 / 12 / 22
-                    }
+                'catcode': "a2b",
+                'subcatcode': "s21",
+                'subcatname': "sri",
+                'subcatstatus': "active",
+                'status': "good",
+                'inserteduser': "aravind",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateduser': "chandru",
+                'updateddatetime': 9 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -341,14 +344,14 @@ function initial() {
     Usersample001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Usersample001mb.insertMany([{
-                        'username': "Raj",
-                        'password': "****",
-                        'securityquestion': "xys",
-                        'securityanswer': "xys"
+                'username': "Raj",
+                'password': "****",
+                'securityquestion': "xys",
+                'securityanswer': "xys"
 
-                    }
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -358,10 +361,10 @@ function initial() {
     Review001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Review001mb.insertMany([{
-                    'comments': "good",
-                    'rating': "9",
-                    'status': "good"
-                }])
+                'comments': "good",
+                'rating': "9",
+                'status': "good"
+            }])
                 .then(() => {
 
                 })
@@ -371,21 +374,21 @@ function initial() {
     Subscribercontent001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscribercontent001wb.insertMany([{
-                        'subscid': 123,
-                        'subsccontentid1': 12,
-                        'subsccontentidattach1': 123,
-                        'subsccontentidappovalflag1': true,
-                        'subsccontentidattach2': 34,
-                        'subsccontentidappovalflag2': false,
-                        'subsccontentidattachn': 12,
-                        'subsccontentidappovalflagn': false,
-                        'inserteduser': "wedas",
-                        'inserteddatetime': 11 / 12 / 22,
-                        'updateduser': "fsdf",
-                        'updateddatetime': 8 / 12 / 22
-                    }
+                'subscid': 123,
+                'subsccontentid1': 12,
+                'subsccontentidattach1': 123,
+                'subsccontentidappovalflag1': true,
+                'subsccontentidattach2': 34,
+                'subsccontentidappovalflag2': false,
+                'subsccontentidattachn': 12,
+                'subsccontentidappovalflagn': false,
+                'inserteduser': "wedas",
+                'inserteddatetime': 11 / 12 / 22,
+                'updateduser': "fsdf",
+                'updateddatetime': 8 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -395,18 +398,18 @@ function initial() {
     Subscribercontentauth001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscribercontentauth001wb.insertMany([{
-                        'subscid': 123,
-                        'subscsubpid': 12,
-                        'subscsubpstatus': "good",
-                        'subscsubpstartdate': 1 / 12 / 22,
-                        'subscsupbenddate': 2 / 12 / 22,
-                        'inserteduser': "aravindh",
-                        'inserteddatetime': 3 / 12 / 22,
-                        'updateduser': "chandru",
-                        'updateddatetime': 4 / 12 / 22
-                    }
+                'subscid': 123,
+                'subscsubpid': 12,
+                'subscsubpstatus': "good",
+                'subscsubpstartdate': 1 / 12 / 22,
+                'subscsupbenddate': 2 / 12 / 22,
+                'inserteduser': "aravindh",
+                'inserteddatetime': 3 / 12 / 22,
+                'updateduser': "chandru",
+                'updateddatetime': 4 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -416,28 +419,28 @@ function initial() {
     Subscriberpersonalinfo001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberpersonalinfo001wb.insertMany([{
-                        'subcid': 12,
-                        'personaldetails': "my details?",
-                        'hobbies': "playing",
-                        'flex1': "flex1",
-                        'flex2': "flex2",
-                        'flex3': "flex3",
-                        'flex4': "flex4",
-                        'flex5': "flex5",
-                        'flex6': "flex6",
-                        'flex7': "flex7",
-                        'flex8': "flex8",
-                        'flex9': "flex9",
-                        'flex10': "flex10",
-                        'flex11': "flex11",
-                        'flex12': "flex12",
-                        'inserteduser': "aravindh",
-                        'inserteddatetime': 3 / 11 / 22,
-                        'updateduser': "chandru",
-                        'updateddatetime': 4 / 12 / 22
-                    }
+                'subcid': 12,
+                'personaldetails': "my details?",
+                'hobbies': "playing",
+                'flex1': "flex1",
+                'flex2': "flex2",
+                'flex3': "flex3",
+                'flex4': "flex4",
+                'flex5': "flex5",
+                'flex6': "flex6",
+                'flex7': "flex7",
+                'flex8': "flex8",
+                'flex9': "flex9",
+                'flex10': "flex10",
+                'flex11': "flex11",
+                'flex12': "flex12",
+                'inserteduser': "aravindh",
+                'inserteddatetime': 3 / 11 / 22,
+                'updateduser': "chandru",
+                'updateddatetime': 4 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -447,28 +450,28 @@ function initial() {
     Subscriberprofessionalinfo002wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriberprofessionalinfo002wb.insertMany([{
-                        'subcid': 12,
-                        'professionaldetails': "hi",
-                        'job': "engineer",
-                        'flex1': "flex1",
-                        'flex2': "flex2",
-                        'flex3': "flex3",
-                        'flex4': "flex4",
-                        'flex5': "flex5",
-                        'flex6': "flex6",
-                        'flex7': "flex7",
-                        'flex8': "flex8",
-                        'flex9': "flex9",
-                        'flex10': "flex10",
-                        'flex11': "flex11",
-                        'flex12': "flex12",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 3 / 11 / 22,
-                        'updateduser': "sri",
-                        'updateddatetime': 4 / 12 / 22
-                    }
+                'subcid': 12,
+                'professionaldetails': "hi",
+                'job': "engineer",
+                'flex1': "flex1",
+                'flex2': "flex2",
+                'flex3': "flex3",
+                'flex4': "flex4",
+                'flex5': "flex5",
+                'flex6': "flex6",
+                'flex7': "flex7",
+                'flex8': "flex8",
+                'flex9': "flex9",
+                'flex10': "flex10",
+                'flex11': "flex11",
+                'flex12': "flex12",
+                'inserteduser': "raj",
+                'inserteddatetime': 3 / 11 / 22,
+                'updateduser': "sri",
+                'updateddatetime': 4 / 12 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -478,18 +481,18 @@ function initial() {
     Video001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Video001wb.insertMany([{
-                        'category': "s222",
-                        'filename': "img.png",
-                        'originalfilename': "video",
-                        'status': "active",
-                        'content': "678667",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 6 / 11 / 22,
-                        'updateduser': "raju",
-                        'updateddatetime': 7 / 11 / 22
-                    }
+                'category': "s222",
+                'filename': "img.png",
+                'originalfilename': "video",
+                'status': "active",
+                'content': "678667",
+                'inserteduser': "raj",
+                'inserteddatetime': 6 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 7 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -499,18 +502,18 @@ function initial() {
     Photo001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Photo001wb.insertMany([{
-                        'category': "s222",
-                        'filename': "img.png",
-                        'originalname': "photo",
-                        'content': "678667",
-                        'status': "active",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 6 / 11 / 22,
-                        'updateduser': "raju",
-                        'updateddatetime': 7 / 11 / 22
-                    }
+                'category': "s222",
+                'filename': "img.png",
+                'originalname': "photo",
+                'content': "678667",
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 6 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 7 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -520,14 +523,14 @@ function initial() {
     Person001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Person001mb.insertMany([{
-                        'status': "active",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 5 / 11 / 22,
-                        'updateduser': "raju",
-                        'updateddatetime': 12 / 11 / 22
-                    }
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 5 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 12 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -537,17 +540,17 @@ function initial() {
     Payment001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Payment001mb.insertMany([{
-                        'subpid': 7878,
-                        'payid': 88,
-                        'payment': "card",
-                        'status': "active",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 5 / 11 / 22,
-                        'updateduser': "raju",
-                        'updateddatetime': 12 / 11 / 22
-                    }
+                'subpid': 7878,
+                'payid': 88,
+                'payment': "card",
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 5 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 12 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -557,30 +560,30 @@ function initial() {
     Users001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Users001wb.insertMany([{
-                        'firstname': "RAJ",
-                        'lasttname': "d",
-                        'zipcode': 1223243,
-                        'employeeid': 8778,
-                        'dob': 3 / 11 / 2000,
-                        'email': "xyz@gmail.com",
-                        'confirmemail': "xyz@gmail.com",
-                        'sex': "male",
-                        'address1': "xyz",
-                        'address2': "xyz",
-                        'address3': "xyz",
-                        'city': "chennai",
-                        'state': "tn",
-                        'country': "india",
-                        'mobile': 76886797974,
-                        'landline': 423321211,
-                        'status': "active",
-                        'inserteduser': "raj",
-                        'inserteddatetime': 5 / 11 / 22,
-                        'updateduser': "raju",
-                        'updateddatetime': 12 / 11 / 22
-                    }
+                'firstname': "RAJ",
+                'lasttname': "d",
+                'zipcode': 1223243,
+                'employeeid': 8778,
+                'dob': 3 / 11 / 2000,
+                'email': "xyz@gmail.com",
+                'confirmemail': "xyz@gmail.com",
+                'sex': "male",
+                'address1': "xyz",
+                'address2': "xyz",
+                'address3': "xyz",
+                'city': "chennai",
+                'state': "tn",
+                'country': "india",
+                'mobile': 76886797974,
+                'landline': 423321211,
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 5 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 12 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -590,20 +593,20 @@ function initial() {
     Subscriptionmaster001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Subscriptionmaster001mb.insertMany([{
-                        'subpid': 1212,
-                        'subpname': "sri",
-                        'description': "good",
-                        'tenure': "3 years",
-                        'amount': 23,
-                        'status': "active",
-                        'discountflag': true,
-                        'inserteduser': "aravindh",
-                        'inserteddatetime': 3 / 11 / 22,
-                        'updateduser': "selvam",
-                        'updateddatetime': 3 / 11 / 22
-                    }
+                'subpid': 1212,
+                'subpname': "sri",
+                'description': "good",
+                'tenure': "3 years",
+                'amount': 23,
+                'status': "active",
+                'discountflag': true,
+                'inserteduser': "aravindh",
+                'inserteddatetime': 3 / 11 / 22,
+                'updateduser': "selvam",
+                'updateddatetime': 3 / 11 / 22
+            }
 
-                ])
+            ])
                 .then(() => {
 
                 })
@@ -613,32 +616,32 @@ function initial() {
     Role001mb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Role001mb.insertMany([{
-                    'rolename': "farmer",
-                    'status': "active",
-                    'discountflag': true,
-                    'inserteduser': "aravindh",
-                    'inserteddatetime': 3 / 11 / 22,
-                    'updateduser': "selvam",
-                    'updateddatetime': 3 / 11 / 22
-                }])
-                .then(() => {})
+                'rolename': "farmer",
+                'status': "active",
+                'discountflag': true,
+                'inserteduser': "aravindh",
+                'inserteddatetime': 3 / 11 / 22,
+                'updateduser': "selvam",
+                'updateddatetime': 3 / 11 / 22
+            }])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
     Audio001wb.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
             Audio001wb.insertMany([{
-                    'category': "s222",
-                    'filename': "img.mp3",
-                    'originalfilename': "audio",
-                    'content': "678667",
-                    'status': "active",
-                    'inserteduser': "raj",
-                    'inserteddatetime': 6 / 11 / 22,
-                    'updateduser': "raju",
-                    'updateddatetime': 7 / 11 / 22
-                }])
-                .then(() => {})
+                'category': "s222",
+                'filename': "img.mp3",
+                'originalfilename': "audio",
+                'content': "678667",
+                'status': "active",
+                'inserteduser': "raj",
+                'inserteddatetime': 6 / 11 / 22,
+                'updateduser': "raju",
+                'updateddatetime': 7 / 11 / 22
+            }])
+                .then(() => { })
                 .catch((err) => console.log("error", err));
         }
     });
@@ -677,7 +680,6 @@ const PORT = process.env.PORT || 8081;
 
 db.mongoose
     .connect(process.env.DATABASE_URI, {
-
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -702,11 +704,26 @@ const options = {
             title: 'Sirius Matrimony API Generation',
             version: '1.0.0'
         },
+        servers: [
+            {
+              url: "http://localhost:8081",
+            },
+          ],
         tags: [{
             name: " API Generation",
-        }]
+        }],
+        components: {
+            securitySchemes: {
+                bearerAuth:{
+                    type: "http",
+                    name: "Authorization",
+                    scheme: "bearer",
+                    // in: "header",
+                    bearerFormat: "JWT"
+                },
+            },
+        },
     },
-
     apis: ['index.js'],
 };
 const specs = swaggerjsdoc(options);
@@ -723,7 +740,6 @@ app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
  *             rolename:
  *                 type: string       
  */
-
 /**
  * @swagger
  * /api/role001mb:
@@ -731,18 +747,18 @@ app.use('/index', swaggerUi.serve, swaggerUi.setup(specs));
  *     tags: [role001mb]
  *     summary: Get Method
  *     description: Retrieve the list of data
+ *     security:
+ *       - bearerAuth: []    
  *     responses:
  *       200:
  *         description: Sucess
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/role001mb'
+ *                           $ref: '#/components/schemas/role001mb'
  */
 app.get('/api/role001mb', (req, res) => {
-    Role001mb.find(function(err, role001mb) {
+    Role001mb.find(function (err, role001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting role001mb.',
@@ -761,6 +777,8 @@ app.get('/api/role001mb', (req, res) => {
  *     tags: [role001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -768,6 +786,11 @@ app.get('/api/role001mb', (req, res) => {
  *         description: Numeric ID of the user to retrieve.
  *         schema:
  *           type: string
+ *     securityDefinitions:
+ *      authentication:
+ *        type: apiKey
+ *        name: Authorization
+ *        in: header
  *     responses:
  *       200:
  *         description: Sucess
@@ -776,15 +799,13 @@ app.get('/api/role001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/role001mb'
+ *                           $ref: '#/components/schemas/role001mb'
  */
 
 app.get('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001mb.findOne({ _id: id }, function(err, role001mb) {
+    Role001mb.findOne({ _id: id }, function (err, role001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting role001mb.',
@@ -809,6 +830,8 @@ app.get('/api/role001mb/:id', (req, res) => {
  *    tags: [role001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -826,7 +849,7 @@ app.post('/api/role001mb/role', (req, res) => {
 
     const role001mb = new Role001mb();
     role001mb.rolename = req.body.rolename;
-    role001mb.save(function(err, role001mb) {
+    role001mb.save(function (err, role001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when creating role001mb',
@@ -847,6 +870,8 @@ app.post('/api/role001mb/role', (req, res) => {
  *    tags: [role001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -868,15 +893,13 @@ app.post('/api/role001mb/role', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/role001mb'
+ *                          $ref: '#/components/schemas/role001mb'
  */
 
 app.put('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001mb.findOne({ _id: id }, function(err, role001mb) {
+    Role001mb.findOne({ _id: id }, function (err, role001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting role001mb',
@@ -890,7 +913,7 @@ app.put('/api/role001mb/:id', (req, res) => {
             });
         }
         role001mb.rolename = req.body.rolename ? req.body.rolename : role001mb.rolename;
-        role001mb.save(function(err, role001mb) {
+        role001mb.save(function (err, role001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating role001mb.',
@@ -912,6 +935,8 @@ app.put('/api/role001mb/:id', (req, res) => {
  *    tags: [role001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -928,7 +953,7 @@ app.put('/api/role001mb/:id', (req, res) => {
 app.delete('/api/role001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Role001mb.findByIdAndRemove(id, function(err, role001mb) {
+    Role001mb.findByIdAndRemove(id, function (err, role001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the role001mb.',
@@ -974,6 +999,8 @@ app.delete('/api/role001mb/:id', (req, res) => {
  *     tags: [country001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -982,13 +1009,11 @@ app.delete('/api/role001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/country001mb'
+ *                          $ref: '#/components/schemas/country001mb'
  */
 
 app.get('/api/country001mb', (req, res) => {
-    Country001mb.find(function(err, country001mb) {
+    Country001mb.find(function (err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -1007,6 +1032,8 @@ app.get('/api/country001mb', (req, res) => {
  *     tags: [country001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -1022,15 +1049,13 @@ app.get('/api/country001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/country001mb'
+ *                           $ref: '#/components/schemas/country001mb'
  */
 
 app.get('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Country001mb.findOne({ _id: id }, function(err, country001mb) {
+    Country001mb.findOne({ _id: id }, function (err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb.',
@@ -1055,6 +1080,8 @@ app.get('/api/country001mb/:id', (req, res) => {
  *    tags: [country001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -1094,6 +1121,8 @@ app.post('/api/country001mb/country', (req, res) => {
  *    tags: [country001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -1115,15 +1144,13 @@ app.post('/api/country001mb/country', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/country001mb'
+ *                            $ref: '#/components/schemas/country001mb'
  */
 
 app.put('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Country001mb.findOne({ _id: id }, function(err, country001mb) {
+    Country001mb.findOne({ _id: id }, function (err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting country001mb',
@@ -1144,7 +1171,7 @@ app.put('/api/country001mb/:id', (req, res) => {
         country001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : country001mb.updateddatetime;
         country001mb.updateduser = req.body.updateduser ? req.body.updateduser : country001mb.updateduser;
 
-        country001mb.save(function(err, country001mb) {
+        country001mb.save(function (err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -1166,6 +1193,8 @@ app.put('/api/country001mb/:id', (req, res) => {
  *    tags: [country001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -1182,7 +1211,7 @@ app.put('/api/country001mb/:id', (req, res) => {
 app.delete('/api/country001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Country001mb.findByIdAndRemove(id, function(err, country001mb) {
+    Country001mb.findByIdAndRemove(id, function (err, country001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the country001mb.',
@@ -1233,6 +1262,8 @@ app.delete('/api/country001mb/:id', (req, res) => {
  *     tags: [state001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -1241,13 +1272,11 @@ app.delete('/api/country001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/state001mb'
+ *                           $ref: '#/components/schemas/state001mb'
  */
 
 app.get('/api/state001mb', (req, res) => {
-    State001mb.find(function(err, state001mbs) {
+    State001mb.find(function (err, state001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -1266,6 +1295,8 @@ app.get('/api/state001mb', (req, res) => {
  *     tags: [state001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -1281,15 +1312,13 @@ app.get('/api/state001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/state001mb'
+ *                           $ref: '#/components/schemas/state001mb'
  */
 
 app.get('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    State001mb.findOne({ _id: id }, function(err, state001mb) {
+    State001mb.findOne({ _id: id }, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -1314,6 +1343,8 @@ app.get('/api/state001mb/:id', (req, res) => {
  *    tags: [state001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -1360,6 +1391,8 @@ app.post('/api/state001mb/state', (req, res) => {
  *    tags: [state001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -1381,15 +1414,13 @@ app.post('/api/state001mb/state', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/state001mb'
+ *                           $ref: '#/components/schemas/state001mb'
  */
 
 app.put('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    State001mb.findOne({ _id: id }, function(err, state001mb) {
+    State001mb.findOne({ _id: id }, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb',
@@ -1411,7 +1442,7 @@ app.put('/api/state001mb/:id', (req, res) => {
         state001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : state001mb.inserteddatetime;
         state001mb.updateduser = req.body.updateduser ? req.body.updateduser : state001mb.updateduser;
         state001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : state001mb.updateddatetime;
-        state001mb.save(function(err, state001mb) {
+        state001mb.save(function (err, state001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating state001mb.',
@@ -1433,6 +1464,8 @@ app.put('/api/state001mb/:id', (req, res) => {
  *    tags: [state001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -1449,7 +1482,7 @@ app.put('/api/state001mb/:id', (req, res) => {
 app.delete('/api/state001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    State001mb.findByIdAndRemove(id, function(err, state001mb) {
+    State001mb.findByIdAndRemove(id, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the state001mb.',
@@ -1499,6 +1532,8 @@ app.delete('/api/state001mb/:id', (req, res) => {
  *     tags: [city001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -1507,13 +1542,11 @@ app.delete('/api/state001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/city001mb'
+ *                          $ref: '#/components/schemas/city001mb'
  */
 
 app.get('/api/city001mb', (req, res) => {
-    City001mb.find(function(err, city001mb) {
+    City001mb.find(function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -1532,6 +1565,8 @@ app.get('/api/city001mb', (req, res) => {
  *     tags: [city001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -1547,15 +1582,13 @@ app.get('/api/city001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/city001mb'
+ *                          $ref: '#/components/schemas/city001mb'
  */
 
 app.get('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    City001mb.findOne({ _id: id }, function(err, city001mb) {
+    City001mb.findOne({ _id: id }, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -1580,6 +1613,8 @@ app.get('/api/city001mb/:id', (req, res) => {
  *    tags: [city001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -1628,6 +1663,8 @@ app.post('/api/city001mb/city', (req, res) => {
  *    tags: [city001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -1649,14 +1686,12 @@ app.post('/api/city001mb/city', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/city001mb'
+ *                           $ref: '#/components/schemas/city001mb'
  */
 
 app.put('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
-    City001mb.findOne({ _id: id }, function(err, city001mb) {
+    City001mb.findOne({ _id: id }, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb',
@@ -1678,7 +1713,7 @@ app.put('/api/city001mb/:id', (req, res) => {
         city001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : city001mb.updateddatetime;
         city001mb.updateduser = req.body.updateduser ? req.body.updateduser : city001mb.updateduser;
 
-        city001mb.save(function(err, country001mb) {
+        city001mb.save(function (err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -1700,6 +1735,8 @@ app.put('/api/city001mb/:id', (req, res) => {
  *    tags: [city001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -1716,7 +1753,7 @@ app.put('/api/city001mb/:id', (req, res) => {
 app.delete('/api/city001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    City001mb.findByIdAndRemove(id, function(err, city001mb) {
+    City001mb.findByIdAndRemove(id, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the city001mb.',
@@ -1771,6 +1808,8 @@ app.delete('/api/city001mb/:id', (req, res) => {
  *     tags: [photo001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -1779,13 +1818,11 @@ app.delete('/api/city001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/photo001wb'
+ *                          $ref: '#/components/schemas/photo001wb'
  */
 
 app.get('/api/photo001wb', (req, res) => {
-    Photo001wb.find({ id: req.params.id }, function(err, results) {
+    Photo001wb.find({ id: req.params.id }, function (err, results) {
         if (err) {
             res.send(`error: ${err}`);
         } else {
@@ -1801,6 +1838,8 @@ app.get('/api/photo001wb', (req, res) => {
  *     tags: [photo001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -1816,14 +1855,12 @@ app.get('/api/photo001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/photo001wb'
+ *                          $ref: '#/components/schemas/photo001wb'
  */
 
 app.get('/api/photo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Photo001wb.findOne({ _id: id }, function(err, photo001wb) {
+    Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb.',
@@ -1848,6 +1885,8 @@ app.get('/api/photo001wb/:id', (req, res) => {
  *    tags: [photo001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -1859,6 +1898,10 @@ app.get('/api/photo001wb/:id', (req, res) => {
  *         description: Sucess
  *       500:
  *         description: failed
+ *         content:
+ *           application/json:
+ *                     schema:
+ *                         $ref: '#/components/schemas/photo001wb'
  */
 
 app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
@@ -1896,6 +1939,8 @@ app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
  *    tags: [photo001wb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -1917,14 +1962,12 @@ app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/photo001wb'
+ *                          $ref: '#/components/schemas/photo001wb'
  */
 
 app.put('/api/photo001wb/:id', [upload.single("content")], (req, res) => {
     var id = req.params.id;
-    Photo001wb.findOne({ _id: id }, function(err, photo001wb) {
+    Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting photo001wb',
@@ -1947,7 +1990,7 @@ app.put('/api/photo001wb/:id', [upload.single("content")], (req, res) => {
         photo001wb.updateduser = req.body.updateduser ? req.body.updateduser : photo001wb.updateduser;
         photo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : photo001wb.updateddatetime;
 
-        photo001wb.save(function(err, photo001wb) {
+        photo001wb.save(function (err, photo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating photo001wb.',
@@ -1967,6 +2010,8 @@ app.put('/api/photo001wb/:id', [upload.single("content")], (req, res) => {
  *    tags: [photo001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -1982,7 +2027,7 @@ app.put('/api/photo001wb/:id', [upload.single("content")], (req, res) => {
  */
 app.delete('/api/photo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Photo001wb.findByIdAndRemove(id, function(err, photo001wb) {
+    Photo001wb.findByIdAndRemove(id, function (err, photo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the photo001wb.',
@@ -2038,6 +2083,8 @@ app.delete('/api/photo001wb/:id', (req, res) => {
  *     tags: [video001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -2046,13 +2093,11 @@ app.delete('/api/photo001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/video001wb'
+ *                           $ref: '#/components/schemas/video001wb'
  */
 
 app.get('/api/video001wb', (req, res) => {
-    Video001wb.find(function(err, video001wb) {
+    Video001wb.find(function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -2071,6 +2116,8 @@ app.get('/api/video001wb', (req, res) => {
  *     tags: [video001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -2086,14 +2133,12 @@ app.get('/api/video001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/video001wb'
+ *                            $ref: '#/components/schemas/video001wb'
  */
 
 app.get('/api/video001wb/:id', (req, res) => {
     var id = req.params.id;
-    Video001wb.findOne({ _id: id }, function(err, video001wb) {
+    Video001wb.findOne({ _id: id }, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -2118,6 +2163,8 @@ app.get('/api/video001wb/:id', (req, res) => {
  *    tags: [video001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -2129,6 +2176,10 @@ app.get('/api/video001wb/:id', (req, res) => {
  *         description: Sucess
  *       500:
  *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/video001wb'
  */
 
 app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) => {
@@ -2167,6 +2218,8 @@ app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) =>
  *    tags: [video001wb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -2188,15 +2241,13 @@ app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) =>
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/video001wb'
  */
 
 app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
     var id = req.params.id;
 
-    Video001wb.findOne({ _id: id }, function(err, video001wb) {
+    Video001wb.findOne({ _id: id }, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb',
@@ -2221,7 +2272,7 @@ app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
         video001wb.updateduser = req.body.updateduser ? req.body.updateduser : video001wb.updateduser;
         video001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : video001wb.updateddatetime;
 
-        video001wb.save(function(err, video001wb) {
+        video001wb.save(function (err, video001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating video001wb.',
@@ -2242,6 +2293,8 @@ app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
  *    tags: [video001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -2257,7 +2310,7 @@ app.put('/api/video001wb/:id', [videoUpload.single("content")], (req, res) => {
  */
 app.delete('/api/video001wb/:id', (req, res) => {
     var id = req.params.id;
-    Video001wb.findByIdAndRemove(id, function(err, video001wb) {
+    Video001wb.findByIdAndRemove(id, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the video001wb.',
@@ -2312,6 +2365,8 @@ app.delete('/api/video001wb/:id', (req, res) => {
  *     tags: [audio001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -2320,13 +2375,11 @@ app.delete('/api/video001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/audio001wb'
+ *                            $ref: '#/components/schemas/audio001wb'
  */
 
 app.get('/api/audio001wb', (req, res) => {
-    Audio001wb.find(function(err, audio001wb) {
+    Audio001wb.find(function (err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb.',
@@ -2345,6 +2398,8 @@ app.get('/api/audio001wb', (req, res) => {
  *     tags: [audio001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -2360,14 +2415,12 @@ app.get('/api/audio001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/audio001wb'
+ *                           $ref: '#/components/schemas/audio001wb'
  */
 
 app.get('/api/audio001wb/:id', (req, res) => {
     var id = req.params.id;
-    Audio001wb.findOne({ _id: id }, function(err, audio001wb) {
+    Audio001wb.findOne({ _id: id }, function (err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb.',
@@ -2392,6 +2445,8 @@ app.get('/api/audio001wb/:id', (req, res) => {
  *    tags: [audio001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -2403,6 +2458,10 @@ app.get('/api/audio001wb/:id', (req, res) => {
  *         description: Sucess
  *       500:
  *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                          $ref: '#/components/schemas/audio001wb'
  */
 
 app.post('/api/audio001wb/audio', [audio.single("content")], (req, res) => {
@@ -2440,6 +2499,8 @@ app.post('/api/audio001wb/audio', [audio.single("content")], (req, res) => {
  *    tags: [audio001wb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -2461,14 +2522,12 @@ app.post('/api/audio001wb/audio', [audio.single("content")], (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/audio001wb'
+ *                            $ref: '#/components/schemas/audio001wb'
  */
 
 app.put('/api/audio001wb/:id', [audio.single("content")], (req, res) => {
     var id = req.params.id;
-    Audio001wb.findOne({ _id: id }, function(err, audio001wb) {
+    Audio001wb.findOne({ _id: id }, function (err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting audio001wb',
@@ -2493,7 +2552,7 @@ app.put('/api/audio001wb/:id', [audio.single("content")], (req, res) => {
         audio001wb.updateduser = req.body.updateduser ? req.body.updateduser : audio001wb.updateduser;
         audio001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : audio001wb.updateddatetime;
 
-        audio001wb.save(function(err, audio001wb) {
+        audio001wb.save(function (err, audio001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating audio001wb.',
@@ -2512,6 +2571,8 @@ app.put('/api/audio001wb/:id', [audio.single("content")], (req, res) => {
  *    tags: [audio001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -2527,7 +2588,7 @@ app.put('/api/audio001wb/:id', [audio.single("content")], (req, res) => {
  */
 app.delete('/api/audio001wb/:id', (req, res) => {
     var id = req.params.id;
-    Audio001wb.findByIdAndRemove(id, function(err, audio001wb) {
+    Audio001wb.findByIdAndRemove(id, function (err, audio001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the audio001wb.',
@@ -2593,6 +2654,8 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  *     tags: [contentmaster001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -2601,13 +2664,11 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/contentmaster001mb'
+ *                            $ref: '#/components/schemas/contentmaster001mb'
  */
 
 app.get('/api/contentmaster001mb', (req, res) => {
-    Contentmaster001mb.find(function(err, contentmaster001mbs) {
+    Contentmaster001mb.find(function (err, contentmaster001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb.',
@@ -2626,6 +2687,8 @@ app.get('/api/contentmaster001mb', (req, res) => {
  *     tags: [contentmaster001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -2641,15 +2704,13 @@ app.get('/api/contentmaster001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/contentmaster001mb'
+ *                            $ref: '#/components/schemas/contentmaster001mb'
  */
 
 app.get('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
+    Contentmaster001mb.findOne({ _id: id }, function (err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb.',
@@ -2674,6 +2735,8 @@ app.get('/api/contentmaster001mb/:id', (req, res) => {
  *    tags: [contentmaster001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -2701,7 +2764,7 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
     contentmaster001mb.personid = req.body.personid.id;
-    contentmaster001mb.save(function(err, contentmaster001mb) {
+    contentmaster001mb.save(function (err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when creating contentmaster001mb',
@@ -2720,6 +2783,8 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
  *    tags: [contentmaster001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -2741,15 +2806,13 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/contentmaster001mb'
+ *                            $ref: '#/components/schemas/contentmaster001mb'
  */
 
 app.put('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Contentmaster001mb.findOne({ _id: id }, function(err, contentmaster001mb) {
+    Contentmaster001mb.findOne({ _id: id }, function (err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting contentmaster001mb',
@@ -2776,7 +2839,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
         contentmaster001mb.updateduser = req.body.updateduser ? req.body.updateduser : contentmaster001mb.updateduser;
         contentmaster001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : contentmaster001mb.updateddatetime;
 
-        contentmaster001mb.save(function(err, contentmaster001mb) {
+        contentmaster001mb.save(function (err, contentmaster001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating contentmaster001mb.',
@@ -2795,6 +2858,8 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
  *    tags: [contentmaster001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -2811,7 +2876,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
 app.delete('/api/contentmaster001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Contentmaster001mb.findByIdAndRemove(id, function(err, contentmaster001mb) {
+    Contentmaster001mb.findByIdAndRemove(id, function (err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the contentmaster001mb.',
@@ -2859,6 +2924,8 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  *     tags: [categorydetails001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -2867,13 +2934,11 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/categorydetails001mb'
  */
 
 app.get('/api/categorydetails001mb', (req, res) => {
-    Categorydetails001mb.find(function(err, categorydetails001mb) {
+    Categorydetails001mb.find(function (err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -2892,6 +2957,8 @@ app.get('/api/categorydetails001mb', (req, res) => {
  *     tags: [categorydetails001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -2907,15 +2974,13 @@ app.get('/api/categorydetails001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/categorydetails001mb'
+ *                            $ref: '#/components/schemas/categorydetails001mb'
  */
 
 app.get('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb.',
@@ -2940,6 +3005,8 @@ app.get('/api/categorydetails001mb/:id', (req, res) => {
  *    tags: [categorydetails001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -2985,6 +3052,8 @@ app.post('/api/categorydetails001mb/category', (req, res) => {
  *    tags: [categorydetails001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -3006,14 +3075,12 @@ app.post('/api/categorydetails001mb/category', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/categorydetails001mb'
  */
 
 app.put('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Categorydetails001mb.findOne({ _id: id }, function(err, categorydetails001mb) {
+    Categorydetails001mb.findOne({ _id: id }, function (err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting categorydetails001mb',
@@ -3034,7 +3101,7 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
         categorydetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : categorydetails001mb.updateduser;
         categorydetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : categorydetails001mb.updateddatetime;
 
-        categorydetails001mb.save(function(err, categorydetails001mb) {
+        categorydetails001mb.save(function (err, categorydetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating categorydetails001mb.',
@@ -3053,6 +3120,8 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
  *    tags: [categorydetails001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -3069,7 +3138,7 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
 app.delete('/api/categorydetails001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Categorydetails001mb.findByIdAndRemove(id, function(err, categorydetails001mb) {
+    Categorydetails001mb.findByIdAndRemove(id, function (err, categorydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the categorydetails001mb.',
@@ -3081,7 +3150,6 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
     });
 });
 
-
 // ********************** companydetails001mb schema method****************//
 /** 
  * @swagger
@@ -3090,12 +3158,10 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  *      companydetails001mb:
  *            type: object
  *            properties:
- *             phonenumber:
- *                type: number
- *             companycode:
- *                 type: string
  *             companyname:
- *                 type: string    
+ *                 type: string  
+ *             phonenumber:
+ *                type: number  
  *             address:
  *                 type: string   
  *             status:
@@ -3108,7 +3174,7 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -3127,6 +3193,8 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  *     tags: [companydetails001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -3135,13 +3203,11 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/companydetails001mb'
  */
 
 app.get('/api/companydetails001mb', (req, res) => {
-    Companydetails001mb.find(function(err, companydetails001mb) {
+    Companydetails001mb.find(function (err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb.',
@@ -3160,6 +3226,8 @@ app.get('/api/companydetails001mb', (req, res) => {
  *     tags: [companydetails001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -3175,14 +3243,12 @@ app.get('/api/companydetails001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/companydetails001mb'
+ *                           $ref: '#/components/schemas/companydetails001mb'
  */
 
 app.get('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findOne({ _id: id }, function(err, companydetails001mb) {
+    Companydetails001mb.findOne({ _id: id }, function (err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb.',
@@ -3207,6 +3273,8 @@ app.get('/api/companydetails001mb/:id', (req, res) => {
  *    tags: [companydetails001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -3221,68 +3289,68 @@ app.get('/api/companydetails001mb/:id', (req, res) => {
  */
 
 app.post('/api/companydetails001mb/company', (req, res) => {
-        const companydetails001mb = new Companydetails001mb();
-        companydetails001mb.subscid = req.body.subscid.id;
-        companydetails001mb.companycode = req.body.companycode;
-        companydetails001mb.companyname = req.body.companyname;
-        companydetails001mb.address = req.body.address;
-        companydetails001mb.phonenumber = req.body.phonenumber;
-        companydetails001mb.regionalid = req.body.regionalid.id;
-        companydetails001mb.status = req.body.status;
-        companydetails001mb.inserteduser = req.body.inserteduser;
-        companydetails001mb.inserteddatetime = req.body.inserteddatetime;
-        companydetails001mb.updateduser = req.body.updateduser;
-        companydetails001mb.updateddatetime = req.body.updateddatetime;
-        companydetails001mb.save()
-            .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: companydetails001mb.subscid }, (err, user) => {
-                    if (user) {
-                        user.companycode.push(companydetails001mb);
-                        user.save();
-                        res.json({ message: 'companydetails created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+    const companydetails001mb = new Companydetails001mb();
+    companydetails001mb.personid = req.body.personid.id;
+    companydetails001mb.regionalid = req.body.regionalid.id;
+    companydetails001mb.companyname = req.body.companyname;
+    companydetails001mb.address = req.body.address;
+    companydetails001mb.phonenumber = req.body.phonenumber;
+    companydetails001mb.status = req.body.status;
+    companydetails001mb.inserteduser = req.body.inserteduser;
+    companydetails001mb.inserteddatetime = req.body.inserteddatetime;
+    companydetails001mb.updateduser = req.body.updateduser;
+    companydetails001mb.updateddatetime = req.body.updateddatetime;
+    companydetails001mb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: companydetails001mb.personid }, (err, user) => {
+                if (user) {
+                    user.companycode.push(companydetails001mb);
+                    user.save();
+                    return res.json({ message: 'companydetails created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/companydetails001mb/{id}:
-     *   put:
-     *    tags: [companydetails001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/companydetails001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/companydetails001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/companydetails001mb/{id}:
+ *   put:
+ *    tags: [companydetails001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/companydetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/companydetails001mb'
+ */
 
 app.put('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findOne({ _id: id }, function(err, companydetails001mb) {
+
+    Companydetails001mb.findOne({ _id: id }, function (err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting companydetails001mb',
@@ -3295,8 +3363,7 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
                 message: 'No such companydetails001mb'
             });
         }
-        companydetails001mb.subscid = req.body.subscid.id ? req.body.subscid.id : companydetails001mb.subscid;
-        companydetails001mb.companycode = req.body.companycode ? req.body.companycode : companydetails001mb.companycode;
+        companydetails001mb.personid = req.body.personid.id ? req.body.personid.id : companydetails001mb.personid;
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;
         companydetails001mb.phonenumber = req.body.phonenumber ? req.body.phonenumber : companydetails001mb.phonenumber;
@@ -3306,8 +3373,7 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
         companydetails001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : companydetails001mb.inserteddatetime;
         companydetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : companydetails001mb.updateduser;
         companydetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : companydetails001mb.updateddatetime;
-
-        companydetails001mb.save(function(err, companydetails001mb) {
+        companydetails001mb.save(function (err, companydetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating companydetails001mb.',
@@ -3326,6 +3392,8 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
  *    tags: [companydetails001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -3341,7 +3409,7 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
  */
 app.delete('/api/companydetails001mb/:id', (req, res) => {
     var id = req.params.id;
-    Companydetails001mb.findByIdAndRemove(id, function(err, companydetails001mb) {
+    Companydetails001mb.findByIdAndRemove(id, function (err, companydetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the companydetails001mb.',
@@ -3352,8 +3420,6 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
         return res.json({ message: 'Deleted Sucessfully' });
     });
 });
-
-
 
 // ********************** language001mb schema method****************//
 /** 
@@ -3392,6 +3458,8 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  *     tags: [language001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -3400,13 +3468,11 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/language001mb'
  */
 
 app.get('/api/language001mb', (req, res) => {
-    Language001mb.find(function(err, language001mb) {
+    Language001mb.find(function (err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -3425,6 +3491,8 @@ app.get('/api/language001mb', (req, res) => {
  *     tags: [language001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -3440,15 +3508,13 @@ app.get('/api/language001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/language001mb'
  */
 
 app.get('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Language001mb.findOne({ _id: id }, function(err, language001mb) {
+    Language001mb.findOne({ _id: id }, function (err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb.',
@@ -3471,6 +3537,8 @@ app.get('/api/language001mb/:id', (req, res) => {
  * /api/language001mb/language:
  *   post:
  *    tags: [language001mb]  
+ *    security:
+ *        - bearerAuth: []
  *    summary: Post Method
  *    description: Retrieve the list of data
  *    requestBody:
@@ -3486,68 +3554,68 @@ app.get('/api/language001mb/:id', (req, res) => {
  *         description: failed
  */
 
-app.post('/api/language001mb/language', (req, res) => {
-        const language001mb = new Language001mb()
-        language001mb.personid = req.body.personid.id;
-        language001mb.languagename = req.body.languagename;
-        language001mb.languagedesc = req.body.languagedesc;
-        language001mb.status = req.body.status;
-        language001mb.inserteduser = req.body.inserteduser;
-        language001mb.inserteddatetime = req.body.inserteddatetime;
-        language001mb.updateduser = req.body.updateduser;
-        language001mb.updateddatetime = req.body.updateddatetime;
+app.post('/api/language001mb/language', verifyToken, rolebaseauth(["subcriber"]), (req, res) => {
+    const language001mb = new Language001mb()
+    language001mb.personid = req.body.personid.id;
+    language001mb.languagename = req.body.languagename;
+    language001mb.languagedesc = req.body.languagedesc;
+    language001mb.status = req.body.status;
+    language001mb.inserteduser = req.body.inserteduser;
+    language001mb.inserteddatetime = req.body.inserteddatetime;
+    language001mb.updateduser = req.body.updateduser;
+    language001mb.updateddatetime = req.body.updateddatetime;
 
-        language001mb.save()
-            .then((result) => {
-                Person001mb.findOne({ _id: language001mb.personid }, (err, user) => {
-                    if (user) {
-                        user.languageid.push(language001mb);
-                        user.save();
-                        return res.json({ message: 'language created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                return res.status(500).json({ error });
+    language001mb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: language001mb.personid }, (err, user) => {
+                if (user) {
+                    user.languageid.push(language001mb);
+                    user.save();
+                    return res.json({ message: 'language created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/language001mb/{id}:
-     *   put:
-     *    tags: [language001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/language001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/language001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/language001mb/{id}:
+ *   put:
+ *    tags: [language001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/language001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/language001mb'
+ */
 
 app.put('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Language001mb.findOne({ _id: id }, function(err, language001mb) {
+    Language001mb.findOne({ _id: id }, function (err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting language001mb',
@@ -3567,7 +3635,7 @@ app.put('/api/language001mb/:id', (req, res) => {
         language001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : language001mb.inserteddatetime;
         language001mb.updateduser = req.body.updateduser ? req.body.updateduser : language001mb.updateduser;
         language001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : language001mb.updateddatetime;
-        language001mb.save(function(err, language001mb) {
+        language001mb.save(function (err, language001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating language001mb.',
@@ -3586,6 +3654,8 @@ app.put('/api/language001mb/:id', (req, res) => {
  *    tags: [language001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -3602,7 +3672,7 @@ app.put('/api/language001mb/:id', (req, res) => {
 app.delete('/api/language001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Language001mb.findByIdAndRemove(id, function(err, language001mb) {
+    Language001mb.findByIdAndRemove(id, function (err, language001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the language001mb.',
@@ -3654,6 +3724,8 @@ app.delete('/api/language001mb/:id', (req, res) => {
  *     tags: [regionaldetails001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -3662,13 +3734,11 @@ app.delete('/api/language001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/regionaldetails001mb'
  */
 
 app.get('/api/regionaldetails001mb', (req, res) => {
-    Regionaldetails001mb.find(function(err, regionaldetails001mb) {
+    Regionaldetails001mb.find(function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -3687,6 +3757,8 @@ app.get('/api/regionaldetails001mb', (req, res) => {
  *     tags: [regionaldetails001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -3702,15 +3774,13 @@ app.get('/api/regionaldetails001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/regionaldetails001mb'
  */
 
 app.get('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb.',
@@ -3735,6 +3805,8 @@ app.get('/api/regionaldetails001mb/:id', (req, res) => {
  *    tags: [regionaldetails001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -3749,66 +3821,66 @@ app.get('/api/regionaldetails001mb/:id', (req, res) => {
  */
 
 app.post('/api/regionaldetails001mb/regional', (req, res) => {
-        const regionaldetails001mb = new Regionaldetails001mb();
-        regionaldetails001mb.personid = req.body.personid.id;
-        regionaldetails001mb.regionalname = req.body.regionalname;
-        regionaldetails001mb.regionaldesc = req.body.regionaldesc;
-        regionaldetails001mb.status = req.body.status;
-        regionaldetails001mb.inserteduser = req.body.inserteduser;
-        regionaldetails001mb.inserteddatetime = req.body.inserteddatetime;
-        regionaldetails001mb.updateduser = req.body.updateduser;
-        regionaldetails001mb.updateddatetime = req.body.updateddatetime;
-        regionaldetails001mb.save()
-            .then((result) => {
-                Person001mb.findOne({ _id: regionaldetails001mb.personid }, (err, user) => {
-                    if (user) {
-                        user.regionalid.push(regionaldetails001mb);
-                        user.save();
-                        return res.json({ message: 'regionaldetails created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                return res.status(500).json({ error });
+    const regionaldetails001mb = new Regionaldetails001mb();
+    regionaldetails001mb.personid = req.body.personid.id;
+    regionaldetails001mb.regionalname = req.body.regionalname;
+    regionaldetails001mb.regionaldesc = req.body.regionaldesc;
+    regionaldetails001mb.status = req.body.status;
+    regionaldetails001mb.inserteduser = req.body.inserteduser;
+    regionaldetails001mb.inserteddatetime = req.body.inserteddatetime;
+    regionaldetails001mb.updateduser = req.body.updateduser;
+    regionaldetails001mb.updateddatetime = req.body.updateddatetime;
+    regionaldetails001mb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: regionaldetails001mb.personid }, (err, user) => {
+                if (user) {
+                    user.regionalid.push(regionaldetails001mb);
+                    user.save();
+                    return res.json({ message: 'regionaldetails created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/regionaldetails001mb/{id}:
-     *   put:
-     *    tags: [regionaldetails001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/regionaldetails001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/regionaldetails001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/regionaldetails001mb/{id}:
+ *   put:
+ *    tags: [regionaldetails001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/regionaldetails001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/regionaldetails001mb'
+ */
 
 app.put('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findOne({ _id: id }, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findOne({ _id: id }, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting regionaldetails001mb',
@@ -3830,7 +3902,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
         regionaldetails001mb.updateduser = req.body.updateduser ? req.body.updateduser : regionaldetails001mb.updateduser;
         regionaldetails001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : regionaldetails001mb.updateddatetime;
 
-        regionaldetails001mb.save(function(err, regionaldetails001mb) {
+        regionaldetails001mb.save(function (err, regionaldetails001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating regionaldetails001mb.',
@@ -3849,6 +3921,8 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
  *    tags: [regionaldetails001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -3865,7 +3939,7 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
 app.delete('/api/regionaldetails001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Regionaldetails001mb.findByIdAndRemove(id, function(err, regionaldetails001mb) {
+    Regionaldetails001mb.findByIdAndRemove(id, function (err, regionaldetails001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the regionaldetails001mb.',
@@ -3886,10 +3960,22 @@ app.delete('/api/regionaldetails001mb/:id', (req, res) => {
  *      login001mb:
  *            type: object
  *            properties:
- *             logintype:
+ *             username:
  *                type: string
  *             password:
- *                 type: string     
+ *                 type: string  
+ *             token:
+ *                 type: string
+ *             personid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string
+ *             roleid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
  *             status:
  *                 type: string
  *             inserteduser:
@@ -3910,6 +3996,8 @@ app.delete('/api/regionaldetails001mb/:id', (req, res) => {
  *     tags: [login001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -3918,13 +4006,11 @@ app.delete('/api/regionaldetails001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/login001mb'
  */
 
 app.get('/api/login001mb', (req, res) => {
-    Login001mb.find(function(err, login001mb) {
+    Login001mb.find(function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -3943,6 +4029,8 @@ app.get('/api/login001mb', (req, res) => {
  *     tags: [login001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -3958,14 +4046,12 @@ app.get('/api/login001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/login001mb'
  */
 
 app.get('/api/login001mb/:id', (req, res) => {
     var id = req.params.id;
-    Login001mb.findOne({ _id: id }, function(err, login001mb) {
+    Login001mb.findOne({ _id: id }, function (err, login001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting login001mb.',
@@ -3983,150 +4069,68 @@ app.get('/api/login001mb/:id', (req, res) => {
     });
 });
 
+
+// ********************** loginauth  get method****************//
 /**
  * @swagger
- * /api/login001mb/login:
- *   post:
- *    tags: [login001mb]  
- *    summary: Post Method
- *    description: Retrieve the list of data
- *    requestBody:
+ * /api/login001mb/{username}/{password}:
+ *  get:
+ *     tags: [login001mb]
+ *     summary: Retrieve a data by username and password.
+ *     description: Retrieve a data by username and password.
+ *     parameters:
+ *       - in: path
+ *         name: username
  *         required: true
+ *         description: Retrive a data by Username.
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: password
+ *         required: true
+ *         description: Retrive a data by password.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
  *         content:
  *             application/json:
  *                       schema:
- *                          $ref: '#/components/schemas/login001mb'
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
+ *                            $ref: '#/components/schemas/login001mb'
  */
 
-app.post('/api/login001mb/login', (req, res) => {
-        const login001mb = new Login001mb()
-        login001mb.email = req.body.email;
-        login001mb.password = req.body.password;
-        login001mb.rolename = req.body.rolename.rolename;
-        login001mb.status = req.body.status;
-        login001mb.inserteduser = req.body.inserteduser;
-        login001mb.inserteddatetime = req.body.inserteddatetime;
-        login001mb.updateduser = req.body.updateduser;
-        login001mb.updateddatetime = req.body.updateddatetime;
 
-        login001mb.save()
-            .then((result) => {
-                res.json({ message: 'Login created' });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
-            });
-    })
-    /**
-     * @swagger
-     * /api/login001mb/{id}:
-     *   put:
-     *    tags: [login001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/login001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/login001mb'
-     */
-
-app.put('/api/login001mb/:id', (req, res) => {
-    var id = req.params.id;
-    Login001mb.findOne({ _id: id }, function(err, login001mb) {
-        if (err) {
+app.get('/api/login001mb/:username/:password', async (req, res) => {
+    var username = req.params.username;
+    var password = req.params.password;
+    const loginperson = await Login001mb.findOne({ username: username }).populate({ path: 'roleid', model: Role001mb });
+    if (loginperson) {
+        const security = await bcrypt.compare(password, loginperson.password)
+        if (security) {
+            const person = await Person001mb.findOne({ _id: loginperson.personid });
+            const token = jwt.sign({ username: loginperson.username, rolename: loginperson.roleid.rolename }, process.env.TOKEN_KEY,
+                {
+                    expiresIn: "6h",
+                }
+            );
             return res.status(500).json({
-                message: 'Error when getting login001mb',
-                error: err
+                data: { person: person, token: token }
+            });
+
+        } else {
+            return res.status(500).json({
+                message: 'invalid password'
             });
         }
-
-        if (!login001mb) {
-            return res.status(404).json({
-                message: 'No such login001mb'
-            });
-        }
-        login001mb.email = req.body.email ? req.body.email : login001mb.email;
-        login001mb.password = req.body.password ? req.body.password : login001mb.password;
-        login001mb.rolename = req.body.rolename.rolename ? req.body.rolename.rolename : login001mb.rolename;
-        login001mb.status = req.body.status ? req.body.status : login001mb.status
-        login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
-        login001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : login001mb.inserteddatetime;
-        login001mb.updateduser = req.body.updateduser ? req.body.updateduser : login001mb.updateduser;
-        login001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : login001mb.updateddatetime;
-
-        login001mb.save(function(err, login001mb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when updating login001mb.',
-                    error: err
-                });
-            }
-
-            return res.json(login001mb);
+    } else {
+        return res.status(500).json({
+            message: 'invalid username'
         });
-    });
+    }
 });
-/**
- * @swagger
- * /api/login001mb/{id}:
- *   delete:
- *    tags: [login001mb]
- *    summary: Delete Method
- *    description: Delete the list of data
- *    parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
- *           type: string
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
- */
-app.delete('/api/login001mb/:id', (req, res) => {
-    var id = req.params.id;
-    Login001mb.findByIdAndRemove(id, function(err, login001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when deleting the login001mb.',
-                error: err
-            });
-        }
-
-        return res.json({ message: 'Deleted Sucessfully' });
-    });
-});
-
-
-
 // ********************** person001mb schema method****************//
 /** 
  * @swagger
@@ -4135,18 +4139,80 @@ app.delete('/api/login001mb/:id', (req, res) => {
  *      person001mb:
  *            type: object
  *            properties:
- *             subscid:
+ *             firstname:
+ *                   type: string
+ *             lasttname:
+ *                   type: string
+ *             sex:
+ *               type: string
+ *             phoneno:
+ *                  type: number
+ *             landline:
+ *                  type: number
+ *             address:
+ *                   type: string
+ *             zipcode:                     
+ *                   type: number
+ *             dob: 
+ *                   type: string
+ *             email:
+ *                   type: string 
+ *             confirmemail:
+ *                   type: string
+ *             verified:
+ *                  type: boolean
+ *             token:
+ *                   type: string
+ *             countryid:
  *                type: object
  *                properties:
  *                    id: 
- *                      type: string    
- *             userid:
+ *                      type: string 
+ *             cityid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
+ *             personid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
+ *             stateid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
+ *             companycode:
+ *                 type: array
+ *             roleid:
  *                 type: object
  *                 properties:
  *                    id: 
- *                      type: string  
- *             personid:   
- *                 type: number 
+ *                      type: string 
+ *             subcatcode:
+ *                 type: array
+ *             professionalid:
+ *                 type: array
+ *             categoryid:
+ *                 type: array
+ *             languageid:
+ *                 type: array
+ *             personalid:
+ *                 type: array
+ *             contentid:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             religionid:
+ *                 type: array
+ *             classificationid:
+ *                 type: array
+ *             subscsubspid:
+ *                 type: array
+ *             regionalid:
+ *                 type: array
  *             status:
  *                 type: string
  *             inserteduser:
@@ -4167,6 +4233,8 @@ app.delete('/api/login001mb/:id', (req, res) => {
  *     tags: [person001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -4175,13 +4243,11 @@ app.delete('/api/login001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/person001mb'
  */
 
 app.get('/api/person001mb', (req, res) => {
-    Person001mb.find(function(err, person001mb) {
+    Person001mb.find(function (err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting person001mb.',
@@ -4200,6 +4266,8 @@ app.get('/api/person001mb', (req, res) => {
  *     tags: [person001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -4215,14 +4283,12 @@ app.get('/api/person001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/person001mb'
  */
 
 app.get('/api/person001mb/:id', (req, res) => {
     var id = req.params.id;
-    Person001mb.findOne({ _id: id }, function(err, person001mb) {
+    Person001mb.findOne({ _id: id }, function (err, person001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting person001mb.',
@@ -4239,155 +4305,6 @@ app.get('/api/person001mb/:id', (req, res) => {
         return res.json(person001mb);
     });
 });
-
-/**
- * @swagger
- * /api/person001mb/person:
- *   post:
- *    tags: [person001mb]  
- *    summary: Post Method
- *    description: Retrieve the list of data
- *    requestBody:
- *         required: true
- *         content:
- *             application/json:
- *                       schema:
- *                          $ref: '#/components/schemas/person001mb'
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
- */
-
-app.post('/api/person001mb/person', (req, res) => {
-        const person001mb = new Person001mb();
-        person001mb.personid = req.body.personid;
-        person001mb.subscid = req.body.subscid.id;
-        person001mb.userid = req.body.userid.id;
-        person001mb.inserteduser = req.body.inserteduser;
-        person001mb.inserteddatetime = req.body.inserteddatetime;
-        person001mb.updateduser = req.body.updateduser;
-        person001mb.status = req.body.status;
-        person001mb.updateddatetime = req.body.updateddatetime;
-        person001mb.save(function(err, person001mb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating person001mb',
-                    error: err
-                });
-            }
-
-            return res.status(201).json('Person001mb Created!');
-        });
-    })
-    /**
-     * @swagger
-     * /api/person001mb/{id}:
-     *   put:
-     *    tags: [person001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/person001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/person001mb'
-     */
-
-app.put('/api/person001mb/:id', (req, res) => {
-    var id = req.params.id;
-    Person001mb.findOne({ _id: id }, function(err, person001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when getting person001mb',
-                error: err
-            });
-        }
-
-        if (!person001mb) {
-            return res.status(404).json({
-                message: 'No such person001mb'
-            });
-        }
-
-        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
-        person001mb.subscid = req.body.subscid.id ? req.body.subscid.id : person001mb.subscid;
-        person001mb.user = req.body.userid.id ? req.body.userid.id : person001mb.user;
-        person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
-        person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
-        person001mb.status = req.body.status ? req.body.status : person001mb.status;
-        person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
-        person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
-
-        person001mb.save(function(err, person001mb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when updating person001mb.',
-                    error: err
-                });
-            }
-
-            return res.json(person001mb);
-        });
-    });
-});
-/**
- * @swagger
- * /api/person001mb/{id}:
- *   delete:
- *    tags: [person001mb]
- *    summary: Delete Method
- *    description: Delete the list of data
- *    parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
- *           type: string
- *    responses:
- *       200:
- *         description: Sucess
- *       500:
- *         description: failed
- */
-app.delete('/api/person001mb/:id', (req, res) => {
-    var id = req.params.id;
-    Person001mb.findByIdAndRemove(id, function(err, person001mb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when deleting the person001mb.',
-                error: err
-            });
-        }
-
-        return res.json({ message: 'Deleted Sucessfully' });
-    });
-});
-
-
-
-
 // ********************** religion001mb schema method****************//
 /** 
  * @swagger
@@ -4396,13 +4313,11 @@ app.delete('/api/person001mb/:id', (req, res) => {
  *      religion001mb:
  *            type: object
  *            properties:
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string      
- *             religionid:
- *                 type: number
  *             religionname:
  *                 type: string
  *             religiondesc:
@@ -4427,6 +4342,8 @@ app.delete('/api/person001mb/:id', (req, res) => {
  *     tags: [religion001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -4435,13 +4352,11 @@ app.delete('/api/person001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/religion001mb'
  */
 
 app.get('/api/religion001mb', (req, res) => {
-    Religion001mb.find(function(err, religion001mbs) {
+    Religion001mb.find(function (err, religion001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb.',
@@ -4460,6 +4375,8 @@ app.get('/api/religion001mb', (req, res) => {
  *     tags: [religion001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -4475,14 +4392,12 @@ app.get('/api/religion001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/religion001mb'
  */
 
 app.get('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findOne({ _id: id }, function(err, religion001mb) {
+    Religion001mb.findOne({ _id: id }, function (err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb.',
@@ -4507,6 +4422,8 @@ app.get('/api/religion001mb/:id', (req, res) => {
  *    tags: [religion001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -4521,68 +4438,68 @@ app.get('/api/religion001mb/:id', (req, res) => {
  */
 
 app.post('/api/religion001mb/religion', (req, res) => {
-        const religion001mb = new Religion001mb();
-        religion001mb.subscid = req.body.subscid.id;
-        religion001mb.religionid = req.body.religionid;
-        religion001mb.religionname = req.body.religionname;
-        religion001mb.religiondesc = req.body.religiondesc;
-        religion001mb.status = req.body.status;
-        religion001mb.inserteduser = req.body.inserteduser;
-        religion001mb.inserteddatetime = req.body.inserteddatetime;
-        religion001mb.updateduser = req.body.updateduser;
-        religion001mb.updateddatetime = req.body.updateddatetime;
+    const religion001mb = new Religion001mb();
+    religion001mb.personid = req.body.personid.id;
+    religion001mb.religionname = req.body.religionname;
+    religion001mb.religiondesc = req.body.religiondesc;
+    religion001mb.status = req.body.status;
+    religion001mb.inserteduser = req.body.inserteduser;
+    religion001mb.inserteddatetime = req.body.inserteddatetime;
+    religion001mb.updateduser = req.body.updateduser;
+    religion001mb.updateddatetime = req.body.updateddatetime;
 
-        religion001mb.save()
-            .then((result) => {
+    religion001mb.save()
+        .then((result) => {
 
-                Subscriberdetails001wb.findOne({ _id: religion001mb.subscid }, (err, user) => {
-                    if (user) {
-                        user.religionid.push(religion001mb);
-                        user.save();
-                        res.json({ message: 'religion created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+            Person001mb.findOne({ _id: religion001mb.personid }, (err, user) => {
+                if (user) {
+                    user.religionid.push(religion001mb);
+                    user.save();
+                    return res.json({ message: 'religion created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/religion001mb/{id}:
-     *   put:
-     *    tags: [religion001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/religion001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/religion001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/religion001mb/{id}:
+ *   put:
+ *    tags: [religion001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/religion001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/religion001mb'
+ */
 
 app.put('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findOne({ _id: id }, function(err, religion001mb) {
+
+    Religion001mb.findOne({ _id: id }, function (err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting religion001mb',
@@ -4595,8 +4512,7 @@ app.put('/api/religion001mb/:id', (req, res) => {
                 message: 'No such religion001mb'
             });
         }
-        religion001mb.subscid = req.body.subscid.id ? req.body.subscid.id : religion001mb.religionid;
-        religion001mb.religionid = req.body.religionid ? req.body.religionid : religion001mb.religionid;
+        religion001mb.personid = req.body.personid.id ? req.body.personid.id : religion001mb.personid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;
@@ -4605,7 +4521,7 @@ app.put('/api/religion001mb/:id', (req, res) => {
         religion001mb.updateduser = req.body.updateduser ? req.body.updateduser : religion001mb.updateduser;
         religion001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : religion001mb.updateddatetime;
 
-        religion001mb.save(function(err, religion001mb) {
+        religion001mb.save(function (err, religion001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating religion001mb.',
@@ -4624,6 +4540,8 @@ app.put('/api/religion001mb/:id', (req, res) => {
  *    tags: [religion001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -4639,7 +4557,7 @@ app.put('/api/religion001mb/:id', (req, res) => {
  */
 app.delete('/api/religion001mb/:id', (req, res) => {
     var id = req.params.id;
-    Religion001mb.findByIdAndRemove(id, function(err, religion001mb) {
+    Religion001mb.findByIdAndRemove(id, function (err, religion001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the religion001mb.',
@@ -4653,10 +4571,6 @@ app.delete('/api/religion001mb/:id', (req, res) => {
 });
 
 
-
-
-
-
 // ********************** subcatclassification001mb schema method****************//
 /** 
  * @swagger
@@ -4665,7 +4579,7 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  *      subcatclassification001mb:
  *            type: object
  *            properties:
- *              subscid:
+ *              personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -4674,9 +4588,12 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  *                 type: object
  *                 properties:
  *                    id: 
- *                      type: string     
- *              classificationid:
- *                 type: number
+ *                      type: string 
+ *              catcode:
+ *                 type: object
+ *                 properties:
+ *                    id: 
+ *                      type: string    
  *              classificationname:
  *                 type: string
  *              status:
@@ -4699,6 +4616,8 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  *     tags: [subcatclassification001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -4707,13 +4626,11 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subcatclassification001mb'
  */
 
 app.get('/api/subcatclassification001mb', (req, res) => {
-    Subcatclassification001mb.find(function(err, subcatclassification001mbs) {
+    Subcatclassification001mb.find(function (err, subcatclassification001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb.',
@@ -4732,6 +4649,8 @@ app.get('/api/subcatclassification001mb', (req, res) => {
  *     tags: [subcatclassification001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -4747,14 +4666,12 @@ app.get('/api/subcatclassification001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subcatclassification001mb'
  */
 
 app.get('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findOne({ _id: id }, function(err, subcatclassification001mb) {
+    Subcatclassification001mb.findOne({ _id: id }, function (err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb.',
@@ -4779,6 +4696,8 @@ app.get('/api/subcatclassification001mb/:id', (req, res) => {
  *    tags: [subcatclassification001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -4793,67 +4712,67 @@ app.get('/api/subcatclassification001mb/:id', (req, res) => {
  */
 
 app.post('/api/subcatclassification001mb/subcatclassification', (req, res) => {
-        const subcatclassification001mb = new Subcatclassification001mb();
-        subcatclassification001mb.subscid = req.body.subscid.id;
-        subcatclassification001mb.subcatcode = req.body.subcatcode.id;
-        // subcatclassification001mb.catcode = req.body.catcode,
-        subcatclassification001mb.classificationid = req.body.classificationid;
-        subcatclassification001mb.classificationname = req.body.classificationname;
-        subcatclassification001mb.status = req.body.status;
-        subcatclassification001mb.inserteduser = req.body.inserteduser;
-        subcatclassification001mb.inserteddatetime = req.body.inserteddatetime;
-        subcatclassification001mb.updateduser = req.body.updateduser;
-        subcatclassification001mb.updateddatetime = req.body.updateddatetime;
-        subcatclassification001mb.save()
-            .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: subcatclassification001mb.subscid }, (err, user) => {
-                    if (user) {
-                        user.classificationid.push(subcatclassification001mb);
-                        user.save();
-                        res.json({ message: 'subcatclassification created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+    const subcatclassification001mb = new Subcatclassification001mb();
+    subcatclassification001mb.personid = req.body.personid.id;
+    subcatclassification001mb.subcatcode = req.body.subcatcode.id;
+    subcatclassification001mb.catcode = req.body.catcode.id,
+    subcatclassification001mb.classificationname = req.body.classificationname;
+    subcatclassification001mb.status = req.body.status;
+    subcatclassification001mb.inserteduser = req.body.inserteduser;
+    subcatclassification001mb.inserteddatetime = req.body.inserteddatetime;
+    subcatclassification001mb.updateduser = req.body.updateduser;
+    subcatclassification001mb.updateddatetime = req.body.updateddatetime;
+    subcatclassification001mb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: subcatclassification001mb.personid }, (err, user) => {
+                if (user) {
+                    user.classificationid.push(subcatclassification001mb);
+                    user.save();
+                    return res.json({ message: 'subcatclassification created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/subcatclassification001mb/{id}:
-     *   put:
-     *    tags: [subcatclassification001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subcatclassification001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subcatclassification001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/subcatclassification001mb/{id}:
+ *   put:
+ *    tags: [subcatclassification001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subcatclassification001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subcatclassification001mb'
+ */
 
 app.put('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findOne({ _id: id }, function(err, subcatclassification001mb) {
+
+    Subcatclassification001mb.findOne({ _id: id }, function (err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcatclassification001mb',
@@ -4867,17 +4786,15 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
             });
         }
         subcatclassification001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : subcatclassification001mb.subcatcode;
-        subcatclassification001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcatclassification001mb.subscid;
-        // subcatclassification001mb.catcode = req.body.catcode ? req.body.catcode : subcatclassification001mb.catcode;
-        subcatclassification001mb.classificationid = req.body.classificationid ? req.body.classificationid : subcatclassification001mb.classificationid;
+        subcatclassification001mb.personid = req.body.personid.id ? req.body.personid.id : subcatclassification001mb.personid;
+        subcatclassification001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcatclassification001mb.catcode;
         subcatclassification001mb.classificationname = req.body.classificationname ? req.body.classificationname : subcatclassification001mb.classificationname;
         subcatclassification001mb.status = req.body.status ? req.body.status : subcatclassification001mb.status;
         subcatclassification001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : subcatclassification001mb.inserteduser;
         subcatclassification001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subcatclassification001mb.inserteddatetime;
         subcatclassification001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcatclassification001mb.updateduser;
         subcatclassification001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcatclassification001mb.updateddatetime;
-
-        subcatclassification001mb.save(function(err, subcatclassification001mb) {
+        subcatclassification001mb.save(function (err, subcatclassification001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subcatclassification001mb.',
@@ -4896,6 +4813,8 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
  *    tags: [subcatclassification001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -4911,7 +4830,7 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
  */
 app.delete('/api/subcatclassification001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcatclassification001mb.findByIdAndRemove(id, function(err, subcatclassification001mb) {
+    Subcatclassification001mb.findByIdAndRemove(id, function (err, subcatclassification001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subcatclassification001mb.',
@@ -4923,9 +4842,6 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
     });
 });
 
-
-
-
 // ********************** subcategory001mb schema method****************//
 /** 
  * @swagger
@@ -4934,7 +4850,7 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  *      subcategory001mb:
  *            type: object
  *            properties:
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
@@ -4944,8 +4860,6 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                      type: string     
- *             subcatcode:
- *                 type: string
  *             subcatname:
  *                 type: string
  *             subcatstatus:
@@ -4970,6 +4884,8 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  *     tags: [subcategory001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -4978,13 +4894,11 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subcategory001mb'
  */
 
 app.get('/api/subcategory001mb', (req, res) => {
-    Subcategory001mb.find(function(err, subcategory001mbs) {
+    Subcategory001mb.find(function (err, subcategory001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -5003,6 +4917,8 @@ app.get('/api/subcategory001mb', (req, res) => {
  *     tags: [subcategory001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -5018,14 +4934,12 @@ app.get('/api/subcategory001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subcategory001mb'
  */
 
 app.get('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
+    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb.',
@@ -5050,6 +4964,8 @@ app.get('/api/subcategory001mb/:id', (req, res) => {
  *    tags: [subcategory001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -5064,67 +4980,67 @@ app.get('/api/subcategory001mb/:id', (req, res) => {
  */
 
 app.post('/api/subcategory001mb/subcategory', (req, res) => {
-        const subcategory001mb = new Subcategory001mb();
-        subcategory001mb.subscid = req.body.subscid.id;
-        subcategory001mb.catcode = req.body.catcode.id;
-        subcategory001mb.subcatcode = req.body.subcatcode;
-        subcategory001mb.subcatname = req.body.subcatname;
-        subcategory001mb.subcatstatus = req.body.subcatstatus;
-        subcategory001mb.status = req.body.status;
-        subcategory001mb.inserteduser = req.body.inserteduser;
-        subcategory001mb.inserteddatetime = req.body.inserteddatetime;
-        subcategory001mb.updateduser = req.body.updateduser;
-        subcategory001mb.updateddatetime = req.body.updateddatetime;
-        subcategory001mb.save()
-            .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: subcategory001mb.subscid }, (err, user) => {
-                    if (user) {
-                        user.subcatcode.push(subcategory001mb);
-                        user.save();
-                        res.json({ message: 'subcategory001mb created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+    const subcategory001mb = new Subcategory001mb();
+    subcategory001mb.personid = req.body.personid.id;
+    subcategory001mb.catcode = req.body.catcode.id;
+    subcategory001mb.subcatname = req.body.subcatname;
+    subcategory001mb.subcatstatus = req.body.subcatstatus;
+    subcategory001mb.status = req.body.status;
+    subcategory001mb.inserteduser = req.body.inserteduser;
+    subcategory001mb.inserteddatetime = req.body.inserteddatetime;
+    subcategory001mb.updateduser = req.body.updateduser;
+    subcategory001mb.updateddatetime = req.body.updateddatetime;
+    subcategory001mb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: subcategory001mb.personid }, (err, user) => {
+                if (user) {
+                    user.subcatcode.push(subcategory001mb);
+                    user.save();
+                    return res.json({ message: 'subcategory001mb created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/subcategory001mb/{id}:
-     *   put:
-     *    tags: [subcategory001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subcategory001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subcategory001mb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/subcategory001mb/{id}:
+ *   put:
+ *    tags: [subcategory001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subcategory001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subcategory001mb'
+ */
 
 app.put('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findOne({ _id: id }, function(err, subcategory001mb) {
+
+    Subcategory001mb.findOne({ _id: id }, function (err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subcategory001mb',
@@ -5137,9 +5053,8 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
                 message: 'No such subcategory001mb'
             });
         }
-        subcategory001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subcategory001mb.subscid;
+        subcategory001mb.personid = req.body.personid.id ? req.body.personid.id : subcategory001mb.personid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
-        subcategory001mb.subcatcode = req.body.subcatcode ? req.body.subcatcode : subcategory001mb.subcatcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;
         subcategory001mb.subcatstatus = req.body.subcatstatus ? req.body.subcatstatus : subcategory001mb.subcatstatus;
         subcategory001mb.status = req.body.status ? req.body.status : subcategory001mb.status;
@@ -5147,8 +5062,7 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
         subcategory001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subcategory001mb.inserteddatetime;
         subcategory001mb.updateduser = req.body.updateduser ? req.body.updateduser : subcategory001mb.updateduser;
         subcategory001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subcategory001mb.updateddatetime;
-
-        subcategory001mb.save(function(err, subcategory001mb) {
+        subcategory001mb.save(function (err, subcategory001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subcategory001mb.',
@@ -5167,6 +5081,8 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
  *    tags: [subcategory001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -5182,7 +5098,7 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
  */
 app.delete('/api/subcategory001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subcategory001mb.findByIdAndRemove(id, function(err, subcategory001mb) {
+    Subcategory001mb.findByIdAndRemove(id, function (err, subcategory001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subcategory001mb.',
@@ -5194,9 +5110,6 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
     });
 });
 
-
-
-
 // ********************** subscribercontentauth001wb schema method****************//
 /** 
  * @swagger
@@ -5205,13 +5118,11 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
  *      subscribercontentauth001wb:
  *            type: object
  *            properties:
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string      
- *             subscsubpid:
- *                 type: number
  *             subscsubpstatus:
  *                 type: string
  *             subscsubpstartdate:
@@ -5238,6 +5149,8 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
  *     tags: [subscribercontentauth001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -5246,13 +5159,11 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscribercontentauth001wb'
  */
 
 app.get('/api/subscribercontentauth001wb', (req, res) => {
-    Subscribercontentauth001wb.find(function(err, subscribercontentauth001wbs) {
+    Subscribercontentauth001wb.find(function (err, subscribercontentauth001wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb.',
@@ -5271,6 +5182,8 @@ app.get('/api/subscribercontentauth001wb', (req, res) => {
  *     tags: [subscribercontentauth001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -5286,14 +5199,12 @@ app.get('/api/subscribercontentauth001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscribercontentauth001wb'
  */
 
 app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscribercontentauth001wb.findOne({ _id: id }, function(err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findOne({ _id: id }, function (err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb.',
@@ -5318,6 +5229,8 @@ app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
  *    tags: [subscribercontentauth001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -5332,69 +5245,68 @@ app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
  */
 
 app.post('/api/subscribercontentauth001wb/subscribercontent', (req, res) => {
-        const subscribercontentauth001wb = new Subscribercontentauth001wb();
-        subscribercontentauth001wb.subscid = req.body.subscid.id;
-        subscribercontentauth001wb.subscsubpid = req.body.subscsubpid;
-        subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
-        subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
-        subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
-        subscribercontentauth001wb.inserteduser = req.body.inserteduser;
-        subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
-        subscribercontentauth001wb.updateduser = req.body.updateduser;
-        subscribercontentauth001wb.status = req.body.status;
-        subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
-        subscribercontentauth001wb.save()
-            .then((result) => {
+    const subscribercontentauth001wb = new Subscribercontentauth001wb();
+    subscribercontentauth001wb.personid = req.body.personid.id;
+    subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
+    subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
+    subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
+    subscribercontentauth001wb.inserteduser = req.body.inserteduser;
+    subscribercontentauth001wb.inserteddatetime = req.body.inserteddatetime;
+    subscribercontentauth001wb.updateduser = req.body.updateduser;
+    subscribercontentauth001wb.status = req.body.status;
+    subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
+    subscribercontentauth001wb.save()
+        .then((result) => {
 
-                Subscriberdetails001wb.findOne({ _id: subscribercontentauth001wb.subscid }, (err, user) => {
-                    if (user) {
-                        user.subscsubspid.push(subscribercontentauth001wb);
-                        user.save();
-                        res.json({ message: 'subscribercontentauth created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+            Person001mb.findOne({ _id: subscribercontentauth001wb.personid }, (err, user) => {
+                if (user) {
+                    user.subscsubspid.push(subscribercontentauth001wb);
+                    user.save();
+                    return res.json({ message: 'subscribercontentauth created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/subscribercontentauth001wb/{id}:
-     *   put:
-     *    tags: [subscribercontentauth001wb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subscribercontentauth001wb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subscribercontentauth001wb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/subscribercontentauth001wb/{id}:
+ *   put:
+ *    tags: [subscribercontentauth001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subscribercontentauth001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscribercontentauth001wb'
+ */
 
 app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
 
-    Subscribercontentauth001wb.findOne({ _id: id }, function(err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findOne({ _id: id }, function (err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscribercontentauth001wb',
@@ -5408,8 +5320,7 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
             });
         }
 
-        subscribercontentauth001wb.subscid = req.body.subscid.id ? req.body.subscid.id : subscribercontentauth001wb.subscid;
-        subscribercontentauth001wb.subscsubpid = req.body.subscsubpid ? req.body.subscsubpid : subscribercontentauth001wb.subscsubpid;
+        subscribercontentauth001wb.personid = req.body.personid.id ? req.body.personid.id : subscribercontentauth001wb.personid;
         subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus ? req.body.subscsubpstatus : subscribercontentauth001wb.subscsubpstatus;
         subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate ? req.body.subscsubpstartdate : subscribercontentauth001wb.subscsubpstartdate;
         subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate ? req.body.subscsubpenddate : subscribercontentauth001wb.subscsupbenddate;
@@ -5418,7 +5329,7 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
         subscribercontentauth001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscribercontentauth001wb.updateduser;
         subscribercontentauth001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscribercontentauth001wb.updateddatetime;
         subscribercontentauth001wb.status = req.body.status ? req.body.status : subscribercontentauth001wb.status;
-        subscribercontentauth001wb.save(function(err, subscribercontentauth001wb) {
+        subscribercontentauth001wb.save(function (err, subscribercontentauth001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscribercontentauth001wb.',
@@ -5437,6 +5348,8 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
  *    tags: [subscribercontentauth001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -5452,7 +5365,7 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
  */
 app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscribercontentauth001wb.findByIdAndRemove(id, function(err, subscribercontentauth001wb) {
+    Subscribercontentauth001wb.findByIdAndRemove(id, function (err, subscribercontentauth001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscribercontentauth001wb.',
@@ -5464,35 +5377,18 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
     });
 });
 
-
-
-
-
 // ********************** subscriberdetails001wb schema method****************//
 /** 
  * @swagger
  * components:
- *    schemas:
- *      subscriberdetails001wb:
+ *     subscriberdetails001wb:
  *            type: object
- *            properties:    
- *             subscid:
- *                 type: number
- *             subscname:
- *                 type: string
- *             age:
- *               type: number
- *             sex:
- *               type: string
+ *            properties:
+ *             horoscope:
+ *                 type: string    
  *             subscdesc:
  *                 type: string
  *             aboutme:
- *                 type: string
- *             address:
- *                 type: string
- *             phoneno:
- *                 type: number
- *             subscstatus:
  *                 type: string
  *             approvedby:
  *                 type: string
@@ -5500,41 +5396,6 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                 type: boolean
  *             approvedon:
  *                 type: string
- *             email:
- *               type: string
- *               format: email
- *             password:
- *               type: string
- *             status:
- *                 type: string
- *             inserteduser:
- *                 type: string
- *             inserteddatetime:
- *                 type: string
- *             updateduser:
- *                 type: string
- *             updateddatetime:
- *                 type: string   
- *             countryid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
- *             cityid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
- *             stateid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
  *             subpid:
  *                type: object
  *                properties:
@@ -5545,37 +5406,31 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                      type: string 
- *             companycode:
- *                 type: array
- *             rolename:
- *                 type: object
- *                 properties:
- *                    rolename: 
- *                      type: string 
- *             subcatcode:
- *                 type: array
- *             professionalid:
- *                 type: array
- *             categoryid:
- *                 type: array
- *             languageid:
- *                 type: array
- *             personalid:
- *                 type: array
- *             contentid:
- *                  type: object
- *                  properties:
+ *            personid:
+ *                type: object
+ *                properties:
  *                    id: 
- *                      type: string 
- *             religionid:
- *                 type: array
- *             classificationid:
- *                 type: array
- *             subscsubspid:
- *                 type: array
- *             regionalid:
- *                 type: array
+ *                      type: string
+ *            contentid:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string
+ *            status:
+ *                 type: string
+ *            inserteduser:
+ *                 type: string
+ *            inserteddatetime:
+ *                 type: string
+ *            updateduser:
+ *                 type: string
+ *            updateddatetime:
+ *                 type: string
+ *       
+ *           
  */
+
+
 
 // ********************** subscriberdetails001wb get method****************//
 /**
@@ -5585,6 +5440,8 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *     tags: [subscriberdetails001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -5593,13 +5450,12 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
- *                             $ref: '#/components/schemas/subscriberdetails001wb'
+ *                          $ref: '#/components/schemas/subscriberdetails001wb'
+ *                        
  */
 
 app.get('/api/subscriberdetails001wb', (req, res) => {
-    Subscriberdetails001wb.find(function(err, subscriberdetails001wb) {
+    Subscriberdetails001wb.find(function (err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -5610,6 +5466,46 @@ app.get('/api/subscriberdetails001wb', (req, res) => {
         return res.json(subscriberdetails001wb);
     });
 });
+/**
+ * @swagger
+ * /api/subscriberdetails001wb/verify:
+ *   get:
+ *     tags: [subscriberdetails001wb]
+ *     summary: Get Method
+ *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscriberdetails001wb'
+ */
+
+app.get('/api/subscriberdetails001wb/verify', async (req, res) => {
+    const token = req.query.token;
+    if (!token) {
+        return res.status(403).send("A token is required for authentication");
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        req.verifydecode = decoded;
+        const person = await Person001mb.findOne({ email: decoded.email, rolename: decoded.rolename, });
+        if (person.verified) {
+            return res.status(401).send({ message: " Account Verified Please Login" });
+        } else {
+            person.verified = true;
+            person.save();
+            return res.status(200).send({ message: "Account Verified" });
+        }
+    } catch (err) {
+        return res.status(401).send("Invalid Token");
+    }
+});
 
 /**
  * @swagger
@@ -5618,6 +5514,8 @@ app.get('/api/subscriberdetails001wb', (req, res) => {
  *     tags: [subscriberdetails001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -5633,14 +5531,12 @@ app.get('/api/subscriberdetails001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriberdetails001wb'
  */
 
 app.get('/api/subscriberdetails001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
+    Subscriberdetails001wb.findOne({ _id: id }, function (err, subscriberdetails001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberdetails001wb.',
@@ -5665,12 +5561,14 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
  *    tags: [subscriberdetails001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
  *             application/json:
  *                       schema:
- *                          $ref: '#/components/schemas/subscriberdetails001wb'
+ *                            $ref: '#/components/schemas/subscriberdetails001wb'
  *    responses:
  *       200:
  *         description: Sucess
@@ -5678,157 +5576,211 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
  *         description: failed
  */
 
-app.post('/api/subscriberdetails001wb/subscriberdetails', async(req, res) => {
-        const subscriberdetails001wb = new Subscriberdetails001wb();
-        subscriberdetails001wb.payid = req.body.payid.id;
-        subscriberdetails001wb.personid = req.body.personid.id;
-        subscriberdetails001wb.subscid = req.body.subscid;
-        subscriberdetails001wb.subpid = req.body.subpid.id;
-        subscriberdetails001wb.countryid = req.body.countryid.id;
-        subscriberdetails001wb.rolename = req.body.rolename.rolename;
-        subscriberdetails001wb.contentid = req.body.contentid.id;
-        subscriberdetails001wb.cityid = req.body.cityid.id;
-        subscriberdetails001wb.stateid = req.body.stateid.id;
-        subscriberdetails001wb.email = req.body.email;
-        subscriberdetails001wb.password = req.body.password;
-        subscriberdetails001wb.subscname = req.body.subscname;
-        subscriberdetails001wb.age = req.body.age;
-        subscriberdetails001wb.sex = req.body.sex;
-        subscriberdetails001wb.subscdesc = req.body.subscdesc;
-        subscriberdetails001wb.aboutme = req.body.aboutme;
-        subscriberdetails001wb.address = req.body.address;
-        subscriberdetails001wb.phoneno = req.body.phoneno;
-        subscriberdetails001wb.subscstatus = req.body.subscstatus;
-        subscriberdetails001wb.subscapproval = req.body.subscapproval;
-        subscriberdetails001wb.approvedby = req.body.approvedby;
-        subscriberdetails001wb.approvedon = req.body.approvedon;
-        subscriberdetails001wb.approvedby = req.body.approvedby;
-        subscriberdetails001wb.inserteduser = req.body.inserteduser;
-        subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
-        subscriberdetails001wb.updateduser = req.body.updateduser;
-        subscriberdetails001wb.updateddatetime = req.body.updateddatetime;
-
-        const oldUser = await Subscriberdetails001wb.findOne({ email: subscriberdetails001wb.email });
-        if (oldUser) {
-            return res.status(409).send("User Already Exist. Please Login");
+app.post('/api/subscriberdetails001wb/subscriberdetails', async (req, res) => {
+    const person001mb = new Person001mb();
+    person001mb.countryid = req.body.countryid.id;
+    person001mb.cityid = req.body.cityid.id;
+    person001mb.stateid = req.body.stateid.id;
+    person001mb.roleid = req.body.roleid.id;
+    person001mb.firstname = req.body.firstname;
+    person001mb.lasttname = req.body.lasttname;
+    person001mb.zipcode = req.body.zipcode;
+    person001mb.dob = req.body.dob;
+    person001mb.confirmemail = req.body.confirmemail;
+    person001mb.email = req.body.email;
+    person001mb.age = req.body.age;
+    person001mb.verified = false;
+    person001mb.sex = req.body.sex;
+    person001mb.address = req.body.address;
+    person001mb.phoneno = req.body.phoneno;
+    person001mb.landline = req.body.landline;
+    person001mb.inserteduser = req.body.inserteduser;
+    person001mb.inserteddatetime = req.body.inserteddatetime;
+    person001mb.updateduser = req.body.updateduser;
+    person001mb.updateddatetime = req.body.updateddatetime;
+    person001mb.status = req.body.status;
+    if (!(person001mb.email && person001mb.firstname && person001mb.roleid)) {
+        return res.status(402).json("Enter a Required Field");
+    }
+    const oldUser = await Person001mb.findOne({ email: person001mb.email, firstname: person001mb.firstname, roleid: person001mb.roleid });
+    if (oldUser) {
+        return res.status(409).send("User Already Exist");
+    }
+    const token = jwt.sign({ email: person001mb.email, roleid: person001mb.roleid }, process.env.TOKEN_KEY,
+        {
+            expiresIn: "6h",
         }
+    );
+    person001mb.token = token;
+    let person = await person001mb.save();
 
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'siriusmatrimoney@gmail.com',
-                pass: 'Welcome!23'
-            }
-        });
-        const handlebarOptions = {
-            viewEngine: {
-                partialsDir: path.resolve('./app/templates'),
-                defaultLayout: false,
-            },
-            viewPath: path.resolve('./app/templates'),
-            extName: ".handlebars"
-        };
-        transporter.use('compile', hbs(handlebarOptions))
-        const mailOptions = {
-            from: 'siriusmatrimoney@gmail.com',
-            to: subscriberdetails001wb.email,
-            subject: 'Sirius Matrimony Confirmation',
-            template: 'mail',
-            context: {
-                name: "Sirius Matrimony"
-            }
-        };
-        transporter.sendMail(mailOptions, function(err, info) {
-            if (err)
-                console.log(err)
-            else
-                console.log('email sent' + info.response);
-        })
-        subscriberdetails001wb.save()
-            .then((result) => {
-                res.json({ message: 'subscriberdetails001wb created!' });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
-            });
+    const login001mb = new Login001mb()
+    login001mb.username = req.body.username;
+    login001mb.password = bcrypt.hashSync(req.body.password, 10);
+    login001mb.roleid = req.body.roleid.id;
+    login001mb.inserteduser = req.body.inserteduser;
+    login001mb.inserteddatetime = req.body.inserteddatetime;
+    login001mb.updateduser = req.body.updateduser;
+    login001mb.status = req.body.status;
+    login001mb.personid = person._id;
+    await login001mb.save()
 
-    })
-    /**
-     * @swagger
-     * /api/subscriberdetails001wb/{id}:
-     *   put:
-     *    tags: [subscriberdetails001wb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subscriberdetails001wb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subscriberdetails001wb'
-     */
+    const subscriberdetails001wb = new Subscriberdetails001wb();
+    subscriberdetails001wb.personid = person._id;
+    subscriberdetails001wb.contentid = req.body.contentid.id;
+    subscriberdetails001wb.payid = req.body.payid.id;
+    subscriberdetails001wb.subpid = req.body.subpid.id;
+    subscriberdetails001wb.subscdesc = req.body.subscdesc;
+    subscriberdetails001wb.aboutme = req.body.aboutme;
+    subscriberdetails001wb.subscstatus = req.body.subscstatus;
+    subscriberdetails001wb.horoscope = req.body.horoscope;
+    subscriberdetails001wb.subscapproval = req.body.subscapproval;
+    subscriberdetails001wb.approvedby = req.body.approvedby;
+    subscriberdetails001wb.approvedon = req.body.approvedon;
+    subscriberdetails001wb.inserteduser = req.body.inserteduser;
+    subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
+    subscriberdetails001wb.updateduser = req.body.updateduser;
+    subscriberdetails001wb.status = req.body.status;
+    await subscriberdetails001wb.save()
 
-app.put('/api/subscriberdetails001wb/:id', (req, res) => {
-    var id = req.params.id;
-
-    Subscriberdetails001wb.findOne({ _id: id }, function(err, subscriberdetails001wb) {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'siriusmatrimoney@gmail.com',
+            pass: 'Welcome!23'
+        }
+    });
+    const handlebarOptions = {
+        viewEngine: {
+            partialsDir: path.resolve('./app/templates'),
+            defaultLayout: false,
+        },
+        viewPath: path.resolve('./app/templates'),
+        extName: ".handlebars"
+    };
+    transporter.use('compile', hbs(handlebarOptions))
+    const mailOptions = {
+        from: 'siriusmatrimoney@gmail.com',
+        to: person001mb.email,
+        subject: 'Sirius Matrimony Confirmation',
+        template: 'mail',
+        context: {
+            name: "Sirius Matrimony",
+            url: `http://localhost:8081/api/subscriberdetails001wb/verify?token=${token}`
+        }
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
         if (err) {
-            return res.status(500).json({
-                message: 'Error when getting subscriberdetails001wb',
-                error: err
-            });
+            return res.status(401).json({ message: 'email not created!' });
+        } else {
+            return res.json({ message: 'email created!' });
         }
+    })
+})
+/**
+ * @swagger
+ * /api/subscriberdetails001wb/{personid}/{loginid}/{subid}:
+ *   put:
+ *    tags: [subscriberdetails001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: personid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: loginid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: subid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subscriberdetails001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscriberdetails001wb'
+ */
 
-        if (!subscriberdetails001wb) {
-            return res.status(404).json({
-                message: 'No such subscriberdetails001wb'
-            });
-        }
+app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res) => {
+    var personid = req.params.personid;
+    var loginid = req.params.loginid;
+    var subid = req.params.subid;
+    const person001mb = await Person001mb.findOne({ _id: personid });
+    if (person001mb) {
+        person001mb.email = req.body.email ? req.body.email : person001mb.email;
+        person001mb.contentid = req.body.contentid.id ? req.body.contentid.id : person001mb.contentid;
+        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
+        person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
+        person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
+        person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
+        person001mb.age = req.body.age ? req.body.age : person001mb.age;
+        person001mb.sex = req.body.sex ? req.body.sex : person001mb.sex;
+        person001mb.countryid = req.body.countryid.id ? req.body.countryid.id : person001mb.countryid;
+        person001mb.address = req.body.address ? req.body.address : person001mb.address;
+        person001mb.phoneno = req.body.phoneno ? req.body.phoneno : person001mb.phoneno;
+        person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
+        person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
+        person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
+        person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
+        person001mb.firstname = req.body.firstname ? req.body.firstname : person001mb.firstname;
+        person001mb.lasttname = req.body.lasttname ? req.body.lasttname : person001mb.lasttname;
+        person001mb.zipcode = req.body.zipcode ? req.body.zipcode : person001mb.zipcode;
+        person001mb.dob = req.body.dob ? req.body.dob : person001mb.dob;
+        person001mb.confirmemail = req.body.confirmemail ? req.body.confirmemail : person001mb.confirmemail;
+        person001mb.landline = req.body.landline ? req.body.landline : person001mb.landline;
+        person001mb.status = req.body.status ? req.body.status : person001mb.status;
+        let person = person001mb.save();
+
+        const login001mb = await Login001mb.findOne({ _id: loginid });
+        login001mb.personid = person._id ? person._id : login001mb.personid;
+        login001mb.username = req.body.username ? req.body.username : login001mb.username;
+        login001mb.password = req.body.password ? req.body.password : login001mb.password;
+        login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
+        login001mb.status = req.body.status ? req.body.status : login001mb.status
+        login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
+        login001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : login001mb.inserteddatetime;
+        login001mb.updateduser = req.body.updateduser ? req.body.updateduser : login001mb.updateduser;
+        login001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : login001mb.updateddatetime;
+        login001mb.save();
+
+        const subscriberdetails001wb = await Subscriberdetails001wb.findOne({ _id: subid });
         subscriberdetails001wb.payid = req.body.payid.id ? req.body.payid.id : subscriberdetails001wb.payid;
-        subscriberdetails001wb.password = req.body.password ? req.body.password : subscriberdetails001wb.password;
         subscriberdetails001wb.subpid = req.body.subpid.id ? req.body.subpid.id : subscriberdetails001wb.subpid;
-        subscriberdetails001wb.email = req.body.email ? req.body.email : subscriberdetails001wb.email;
+        subscriberdetails001wb.horoscope = req.body.horoscope ? req.body.horoscope : subscriberdetails001wb.horoscope;
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
-        subscriberdetails001wb.cityid = req.body.cityid.id ? req.body.cityid.id : subscriberdetails001wb.cityid;
-        subscriberdetails001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberdetails001wb.personid;
-        subscriberdetails001wb.stateid = req.body.stateid.id ? req.body.stateid.id : subscriberdetails001wb.stateid;
-        subscriberdetails001wb.subscid = req.body.subscid ? req.body.subscid : subscriberdetails001wb.subscid;
-        subscriberdetails001wb.rolename = req.body.rolename.rolename ? req.body.rolename.id : subscriberdetails001wb.rolename;
-        subscriberdetails001wb.subscname = req.body.subscname ? req.body.subscname : subscriberdetails001wb.subscname;
-        subscriberdetails001wb.age = req.body.age ? req.body.age : subscriberdetails001wb.age;
-        subscriberdetails001wb.sex = req.body.sex ? req.body.sex : subscriberdetails001wb.sex;
+        subscriberdetails001wb.personid = person._id ? person._id : subscriberdetails001wb.personid;
         subscriberdetails001wb.subscdesc = req.body.subscdesc ? req.body.subscdesc : subscriberdetails001wb.subscdesc;
         subscriberdetails001wb.aboutme = req.body.aboutme ? req.body.aboutme : subscriberdetails001wb.aboutme;
-        subscriberdetails001wb.countryid = req.body.countryid.id ? req.body.countryid.id : subscriberdetails001wb.countryid;
-        subscriberdetails001wb.address = req.body.address ? req.body.address : subscriberdetails001wb.address;
-        subscriberdetails001wb.phoneno = req.body.phoneno ? req.body.phoneno : subscriberdetails001wb.phoneno;
-        subscriberdetails001wb.subscstatus = req.body.subscstatus ? req.body.subscstatus : subscriberdetails001wb.subscstatus;
-        subscriberdetails001wb.subscapproval = req.body.subscapproval ? req.body.subscapproval : subscriberdetails001wb.subscapproval;
-        subscriberdetails001wb.approvedby = req.body.approvedby ? req.body.approvedby : subscriberdetails001wb.approvedby;
-        subscriberdetails001wb.approvedon = req.body.approvedon ? req.body.approvedon : subscriberdetails001wb.approvedon;
+        subscriberdetails001wb.status = req.body.status ? req.body.status : subscriberdetails001wb.status
         subscriberdetails001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : subscriberdetails001wb.inserteduser;
         subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberdetails001wb.inserteddatetime;
         subscriberdetails001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberdetails001wb.updateduser;
         subscriberdetails001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberdetails001wb.updateddatetime;
-        subscriberdetails001wb.save(function(err, subscriberdetails001wb) {
+        subscriberdetails001wb.subscapproval = req.body.subscapproval ? req.body.subscapproval : subscriberdetails001wb.subscapproval;
+        subscriberdetails001wb.approvedby = req.body.approvedby ? req.body.approvedby : subscriberdetails001wb.approvedby;
+        subscriberdetails001wb.approvedon = req.body.approvedon ? req.body.approvedon : subscriberdetails001wb.approvedon;
+        subscriberdetails001wb.save(function (err, subscriberdetails001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberdetails001wb.',
@@ -5836,23 +5788,37 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
                 });
             }
 
-            return res.json(subscriberdetails001wb);
+            return res.json('subscriberdetails001wb updated');
         });
-    });
+    }
 });
 /**
  * @swagger
- * /api/subscriberdetails001wb/{id}:
+ * /api/subscriberdetails001wb/{personid}/{loginid}/{subid}:
  *   delete:
  *    tags: [subscriberdetails001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
+ *      - in: path
+ *        name: personid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: loginid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: subid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
  *           type: string
  *    responses:
  *       200:
@@ -5860,18 +5826,21 @@ app.put('/api/subscriberdetails001wb/:id', (req, res) => {
  *       500:
  *         description: failed
  */
-app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
-    var id = req.params.id;
-    Subscriberdetails001wb.findByIdAndRemove(id, function(err, subscriberdetails001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when deleting the subscriberdetails001wb.',
-                error: err
-            });
-        }
-
-        return res.json({ message: 'Deleted Sucessfully' });
-    });
+app.delete('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res) => {
+    var subid = req.params.subid;
+    var loginid = req.params.loginid;
+    var personid = req.params.personid;
+    if (subid && loginid && personid) {
+        await Person001mb.findByIdAndRemove({ _id: personid });
+        await Login001mb.findByIdAndRemove({ _id: loginid });
+        await Subscriberdetails001wb.findByIdAndRemove({ _id: subid });
+        return res.json('subscriberdetails001wb deleted');
+    } else {
+        return res.status(500).json({
+            message: 'Error when deleting subscriberdetails001wb.',
+            error: err
+        });
+    }
 });
 
 
@@ -5883,13 +5852,11 @@ app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
  *      subscriberpersonalinfo001wb:
  *            type: object
  *            properties:
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string      
- *             personalid:
- *                 type: number
  *             personaldetails:
  *                 type: string
  *             hobbies:
@@ -5938,6 +5905,8 @@ app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
  *     tags: [subscriberpersonalinfo001wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -5946,13 +5915,11 @@ app.delete('/api/subscriberdetails001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
  */
 
 app.get('/api/subscriberpersonalinfo001wb', (req, res) => {
-    Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
+    Subscriberpersonalinfo001wb.find(function (err, subscriberpersonalinfo001wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -5971,6 +5938,8 @@ app.get('/api/subscriberpersonalinfo001wb', (req, res) => {
  *     tags: [subscriberpersonalinfo001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -5986,14 +5955,12 @@ app.get('/api/subscriberpersonalinfo001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
  */
 
 app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb.',
@@ -6018,6 +5985,8 @@ app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *    tags: [subscriberpersonalinfo001wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -6032,80 +6001,78 @@ app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  */
 
 app.post('/api/subscriberpersonalinfo001wb/personal', (req, res) => {
-        const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
-        subscriberpersonalinfo001wb.subscid = req.body.subscid.id;
-        subscriberpersonalinfo001wb.personalid = req.body.personalid;
-        subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
-        subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
-        subscriberpersonalinfo001wb.flex1 = req.body.flex1;
-        subscriberpersonalinfo001wb.flex2 = req.body.flex2;
-        subscriberpersonalinfo001wb.flex3 = req.body.flex3;
-        subscriberpersonalinfo001wb.flex4 = req.body.flex4;
-        subscriberpersonalinfo001wb.flex5 = req.body.flex5;
-        subscriberpersonalinfo001wb.flex6 = req.body.flex6;
-        subscriberpersonalinfo001wb.flex7 = req.body.flex7;
-        subscriberpersonalinfo001wb.flex8 = req.body.flex8;
-        subscriberpersonalinfo001wb.flex9 = req.body.flex9;
-        subscriberpersonalinfo001wb.flex10 = req.body.flex10;
-        subscriberpersonalinfo001wb.flex11 = req.body.flex11;
-        subscriberpersonalinfo001wb.flex12 = req.body.flex12;
-        subscriberpersonalinfo001wb.inserteduser = req.body.inserteduser;
-        subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
-        subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
-        subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
+    const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
+    subscriberpersonalinfo001wb.personid = req.body.personid.id;
+    subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
+    subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
+    subscriberpersonalinfo001wb.flex1 = req.body.flex1;
+    subscriberpersonalinfo001wb.flex2 = req.body.flex2;
+    subscriberpersonalinfo001wb.flex3 = req.body.flex3;
+    subscriberpersonalinfo001wb.flex4 = req.body.flex4;
+    subscriberpersonalinfo001wb.flex5 = req.body.flex5;
+    subscriberpersonalinfo001wb.flex6 = req.body.flex6;
+    subscriberpersonalinfo001wb.flex7 = req.body.flex7;
+    subscriberpersonalinfo001wb.flex8 = req.body.flex8;
+    subscriberpersonalinfo001wb.flex9 = req.body.flex9;
+    subscriberpersonalinfo001wb.flex10 = req.body.flex10;
+    subscriberpersonalinfo001wb.flex11 = req.body.flex11;
+    subscriberpersonalinfo001wb.flex12 = req.body.flex12;
+    subscriberpersonalinfo001wb.inserteduser = req.body.inserteduser;
+    subscriberpersonalinfo001wb.inserteddatetime = req.body.inserteddatetime;
+    subscriberpersonalinfo001wb.updateduser = req.body.updateduser;
+    subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
+    subscriberpersonalinfo001wb.save()
+        .then((result) => {
 
-
-        subscriberpersonalinfo001wb.save()
-            .then((result) => {
-
-                Subscriberdetails001wb.findOne({ _id: subscriberpersonalinfo001wb.subscid }, (err, user) => {
-                    if (user) {
-                        user.personalid.push(subscriberpersonalinfo001wb);
-                        user.save();
-                        res.json({ message: 'subscriberpersonalinfo created!' });
-                    }
-                });
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+            Person001mb.findOne({ _id: subscriberpersonalinfo001wb.personid }, (err, user) => {
+                if (user) {
+                    user.personalid.push(subscriberpersonalinfo001wb);
+                    user.save();
+                    return res.json({ message: 'subscriberpersonalinfo created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/subscriberpersonalinfo001wb/{id}:
-     *   put:
-     *    tags: [subscriberpersonalinfo001wb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
-     */
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/subscriberpersonalinfo001wb/{id}:
+ *   put:
+ *    tags: [subscriberpersonalinfo001wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscriberpersonalinfo001wb'
+ */
 
 app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findOne({ _id: id }, function(err, subscriberpersonalinfo001wb) {
+
+    Subscriberpersonalinfo001wb.findOne({ _id: id }, function (err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberpersonalinfo001wb',
@@ -6119,8 +6086,7 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
             });
         }
 
-        subscriberpersonalinfo001wb.personalid = req.body.personalid ? req.body.personalid : subscriberpersonalinfo001wb.personalid;
-        subscriberpersonalinfo001wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberpersonalinfo001wb.subcid;
+        subscriberpersonalinfo001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberpersonalinfo001wb.personid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;
@@ -6140,7 +6106,7 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
         subscriberpersonalinfo001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberpersonalinfo001wb.updateduser;
         subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberpersonalinfo001wb.updateddatetime;
 
-        subscriberpersonalinfo001wb.save(function(err, subscriberpersonalinfo001wb) {
+        subscriberpersonalinfo001wb.save(function (err, subscriberpersonalinfo001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberpersonalinfo001wb.',
@@ -6159,6 +6125,8 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *    tags: [subscriberpersonalinfo001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -6174,7 +6142,7 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  */
 app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function(err, subscriberpersonalinfo001wb) {
+    Subscriberpersonalinfo001wb.findByIdAndRemove(id, function (err, subscriberpersonalinfo001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberpersonalinfo001wb.',
@@ -6196,13 +6164,11 @@ app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *      subscriberprofessionalinfo002wb:
  *            type: object
  *            properties:
- *             subscid:
+ *             personid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string  
- *             professionid:
- *                 type: number
  *             professionaldetails:
  *                 type: string
  *             job:
@@ -6251,6 +6217,8 @@ app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *     tags: [subscriberprofessionalinfo002wb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -6259,13 +6227,11 @@ app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
  */
 
 app.get('/api/subscriberprofessionalinfo002wb', (req, res) => {
-    Subscriberprofessionalinfo002wb.find(function(err, subscriberprofessionalinfo002wbs) {
+    Subscriberprofessionalinfo002wb.find(function (err, subscriberprofessionalinfo002wbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb.',
@@ -6284,6 +6250,8 @@ app.get('/api/subscriberprofessionalinfo002wb', (req, res) => {
  *     tags: [subscriberprofessionalinfo002wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -6299,14 +6267,12 @@ app.get('/api/subscriberprofessionalinfo002wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
  */
 
 app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function(err, subscriberprofessionalinfo002wb) {
+    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function (err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb.',
@@ -6331,6 +6297,8 @@ app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *    tags: [subscriberprofessionalinfo002wb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -6345,78 +6313,79 @@ app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  */
 
 app.post('/api/subscriberprofessionalinfo002wb/professional', (req, res) => {
-        const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
-        subscriberprofessionalinfo002wb.subscid = req.body.subscid.id;
-        subscriberprofessionalinfo002wb.professionid = req.body.professionid;
-        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
-        subscriberprofessionalinfo002wb.job = req.body.job;
-        subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
-        subscriberprofessionalinfo002wb.flex2 = req.body.flex2;
-        subscriberprofessionalinfo002wb.flex3 = req.body.flex3;
-        subscriberprofessionalinfo002wb.flex4 = req.body.flex4;
-        subscriberprofessionalinfo002wb.flex5 = req.body.flex5;
-        subscriberprofessionalinfo002wb.flex6 = req.body.flex6;
-        subscriberprofessionalinfo002wb.flex7 = req.body.flex7;
-        subscriberprofessionalinfo002wb.flex8 = req.body.flex8;
-        subscriberprofessionalinfo002wb.flex9 = req.body.flex9;
-        subscriberprofessionalinfo002wb.flex10 = req.body.flex10;
-        subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
-        subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
-        subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
-            subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
-            subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
-            subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
-        subscriberprofessionalinfo002wb.save()
-            .then((result) => {
-                Subscriberdetails001wb.findOne({ _id: subscriberprofessionalinfo002wb.subscid }, (err, user) => {
-                    if (user) {
-                        user.professionalid.push(subscriberprofessionalinfo002wb);
-                        user.save();
-                        res.json({ message: 'subscriberprofessional created!' });
-                    }
-                });
 
-            })
-            .catch((error) => {
-                res.status(500).json({ error });
+    const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
+    subscriberprofessionalinfo002wb.personid = req.body.personid.id;
+    subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
+    subscriberprofessionalinfo002wb.job = req.body.job;
+    subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
+    subscriberprofessionalinfo002wb.flex2 = req.body.flex2;
+    subscriberprofessionalinfo002wb.flex3 = req.body.flex3;
+    subscriberprofessionalinfo002wb.flex4 = req.body.flex4;
+    subscriberprofessionalinfo002wb.flex5 = req.body.flex5;
+    subscriberprofessionalinfo002wb.flex6 = req.body.flex6;
+    subscriberprofessionalinfo002wb.flex7 = req.body.flex7;
+    subscriberprofessionalinfo002wb.flex8 = req.body.flex8;
+    subscriberprofessionalinfo002wb.flex9 = req.body.flex9;
+    subscriberprofessionalinfo002wb.flex10 = req.body.flex10;
+    subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
+    subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
+    subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
+    subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
+    subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
+    subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
+    subscriberprofessionalinfo002wb.save()
+        .then((result) => {
+            Person001mb.findOne({ _id: subscriberprofessionalinfo002wb.personid }, (err, user) => {
+                if (user) {
+                    user.professionalid.push(subscriberprofessionalinfo002wb);
+                    user.save();
+                    return res.json({ message: 'subscriberprofessional created!' });
+                }
             });
-    })
-    /**
-     * @swagger
-     * /api/subscriberprofessionalinfo002wb/{id}:
-     *   put:
-     *    tags: [subscriberprofessionalinfo002wb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
-     */
+
+        })
+        .catch((error) => {
+            return res.status(500).json({ error });
+        });
+})
+/**
+ * @swagger
+ * /api/subscriberprofessionalinfo002wb/{id}:
+ *   put:
+ *    tags: [subscriberprofessionalinfo002wb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscriberprofessionalinfo002wb'
+ */
 
 app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function(err, subscriberprofessionalinfo002wb) {
+
+    Subscriberprofessionalinfo002wb.findOne({ _id: id }, function (err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriberprofessionalinfo002wb',
@@ -6429,9 +6398,8 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
                 message: 'No such subscriberprofessionalinfo002wb'
             });
         }
-        subscriberprofessionalinfo002wb.professionid = req.body.professionid ? req.body.professionid : subscriberprofessionalinfo002wb.professionid;
-        subscriberprofessionalinfo002wb.subcid = req.body.subscid.id ? req.body.subscid.id : subscriberprofessionalinfo002wb.subcid;
-        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.personaldetails : subscriberprofessionalinfo002wb.professionaldetails;
+        subscriberprofessionalinfo002wb.personid = req.body.personid.id ? req.body.personid.id : subscriberprofessionalinfo002wb.personid;
+        subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.professionaldetails : subscriberprofessionalinfo002wb.professionaldetails;
         subscriberprofessionalinfo002wb.job = req.body.job ? req.body.job : subscriberprofessionalinfo002wb.job;
         subscriberprofessionalinfo002wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberprofessionalinfo002wb.flex1;
         subscriberprofessionalinfo002wb.flex2 = req.body.flex2 ? req.body.flex2 : subscriberprofessionalinfo002wb.flex2;
@@ -6449,8 +6417,7 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
         subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberprofessionalinfo002wb.inserteddatetime;
         subscriberprofessionalinfo002wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberprofessionalinfo002wb.updateduser;
         subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberprofessionalinfo002wb.updateddatetime;
-
-        subscriberprofessionalinfo002wb.save(function(err, subscriberprofessionalinfo002wb) {
+        subscriberprofessionalinfo002wb.save(function (err, subscriberprofessionalinfo002wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriberprofessionalinfo002wb.',
@@ -6469,6 +6436,8 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *    tags: [subscriberprofessionalinfo002wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -6484,7 +6453,7 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  */
 app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriberprofessionalinfo002wb.findByIdAndRemove(id, function(err, subscriberprofessionalinfo002wb) {
+    Subscriberprofessionalinfo002wb.findByIdAndRemove(id, function (err, subscriberprofessionalinfo002wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriberprofessionalinfo002wb.',
@@ -6506,11 +6475,9 @@ app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *      subscriptionmaster001mb:
  *            type: object
  *            properties:    
- *             subpid:
- *                 type: number
  *             subpname:
  *                 type: string
- *             subscid:
+ *             personid:
  *                 type: object
  *                 properties:
  *                    id: 
@@ -6543,6 +6510,8 @@ app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *     tags: [subscriptionmaster001mb]
  *     summary: Get Method
  *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Sucess
@@ -6551,13 +6520,11 @@ app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriptionmaster001mb'
  */
 
 app.get('/api/subscriptionmaster001mb', (req, res) => {
-    Subscriptionmaster001mb.find(function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.find(function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -6576,6 +6543,8 @@ app.get('/api/subscriptionmaster001mb', (req, res) => {
  *     tags: [subscriptionmaster001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -6591,14 +6560,12 @@ app.get('/api/subscriptionmaster001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/subscriptionmaster001mb'
  */
 
 app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb.',
@@ -6623,6 +6590,8 @@ app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
  *    tags: [subscriptionmaster001mb]  
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -6637,68 +6606,66 @@ app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
  */
 
 app.post('/api/subscriptionmaster001mb/master', (req, res) => {
-        const subscriptionmaster001mb = new Subscriptionmaster001mb();
-        subscriptionmaster001mb.subpid = req.body.subpid;
-        subscriptionmaster001mb.subscid = req.body.subscid.id;
-        subscriptionmaster001mb.subpname = req.body.subpname;
-        subscriptionmaster001mb.description = req.body.description;
-        subscriptionmaster001mb.tenure = req.body.tenure;
-        subscriptionmaster001mb.amount = req.body.amount;
-        subscriptionmaster001mb.status = req.body.status;
-        subscriptionmaster001mb.discountflag = req.body.discountflag;
-        subscriptionmaster001mb.inserteduser = req.body.inserteduser;
-        subscriptionmaster001mb.inserteddatetime = req.body.inserteddatetime;
-        subscriptionmaster001mb.updateduser = req.body.updateduser;
-        subscriptionmaster001mb.updateddatetime = req.body.updateddatetime;
+    const subscriptionmaster001mb = new Subscriptionmaster001mb();
+    subscriptionmaster001mb.personid = req.body.personid.id;
+    subscriptionmaster001mb.subpname = req.body.subpname;
+    subscriptionmaster001mb.description = req.body.description;
+    subscriptionmaster001mb.tenure = req.body.tenure;
+    subscriptionmaster001mb.amount = req.body.amount;
+    subscriptionmaster001mb.status = req.body.status;
+    subscriptionmaster001mb.discountflag = req.body.discountflag;
+    subscriptionmaster001mb.inserteduser = req.body.inserteduser;
+    subscriptionmaster001mb.inserteddatetime = req.body.inserteddatetime;
+    subscriptionmaster001mb.updateduser = req.body.updateduser;
+    subscriptionmaster001mb.updateddatetime = req.body.updateddatetime;
+    subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Error when creating subscriptionmaster001mb',
+                error: err
+            });
+        }
 
-        subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating subscriptionmaster001mb',
-                    error: err
-                });
-            }
-
-            return res.json({ messsage: 'Subscriptionmaster Created' });
-        });
-    })
-    /**
-     * @swagger
-     * /api/subscriptionmaster001mb/{id}:
-     *   put:
-     *    tags: [subscriptionmaster001mb]
-     *    summary: Put Method
-     *    description: Retrieve the list of data
-     *    parameters:
-     *      - in: path
-     *        name: id
-     *        required: true
-     *        description: Numeric ID of the user to retrieve.
-     *        schema:
-     *           type: string
-     *    requestBody:
-     *         required: true
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                         $ref: '#/components/schemas/subscriptionmaster001mb'
-     *    responses:
-     *       200:
-     *         description: Sucess
-     *       500:
-     *         description: failed
-     *         content:
-     *             application/json:
-     *                       schema:
-     *                          type: array
-     *                          items:
-     *                             $ref: '#/components/schemas/subscriptionmaster001mb'
-     */
+        return res.json("subscriptionmaster001mb created");
+    });
+})
+/**
+ * @swagger
+ * /api/subscriptionmaster001mb/{id}:
+ *   put:
+ *    tags: [subscriptionmaster001mb]
+ *    summary: Put Method
+ *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *    requestBody:
+ *         required: true
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                         $ref: '#/components/schemas/subscriptionmaster001mb'
+ *    responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/subscriptionmaster001mb'
+ */
 
 app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
 
-    Subscriptionmaster001mb.findOne({ _id: id }, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findOne({ _id: id }, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting subscriptionmaster001mb',
@@ -6711,10 +6678,8 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
                 message: 'No such subscriptionmaster001mb'
             });
         }
-
-        subscriptionmaster001mb.subpid = req.body.subpid ? req.body.subpid : subscriptionmaster001mb.subpid;
+        subscriptionmaster001mb.personid = req.body.personid.id ? req.body.personid.id : subscriptionmaster001mb.personid;
         subscriptionmaster001mb.subpname = req.body.subpname ? req.body.subpname : subscriptionmaster001mb.subpname;
-        subscriptionmaster001mb.subscid = req.body.subscid.id ? req.body.subscid.id : subscriptionmaster001mb.subscid;
         subscriptionmaster001mb.description = req.body.description ? req.body.description : subscriptionmaster001mb.description;
         subscriptionmaster001mb.tenure = req.body.tenure ? req.body.tenure : subscriptionmaster001mb.tenure;
         subscriptionmaster001mb.amount = req.body.amount ? req.body.amount : subscriptionmaster001mb.amount;
@@ -6725,7 +6690,7 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
         subscriptionmaster001mb.updateduser = req.body.updateduser ? req.body.updateduser : subscriptionmaster001mb.updateduser;
         subscriptionmaster001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriptionmaster001mb.updateddatetime;
 
-        subscriptionmaster001mb.save(function(err, subscriptionmaster001mb) {
+        subscriptionmaster001mb.save(function (err, subscriptionmaster001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating subscriptionmaster001mb.',
@@ -6744,6 +6709,8 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
  *    tags: [subscriptionmaster001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -6759,7 +6726,7 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
  */
 app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
     var id = req.params.id;
-    Subscriptionmaster001mb.findByIdAndRemove(id, function(err, subscriptionmaster001mb) {
+    Subscriptionmaster001mb.findByIdAndRemove(id, function (err, subscriptionmaster001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the subscriptionmaster001mb.',
@@ -6771,7 +6738,7 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
     });
 });
 
-//-----------------user001ws_doc-----------------//
+//-----------------user001wb schema method-----------------//
 /** 
  * @swagger
  * components:
@@ -6779,40 +6746,18 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *      users001wb:
  *           type: object
  *           properties:
- *             firstname:
- *                   type: string
- *             lasttname:
- *                   type: string
- *             zipcode:                     
- *                   type: number
  *             employeeid:
  *                   type: number
- *             dob: 
+ *             bankname:
+ *                   type: string  
+ *             accountnumber:
  *                   type: string
- *             email:
- *                   type: string 
- *             confirmemail:
+ *             insurance:
+ *                   type: string  
+ *             accounttype:
  *                   type: string
- *             sex:
- *                   type: string
- *             address1:
- *                   type: string
- *             address2:
- *                   type: string
- *             address3:
- *                   type: string
- *             city: 
- *                   type: string
- *             state: 
- *                   type: string
- *             country:
- *                   type: string
- *             mobile:
- *                   type: number
- *             landline:
- *                   type: number
  *             status:
- *                   type: string       
+ *                   type: string   
  *             inserteduser:
  *                   type: string
  *             inserteddatetime:
@@ -6821,37 +6766,12 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *                   type: string
  *             updateddatetime:
  *                   type: string     
- *             subscid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             stateid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             cityid: 
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string
- *             countryid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string 
  *             personid:
  *                type: object 
  *                properties:
  *                    id:
- *                     type: string 
- *             roleid:
- *                type: object 
- *                properties:
- *                    id:
- *                     type: string    
- * 
+ *                     type: string
+ *             
  */
 // ********************** users001wb get method****************//
 /**
@@ -6861,6 +6781,8 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *     tags: [users001wb]
  *     summary: Get Method
  *     description: Retrieve the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Success
@@ -6869,13 +6791,11 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/users001wb'
  */
 
 app.get('/api/users001wb', (req, res) => {
-    Users001wb.find(function(err, users001wb) {
+    Users001wb.find(function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -6885,6 +6805,46 @@ app.get('/api/users001wb', (req, res) => {
         return res.json(users001wb);
     });
 });
+
+/**
+ * @swagger
+ * /api/users001wb/verify:
+ *   get:
+ *     tags: [users001wb]
+ *     summary: Get Method
+ *     description: Get the list of data
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Sucess
+ *       500:
+ *         description: failed
+ *         content:
+ *             application/json:
+ *                       schema:
+ *                             $ref: '#/components/schemas/users001wb'
+ */
+app.get('/api/users001wb/verify', async (req, res) => {
+    const token = req.query.token;
+    if (!token) {
+        return res.status(403).send("A token is required for authentication");
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        req.verifydecode = decoded;
+        const person = await Person001mb.findOne({ email: decoded.email, roleid: decoded.roleid, });
+        if (person.verified) {
+            return res.status(409).send({ message: " Account Verified Please Login" });
+        } else {
+            person.verified = true;
+            person.save();
+            return res.status(200).send({ message: "Account Verified" });
+        }
+    } catch (err) {
+        return res.status(401).send("Invalid Token");
+    }
+});
 /**
  * @swagger
  * /api/users001wb/{id}:
@@ -6892,6 +6852,8 @@ app.get('/api/users001wb', (req, res) => {
  *     tags: [users001wb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -6907,13 +6869,11 @@ app.get('/api/users001wb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/users001wb'
  */
 app.get('/api/users001wb/:id', (req, res) => {
     var id = req.params.id;
-    Users001wb.findOne({ _id: id }, function(err, users001wb) {
+    Users001wb.findOne({ _id: id }, function (err, users001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting users001wb.',
@@ -6935,6 +6895,8 @@ app.get('/api/users001wb/:id', (req, res) => {
  *    tags: [users001wb]
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -6947,37 +6909,73 @@ app.get('/api/users001wb/:id', (req, res) => {
  *       500:
  *         description: failed
  */
-app.post('/api/users001wb/user', async(req, res) => {
+app.post('/api/users001wb/user', async (req, res) => {
+    const person001mb = new Person001mb();
+    person001mb.countryid = req.body.countryid.id;
+    person001mb.cityid = req.body.cityid.id;
+    person001mb.stateid = req.body.stateid.id;
+    person001mb.roleid = req.body.roleid.id;
+    person001mb.firstname = req.body.firstname;
+    person001mb.lasttname = req.body.lasttname;
+    person001mb.zipcode = req.body.zipcode;
+    person001mb.dob = req.body.dob;
+    person001mb.confirmemail = req.body.confirmemail;
+    person001mb.email = req.body.email;
+    person001mb.subscname = req.body.subscname;
+    person001mb.age = req.body.age;
+    person001mb.verified = false;
+    person001mb.sex = req.body.sex;
+    person001mb.subscdesc = req.body.subscdesc;
+    person001mb.aboutme = req.body.aboutme;
+    person001mb.address = req.body.address;
+    person001mb.phoneno = req.body.phoneno;
+    person001mb.landline = req.body.landline;
+    person001mb.inserteduser = req.body.inserteduser;
+    person001mb.inserteddatetime = req.body.inserteddatetime;
+    person001mb.updateduser = req.body.updateduser;
+    person001mb.updateddatetime = req.body.updateddatetime;
+    person001mb.status = req.body.status;
+
+    if (!(person001mb.email && person001mb.firstname && person001mb.roleid)) {
+        return res.status(402).json("Enter a Required Field");
+    }
+    const oldUser = await Person001mb.findOne({ email: person001mb.email, roleid: person001mb.roleid });
+    if (oldUser) {
+        return res.status(409).send("User Already Exist");
+    }
+    const token = jwt.sign({ email: person001mb.email, roleid: person001mb.roleid }, process.env.TOKEN_KEY,
+        {
+            expiresIn: "6h",
+        }
+    );
+    person001mb.token = token;
+    let person = await person001mb.save();
+
+    const login001mb = new Login001mb()
+    login001mb.username = req.body.username;
+    login001mb.password = bcrypt.hashSync(req.body.password, 10);
+    login001mb.roleid = req.body.roleid.id;
+    login001mb.inserteduser = req.body.inserteduser;
+    login001mb.inserteddatetime = req.body.inserteddatetime;
+    login001mb.updateduser = req.body.updateduser;
+    login001mb.status = req.body.status;
+    login001mb.personid = person._id;
+    await login001mb.save()
+
+
     const users001wb = new Users001wb();
-    users001wb.subscid = req.body.subscid.id;
-    users001wb.rolename = req.body.rolename.rolename;
-    users001wb.personid = req.body.personid.id;
-    users001wb.firstname = req.body.firstname;
-    users001wb.lasttname = req.body.lasttname;
-    users001wb.zipcode = req.body.zipcode;
+    users001wb.personid = person._id;
     users001wb.employeeid = req.body.employeeid;
-    users001wb.dob = req.body.dob;
-    users001wb.email = req.body.email;
-    users001wb.confirmemail = req.body.confirmemail;
-    users001wb.sex = req.body.sex;
-    users001wb.address1 = req.body.address1;
-    users001wb.address2 = req.body.address2;
-    users001wb.address3 = req.body.address3;
-    users001wb.cityid = req.body.cityid.id;
-    users001wb.stateid = req.body.stateid.id;
-    users001wb.countryid = req.body.countryid.id;
-    users001wb.mobile = req.body.mobile;
-    users001wb.landline = req.body.landline;
-    users001wb.status = req.body.status;
+    users001wb.bankname = req.body.bankname;
+    users001wb.accountnumber = req.body.accountnumber;
+    users001wb.insurance = req.body.insurance;
+    users001wb.accounttype = req.body.accounttype;
     users001wb.inserteduser = req.body.inserteduser;
     users001wb.inserteddatetime = req.body.inserteddatetime;
     users001wb.updateduser = req.body.updateduser;
-    users001wb.updateddatetime = req.body.updateddatetime;
+    users001wb.status = req.body.status;
+    await users001wb.save()
 
-    const oldUser = await Users001wb.findOne({ email: users001wb.email });
-    if (oldUser) {
-        return res.status(409).send("User Already Exist. Please Login");
-    }
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -6996,38 +6994,45 @@ app.post('/api/users001wb/user', async(req, res) => {
     transporter.use('compile', hbs(handlebarOptions))
     const mailOptions = {
         from: 'siriusmatrimoney@gmail.com',
-        to: users001wb.email,
+        to: person001mb.email,
         subject: 'Sirius Matrimony Confirmation',
         template: 'mail',
         context: {
-            name: "Sirius Matrimony"
+            name: "Sirius Matrimony",
+            url: `http://localhost:8081/api/users001wb/verify?token=${token}`
         }
     };
-    transporter.sendMail(mailOptions, function(err, info) {
+    transporter.sendMail(mailOptions, function (err, info) {
         if (err)
             console.log(err)
         else
-            console.log('email sent' + info.response);
+            return res.json({ message: 'email created!' });
     })
-    users001wb.save()
-        .then((result) => {
-            res.json({ message: 'user created' });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
 });
-
 /**
  * @swagger
- * /api/users001wb/{id}:
+ * /api/users001wb/{personid}/{loginid}/{userid}:
  *   put:
  *    tags: [users001wb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
- *        name: id
+ *        name: personid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: loginid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: userid
  *        required: true
  *        description: Numeric ID of the user to retrieve.
  *        schema:
@@ -7046,72 +7051,93 @@ app.post('/api/users001wb/user', async(req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/users001wb'
  */
-app.put('/api/users001wb/:id', (req, res) => {
-    var id = req.params.id;
-    Users001wb.findOne({ _id: id }, function(err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when getting users001wb',
-                error: err
-            });
-        }
-        if (!users001wb) {
-            return res.status(404).json({
-                message: 'No such users001wb'
-            });
-        }
-        users001wb.subscid = req.body.subscid.id ? req.body.subscid.id : users001wb.subscid;
-        users001wb.personid = req.body.personid.id ? req.body.personid.id : users001wb.personid;
-        users001wb.rolename = req.body.rolename.rolename ? req.body.rolename.rolename : users001wb.rolename;
-        users001wb.firstname = req.body.firstname ? req.body.firstname : users001wb.firstname;
-        users001wb.lasttname = req.body.lasttname ? req.body.lasttname : users001wb.lasttname;
-        users001wb.zipcode = req.body.zipcode ? req.body.zipcode : users001wb.zipcode;
+app.put('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
+    var personid = req.params.personid;
+    var loginid = req.params.loginid;
+    var userid = req.params.userid;
+    const person001mb = await Person001mb.findOne({ _id: personid });
+    if (person001mb) {
+        person001mb.email = req.body.email ? req.body.email : person001mb.email;
+        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
+        person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
+        person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
+        person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
+        person001mb.age = req.body.age ? req.body.age : person001mb.age;
+        person001mb.sex = req.body.sex ? req.body.sex : person001mb.sex;
+        person001mb.countryid = req.body.countryid.id ? req.body.countryid.id : person001mb.countryid;
+        person001mb.address = req.body.address ? req.body.address : person001mb.address;
+        person001mb.phoneno = req.body.phoneno ? req.body.phoneno : person001mb.phoneno;
+        person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
+        person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
+        person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
+        person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
+        person001mb.firstname = req.body.firstname ? req.body.firstname : person001mb.firstname;
+        person001mb.lasttname = req.body.lasttname ? req.body.lasttname : person001mb.lasttname;
+        person001mb.zipcode = req.body.zipcode ? req.body.zipcode : person001mb.zipcode;
+        person001mb.dob = req.body.dob ? req.body.dob : person001mb.dob;
+        person001mb.confirmemail = req.body.confirmemail ? req.body.confirmemail : person001mb.confirmemail;
+        person001mb.landline = req.body.landline ? req.body.landline : person001mb.landline;
+        person001mb.status = req.body.status ? req.body.status : person001mb.status;
+        let person = person001mb.save();
+        const login001mb = await Login001mb.findOne({ _id: loginid });
+        login001mb.personid = person._id ? person._id : login001mb.personid;
+        login001mb.username = req.body.username ? req.body.username : login001mb.username;
+        login001mb.password = req.body.password ? req.body.password : login001mb.password;
+        login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
+        login001mb.status = req.body.status ? req.body.status : login001mb.status
+        login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
+        login001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : login001mb.inserteddatetime;
+        login001mb.updateduser = req.body.updateduser ? req.body.updateduser : login001mb.updateduser;
+        login001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : login001mb.updateddatetime;
+        login001mb.save();
+        const users001wb = await Users001wb.findOne({ _id: userid });
         users001wb.employeeid = req.body.employeeid ? req.body.employeeid : users001wb.employeeid;
-        users001wb.dob = req.body.dob ? req.body.dob : users001wb.dob;
-        users001wb.email = req.body.email ? req.body.email : users001wb.email;
-        users001wb.confirmemail = req.body.confirmemail ? req.body.confirmemail : users001wb.confirmemail;
-        users001wb.sex = req.body.sex ? req.body.sex : users001wb.sex;
-        users001wb.address1 = req.body.address1 ? req.body.address1 : users001wb.address1;
-        users001wb.address2 = req.body.address2 ? req.body.address2 : users001wb.address2;
-        users001wb.address3 = req.body.address3 ? req.body.address3 : users001wb.address3;
-        users001wb.cityid = req.body.cityid.id ? req.body.cityid.id : users001wb.cityid;
-        users001wb.stateid = req.body.stateid.id ? req.body.stateid.id : users001wb.stateid;
-        users001wb.countryid = req.body.countryid.id ? req.body.countryid.id : users001wb.countryid;
-        users001wb.mobile = req.body.mobile ? req.body.mobile : users001wb.mobile;
-        users001wb.landline = req.body.landline ? req.body.landline : users001wb.landline;
-        users001wb.status = req.body.status ? req.body.status : users001wb.status;
-        users001wb.inserteduser = req.body.inserteduser ? req.body.inserteduser : users001wb.inserteduser;
-        users001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : users001wb.inserteddatetime;
-        users001wb.updateduser = req.body.updateduser ? req.body.updateduser : users001wb.updateduser;
-        users001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : users001wb.updateddatetime;
-        users001wb.save(function(err, users001wb) {
+        users001wb.personid = person._id ? person._id : users001wb.personid;
+        users001wb.bankname = req.body.bankname ? req.body.bankname : users001wb.bankname;
+        users001wb.accountnumber = req.body.accountnumber ? req.body.accountnumber : users001wb.accountnumber;
+        users001wb.insurance = req.body.insurance ? req.body.insurance : users001wb.insurance;
+        users001wb.accounttype = req.body.accounttype ? req.body.accounttype : users001wb.accounttype;
+        users001wb.save(function (err, users001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating users001wb.',
                     error: err
                 });
             }
-            return res.json(users001wb);
+
+            return res.json('users001wb updated');
         });
-    });
+    }
 });
 /**
  * @swagger
- * /api/users001wb/{id}:
+ * /api/users001wb/{personid}/{loginid}/{userid}:
  *   delete:
  *    tags: [users001wb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: Numeric ID of the user to retrieve.
- *         schema:
+ *      - in: path
+ *        name: personid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: loginid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
+ *           type: string
+ *      - in: path
+ *        name: userid
+ *        required: true
+ *        description: Numeric ID of the user to retrieve.
+ *        schema:
  *           type: string
  *    responses:
  *       200:
@@ -7119,17 +7145,22 @@ app.put('/api/users001wb/:id', (req, res) => {
  *       500:
  *         description: failed 
  */
-app.delete('/api/users001wb/:id', (req, res) => {
-    var id = req.params.id;
-    Users001wb.findByIdAndRemove(id, function(err, users001wb) {
-        if (err) {
-            return res.status(500).json({
-                message: 'Error when deleting the users001wb.',
-                error: err
-            });
-        }
-        return res.json({ message: 'Deleted successfully' });
-    });
+app.delete('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
+    var userid = req.params.userid;
+    var loginid = req.params.loginid;
+    var personid = req.params.personid;
+    if (userid && loginid && personid) {
+        console.log("testing", userid, loginid, personid)
+        await Person001mb.findByIdAndRemove({ _id: personid });
+        await Login001mb.findByIdAndRemove({ _id: loginid });
+        await Users001wb.findByIdAndRemove({ _id: userid });
+        return res.json('users001wb deleted');
+    } else {
+        return res.status(500).json({
+            message: 'Error when deleting users001wb.',
+            error: err
+        });
+    }
 });
 
 // ********************** payment001mb schema method****************//
@@ -7140,18 +7171,11 @@ app.delete('/api/users001wb/:id', (req, res) => {
  *      payment001mb:
  *            type: object
  *            properties:    
- *             payid:
- *                 type: number
  *             subpid:
  *                 type: object
  *                 properties:
  *                    id: 
- *                      type: string
- *             subscid:
- *                 type: object
- *                 properties:
- *                    id: 
- *                      type: string  
+ *                      type: string 
  *             payment:
  *                 type: string
  *             status:
@@ -7173,6 +7197,8 @@ app.delete('/api/users001wb/:id', (req, res) => {
  *     tags: [payment001mb]
  *     summary: Get Method
  *     description: Retrieve the list of data
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Success
@@ -7181,13 +7207,11 @@ app.delete('/api/users001wb/:id', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/payment001mb'
  */
 
 app.get('/api/payment001mb', (req, res) => {
-    Payment001mb.find(function(err, payment001mb) {
+    Payment001mb.find(function (err, payment001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting payment001mb.',
@@ -7204,6 +7228,8 @@ app.get('/api/payment001mb', (req, res) => {
  *     tags: [payment001mb]
  *     summary: Retrieve a data by id.
  *     description: Retrieve a data by id.
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -7219,13 +7245,11 @@ app.get('/api/payment001mb', (req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/payment001mb'
  */
 app.get('/api/payment001mb/:id', (req, res) => {
     var id = req.params.id;
-    Payment001mb.findOne({ _id: id }, function(err, payment001mb) {
+    Payment001mb.findOne({ _id: id }, function (err, payment001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting payment001mb.',
@@ -7248,6 +7272,8 @@ app.get('/api/payment001mb/:id', (req, res) => {
  *    tags: [payment001mb]
  *    summary: Post Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *         required: true
  *         content:
@@ -7260,18 +7286,16 @@ app.get('/api/payment001mb/:id', (req, res) => {
  *       500:
  *         description: failed
  */
-app.post('/api/payment001mb/payment', async(req, res) => {
+app.post('/api/payment001mb/payment', async (req, res) => {
     const payment001mb = new Payment001mb();
     payment001mb.subpid = req.body.subpid.id;
-    payment001mb.subscid = req.body.subscid.id;
-    payment001mb.payid = req.body.payid;
     payment001mb.payment = req.body.payment;
     payment001mb.status = req.body.status;
     payment001mb.inserteduser = req.body.inserteduser;
     payment001mb.inserteddatetime = req.body.inserteddatetime;
     payment001mb.updateduser = req.body.updateduser;
     payment001mb.updateddatetime = req.body.updateddatetime;
-    payment001mb.save(function(err, payment001mb) {
+    payment001mb.save(function (err, payment001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when creating payment001mb',
@@ -7279,7 +7303,7 @@ app.post('/api/payment001mb/payment', async(req, res) => {
             });
         }
 
-        return res.json({ messsage: 'payment is Created' });
+        return res.status(201).json({ message: 'payment001mb created' });
     });
 });
 
@@ -7290,6 +7314,8 @@ app.post('/api/payment001mb/payment', async(req, res) => {
  *    tags: [payment001mb]
  *    summary: Put Method
  *    description: Retrieve the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *      - in: path
  *        name: id
@@ -7311,15 +7337,13 @@ app.post('/api/payment001mb/payment', async(req, res) => {
  *         content:
  *             application/json:
  *                       schema:
- *                          type: array
- *                          items:
  *                             $ref: '#/components/schemas/payment001mb'
  */
 app.put('/api/payment001mb/:id', (req, res) => {
 
     var id = req.params.id;
 
-    Payment001mb.findOne({ _id: id }, function(err, payment001mb) {
+    Payment001mb.findOne({ _id: id }, function (err, payment001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting payment001mb',
@@ -7334,15 +7358,13 @@ app.put('/api/payment001mb/:id', (req, res) => {
         }
         payment001mb.payment = req.body.payment ? req.body.payment : payment001mb.payment;
         payment001mb.payid = req.body.payid ? req.body.payid : payment001mb.payid;
-        payment001mb.subscid = req.body.subscid.id ? req.body.subscid.id : payment001mb.subscid;
         payment001mb.subpid = req.body.subpid.id ? req.body.subpid.id : payment001mb.subpid;
         payment001mb.status = req.body.status ? req.body.status : payment001mb.status;
         payment001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : payment001mb.inserteduser;
         payment001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : payment001mb.inserteddatetime;
         payment001mb.updateduser = req.body.updateduser ? req.body.updateduser : payment001mb.updateduser;
         payment001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : payment001mb.updateddatetime;
-
-        payment001mb.save(function(err, payment001mb) {
+        payment001mb.save(function (err, payment001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating payment001mb.',
@@ -7362,6 +7384,8 @@ app.put('/api/payment001mb/:id', (req, res) => {
  *    tags: [payment001mb]
  *    summary: Delete Method
  *    description: Delete the list of data
+ *    security:
+ *       - bearerAuth: []
  *    parameters:
  *       - in: path
  *         name: id
@@ -7377,7 +7401,7 @@ app.put('/api/payment001mb/:id', (req, res) => {
  */
 app.delete('/api/payment001mb/:id', (req, res) => {
     var id = req.params.id;
-    Payment001mb.findByIdAndRemove(id, function(err, payment001mb) {
+    Payment001mb.findByIdAndRemove(id, function (err, payment001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the payment001mb.',
