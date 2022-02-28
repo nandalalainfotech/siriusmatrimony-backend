@@ -14,7 +14,4 @@ router.use(function (req, res, next) {
 router.get('/:username/:password', loginservice.loginauth);
 router.get('/list', loginservice.list);
 router.get('/:id', loginservice.show);
-// router.post('/create', loginservice.create);
-router.put('/:id', loginservice.update);
-router.delete('/:id', loginservice.remove);
 export default router;

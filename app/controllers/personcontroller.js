@@ -12,8 +12,5 @@ router.use(function(req, res, next) {
 
 router.get('/list', personservice.list);
 router.get('/:id', personservice.show);
-// router.post('/create', personservice.create);
-router.put('/:id', personservice.update);
-router.delete('/:id', personservice.remove);
 
 export default router;

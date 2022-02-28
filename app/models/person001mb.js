@@ -72,8 +72,6 @@ const person001mb = mongoose.model(
             'dob': String,
             'confirmemail': String,
             'landline': String,
-            'subscid': Number,
-            'subscname': String,
             'age': Number,
             'sex': String,
             'email': String,
