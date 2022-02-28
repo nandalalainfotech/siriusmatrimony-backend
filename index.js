@@ -716,10 +716,7 @@ const options = {
             securitySchemes: {
                 bearerAuth:{
                     type: "http",
-                    name: "Authorization",
-                    scheme: "bearer",
-                    // in: "header",
-                    bearerFormat: "JWT"
+                    scheme: "bearer"
                 },
             },
         },
@@ -3966,6 +3963,7 @@ app.delete('/api/regionaldetails001mb/:id', (req, res) => {
  *                 type: string  
  *             token:
  *                 type: string
+ *                 example: Generate from JWT
  *             personid:
  *                type: object
  *                properties:
@@ -4161,8 +4159,10 @@ app.get('/api/login001mb/:username/:password', async (req, res) => {
  *                   type: string
  *             verified:
  *                  type: boolean
+ *                  default: false
  *             token:
  *                   type: string
+ *                   example: Generate from JWT
  *             countryid:
  *                type: object
  *                properties:
@@ -5381,9 +5381,13 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
 /** 
  * @swagger
  * components:
+ *   schemas:
  *     subscriberdetails001wb:
- *            type: object
- *            properties:
+ *        allOf:
+ *           - $ref: '#/components/schemas/person001mb'
+ *           - $ref: '#/components/schemas/login001mb'
+ *        type: object
+ *        properties:
  *             horoscope:
  *                 type: string    
  *             subscdesc:
@@ -5406,32 +5410,30 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                properties:
  *                    id: 
  *                      type: string 
- *            personid:
+ *             personid:
+ *                type: object
+ *                example: Automatically Generated from person001mb 
+ *                properties:
+ *                    id: 
+ *                      type: string                    
+ *             contentid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string
- *            contentid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string
- *            status:
+ *             status:
  *                 type: string
- *            inserteduser:
+ *             inserteduser:
  *                 type: string
- *            inserteddatetime:
+ *             inserteddatetime:
  *                 type: string
- *            updateduser:
+ *             updateduser:
  *                 type: string
- *            updateddatetime:
+ *             updateddatetime:
  *                 type: string
  *       
  *           
  */
-
-
-
 // ********************** subscriberdetails001wb get method****************//
 /**
  * @swagger
@@ -5777,7 +5779,7 @@ app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res
         subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : subscriberdetails001wb.inserteddatetime;
         subscriberdetails001wb.updateduser = req.body.updateduser ? req.body.updateduser : subscriberdetails001wb.updateduser;
         subscriberdetails001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : subscriberdetails001wb.updateddatetime;
-        subscriberdetails001wb.subscapproval = req.body.subscapproval ? req.body.subscapproval : subscriberdetails001wb.subscapproval;
+        subscriberdetails001wb.subscapproval = req.body.subscapproval;
         subscriberdetails001wb.approvedby = req.body.approvedby ? req.body.approvedby : subscriberdetails001wb.approvedby;
         subscriberdetails001wb.approvedon = req.body.approvedon ? req.body.approvedon : subscriberdetails001wb.approvedon;
         subscriberdetails001wb.save(function (err, subscriberdetails001wb) {
@@ -6744,6 +6746,9 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  * components:
  *    schemas:                 
  *      users001wb:
+ *           allOf:
+ *            - $ref: '#/components/schemas/person001mb'
+ *            - $ref: '#/components/schemas/login001mb'
  *           type: object
  *           properties:
  *             employeeid:
@@ -6768,6 +6773,7 @@ app.delete('/api/subscriptionmaster001mb/:id', (req, res) => {
  *                   type: string     
  *             personid:
  *                type: object 
+ *                example: Automatically Generated from person001mb
  *                properties:
  *                    id:
  *                     type: string
