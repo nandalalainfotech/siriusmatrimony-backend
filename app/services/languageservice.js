@@ -38,7 +38,6 @@ export const show = (req, res) => {
 };
 export const create = async(req, res) => {
     const language001mb = new Language001mb()
-    language001mb.personid = req.body.personid.id;
     language001mb.languagename = req.body.languagename;
     language001mb.languagedesc = req.body.languagedesc;
     language001mb.status = req.body.status;
@@ -49,13 +48,7 @@ export const create = async(req, res) => {
 
     language001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: language001mb.personid }, (err, user) => {
-                if (user) {
-                    user.languageid.push(language001mb);
-                    user.save();
                     return res.json({ message: 'language created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -78,7 +71,6 @@ export const update = async(req, res) => {
                 message: 'No such language001mb'
             });
         }
-        language001mb.personid = req.body.personid.id ? req.body.personid.id : language001mb.personid;
         language001mb.languagename = req.body.languagename ? req.body.languagename : language001mb.languagename;
         language001mb.languagedesc = req.body.languagedesc ? req.body.languagedesc : language001mb.languagedesc;
         language001mb.status = req.body.status ? req.body.status : language001mb.status;

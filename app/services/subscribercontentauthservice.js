@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Subscribercontentauth001wb = db.subscribercontentauth001wb;
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Subscribercontentauth001wb.find(function(err, subscribercontentauth001wbs) {
         if (err) {
@@ -40,7 +38,6 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const subscribercontentauth001wb = new Subscribercontentauth001wb();
-    subscribercontentauth001wb.personid = req.body.personid.id;
     subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
     subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
     subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
@@ -51,14 +48,7 @@ export const create = async(req, res) => {
     subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
     subscribercontentauth001wb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: subscribercontentauth001wb.personid }, (err, user) => {
-                if (user) {
-                    user.subscsubspid.push(subscribercontentauth001wb);
-                    user.save();
                     return res.json({ message: 'subscribercontentauth created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -80,8 +70,6 @@ export const update = (req, res) => {
                 message: 'No such subscribercontentauth001wb'
             });
         }
-
-        subscribercontentauth001wb.personid = req.body.personid.id ? req.body.personid.id : subscribercontentauth001wb.personid;
         subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus ? req.body.subscsubpstatus : subscribercontentauth001wb.subscsubpstatus;
         subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate ? req.body.subscsubpstartdate : subscribercontentauth001wb.subscsubpstartdate;
         subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate ? req.body.subscsubpenddate : subscribercontentauth001wb.subscsupbenddate;

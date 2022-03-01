@@ -2,8 +2,6 @@ import db from "../models/main.js"
 
 const Subcatclassification001mb = db.subcatclassification001mb;
 
-const Person001mb = db.person001mb
-
 export const list = async (req, res) => {
     Subcatclassification001mb.find(function (err, subcatclassification001mbs) {
         if (err) {
@@ -41,7 +39,6 @@ export const show = async (req, res) => {
 
 export const create = async (req, res) => {
     const subcatclassification001mb = new Subcatclassification001mb();
-    subcatclassification001mb.personid = req.body.personid.id;
     subcatclassification001mb.subcatcode = req.body.subcatcode.id;
     subcatclassification001mb.catcode = req.body.catcode.id,
     subcatclassification001mb.classificationname = req.body.classificationname;
@@ -52,13 +49,7 @@ export const create = async (req, res) => {
     subcatclassification001mb.updateddatetime = req.body.updateddatetime;
     subcatclassification001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subcatclassification001mb.personid }, (err, user) => {
-                if (user) {
-                    user.classificationid.push(subcatclassification001mb);
-                    user.save();
                     return res.json({ message: 'subcatclassification created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -82,7 +73,6 @@ export const update = (req, res) => {
             });
         }
         subcatclassification001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : subcatclassification001mb.subcatcode;
-        subcatclassification001mb.personid = req.body.personid.id ? req.body.personid.id : subcatclassification001mb.personid;
         subcatclassification001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcatclassification001mb.catcode;
         subcatclassification001mb.classificationname = req.body.classificationname ? req.body.classificationname : subcatclassification001mb.classificationname;
         subcatclassification001mb.status = req.body.status ? req.body.status : subcatclassification001mb.status;

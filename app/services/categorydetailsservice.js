@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Categorydetails001mb = db.categorydetails001mb;
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Categorydetails001mb.find(function(err, categorydetails001mb) {
         if (err) {
@@ -42,7 +40,6 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
-    categorydetails001mb.personid = req.body.personid.id;
     categorydetails001mb.catname = req.body.catname;
     categorydetails001mb.status = req.body.status;
     categorydetails001mb.inserteduser = req.body.inserteduser;
@@ -51,13 +48,7 @@ export const create = async(req, res) => {
     categorydetails001mb.updateddatetime = req.body.updateddatetime;
     categorydetails001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: categorydetails001mb.personid }, (err, user) => {
-                if (user) {
-                    user.categoryid.push(categorydetails001mb);
-                    user.save();
                     return res.json({ message: 'categorydetails created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -81,7 +72,6 @@ export const update = async(req, res) => {
                 message: 'No such categorydetails001mb'
             });
         }
-        categorydetails001mb.personid = req.body.personid.id ? req.body.personid.id : categorydetails001mb.personid;
         categorydetails001mb.catname = req.body.catname ? req.body.catname : categorydetails001mb.catname;
         categorydetails001mb.status = req.body.status ? req.body.status : categorydetails001mb.status;
         categorydetails001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : categorydetails001mb.inserteduser;

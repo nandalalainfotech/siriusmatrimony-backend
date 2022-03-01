@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Companydetails001mb = db.companydetails001mb;
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Companydetails001mb.find(function(err, companydetails001mb) {
         if (err) {
@@ -40,7 +38,6 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const companydetails001mb = new Companydetails001mb();
-    companydetails001mb.personid = req.body.personid.id;
     companydetails001mb.regionalid = req.body.regionalid.id;
     companydetails001mb.companyname = req.body.companyname;
     companydetails001mb.address = req.body.address;
@@ -52,13 +49,7 @@ export const create = async(req, res) => {
     companydetails001mb.updateddatetime = req.body.updateddatetime;
     companydetails001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: companydetails001mb.personid }, (err, user) => {
-                if (user) {
-                    user.companycode.push(companydetails001mb);
-                    user.save();
                     return res.json({ message: 'companydetails created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -81,7 +72,6 @@ export const update = async(req, res) => {
                 message: 'No such companydetails001mb'
             });
         }
-        companydetails001mb.personid = req.body.personid.id ? req.body.personid.id : companydetails001mb.personid;
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;
         companydetails001mb.phonenumber = req.body.phonenumber ? req.body.phonenumber : companydetails001mb.phonenumber;

@@ -18,11 +18,7 @@ const subcatclassification001mb = mongoose.model(
         'inserteduser': String,
         'inserteddatetime': String,
         'updateduser': String,
-        'updateddatetime': String,
-        'personid': {
-            type: mongoose.Types.ObjectId,
-            ref: 'person001mb'
-        },
+        'updateddatetime': String
     }, { timestamps: false })
 );
 

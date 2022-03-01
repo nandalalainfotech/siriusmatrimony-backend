@@ -6,10 +6,6 @@ const categorydetails001mb = mongoose.model(
 	"categorydetails001mb",
 	new mongoose.Schema(
 		{
-			'personid':  {
-				type: mongoose.Types.ObjectId,
-				ref: 'person001mb'
-			},
 			'catname': String,
 			'status': String,
 			'inserteduser': String,

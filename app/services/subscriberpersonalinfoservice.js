@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Subscriberpersonalinfo001wb = db.subscriberpersonalinfo001wb;
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Subscriberpersonalinfo001wb.find(function(err, subscriberpersonalinfo001wbs) {
         if (err) {
@@ -40,7 +38,6 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
-    subscriberpersonalinfo001wb.personid = req.body.personid.id;
     subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
     subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
     subscriberpersonalinfo001wb.flex1 = req.body.flex1;
@@ -61,14 +58,7 @@ export const create = async(req, res) => {
     subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
     subscriberpersonalinfo001wb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: subscriberpersonalinfo001wb.personid }, (err, user) => {
-                if (user) {
-                    user.personalid.push(subscriberpersonalinfo001wb);
-                    user.save();
                     return res.json({ message: 'subscriberpersonalinfo created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -92,7 +82,6 @@ export const update = async(req, res) => {
             });
         }
 
-        subscriberpersonalinfo001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberpersonalinfo001wb.personid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;

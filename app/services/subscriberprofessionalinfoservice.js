@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Subscriberprofessionalinfo002wb = db.subscriberprofessionalinfo002wb
 
-const Person001mb = db.person001mb
-
 export const list = async (req, res) => {
     Subscriberprofessionalinfo002wb.find(function (err, subscriberprofessionalinfo002wbs) {
         if (err) {
@@ -42,7 +40,6 @@ export const show = async (req, res) => {
 export const create = async (req, res) => {
 
     const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
-    subscriberprofessionalinfo002wb.personid = req.body.personid.id;
     subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
     subscriberprofessionalinfo002wb.job = req.body.job;
     subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
@@ -63,14 +60,7 @@ export const create = async (req, res) => {
     subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
     subscriberprofessionalinfo002wb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subscriberprofessionalinfo002wb.personid }, (err, user) => {
-                if (user) {
-                    user.professionalid.push(subscriberprofessionalinfo002wb);
-                    user.save();
                     return res.json({ message: 'subscriberprofessional created!' });
-                }
-            });
-
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -92,7 +82,6 @@ export const update = async (req, res) => {
                 message: 'No such subscriberprofessionalinfo002wb'
             });
         }
-        subscriberprofessionalinfo002wb.personid = req.body.personid.id ? req.body.personid.id : subscriberprofessionalinfo002wb.personid;
         subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.professionaldetails : subscriberprofessionalinfo002wb.professionaldetails;
         subscriberprofessionalinfo002wb.job = req.body.job ? req.body.job : subscriberprofessionalinfo002wb.job;
         subscriberprofessionalinfo002wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberprofessionalinfo002wb.flex1;
