@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Subcategory001mb = db.subcategory001mb
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Subcategory001mb.find(function(err, subcategory001mbs) {
         if (err) {
@@ -39,7 +37,6 @@ export const show = async(req, res) => {
 
 export const create = async(req, res) => {
     const subcategory001mb = new Subcategory001mb();
-    subcategory001mb.personid = req.body.personid.id;
     subcategory001mb.catcode = req.body.catcode.id;
     subcategory001mb.subcatname = req.body.subcatname;
     subcategory001mb.subcatstatus = req.body.subcatstatus;
@@ -50,13 +47,7 @@ export const create = async(req, res) => {
     subcategory001mb.updateddatetime = req.body.updateddatetime;
     subcategory001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subcategory001mb.personid }, (err, user) => {
-                if (user) {
-                    user.subcatcode.push(subcategory001mb);
-                    user.save();
                     return res.json({ message: 'subcategory001mb created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -80,7 +71,6 @@ export const update = async(req, res) => {
                 message: 'No such subcategory001mb'
             });
         }
-        subcategory001mb.personid = req.body.personid.id ? req.body.personid.id : subcategory001mb.personid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;
         subcategory001mb.subcatstatus = req.body.subcatstatus ? req.body.subcatstatus : subcategory001mb.subcatstatus;

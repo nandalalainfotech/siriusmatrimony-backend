@@ -59,6 +59,16 @@ export const create = async (req, res, err) => {
     person001mb.cityid = req.body.cityid.id;
     person001mb.stateid = req.body.stateid.id;
     person001mb.roleid = req.body.roleid.id;
+    person001mb.subcatcode = req.body.subcatcode.id;
+    person001mb.professionalid = req.body.professionalid.id;
+    person001mb.categoryid = req.body.categoryid.id;
+    person001mb.languageid = req.body.languageid.id;
+    person001mb.personalid = req.body.personalid.id;
+    person001mb.religionid = req.body.religionid.id;
+    person001mb.classificationid = req.body.classificationid.id;
+    person001mb.subscsubspid = req.body.subscsubspid.id;
+    person001mb.regionalid = req.body.regionalid.id;
+    person001mb.companycode = req.body.companycode.id;
     person001mb.firstname = req.body.firstname;
     person001mb.lasttname = req.body.lasttname;
     person001mb.zipcode = req.body.zipcode;
@@ -182,7 +192,16 @@ export const update = async (req, res) => {
     const person001mb = await Person001mb.findOne({ _id: personid });
     if (person001mb) {
         person001mb.email = req.body.email ? req.body.email : person001mb.email;
-        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
+        person001mb.personalid = req.body.personalid.id ? req.body.personalid.id : person001mb.personalid;
+        person001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : person001mb.subcatcode;
+        person001mb.professionalid = req.body.professionalid.id ? req.body.professionalid.id : person001mb.professionalid;
+        person001mb.categoryid = req.body.categoryid.id ? req.body.categoryid.id : person001mb.categoryid;
+        person001mb.languageid = req.body.languageid.id ? req.body.languageid.id : person001mb.languageid;
+        person001mb.religionid = req.body.religionid.id ? req.body.religionid.id : person001mb.religionid;
+        person001mb.classificationid = req.body.classificationid.id ? req.body.classificationid.id : person001mb.classificationid;
+        person001mb.subscsubspid = req.body.subscsubspid.id ? req.body.subscsubspid.id : person001mb.subscsubspid;
+        person001mb.regionalid = req.body.regionalid.id ? req.body.regionalid.id : person001mb.regionalid;
+        person001mb.companycode = req.body.companycode.id ? req.body.companycode.id : person001mb.companycode;
         person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
         person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
         person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
@@ -206,7 +225,7 @@ export const update = async (req, res) => {
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ? req.body.password : login001mb.password;
+        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;

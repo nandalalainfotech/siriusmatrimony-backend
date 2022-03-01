@@ -49,7 +49,7 @@ export const loginauth = async (req, res) => {
                     expiresIn: "6h",
                 }
             );
-                return res.status(500).json({
+                return res.json({
                     data: {person:person, token:token }
                 });
                

@@ -706,15 +706,15 @@ const options = {
         },
         servers: [
             {
-              url: "http://localhost:8081",
+                url: "http://localhost:8081",
             },
-          ],
+        ],
         tags: [{
             name: " API Generation",
         }],
         components: {
             securitySchemes: {
-                bearerAuth:{
+                bearerAuth: {
                     type: "http",
                     scheme: "bearer"
                 },
@@ -2906,12 +2906,7 @@ app.delete('/api/contentmaster001mb/:id', (req, res) => {
  *             updateduser:
  *                 type: string
  *             updateddatetime:
- *                 type: string
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string      
+ *                 type: string   
  */
 // ********************** categorydetails001mb get method****************//
 /**
@@ -3019,7 +3014,6 @@ app.get('/api/categorydetails001mb/:id', (req, res) => {
 
 app.post('/api/categorydetails001mb/category', (req, res) => {
     const categorydetails001mb = new Categorydetails001mb()
-    categorydetails001mb.personid = req.body.personid.id;
     categorydetails001mb.catname = req.body.catname;
     categorydetails001mb.status = req.body.status;
     categorydetails001mb.inserteduser = req.body.inserteduser;
@@ -3028,13 +3022,7 @@ app.post('/api/categorydetails001mb/category', (req, res) => {
     categorydetails001mb.updateddatetime = req.body.updateddatetime;
     categorydetails001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: categorydetails001mb.personid }, (err, user) => {
-                if (user) {
-                    user.categoryid.push(categorydetails001mb);
-                    user.save();
-                    return res.json({ message: 'categorydetails created!' });
-                }
-            });
+            return res.json({ message: 'categorydetails created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -3090,7 +3078,6 @@ app.put('/api/categorydetails001mb/:id', (req, res) => {
                 message: 'No such categorydetails001mb'
             });
         }
-        categorydetails001mb.personid = req.body.personid.id ? req.body.personid.id : categorydetails001mb.personid;
         categorydetails001mb.catname = req.body.catname ? req.body.catname : categorydetails001mb.catname;
         categorydetails001mb.status = req.body.status ? req.body.status : categorydetails001mb.status;
         categorydetails001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : categorydetails001mb.inserteduser;
@@ -3171,11 +3158,6 @@ app.delete('/api/categorydetails001mb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
  *             regionalid:
  *                type: object
  *                properties:
@@ -3287,7 +3269,6 @@ app.get('/api/companydetails001mb/:id', (req, res) => {
 
 app.post('/api/companydetails001mb/company', (req, res) => {
     const companydetails001mb = new Companydetails001mb();
-    companydetails001mb.personid = req.body.personid.id;
     companydetails001mb.regionalid = req.body.regionalid.id;
     companydetails001mb.companyname = req.body.companyname;
     companydetails001mb.address = req.body.address;
@@ -3299,13 +3280,7 @@ app.post('/api/companydetails001mb/company', (req, res) => {
     companydetails001mb.updateddatetime = req.body.updateddatetime;
     companydetails001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: companydetails001mb.personid }, (err, user) => {
-                if (user) {
-                    user.companycode.push(companydetails001mb);
-                    user.save();
-                    return res.json({ message: 'companydetails created!' });
-                }
-            });
+            return res.json({ message: 'companydetails created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -3360,7 +3335,6 @@ app.put('/api/companydetails001mb/:id', (req, res) => {
                 message: 'No such companydetails001mb'
             });
         }
-        companydetails001mb.personid = req.body.personid.id ? req.body.personid.id : companydetails001mb.personid;
         companydetails001mb.companyname = req.body.companyname ? req.body.companyname : companydetails001mb.companyname;
         companydetails001mb.address = req.body.address ? req.body.address : companydetails001mb.address;
         companydetails001mb.phonenumber = req.body.phonenumber ? req.body.phonenumber : companydetails001mb.phonenumber;
@@ -3439,12 +3413,7 @@ app.delete('/api/companydetails001mb/:id', (req, res) => {
  *             updateduser:
  *                 type: string
  *             updateddatetime:
- *                 type: string
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string    
+ *                 type: string   
  */
 
 // ********************** language001mb get method****************//
@@ -3551,9 +3520,8 @@ app.get('/api/language001mb/:id', (req, res) => {
  *         description: failed
  */
 
-app.post('/api/language001mb/language', verifyToken, rolebaseauth(["subcriber"]), (req, res) => {
+app.post('/api/language001mb/language', verifyToken, rolebaseauth(["admin"]), (req, res) => {
     const language001mb = new Language001mb()
-    language001mb.personid = req.body.personid.id;
     language001mb.languagename = req.body.languagename;
     language001mb.languagedesc = req.body.languagedesc;
     language001mb.status = req.body.status;
@@ -3564,13 +3532,7 @@ app.post('/api/language001mb/language', verifyToken, rolebaseauth(["subcriber"])
 
     language001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: language001mb.personid }, (err, user) => {
-                if (user) {
-                    user.languageid.push(language001mb);
-                    user.save();
-                    return res.json({ message: 'language created!' });
-                }
-            });
+            return res.json({ message: 'language created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -3624,7 +3586,6 @@ app.put('/api/language001mb/:id', (req, res) => {
                 message: 'No such language001mb'
             });
         }
-        language001mb.personid = req.body.personid.id ? req.body.personid.id : language001mb.personid;
         language001mb.languagename = req.body.languagename ? req.body.languagename : language001mb.languagename;
         language001mb.languagedesc = req.body.languagedesc ? req.body.languagedesc : language001mb.languagedesc;
         language001mb.status = req.body.status ? req.body.status : language001mb.status;
@@ -3705,12 +3666,7 @@ app.delete('/api/language001mb/:id', (req, res) => {
  *             updateduser:
  *                 type: string
  *             updateddatetime:
- *                 type: string
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string    
+ *                 type: string   
  */
 
 // ********************** regionaldetails001mb get method****************//
@@ -3819,7 +3775,6 @@ app.get('/api/regionaldetails001mb/:id', (req, res) => {
 
 app.post('/api/regionaldetails001mb/regional', (req, res) => {
     const regionaldetails001mb = new Regionaldetails001mb();
-    regionaldetails001mb.personid = req.body.personid.id;
     regionaldetails001mb.regionalname = req.body.regionalname;
     regionaldetails001mb.regionaldesc = req.body.regionaldesc;
     regionaldetails001mb.status = req.body.status;
@@ -3829,13 +3784,7 @@ app.post('/api/regionaldetails001mb/regional', (req, res) => {
     regionaldetails001mb.updateddatetime = req.body.updateddatetime;
     regionaldetails001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: regionaldetails001mb.personid }, (err, user) => {
-                if (user) {
-                    user.regionalid.push(regionaldetails001mb);
-                    user.save();
-                    return res.json({ message: 'regionaldetails created!' });
-                }
-            });
+            return res.json({ message: 'regionaldetails created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -3890,7 +3839,6 @@ app.put('/api/regionaldetails001mb/:id', (req, res) => {
                 message: 'No such regionaldetails001mb'
             });
         }
-        regionaldetails001mb.personid = req.body.personid.id ? req.body.personid.id : regionaldetails001mb.personid;
         regionaldetails001mb.regionalname = req.body.regionalname ? req.body.regionalname : regionaldetails001mb.regionalname;
         regionaldetails001mb.regionaldesc = req.body.regionaldesc ? req.body.regionaldesc : regionaldetails001mb.regionaldesc;
         regionaldetails001mb.status = req.body.status ? req.body.status : regionaldetails001mb.status;
@@ -4114,7 +4062,7 @@ app.get('/api/login001mb/:username/:password', async (req, res) => {
                     expiresIn: "6h",
                 }
             );
-            return res.status(500).json({
+            return res.json({
                 data: { person: person, token: token }
             });
 
@@ -4172,47 +4120,72 @@ app.get('/api/login001mb/:username/:password', async (req, res) => {
  *                type: object
  *                properties:
  *                    id: 
- *                      type: string 
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
+ *                      type: string  
  *             stateid:
  *                type: object
  *                properties:
  *                    id: 
  *                      type: string 
- *             companycode:
- *                 type: array
  *             roleid:
  *                 type: object
  *                 properties:
  *                    id: 
  *                      type: string 
- *             subcatcode:
- *                 type: array
- *             professionalid:
- *                 type: array
- *             categoryid:
- *                 type: array
- *             languageid:
- *                 type: array
- *             personalid:
- *                 type: array
  *             contentid:
  *                  type: object
  *                  properties:
  *                    id: 
  *                      type: string 
  *             religionid:
- *                 type: array
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
  *             classificationid:
- *                 type: array
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
  *             subscsubspid:
- *                 type: array
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
  *             regionalid:
- *                 type: array
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             subcatcode:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             professionalid:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             categoryid:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             languageid:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             personalid:
+ *                  type: object
+ *                  properties:
+ *                    id: 
+ *                      type: string 
+ *             companycode:
+ *                type: object
+ *                properties:
+ *                    id: 
+ *                      type: string 
  *             status:
  *                 type: string
  *             inserteduser:
@@ -4312,12 +4285,7 @@ app.get('/api/person001mb/:id', (req, res) => {
  *    schemas:
  *      religion001mb:
  *            type: object
- *            properties:
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string      
+ *            properties: 
  *             religionname:
  *                 type: string
  *             religiondesc:
@@ -4439,7 +4407,6 @@ app.get('/api/religion001mb/:id', (req, res) => {
 
 app.post('/api/religion001mb/religion', (req, res) => {
     const religion001mb = new Religion001mb();
-    religion001mb.personid = req.body.personid.id;
     religion001mb.religionname = req.body.religionname;
     religion001mb.religiondesc = req.body.religiondesc;
     religion001mb.status = req.body.status;
@@ -4450,14 +4417,7 @@ app.post('/api/religion001mb/religion', (req, res) => {
 
     religion001mb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: religion001mb.personid }, (err, user) => {
-                if (user) {
-                    user.religionid.push(religion001mb);
-                    user.save();
-                    return res.json({ message: 'religion created!' });
-                }
-            });
+            return res.json({ message: 'religion created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -4512,7 +4472,6 @@ app.put('/api/religion001mb/:id', (req, res) => {
                 message: 'No such religion001mb'
             });
         }
-        religion001mb.personid = req.body.personid.id ? req.body.personid.id : religion001mb.personid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;
@@ -4578,12 +4537,7 @@ app.delete('/api/religion001mb/:id', (req, res) => {
  *    schemas:
  *      subcatclassification001mb:
  *            type: object
- *            properties:
- *              personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string  
+ *            properties: 
  *              subcatcode:
  *                 type: object
  *                 properties:
@@ -4713,10 +4667,9 @@ app.get('/api/subcatclassification001mb/:id', (req, res) => {
 
 app.post('/api/subcatclassification001mb/subcatclassification', (req, res) => {
     const subcatclassification001mb = new Subcatclassification001mb();
-    subcatclassification001mb.personid = req.body.personid.id;
     subcatclassification001mb.subcatcode = req.body.subcatcode.id;
     subcatclassification001mb.catcode = req.body.catcode.id,
-    subcatclassification001mb.classificationname = req.body.classificationname;
+        subcatclassification001mb.classificationname = req.body.classificationname;
     subcatclassification001mb.status = req.body.status;
     subcatclassification001mb.inserteduser = req.body.inserteduser;
     subcatclassification001mb.inserteddatetime = req.body.inserteddatetime;
@@ -4724,13 +4677,7 @@ app.post('/api/subcatclassification001mb/subcatclassification', (req, res) => {
     subcatclassification001mb.updateddatetime = req.body.updateddatetime;
     subcatclassification001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subcatclassification001mb.personid }, (err, user) => {
-                if (user) {
-                    user.classificationid.push(subcatclassification001mb);
-                    user.save();
-                    return res.json({ message: 'subcatclassification created!' });
-                }
-            });
+            return res.json({ message: 'subcatclassification created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -4786,7 +4733,6 @@ app.put('/api/subcatclassification001mb/:id', (req, res) => {
             });
         }
         subcatclassification001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : subcatclassification001mb.subcatcode;
-        subcatclassification001mb.personid = req.body.personid.id ? req.body.personid.id : subcatclassification001mb.personid;
         subcatclassification001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcatclassification001mb.catcode;
         subcatclassification001mb.classificationname = req.body.classificationname ? req.body.classificationname : subcatclassification001mb.classificationname;
         subcatclassification001mb.status = req.body.status ? req.body.status : subcatclassification001mb.status;
@@ -4850,11 +4796,6 @@ app.delete('/api/subcatclassification001mb/:id', (req, res) => {
  *      subcategory001mb:
  *            type: object
  *            properties:
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string  
  *             catcode:
  *                type: object
  *                properties:
@@ -4981,7 +4922,6 @@ app.get('/api/subcategory001mb/:id', (req, res) => {
 
 app.post('/api/subcategory001mb/subcategory', (req, res) => {
     const subcategory001mb = new Subcategory001mb();
-    subcategory001mb.personid = req.body.personid.id;
     subcategory001mb.catcode = req.body.catcode.id;
     subcategory001mb.subcatname = req.body.subcatname;
     subcategory001mb.subcatstatus = req.body.subcatstatus;
@@ -4992,13 +4932,7 @@ app.post('/api/subcategory001mb/subcategory', (req, res) => {
     subcategory001mb.updateddatetime = req.body.updateddatetime;
     subcategory001mb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subcategory001mb.personid }, (err, user) => {
-                if (user) {
-                    user.subcatcode.push(subcategory001mb);
-                    user.save();
-                    return res.json({ message: 'subcategory001mb created!' });
-                }
-            });
+            return res.json({ message: 'subcategory001mb created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -5053,7 +4987,6 @@ app.put('/api/subcategory001mb/:id', (req, res) => {
                 message: 'No such subcategory001mb'
             });
         }
-        subcategory001mb.personid = req.body.personid.id ? req.body.personid.id : subcategory001mb.personid;
         subcategory001mb.catcode = req.body.catcode.id ? req.body.catcode.id : subcategory001mb.catcode;
         subcategory001mb.subcatname = req.body.subcatname ? req.body.subcatname : subcategory001mb.subcatname;
         subcategory001mb.subcatstatus = req.body.subcatstatus ? req.body.subcatstatus : subcategory001mb.subcatstatus;
@@ -5117,12 +5050,7 @@ app.delete('/api/subcategory001mb/:id', (req, res) => {
  *    schemas:
  *      subscribercontentauth001wb:
  *            type: object
- *            properties:
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string      
+ *            properties:    
  *             subscsubpstatus:
  *                 type: string
  *             subscsubpstartdate:
@@ -5246,7 +5174,6 @@ app.get('/api/subscribercontentauth001wb/:id', (req, res) => {
 
 app.post('/api/subscribercontentauth001wb/subscribercontent', (req, res) => {
     const subscribercontentauth001wb = new Subscribercontentauth001wb();
-    subscribercontentauth001wb.personid = req.body.personid.id;
     subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus;
     subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate;
     subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate;
@@ -5257,14 +5184,7 @@ app.post('/api/subscribercontentauth001wb/subscribercontent', (req, res) => {
     subscribercontentauth001wb.updateddatetime = req.body.updateddatetime;
     subscribercontentauth001wb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: subscribercontentauth001wb.personid }, (err, user) => {
-                if (user) {
-                    user.subscsubspid.push(subscribercontentauth001wb);
-                    user.save();
-                    return res.json({ message: 'subscribercontentauth created!' });
-                }
-            });
+            return res.json({ message: 'subscribercontentauth created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -5319,8 +5239,6 @@ app.put('/api/subscribercontentauth001wb/:id', (req, res) => {
                 message: 'No such subscribercontentauth001wb'
             });
         }
-
-        subscribercontentauth001wb.personid = req.body.personid.id ? req.body.personid.id : subscribercontentauth001wb.personid;
         subscribercontentauth001wb.subscsubpstatus = req.body.subscsubpstatus ? req.body.subscsubpstatus : subscribercontentauth001wb.subscsubpstatus;
         subscribercontentauth001wb.subscsubpstartdate = req.body.subscsubpstartdate ? req.body.subscsubpstartdate : subscribercontentauth001wb.subscsubpstartdate;
         subscribercontentauth001wb.subscsubpenddate = req.body.subscsubpenddate ? req.body.subscsubpenddate : subscribercontentauth001wb.subscsupbenddate;
@@ -5580,6 +5498,16 @@ app.get('/api/subscriberdetails001wb/:id', (req, res) => {
 
 app.post('/api/subscriberdetails001wb/subscriberdetails', async (req, res) => {
     const person001mb = new Person001mb();
+    person001mb.subcatcode = req.body.subcatcode.id;
+    person001mb.professionalid = req.body.professionalid.id;
+    person001mb.categoryid = req.body.categoryid.id;
+    person001mb.languageid = req.body.languageid.id;
+    person001mb.personalid = req.body.personalid.id;
+    person001mb.religionid = req.body.religionid.id;
+    person001mb.classificationid = req.body.classificationid.id;
+    person001mb.subscsubspid = req.body.subscsubspid.id;
+    person001mb.regionalid = req.body.regionalid.id;
+    person001mb.companycode = req.body.companycode.id;
     person001mb.countryid = req.body.countryid.id;
     person001mb.cityid = req.body.cityid.id;
     person001mb.stateid = req.body.stateid.id;
@@ -5730,9 +5658,18 @@ app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res
     var subid = req.params.subid;
     const person001mb = await Person001mb.findOne({ _id: personid });
     if (person001mb) {
+        person001mb.personalid = req.body.personalid.id ? req.body.personalid.id : person001mb.personalid;
+        person001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : person001mb.subcatcode;
+        person001mb.professionalid = req.body.professionalid.id ? req.body.professionalid.id : person001mb.professionalid;
+        person001mb.categoryid = req.body.categoryid.id ? req.body.categoryid.id : person001mb.categoryid;
+        person001mb.languageid = req.body.languageid.id ? req.body.languageid.id : person001mb.languageid;
+        person001mb.religionid = req.body.religionid.id ? req.body.religionid.id : person001mb.religionid;
+        person001mb.classificationid = req.body.classificationid.id ? req.body.classificationid.id : person001mb.classificationid;
+        person001mb.subscsubspid = req.body.subscsubspid.id ? req.body.subscsubspid.id : person001mb.subscsubspid;
+        person001mb.regionalid = req.body.regionalid.id ? req.body.regionalid.id : person001mb.regionalid;
+        person001mb.companycode = req.body.companycode.id ? req.body.companycode.id : person001mb.companycode;
         person001mb.email = req.body.email ? req.body.email : person001mb.email;
         person001mb.contentid = req.body.contentid.id ? req.body.contentid.id : person001mb.contentid;
-        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
         person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
         person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
         person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
@@ -5757,7 +5694,7 @@ app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ? req.body.password : login001mb.password;
+        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
@@ -5853,12 +5790,7 @@ app.delete('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, 
  *    schemas:
  *      subscriberpersonalinfo001wb:
  *            type: object
- *            properties:
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string      
+ *            properties:    
  *             personaldetails:
  *                 type: string
  *             hobbies:
@@ -6004,7 +5936,6 @@ app.get('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
 
 app.post('/api/subscriberpersonalinfo001wb/personal', (req, res) => {
     const subscriberpersonalinfo001wb = new Subscriberpersonalinfo001wb();
-    subscriberpersonalinfo001wb.personid = req.body.personid.id;
     subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails;
     subscriberpersonalinfo001wb.hobbies = req.body.hobbies;
     subscriberpersonalinfo001wb.flex1 = req.body.flex1;
@@ -6025,14 +5956,7 @@ app.post('/api/subscriberpersonalinfo001wb/personal', (req, res) => {
     subscriberpersonalinfo001wb.updateddatetime = req.body.updateddatetime;
     subscriberpersonalinfo001wb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: subscriberpersonalinfo001wb.personid }, (err, user) => {
-                if (user) {
-                    user.personalid.push(subscriberpersonalinfo001wb);
-                    user.save();
-                    return res.json({ message: 'subscriberpersonalinfo created!' });
-                }
-            });
+            return res.json({ message: 'subscriberpersonalinfo created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -6087,8 +6011,6 @@ app.put('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
                 message: 'No such subscriberpersonalinfo001wb'
             });
         }
-
-        subscriberpersonalinfo001wb.personid = req.body.personid.id ? req.body.personid.id : subscriberpersonalinfo001wb.personid;
         subscriberpersonalinfo001wb.personaldetails = req.body.personaldetails ? req.body.personaldetails : subscriberpersonalinfo001wb.personaldetails;
         subscriberpersonalinfo001wb.hobbies = req.body.hobbies ? req.body.hobbies : subscriberpersonalinfo001wb.hobbies;
         subscriberpersonalinfo001wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberpersonalinfo001wb.flex1;
@@ -6166,11 +6088,6 @@ app.delete('/api/subscriberpersonalinfo001wb/:id', (req, res) => {
  *      subscriberprofessionalinfo002wb:
  *            type: object
  *            properties:
- *             personid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string  
  *             professionaldetails:
  *                 type: string
  *             job:
@@ -6317,7 +6234,6 @@ app.get('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
 app.post('/api/subscriberprofessionalinfo002wb/professional', (req, res) => {
 
     const subscriberprofessionalinfo002wb = new Subscriberprofessionalinfo002wb();
-    subscriberprofessionalinfo002wb.personid = req.body.personid.id;
     subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails;
     subscriberprofessionalinfo002wb.job = req.body.job;
     subscriberprofessionalinfo002wb.flex1 = req.body.flex1;
@@ -6333,19 +6249,12 @@ app.post('/api/subscriberprofessionalinfo002wb/professional', (req, res) => {
     subscriberprofessionalinfo002wb.flex11 = req.body.flex11;
     subscriberprofessionalinfo002wb.flex12 = req.body.flex12;
     subscriberprofessionalinfo002wb.inserteduser = req.body.inserteduser,
-    subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
-    subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
-    subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
+        subscriberprofessionalinfo002wb.inserteddatetime = req.body.inserteddatetime,
+        subscriberprofessionalinfo002wb.updateduser = req.body.updateduser,
+        subscriberprofessionalinfo002wb.updateddatetime = req.body.updateddatetime
     subscriberprofessionalinfo002wb.save()
         .then((result) => {
-            Person001mb.findOne({ _id: subscriberprofessionalinfo002wb.personid }, (err, user) => {
-                if (user) {
-                    user.professionalid.push(subscriberprofessionalinfo002wb);
-                    user.save();
-                    return res.json({ message: 'subscriberprofessional created!' });
-                }
-            });
-
+            return res.json({ message: 'subscriberprofessional created!' });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -6400,7 +6309,6 @@ app.put('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
                 message: 'No such subscriberprofessionalinfo002wb'
             });
         }
-        subscriberprofessionalinfo002wb.personid = req.body.personid.id ? req.body.personid.id : subscriberprofessionalinfo002wb.personid;
         subscriberprofessionalinfo002wb.professionaldetails = req.body.professionaldetails ? req.body.professionaldetails : subscriberprofessionalinfo002wb.professionaldetails;
         subscriberprofessionalinfo002wb.job = req.body.job ? req.body.job : subscriberprofessionalinfo002wb.job;
         subscriberprofessionalinfo002wb.flex1 = req.body.flex1 ? req.body.flex1 : subscriberprofessionalinfo002wb.flex1;
@@ -6478,12 +6386,7 @@ app.delete('/api/subscriberprofessionalinfo002wb/:id', (req, res) => {
  *            type: object
  *            properties:    
  *             subpname:
- *                 type: string
- *             personid:
- *                 type: object
- *                 properties:
- *                    id: 
- *                      type: string  
+ *                 type: string  
  *             description:
  *                 type: string
  *             tenure:
@@ -6609,7 +6512,6 @@ app.get('/api/subscriptionmaster001mb/:id', (req, res) => {
 
 app.post('/api/subscriptionmaster001mb/master', (req, res) => {
     const subscriptionmaster001mb = new Subscriptionmaster001mb();
-    subscriptionmaster001mb.personid = req.body.personid.id;
     subscriptionmaster001mb.subpname = req.body.subpname;
     subscriptionmaster001mb.description = req.body.description;
     subscriptionmaster001mb.tenure = req.body.tenure;
@@ -6680,7 +6582,6 @@ app.put('/api/subscriptionmaster001mb/:id', (req, res) => {
                 message: 'No such subscriptionmaster001mb'
             });
         }
-        subscriptionmaster001mb.personid = req.body.personid.id ? req.body.personid.id : subscriptionmaster001mb.personid;
         subscriptionmaster001mb.subpname = req.body.subpname ? req.body.subpname : subscriptionmaster001mb.subpname;
         subscriptionmaster001mb.description = req.body.description ? req.body.description : subscriptionmaster001mb.description;
         subscriptionmaster001mb.tenure = req.body.tenure ? req.body.tenure : subscriptionmaster001mb.tenure;
@@ -6917,6 +6818,16 @@ app.get('/api/users001wb/:id', (req, res) => {
  */
 app.post('/api/users001wb/user', async (req, res) => {
     const person001mb = new Person001mb();
+    person001mb.subcatcode = req.body.subcatcode.id;
+    person001mb.professionalid = req.body.professionalid.id;
+    person001mb.categoryid = req.body.categoryid.id;
+    person001mb.languageid = req.body.languageid.id;
+    person001mb.personalid = req.body.personalid.id;
+    person001mb.religionid = req.body.religionid.id;
+    person001mb.classificationid = req.body.classificationid.id;
+    person001mb.subscsubspid = req.body.subscsubspid.id;
+    person001mb.regionalid = req.body.regionalid.id;
+    person001mb.companycode = req.body.companycode.id;
     person001mb.countryid = req.body.countryid.id;
     person001mb.cityid = req.body.cityid.id;
     person001mb.stateid = req.body.stateid.id;
@@ -7066,7 +6977,16 @@ app.put('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
     const person001mb = await Person001mb.findOne({ _id: personid });
     if (person001mb) {
         person001mb.email = req.body.email ? req.body.email : person001mb.email;
-        person001mb.personid = req.body.personid ? req.body.personid : person001mb.personid;
+        person001mb.personalid = req.body.personalid.id ? req.body.personalid.id : person001mb.personalid;
+        person001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : person001mb.subcatcode;
+        person001mb.professionalid = req.body.professionalid.id ? req.body.professionalid.id : person001mb.professionalid;
+        person001mb.categoryid = req.body.categoryid.id ? req.body.categoryid.id : person001mb.categoryid;
+        person001mb.languageid = req.body.languageid.id ? req.body.languageid.id : person001mb.languageid;
+        person001mb.religionid = req.body.religionid.id ? req.body.religionid.id : person001mb.religionid;
+        person001mb.classificationid = req.body.classificationid.id ? req.body.classificationid.id : person001mb.classificationid;
+        person001mb.subscsubspid = req.body.subscsubspid.id ? req.body.subscsubspid.id : person001mb.subscsubspid;
+        person001mb.regionalid = req.body.regionalid.id ? req.body.regionalid.id : person001mb.regionalid;
+        person001mb.companycode = req.body.companycode.id ? req.body.companycode.id : person001mb.companycode;
         person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
         person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
         person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
@@ -7090,7 +7010,7 @@ app.put('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ? req.body.password : login001mb.password;
+        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;

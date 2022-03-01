@@ -18,10 +18,6 @@ const companydetails001mb = mongoose.model(
 			'inserteddatetime': String,
 			'updateduser': String,
 			'updateddatetime': String,
-			'personid':  {
-				type: mongoose.Types.ObjectId,
-				ref: 'person001mb'
-			}
 		},
 		{ timestamps: false }
 	)

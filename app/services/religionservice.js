@@ -2,8 +2,6 @@ import db from "../models/main.js";
 
 const Religion001mb = db.religion001mb;
 
-const Person001mb = db.person001mb
-
 export const list = async(req, res) => {
     Religion001mb.find(function(err, religion001mbs) {
         if (err) {
@@ -39,7 +37,6 @@ export const show = (req, res) => {
 
 export const create = async(req, res) => {
     const religion001mb = new Religion001mb();
-    religion001mb.personid = req.body.personid.id;
     religion001mb.religionname = req.body.religionname;
     religion001mb.religiondesc = req.body.religiondesc;
     religion001mb.status = req.body.status;
@@ -50,14 +47,7 @@ export const create = async(req, res) => {
 
     religion001mb.save()
         .then((result) => {
-
-            Person001mb.findOne({ _id: religion001mb.personid }, (err, user) => {
-                if (user) {
-                    user.religionid.push(religion001mb);
-                    user.save();
                     return res.json({ message: 'religion created!' });
-                }
-            });
         })
         .catch((error) => {
             return res.status(500).json({ error });
@@ -79,7 +69,6 @@ export const update = async(req, res) => {
                 message: 'No such religion001mb'
             });
         }
-        religion001mb.personid = req.body.personid.id ? req.body.personid.id : religion001mb.personid;
         religion001mb.religionname = req.body.religionname ? req.body.religionname : religion001mb.religionname;
         religion001mb.religiondesc = req.body.religiondesc ? req.body.religiondesc : religion001mb.religiondesc;
         religion001mb.status = req.body.status ? req.body.status : religion001mb.status;

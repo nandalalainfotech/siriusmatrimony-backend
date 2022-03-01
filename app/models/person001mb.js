@@ -5,54 +5,50 @@ mongoose.pluralize(null);
 const person001mb = mongoose.model(
     "person001mb",
     new mongoose.Schema({
-            'regionalid': [{
+            'regionalid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'regionaldetails001mb'
-            }],
-            'companycode': [{
+            },
+            'companycode': {
                 type: mongoose.Types.ObjectId,
                 ref: 'companydetails001mb'
-            }],
+            },
             'roleid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'role001wb'
             },
-            'subcatcode': [{
+            'subcatcode': {
                 type: mongoose.Types.ObjectId,
                 ref: 'subcategory001mb'
-            }],
-            'professionalid': [{
+            },
+            'professionalid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'subscriberprofessionalinfo002wb'
-            }],
-            'categoryid': [{
+            },
+            'categoryid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'categorydetails001mb'
-            }],
-            'languageid': [{
+            },
+            'languageid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'language001mb'
-            }],
-            'personalid': [{
+            },
+            'personalid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'subscriberpersonalinfo001wb'
-            }],
-            'contentid': {
-                type: mongoose.Types.ObjectId,
-                ref: 'contentmaster001mb'
             },
-            'religionid': [{
+            'religionid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'religion001mb'
-            }],
-            'classificationid': [{
+            },
+            'classificationid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'subcatclassification001mb'
-            }],
-            'subscsubspid': [{
+            },
+            'subscsubspid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'subscribercontentauth001wb'
-            }],
+            },
             'stateid': {
                 type: mongoose.Types.ObjectId,
                 ref: 'state001mb'
