@@ -13,10 +13,10 @@ const subscriberdetails001wb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriptionmaster001mb'
         },
-        'payid': {
+        'payid': [{
             type: mongoose.Types.ObjectId,
-            ref: 'subscriptionmaster001mb'
-        },
+            ref: 'payment001mb'
+        }],
         'contentid': {
             type: mongoose.Types.ObjectId,
             ref: 'contentmaster001mb'

@@ -114,7 +114,6 @@ export const create = async (req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
     subscriberdetails001wb.personid = person._id;
     subscriberdetails001wb.contentid = req.body.contentid.id;
-    subscriberdetails001wb.payid = req.body.payid.id;
     subscriberdetails001wb.subpid = req.body.subpid.id;
     subscriberdetails001wb.subscdesc = req.body.subscdesc;
     subscriberdetails001wb.aboutme = req.body.aboutme;
@@ -237,7 +236,6 @@ export const update = async (req, res) => {
         login001mb.save();
 
         const subscriberdetails001wb = await Subscriberdetails001wb.findOne({ _id: subid });
-        subscriberdetails001wb.payid = req.body.payid.id ? req.body.payid.id : subscriberdetails001wb.payid;
         subscriberdetails001wb.subpid = req.body.subpid.id ? req.body.subpid.id : subscriberdetails001wb.subpid;
         subscriberdetails001wb.horoscope = req.body.horoscope ? req.body.horoscope : subscriberdetails001wb.horoscope;
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;

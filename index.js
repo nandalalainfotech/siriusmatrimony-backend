@@ -5324,10 +5324,7 @@ app.delete('/api/subscribercontentauth001wb/:id', (req, res) => {
  *                    id: 
  *                      type: string 
  *             payid:
- *                type: object
- *                properties:
- *                    id: 
- *                      type: string 
+ *                type: array 
  *             personid:
  *                type: object
  *                example: Automatically Generated from person001mb 
@@ -5558,7 +5555,6 @@ app.post('/api/subscriberdetails001wb/subscriberdetails', async (req, res) => {
     const subscriberdetails001wb = new Subscriberdetails001wb();
     subscriberdetails001wb.personid = person._id;
     subscriberdetails001wb.contentid = req.body.contentid.id;
-    subscriberdetails001wb.payid = req.body.payid.id;
     subscriberdetails001wb.subpid = req.body.subpid.id;
     subscriberdetails001wb.subscdesc = req.body.subscdesc;
     subscriberdetails001wb.aboutme = req.body.aboutme;
@@ -5694,7 +5690,7 @@ app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
+        login001mb.password = req.body.password ? bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
@@ -5704,7 +5700,6 @@ app.put('/api/subscriberdetails001wb/:personid/:loginid/:subid', async (req, res
         login001mb.save();
 
         const subscriberdetails001wb = await Subscriberdetails001wb.findOne({ _id: subid });
-        subscriberdetails001wb.payid = req.body.payid.id ? req.body.payid.id : subscriberdetails001wb.payid;
         subscriberdetails001wb.subpid = req.body.subpid.id ? req.body.subpid.id : subscriberdetails001wb.subpid;
         subscriberdetails001wb.horoscope = req.body.horoscope ? req.body.horoscope : subscriberdetails001wb.horoscope;
         subscriberdetails001wb.contentid = req.body.contentid.id ? req.body.contentid.id : subscriberdetails001wb.contentid;
@@ -7010,7 +7005,7 @@ app.put('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
+        login001mb.password = req.body.password ? bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
@@ -7098,6 +7093,11 @@ app.delete('/api/users001wb/:personid/:loginid/:userid', async (req, res) => {
  *            type: object
  *            properties:    
  *             subpid:
+ *                 type: object
+ *                 properties:
+ *                    id: 
+ *                      type: string
+ *             subcid:
  *                 type: object
  *                 properties:
  *                    id: 
@@ -7215,21 +7215,25 @@ app.get('/api/payment001mb/:id', (req, res) => {
 app.post('/api/payment001mb/payment', async (req, res) => {
     const payment001mb = new Payment001mb();
     payment001mb.subpid = req.body.subpid.id;
+    payment001mb.subcid = req.body.subcid.id;
     payment001mb.payment = req.body.payment;
     payment001mb.status = req.body.status;
     payment001mb.inserteduser = req.body.inserteduser;
     payment001mb.inserteddatetime = req.body.inserteddatetime;
     payment001mb.updateduser = req.body.updateduser;
     payment001mb.updateddatetime = req.body.updateddatetime;
-    payment001mb.save(function (err, payment001mb) {
-        if (err) {
+    Subscriberdetails001wb.findOne({ _id: payment001mb.subcid }, (err, user) => {
+        if (user) {
+            user.payid.push(payment001mb);
+            user.save();
+            payment001mb.save();
+            return res.json({ message: 'payment001mb created!' });
+        } else {
             return res.status(500).json({
-                message: 'Error when creating payment001mb',
-                error: err
+                message: 'Error when creating payment001mb'
             });
         }
 
-        return res.status(201).json({ message: 'payment001mb created' });
     });
 });
 
@@ -7283,7 +7287,7 @@ app.put('/api/payment001mb/:id', (req, res) => {
             });
         }
         payment001mb.payment = req.body.payment ? req.body.payment : payment001mb.payment;
-        payment001mb.payid = req.body.payid ? req.body.payid : payment001mb.payid;
+        payment001mb.subcid = req.body.subcid.id ? req.body.subcid.id : payment001mb.subcid;
         payment001mb.subpid = req.body.subpid.id ? req.body.subpid.id : payment001mb.subpid;
         payment001mb.status = req.body.status ? req.body.status : payment001mb.status;
         payment001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : payment001mb.inserteduser;
