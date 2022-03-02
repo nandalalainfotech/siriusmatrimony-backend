@@ -15,6 +15,10 @@ const payment001mb = mongoose.model(
             type: mongoose.Types.ObjectId,
             ref: 'subscriptionmaster001mb'
         },
+        'subcid':{
+            type: mongoose.Types.ObjectId,
+            ref: 'subscriberdetails001wb'
+        },
     }, { timestamps: false })
 );
 
