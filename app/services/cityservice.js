@@ -4,8 +4,8 @@ const City001mb = db.city001mb;
 
 const State001mb = db.state001mb;
 
-export const list = async(req, res) => {
-    City001mb.find(function(err, city001mb) {
+export const list = async (req, res) => {
+    City001mb.find(function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -17,10 +17,10 @@ export const list = async(req, res) => {
     });
 };
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    City001mb.findOne({ _id: id }, function(err, city001mb) {
+    City001mb.findOne({ _id: id }, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb.',
@@ -38,7 +38,7 @@ export const show = async(req, res) => {
     });
 };
 
-export const create = async(req, res) => {
+export const create = async (req, res) => {
 
     const city001mb = new City001mb();
 
@@ -50,25 +50,23 @@ export const create = async(req, res) => {
     city001mb.inserteddatetime = req.body.inserteddatetime;
     city001mb.updateddatetime = req.body.updateddatetime;
     city001mb.updateduser = req.body.updateduser;
-
-    city001mb.save()
-        .then((result) => {
-            State001mb.findOne({ _id: city001mb.stateid }, (err, user) => {
-                if (user) {
-                    user.cityid.push(city001mb);
-                    user.save();
-                    return res.json({ message: 'city created!' });
-                }
+    State001mb.findOne({ _id: city001mb.stateid }, (err, user) => {
+        if (user) {
+            user.cityid.push(city001mb);
+            user.save();
+            city001mb.save()
+            return res.json({ message: 'city created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating state001mb'
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
+        }
+    });
 };
 
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
-    City001mb.findOne({ _id: id }, function(err, city001mb) {
+    City001mb.findOne({ _id: id }, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting city001mb',
@@ -90,7 +88,7 @@ export const update = async(req, res) => {
         city001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : city001mb.updateddatetime;
         city001mb.updateduser = req.body.updateduser ? req.body.updateduser : city001mb.updateduser;
 
-        city001mb.save(function(err, country001mb) {
+        city001mb.save(function (err, country001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating country001mb.',
@@ -103,10 +101,10 @@ export const update = async(req, res) => {
     });
 };
 
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    City001mb.findByIdAndRemove(id, function(err, city001mb) {
+    City001mb.findByIdAndRemove(id, function (err, city001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the city001mb.',

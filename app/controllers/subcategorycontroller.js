@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
 router.get('/list', subcategoryservice.list);
 router.get('/:id', subcategoryservice.show);
 router.post('/create', subcategoryservice.create);
-router.put('/:id', subcategoryservice.update);
-router.delete('/:id', subcategoryservice.remove);
+router.put('/:id/update', subcategoryservice.update);
+router.delete('/:id/delete', subcategoryservice.remove);
 
 export default router;

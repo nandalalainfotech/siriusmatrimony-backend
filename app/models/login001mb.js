@@ -19,6 +19,7 @@ const login001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
+        'theme':String,
     }, { timestamps: false })
 );
 export default login001mb;

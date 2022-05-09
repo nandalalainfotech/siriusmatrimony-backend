@@ -108,6 +108,7 @@ export const create = async (req, res) => {
     login001mb.inserteddatetime = req.body.inserteddatetime;
     login001mb.updateduser = req.body.updateduser;
     login001mb.status = req.body.status;
+    login001mb.theme = req.body.theme;
     login001mb.personid = person._id;
     await login001mb.save()
 
@@ -225,6 +226,7 @@ export const update = async (req, res) => {
 
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
+        login001mb.theme = req.body.theme ? req.body.theme : login001mb.theme;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
         login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;

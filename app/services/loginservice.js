@@ -1,6 +1,7 @@
 import db from "../models/main.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import login001mb from "../models/login001mb.js";
 
 
 const Login001mb = db.login001mb;
@@ -36,28 +37,35 @@ export const show = (req, res) => {
         return res.json(login001mb);
     });
 };
+
+export const updatetheme = async (req, res) => {
+    const login001mb = new Login001mb();;
+    login001mb.theme = req.body.theme;
+    await login001mb.save();
+   return res.json({theme: login001mb.theme});
+}
 export const loginauth = async (req, res) => {
-   var username = req.params.username;
-   var password = req.params.password;
-    const loginperson = await Login001mb.findOne({ username:username }).populate({path:'roleid',model: Role001mb});
+    var username = req.params.username;
+    var password = req.params.password;
+    const loginperson = await Login001mb.findOne({ username: username }).populate({ path: 'roleid', model: Role001mb });
     if (loginperson) {
         const security = await bcrypt.compare(password, loginperson.password)
-        if(security){
+        if (security) {
             const person = await Person001mb.findOne({ _id: loginperson.personid });
             const token = jwt.sign({ username: loginperson.username, rolename: loginperson.roleid.rolename }, process.env.TOKEN_KEY,
                 {
                     expiresIn: "6h",
                 }
             );
-                return res.json({
-                    data: {person:person, token:token }
-                });
-               
-            }else {
-                return res.status(500).json({
-                    message: 'invalid password'
-                });
-            }
+            return res.json({
+             person001mb: person, token: token, username: loginperson.username, theme:loginperson.theme 
+            });
+
+        } else {
+            return res.status(500).json({
+                message: 'invalid password'
+            });
+        }
     } else {
         return res.status(500).json({
             message: 'invalid username'
