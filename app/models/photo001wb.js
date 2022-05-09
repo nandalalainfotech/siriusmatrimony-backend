@@ -9,6 +9,10 @@ const photo001wb = mongoose.model(
                 type: mongoose.Types.ObjectId,
                 ref: 'contentmaster001mb'
             },
+            'fileid': {
+                type: mongoose.Types.ObjectId,
+                ref: 'upload.files'
+            },
             'fieldname': String,
             'filename': String,
             'originalname': String,
@@ -17,7 +21,8 @@ const photo001wb = mongoose.model(
             'inserteduser': String,
             'inserteddatetime': String,
             'updateduser': String,
-            'updateddatetime': String
+            'updateddatetime': String,
+            'flag':Boolean
         },
 
         { timestamps: false })

@@ -28,9 +28,9 @@ const contentmaster001mb = mongoose.model(
         'inserteddatetime': String,
         'updateduser': String,
         'updateddatetime': String,
-        'personid':  {
+        'subid':  {
             type: mongoose.Types.ObjectId,
-            ref: 'person001mb'
+            ref: 'subscriberdetails001wb'
         }
     }, { timestamps: false })
 );

@@ -50,7 +50,7 @@ export const create = async(req, res) => {
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
-    contentmaster001mb.personid = req.body.personid.id;
+    contentmaster001mb.subid = req.body.subid.id;
     contentmaster001mb.save(function(err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -79,7 +79,7 @@ export const update = async(req, res) => {
             });
         }
 
-        contentmaster001mb.personid = req.body.personid.id ? req.body.personid.id : contentmaster001mb.personid;
+        contentmaster001mb.subid = req.body.subid.id ? req.body.subid.id : contentmaster001mb.subid;
         contentmaster001mb.name = req.body.name ? req.body.name : contentmaster001mb.name;
         contentmaster001mb.description = req.body.description ? req.body.description : contentmaster001mb.description;
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;

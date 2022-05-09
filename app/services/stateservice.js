@@ -4,8 +4,8 @@ const State001mb = db.state001mb;
 
 const Country001mb = db.country001mb;
 
-export const list = async(req, res) => {
-    State001mb.find(function(err, state001mbs) {
+export const list = async (req, res) => {
+    State001mb.find(function (err, state001mbs) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -17,10 +17,10 @@ export const list = async(req, res) => {
     });
 };
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    State001mb.findOne({ _id: id }, function(err, state001mb) {
+    State001mb.findOne({ _id: id }, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb.',
@@ -39,7 +39,7 @@ export const show = async(req, res) => {
 };
 
 
-export const create = async(req, res) => {
+export const create = async (req, res) => {
     const state001mb = new State001mb();
     state001mb.countryid = req.body.countryid.id;
     state001mb.statename = req.body.statename;
@@ -49,24 +49,23 @@ export const create = async(req, res) => {
     state001mb.inserteddatetime = req.body.inserteddatetime;
     state001mb.updateduser = req.body.updateduser;
     state001mb.updateddatetime = req.body.updateddatetime;
-    state001mb.save()
-        .then((result) => {
-            Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
-                if (user) {
-                    user.stateid.push(state001mb);
-                    user.save();
-                    return res.json({ message: 'state created!' });
-                }
+    Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
+        if (user) {
+            user.stateid.push(state001mb);
+            user.save();
+            state001mb.save()
+            return res.json({ message: 'state created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating state001mb'
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
+        }
+    });
 };
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
 
-    State001mb.findOne({ _id: id }, function(err, state001mb) {
+    State001mb.findOne({ _id: id }, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting state001mb',
@@ -88,7 +87,7 @@ export const update = async(req, res) => {
         state001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : state001mb.inserteddatetime;
         state001mb.updateduser = req.body.updateduser ? req.body.updateduser : state001mb.updateduser;
         state001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : state001mb.updateddatetime;
-        state001mb.save(function(err, state001mb) {
+        state001mb.save(function (err, state001mb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating state001mb.',
@@ -102,10 +101,10 @@ export const update = async(req, res) => {
 };
 
 
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    State001mb.findByIdAndRemove(id, function(err, state001mb) {
+    State001mb.findByIdAndRemove(id, function (err, state001mb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the state001mb.',

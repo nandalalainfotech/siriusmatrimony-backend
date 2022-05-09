@@ -31,9 +31,9 @@ import personcontroller from "./app/controllers/personcontroller.js";
 import logincontroller from "./app/controllers/logincontroller.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerjsdoc from "swagger-jsdoc";
-import upload from "../siriusmatrimony-backend/app/middleware/upload.js";
-import videoUpload from "../siriusmatrimony-backend/app/middleware/videoUpload.js";
-import audio from "../siriusmatrimony-backend/app/middleware/audio.js";
+import upload from "../sirius-api/app/middleware/upload.js";
+import videoUpload from "../sirius-api/app/middleware/videoUpload.js";
+import audio from "../sirius-api/app/middleware/audio.js";
 import paymentcontroller from "./app/controllers/paymentcontroller.js";
 import verifyToken from "./app/middleware/auth.js";
 import nodemailer from "nodemailer";
@@ -41,7 +41,7 @@ import hbs from "nodemailer-express-handlebars";
 import path from "path";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import rolebaseauth from "../siriusmatrimony-backend/app/middleware/roleauth.js";
+import rolebaseauth from "../sirius-api/app/middleware/roleauth.js";
 const app = express();
 app.use(cors());
 dotenv.config();
@@ -686,7 +686,7 @@ db.mongoose
     .then(() => {
 
         console.log(`Successfully connect to MongoDB .`);
-        //   initial();
+          initial();
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}.`);
         });
@@ -1365,19 +1365,18 @@ app.post('/api/state001mb/state', (req, res) => {
     state001mb.inserteddatetime = req.body.inserteddatetime;
     state001mb.updateduser = req.body.updateduser;
     state001mb.updateddatetime = req.body.updateddatetime;
-    state001mb.save()
-        .then((result) => {
-            Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
-                if (user) {
-                    user.stateid.push(state001mb);
-                    user.save();
-                    return res.json({ message: 'state created!' });
-                }
+    Country001mb.findOne({ _id: state001mb.countryid }, (err, user) => {
+        if (user) {
+            user.stateid.push(state001mb);
+            user.save();
+            state001mb.save()
+            return res.json({ message: 'state created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating state001mb'
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
+        }
+    });
 })
 
 
@@ -1636,20 +1635,18 @@ app.post('/api/city001mb/city', (req, res) => {
     city001mb.inserteddatetime = req.body.inserteddatetime;
     city001mb.updateddatetime = req.body.updateddatetime;
     city001mb.updateduser = req.body.updateduser;
-
-    city001mb.save()
-        .then((result) => {
-            State001mb.findOne({ _id: city001mb.stateid }, (err, user) => {
-                if (user) {
-                    user.cityid.push(city001mb);
-                    user.save();
-                    return res.json({ message: 'city created!' });
-                }
+    State001mb.findOne({ _id: city001mb.stateid }, (err, user) => {
+        if (user) {
+            user.cityid.push(city001mb);
+            user.save();
+            city001mb.save()
+            return res.json({ message: 'city created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating state001mb'
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
+        }
+    });
 })
 
 
@@ -1913,19 +1910,18 @@ app.post('/api/photo001wb/photo', [upload.single("content")], (req, res) => {
     photo001wb.inserteddatetime = req.body.inserteddatetime;
     photo001wb.updateduser = req.body.updateduser;
     photo001wb.updateddatetime = req.body.updateddatetime;
-    photo001wb.save()
-        .then((result) => {
-            Contentmaster001mb.findOne({ _id: photo001wb.contentid }, (err, user) => {
-                if (user) {
-                    user.photo.push(photo001wb);
-                    user.save();
-                    res.json({ message: 'photo created!' });
-                }
+    Contentmaster001mb.findOne({ _id: photo001wb.contentid }, (err, user) => {
+        if (user) {
+            user.photo.push(photo001wb);
+            user.save();
+            photo001wb.save()
+            return res.json({ message: 'photo created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating photo001wb'
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
+        }
+    });
 })
 
 
@@ -2191,20 +2187,18 @@ app.post('/api/video001wb/video', [videoUpload.single("content")], (req, res) =>
     video001wb.inserteddatetime = req.body.inserteddatetime;
     video001wb.updateduser = req.body.updateduser;
     video001wb.updateddatetime = req.body.updateddatetime;
-
-    video001wb.save()
-        .then((result) => {
-            Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
-                if (user) {
-                    user.video.push(video001wb);
-                    user.save();
-                    res.json({ message: 'Video created!' });
-                }
+    Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
+        if (user) {
+            user.video.push(video001wb);
+            user.save();
+            video001wb.save()
+            return res.json({ message: 'Video created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating video001wb'
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
+        }
+    });
 })
 
 
@@ -2473,19 +2467,18 @@ app.post('/api/audio001wb/audio', [audio.single("content")], (req, res) => {
     audio001wb.inserteddatetime = req.body.inserteddatetime;
     audio001wb.updateduser = req.body.updateduser;
     audio001wb.updateddatetime = req.body.updateddatetime;
-    audio001wb.save()
-        .then((result) => {
-            Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
-                if (user) {
-                    user.audio.push(audio001wb);
-                    user.save();
-                    res.json({ message: 'Audio created!' });
-                }
+    Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
+        if (user) {
+            user.audio.push(audio001wb);
+            user.save();
+            audio001wb.save();
+            return res.json({ message: 'Audio created!' });
+        }else {
+            return res.status(500).json({
+                message: 'Error when creating audio001wb'
             });
-        })
-        .catch((error) => {
-            res.status(500).json({ error });
-        });
+        }
+    });
 })
 
 
@@ -2629,7 +2622,7 @@ app.delete('/api/audio001wb/:id', (req, res) => {
  *                 type: string
  *             updateddatetime:
  *                 type: string
- *             personid:
+ *             subid:
  *                type: object 
  *                properties:
  *                   id:
@@ -2760,7 +2753,7 @@ app.post('/api/contentmaster001mb/master', (req, res) => {
     contentmaster001mb.inserteddatetime = req.body.inserteddatetime;
     contentmaster001mb.updateduser = req.body.updateduser;
     contentmaster001mb.updateddatetime = req.body.updateddatetime;
-    contentmaster001mb.personid = req.body.personid.id;
+    contentmaster001mb.subid = req.body.subid.id;
     contentmaster001mb.save(function (err, contentmaster001mb) {
         if (err) {
             return res.status(500).json({
@@ -2823,7 +2816,7 @@ app.put('/api/contentmaster001mb/:id', (req, res) => {
             });
         }
 
-        contentmaster001mb.personid = req.body.personid.id ? req.body.personid.id : contentmaster001mb.personid;
+        contentmaster001mb.subid = req.body.subid.id ? req.body.subid.id : contentmaster001mb.subid;
         contentmaster001mb.name = req.body.name ? req.body.name : contentmaster001mb.name;
         contentmaster001mb.description = req.body.description ? req.body.description : contentmaster001mb.description;
         contentmaster001mb.size = req.body.size ? req.body.size : contentmaster001mb.size;

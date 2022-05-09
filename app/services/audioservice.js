@@ -50,19 +50,18 @@ export const create = async(req, res) => {
     audio001wb.inserteddatetime = req.body.inserteddatetime;
     audio001wb.updateduser = req.body.updateduser;
     audio001wb.updateddatetime = req.body.updateddatetime;
-    audio001wb.save()
-        .then((result) => {
-            Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
+    Contentmaster001mb.findOne({ _id: audio001wb.contentid }, (err, user) => {
                 if (user) {
                     user.audio.push(audio001wb);
                     user.save();
+                    audio001wb.save();
                     return res.json({ message: 'Audio created!' });
+                }else {
+                    return res.status(500).json({
+                        message: 'Error when creating audio001wb'
+                    });
                 }
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
 };
 
 export const update = async(req, res) => {

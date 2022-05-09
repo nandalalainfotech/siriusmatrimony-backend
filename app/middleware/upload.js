@@ -1,14 +1,29 @@
 import multer from "multer";
 import path from "path";
+import db from "../models/main.js";
+import { GridFsStorage } from "multer-gridfs-storage";
+import crypto from "crypto";
 
-var storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, './upload/images');
-
+const url = 'mongodb+srv://sirius_db:ChettyStreet2021@siriuscluster.hkn0z.mongodb.net/siriusdb?retryWrites=true&w=majority';
+console.log("process.env.DATABASE_URI", url);
+const storage = new GridFsStorage({
+    url: url,
+    file: (req, file) => {
+        console.log("req",req)
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'uploads',
+                };
+                resolve(fileInfo);
+            });
+        });
     },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + ' - ' + Date.now() + path.extname(file.originalname))
-    }
 });
 
 const upload = multer({ storage });

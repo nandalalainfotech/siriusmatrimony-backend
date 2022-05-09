@@ -4,8 +4,8 @@ const Video001wb = db.video001wb
 
 const Contentmaster001mb = db.contentmaster001mb
 
-export const list = async(req, res) => {
-    Video001wb.find(function(err, video001wb) {
+export const list = async (req, res) => {
+    Video001wb.find(function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -17,10 +17,10 @@ export const list = async(req, res) => {
     });
 };
 
-export const show = async(req, res) => {
+export const show = async (req, res) => {
     var id = req.params.id;
 
-    Video001wb.findOne({ _id: id }, function(err, video001wb) {
+    Video001wb.findOne({ _id: id }, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb.',
@@ -37,7 +37,7 @@ export const show = async(req, res) => {
         return res.json(video001wb);
     });
 };
-export const create = async(req, res, err) => {
+export const create = async (req, res, err) => {
 
     const video001wb = new Video001wb();
     video001wb.contentid = req.body.contentid;
@@ -50,25 +50,24 @@ export const create = async(req, res, err) => {
     video001wb.inserteddatetime = req.body.inserteddatetime;
     video001wb.updateduser = req.body.updateduser;
     video001wb.updateddatetime = req.body.updateddatetime;
-    video001wb.save()
-        .then((result) => {
-            Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
-                if (user) {
-                    user.video.push(video001wb);
-                    user.save();
-                    return res.json({ message: 'Video created!' });
-                }
+    Contentmaster001mb.findOne({ _id: video001wb.contentid }, (err, user) => {
+        if (user) {
+            user.video.push(video001wb);
+            user.save();
+            video001wb.save()
+            return res.json({ message: 'Video created!' });
+        } else {
+            return res.status(500).json({
+                message: 'Error when creating video001wb'
             });
-        })
-        .catch((error) => {
-            return res.status(500).json({ error });
-        });
+        }
+    });
 };
 
-export const update = async(req, res) => {
+export const update = async (req, res) => {
     var id = req.params.id;
 
-    Video001wb.findOne({ _id: id }, function(err, video001wb) {
+    Video001wb.findOne({ _id: id }, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when getting video001wb',
@@ -93,7 +92,7 @@ export const update = async(req, res) => {
         video001wb.updateduser = req.body.updateduser ? req.body.updateduser : video001wb.updateduser;
         video001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : video001wb.updateddatetime;
 
-        video001wb.save(function(err, video001wb) {
+        video001wb.save(function (err, video001wb) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when updating video001wb.',
@@ -105,10 +104,10 @@ export const update = async(req, res) => {
         });
     });
 };
-export const remove = async(req, res) => {
+export const remove = async (req, res) => {
     var id = req.params.id;
 
-    Video001wb.findByIdAndRemove(id, function(err, video001wb) {
+    Video001wb.findByIdAndRemove(id, function (err, video001wb) {
         if (err) {
             return res.status(500).json({
                 message: 'Error when deleting the video001wb.',
