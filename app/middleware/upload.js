@@ -1,15 +1,12 @@
 import multer from "multer";
 import path from "path";
-import db from "../models/main.js";
 import { GridFsStorage } from "multer-gridfs-storage";
 import crypto from "crypto";
 
 const url = 'mongodb+srv://sirius_db:ChettyStreet2021@siriuscluster.hkn0z.mongodb.net/siriusdb?retryWrites=true&w=majority';
-console.log("process.env.DATABASE_URI", url);
 const storage = new GridFsStorage({
     url: url,
     file: (req, file) => {
-        console.log("req",req)
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
                 if (err) {

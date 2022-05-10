@@ -11,8 +11,8 @@ router.use(function(req, res, next) {
 });
 
 router.get('/list', videoservice.list);
-router.get('/:id', videoservice.show);
-router.put('/:id', [videoUpload.single("video")], videoservice.update);
+router.get('/show/:filename', videoservice.show);
+router.put('/update/:id', [videoUpload.single("video")], videoservice.update);
 router.delete('/:id', videoservice.remove);
 router.post('/create', [videoUpload.single("video")], videoservice.create);
 
