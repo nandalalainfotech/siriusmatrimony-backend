@@ -17,7 +17,8 @@ const video001wb = mongoose.model(
             'inserteduser': String,
             'inserteddatetime': String,
             'updateduser': String,
-            'updateddatetime': String
+            'updateddatetime': String,
+            'flag':Boolean
         },
 
         { timestamps: false })

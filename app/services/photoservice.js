@@ -1,8 +1,5 @@
 import db from "../models/main.js";
-import gfs from 'gfs';
-// import Blob from "blob";
 import Grid from 'gridfs-stream';
-// import gfs from 'multer-gridfs-storage';
 import mongoose from 'mongoose';
 import mime from 'mime';
 const Photo001wb = db.photo001wb
@@ -11,7 +8,6 @@ const Contentmaster001mb = db.contentmaster001mb;
 export const show = async (req, res, photo001wb) => {
     var id = req.params.id;
     var filename = req.params.filename;
-    console.log("res", filename);
     const conn = mongoose.connection;
     var gfs = Grid(conn.db, mongoose.mongo);
     gfs.collection('uploads');
@@ -22,10 +18,10 @@ export const show = async (req, res, photo001wb) => {
             });
 
         }
-        // var bucket =  new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-        //     bucketName: 'uploads',
-        //   })
-        var readstream = gfs.createReadStream(filename);
+        var bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+            bucketName: 'uploads',
+        })
+        var readstream = bucket.openDownloadStreamByName(filename);
         // var imgFile = fs.createWriteStream("images/logos/logo.jpg");
         return readstream.pipe(res);
     });
@@ -48,8 +44,6 @@ export const list = async (req, res) => {
 
 
 export const create = async (req, res, err) => {
-    console.log("Testing------->>>", req.file);
-
     const photo001wb = new Photo001wb();
     // photo001wb.content = req.file.path;
     photo001wb.fieldname = req.file.fieldname;
@@ -63,20 +57,6 @@ export const create = async (req, res, err) => {
     photo001wb.updateduser = req.body.updateduser;
     photo001wb.flag = req.body.flag;
     photo001wb.updateddatetime = req.body.updateddatetime;
-    console.log("req.file",   req.file.fileid);
-
-    //    photo001wb.content= fs.readFileSync(req.file.path);
-    //    console.log("photo001wb.content",photo001wb.content)
-    //     var encode_img = photo001wb.content.toString('base64');
-    //     var final_img = {
-    //         contentType:req.file.mimetype,
-    //         image:new Buffer(encode_img,'base64')
-    //     };
-    //     console.log("contentType",contentType)
-    //             console.log(result.img.Buffer);
-    //             console.log("Saved To database");
-    //             res.contentType(final_img.contentType);
-    //             res.send(final_img.image);`
     Contentmaster001mb.findOne({ _id: photo001wb.contentid }, (err, user) => {
         if (user) {
             user.photo.push(photo001wb);
@@ -92,7 +72,6 @@ export const create = async (req, res, err) => {
 }
 
 export const update = async (req, res) => {
-    console.log("req",req)
     var id = req.params.id;
     Photo001wb.findOne({ _id: id }, function (err, photo001wb) {
         if (err) {
@@ -117,7 +96,6 @@ export const update = async (req, res) => {
         photo001wb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : photo001wb.inserteddatetime;
         photo001wb.updateduser = req.body.updateduser ? req.body.updateduser : photo001wb.updateduser;
         photo001wb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : photo001wb.updateddatetime;
-console.log("photo001wb.flag",photo001wb.flag)
         photo001wb.save(function (err, photo001wb) {
             if (err) {
                 return res.status(500).json({
