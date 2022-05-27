@@ -54,7 +54,7 @@ export const loginauth = async (req, res) => {
             const person = await Person001mb.findOne({ _id: loginperson.personid });
             const token = jwt.sign({ username: loginperson.username, rolename: loginperson.roleid.rolename }, process.env.TOKEN_KEY,
                 {
-                    expiresIn: "6h",
+                    expiresIn: "112h",
                 }
             );
             return res.json({

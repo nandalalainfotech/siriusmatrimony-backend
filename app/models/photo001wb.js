@@ -22,7 +22,7 @@ const photo001wb = mongoose.model(
             'inserteddatetime': String,
             'updateduser': String,
             'updateddatetime': String,
-            'flag':Boolean
+            'flag':Boolean,
         },
 
         { timestamps: false })
