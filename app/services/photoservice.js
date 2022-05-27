@@ -45,7 +45,7 @@ export const list = async (req, res) => {
 
 export const create = async (req, res, err) => {
     const photo001wb = new Photo001wb();
-    // photo001wb.content = req.file.path;
+    //  photo001wb.content = req.file.path;
     photo001wb.fieldname = req.file.fieldname;
     photo001wb.fileid = req.body.fileid;
     photo001wb.originalname = req.file.originalname;

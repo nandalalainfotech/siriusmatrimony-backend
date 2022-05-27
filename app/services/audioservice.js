@@ -43,7 +43,7 @@ export const create = async(req, res) => {
     const audio001wb = new Audio001wb();
     audio001wb.flag = req.body.flag;
     // audio001wb.content = req.file.path;
-    video001wb.fileid = req.body.fileid;
+    audio001wb.fileid = req.body.fileid;
     audio001wb.fieldname = req.file.fieldname;
     audio001wb.fieldname = req.file.fieldname;
     audio001wb.originalname = req.file.originalname;

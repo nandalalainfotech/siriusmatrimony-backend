@@ -9,6 +9,18 @@ const person001mb = mongoose.model(
                 type: mongoose.Types.ObjectId,
                 ref: 'regionaldetails001mb'
             },
+            'loginid': {
+                type: mongoose.Types.ObjectId,
+                ref: 'login001mb'
+            },
+            'usersid': {
+                type: mongoose.Types.ObjectId,
+                ref: 'Users001wb'
+            },
+            'subscriberdetailsid': {
+                type: mongoose.Types.ObjectId,
+                ref: 'subscriberdetails001wb'
+            },
             'companycode': {
                 type: mongoose.Types.ObjectId,
                 ref: 'companydetails001mb'
@@ -61,6 +73,7 @@ const person001mb = mongoose.model(
                 type: mongoose.Types.ObjectId,
                 ref: 'country001mb'
             },
+            'lastname':String,
             'token': String,
             'firstname': String,
             'lasttname': String,
