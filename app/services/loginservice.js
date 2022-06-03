@@ -38,12 +38,12 @@ export const show = (req, res) => {
     });
 };
 
-export const updatetheme = async (req, res) => {
-    const login001mb = new Login001mb();;
-    login001mb.theme = req.body.theme;
-    await login001mb.save();
-   return res.json({theme: login001mb.theme});
-}
+// export const updatetheme = async (req, res) => {
+//     const login001mb = new Login001mb();;
+//     login001mb.theme = req.body.theme;
+//     await login001mb.save();
+//    return res.json({theme: login001mb.theme});
+// }
 export const loginauth = async (req, res) => {
     var username = req.params.username;
     var password = req.params.password;
