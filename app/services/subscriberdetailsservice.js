@@ -54,6 +54,9 @@ export const show = async (req, res) => {
 export const create = async (req, res) => {
 
     const person001mb = new Person001mb();
+    person001mb.usersid = null;
+    person001mb.loginid = null;
+    person001mb.subscriberdetailsid = null;
     person001mb.countryid = req.body.countryid.id;
     person001mb.cityid = req.body.cityid.id;
     person001mb.stateid = req.body.stateid.id;
@@ -128,7 +131,13 @@ export const create = async (req, res) => {
     subscriberdetails001wb.updateduser = req.body.updateduser;
     subscriberdetails001wb.status = req.body.status;
     await subscriberdetails001wb.save()
-
+    if ( subscriberdetails001wb) {
+        const updateperson = await Subscriberdetails001wb.findOne({ personid:subscriberdetails001wb.personid });
+        const updatepersons = await Login001mb.findOne({ personid: login001mb.personid });
+        person001mb.subscriberdetailsid = updateperson._id;
+        person001mb.loginid = updatepersons._id;
+        person001mb.save();
+    }
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

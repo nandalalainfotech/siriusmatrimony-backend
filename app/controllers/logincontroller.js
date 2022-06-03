@@ -11,8 +11,8 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/list1/:username/:password', loginservice.loginauth);
+router.get('/lister/:username/:password', loginservice.loginauth);
 router.get('/list', loginservice.list);
 router.get('/:id', loginservice.show);
-router.put('/updatetheme', loginservice.updatetheme);
+// router.put('/updatetheme', loginservice.updatetheme);
 export default router;

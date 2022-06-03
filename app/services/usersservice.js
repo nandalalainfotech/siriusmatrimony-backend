@@ -63,7 +63,7 @@ export const create = async (req, res, err) => {
     person001mb.stateid = req.body.person001mb.stateid;
     person001mb.roleid = req.body.person001mb.roleid;
     person001mb.subcatcode = req.body.person001mb.subcatcode;
-    console.log("person001mb.subcatcode",person001mb.subcatcode)
+    console.log("person001mb.subcatcode", person001mb.subcatcode)
     person001mb.professionalid = req.body.person001mb.professionalid;
     person001mb.categoryid = req.body.person001mb.categoryid;
     person001mb.languageid = req.body.person001mb.languageid;
@@ -81,7 +81,7 @@ export const create = async (req, res, err) => {
     person001mb.email = req.body.person001mb.email;
     // person001mb.subscname = req.body.subscname;
     person001mb.age = req.body.person001mb.age;
-    person001mb.verified = false;
+    person001mb.verified = req.body.person001mb.verified;
     person001mb.sex = req.body.person001mb.sex;
     // person001mb.subscdesc = req.body.subscdesc;
     // person001mb.aboutme = req.body.aboutme;
@@ -94,10 +94,10 @@ export const create = async (req, res, err) => {
     person001mb.updateddatetime = req.body.person001mb.updateddatetime;
     person001mb.status = req.body.person001mb.status;
     console.log("person001mb", person001mb)
-    if (!(person001mb.email && person001mb.firstname && person001mb.roleid )) {
+    if (!(person001mb.email && person001mb.firstname && person001mb.roleid)) {
         return res.status(402).json("Enter a Required Field");
     }
-    const oldUser = await Person001mb.findOne({ email: person001mb.email, roleid:person001mb.roleid });
+    const oldUser = await Person001mb.findOne({ email: person001mb.email});
     if (oldUser) {
         return res.status(409).send("User Already Exist");
     }
@@ -113,7 +113,7 @@ export const create = async (req, res, err) => {
     console.log("login001mb", login001mb.username)
     login001mb.password = bcrypt.hashSync(req.body.login001mb.password, 10);
     login001mb.roleid = req.body.login001mb.roleid;
-    login001mb.inserteduser =  person001mb.inserteduser;
+    login001mb.inserteduser = person001mb.inserteduser;
     login001mb.inserteddatetime = person001mb.inserteddatetime;
     login001mb.updateduser = person001mb.updateduser;
     login001mb.updateddatetime = person001mb.updateddatetime;
@@ -127,20 +127,20 @@ export const create = async (req, res, err) => {
     users001wb.accountnumber = req.body.user001wb.accountnumber;
     users001wb.insurance = req.body.user001wb.insurance;
     users001wb.accounttype = req.body.user001wb.accounttype;
-    users001wb.inserteduser =  person001mb.inserteduser;
+    users001wb.inserteduser = person001mb.inserteduser;
     users001wb.inserteddatetime = person001mb.inserteddatetime;
     users001wb.updateduser = person001mb.updateduser;
     users001wb.updateddatetime = person001mb.updateddatetime;
     users001wb.status = req.body.status;
     await users001wb.save()
-    if(users001wb){
-        const updateperson = await Users001wb.findOne({ personid:users001wb.personid });
-        const updatepersons = await Login001mb.findOne({ personid:login001mb.personid });
-        person001mb.usersid=updateperson._id;
-        person001mb.loginid=updatepersons._id;
+    if (users001wb) {
+        const updateperson = await Users001wb.findOne({ personid: users001wb.personid });
+        const updatepersons = await Login001mb.findOne({ personid: login001mb.personid });
+        person001mb.usersid = updateperson._id;
+        person001mb.loginid = updatepersons._id;
         person001mb.save();
     }
-   
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -171,7 +171,7 @@ export const create = async (req, res, err) => {
         if (err)
             console.log(err)
         else
-            return res.json({users001wb,login001mb,person001mb });
+            return res.json({ users001wb, login001mb, person001mb });
     })
 };
 
@@ -196,43 +196,49 @@ export const verify = async (req, res) => {
     }
 };
 
-export const update = async (req, res) => {
+export const update = async (req, res,err) => {
     var personid = req.params.personid;
     var loginid = req.params.loginid;
     var userid = req.params.userid;
-    console.log("req",req)
-    const person001mb = await Person001mb.findOne({ _id: personid });
-    if (person001mb) {
-        person001mb.email = req.body.email ? req.body.email : person001mb.email;
-        person001mb.personalid = req.body.personalid.id ? req.body.personalid.id : person001mb.personalid;
-        person001mb.subcatcode = req.body.subcatcode.id ? req.body.subcatcode.id : person001mb.subcatcode;
-        person001mb.professionalid = req.body.professionalid.id ? req.body.professionalid.id : person001mb.professionalid;
-        person001mb.categoryid = req.body.categoryid.id ? req.body.categoryid.id : person001mb.categoryid;
-        person001mb.languageid = req.body.languageid.id ? req.body.languageid.id : person001mb.languageid;
-        person001mb.religionid = req.body.religionid.id ? req.body.religionid.id : person001mb.religionid;
-        person001mb.classificationid = req.body.classificationid.id ? req.body.classificationid.id : person001mb.classificationid;
-        person001mb.subscsubspid = req.body.subscsubspid.id ? req.body.subscsubspid.id : person001mb.subscsubspid;
-        person001mb.regionalid = req.body.regionalid.id ? req.body.regionalid.id : person001mb.regionalid;
-        person001mb.companycode = req.body.companycode.id ? req.body.companycode.id : person001mb.companycode;
-        person001mb.cityid = req.body.cityid.id ? req.body.cityid.id : person001mb.cityid;
+    console.log("req", req)
+    // if (err) {
+    //     return res.status(500).json({
+    //         message: 'Error when updating users001wb.',
+    //         error: err
+    //     });
+    // } else {
+        const person001mb = await Person001mb.findOne({ _id: personid });
+        person001mb.email = req.body.person001mb.email ? req.body.person001mb.email : person001mb.email;
+        person001mb.personalid = req.body.person001mb.personalid.id ? req.body.person001mb.personalid.id : person001mb.personalid;
+        person001mb.subcatcode = req.body.person001mb.subcatcode.id ? req.body.person001mb.subcatcode.id : person001mb.subcatcode;
+        person001mb.professionalid = req.body.person001mb.professionalid.id ? req.body.person001mb.professionalid.id : person001mb.professionalid;
+        person001mb.categoryid = req.body.person001mb.categoryid.id ? req.body.person001mb.categoryid.id : person001mb.categoryid;
+        person001mb.languageid = req.body.person001mb.languageid.id ? req.body.person001mb.languageid.id : person001mb.languageid;
+        person001mb.religionid = req.body.person001mb.religionid.id ? req.body.person001mb.religionid.id : person001mb.religionid;
+        person001mb.classificationid = req.body.person001mb.classificationid.id ? req.body.person001mb.classificationid.id : person001mb.classificationid;
+        person001mb.subscsubspid = req.body.person001mb.subscsubspid.id ? req.body.person001mb.subscsubspid.id : person001mb.subscsubspid;
+        person001mb.regionalid = req.body.person001mb.regionalid.id ? req.body.person001mb.regionalid.id : person001mb.regionalid;
+        person001mb.companycode = req.body.person001mb.companycode.id ? req.body.person001mb.companycode.id : person001mb.companycode;
+        person001mb.cityid = req.body.person001mb.cityid.id ? req.body.person001mb.cityid.id : person001mb.cityid;
         person001mb.stateid = req.body.stateid.id ? req.body.stateid.id : person001mb.stateid;
-        person001mb.roleid = req.body.roleid.id ? req.body.roleid.id : person001mb.roleid;
-        person001mb.age = req.body.age ? req.body.age : person001mb.age;
-        person001mb.sex = req.body.sex ? req.body.sex : person001mb.sex;
-        person001mb.countryid = req.body.countryid.id ? req.body.countryid.id : person001mb.countryid;
-        person001mb.address = req.body.address ? req.body.address : person001mb.address;
+        person001mb.roleid = req.body.person001mb.roleid.id ? req.body.person001mb.roleid.id : person001mb.roleid;
+        person001mb.age = req.body.person001mb.age ? req.body.person001mb.age : person001mb.age;
+        person001mb.sex = req.body.person001mb.sex ? req.body.person001mb.sex : person001mb.sex;
+        person001mb.countryid = req.body.person001mb.countryid.id ? req.body.person001mb.countryid.id : person001mb.countryid;
+        person001mb.address = req.body.person001mb.address ? req.body.person001mb.address : person001mb.address;
         person001mb.phoneno = req.body.phoneno ? req.body.phoneno : person001mb.phoneno;
-        person001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : person001mb.inserteduser;
-        person001mb.inserteddatetime = req.body.inserteddatetime ? req.body.inserteddatetime : person001mb.inserteddatetime;
-        person001mb.updateduser = req.body.updateduser ? req.body.updateduser : person001mb.updateduser;
-        person001mb.updateddatetime = req.body.updateddatetime ? req.body.updateddatetime : person001mb.updateddatetime;
-        person001mb.firstname = req.body.firstname ? req.body.firstname : person001mb.firstname;
-        person001mb.lasttname = req.body.lasttname ? req.body.lasttname : person001mb.lasttname;
-        person001mb.zipcode = req.body.zipcode ? req.body.zipcode : person001mb.zipcode;
-        person001mb.dob = req.body.dob ? req.body.dob : person001mb.dob;
-        person001mb.confirmemail = req.body.confirmemail ? req.body.confirmemail : person001mb.confirmemail;
-        person001mb.landline = req.body.landline ? req.body.landline : person001mb.landline;
-        person001mb.status = req.body.status ? req.body.status : person001mb.status;
+        person001mb.inserteduser = req.body.person001mb.inserteduser ? req.body.person001mb.inserteduser : person001mb.inserteduser;
+        person001mb.inserteddatetime = req.body.person001mb.inserteddatetime ? req.body.person001mb.inserteddatetime : person001mb.inserteddatetime;
+        person001mb.updateduser = req.body.person001mb.updateduser ? req.body.person001mb.updateduser : person001mb.updateduser;
+        person001mb.updateddatetime = req.body.person001mb.updateddatetime ? req.body.person001mb.updateddatetime : person001mb.updateddatetime;
+        person001mb.firstname = req.body.person001mb.firstname ? req.body.person001mb.firstname : person001mb.firstname;
+        person001mb.lasttname = req.body.person001mb.lasttname ? req.body.person001mb.lasttname : person001mb.lasttname;
+        person001mb.zipcode = req.body.person001mb.zipcode ? req.body.person001mb.zipcode : person001mb.zipcode;
+        person001mb.dob = req.body.person001mb.dob ? req.body.person001mb.dob : person001mb.dob;
+        person001mb.confirmemail = req.body.person001mb.confirmemail ? req.body.person001mb.confirmemail : person001mb.confirmemail;
+        person001mb.landline = req.body.person001mb.landline ? req.body.person001mb.landline : person001mb.landline;
+        person001mb.status = req.body.person001mb.status ? req.body.person001mb.status : person001mb.status;
+        console.log("person001mb",person001mb)
         let person = person001mb.save();
         const login001mb = await Login001mb.findOne({ _id: loginid });
         login001mb.personid = person._id ? person._id : login001mb.personid;
@@ -253,32 +259,25 @@ export const update = async (req, res) => {
         users001wb.insurance = req.body.insurance ? req.body.insurance : users001wb.insurance;
         users001wb.accounttype = req.body.accounttype ? req.body.accounttype : users001wb.accounttype;
         users001wb.save(function (err, users001wb) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when updating users001wb.',
-                    error: err
-                });
-            }
-
             return res.json('users001wb updated');
         });
     }
-};
-export const remove = async (req, res) => {
-    var userid = req.params.userid;
-    var loginid = req.params.loginid;
-    var personid = req.params.personid;
-    if (userid && loginid && personid) {
-        console.log("testing", userid, loginid, personid)
-        await Person001mb.findByIdAndRemove({ _id: personid });
-        await Login001mb.findByIdAndRemove({ _id: loginid });
-        await Users001wb.findByIdAndRemove({ _id: userid });
-        return res.json('users001wb deleted');
-    } else {
-        return res.status(500).json({
-            message: 'Error when deleting users001wb.',
-            error: err
-        });
-    }
+    // };
+    export const remove = async (req, res) => {
+        var userid = req.params.userid;
+        var loginid = req.params.loginid;
+        var personid = req.params.personid;
+        if (userid && loginid && personid) {
+            console.log("testing", userid, loginid, personid)
+            await Person001mb.findByIdAndRemove({ _id: personid });
+            await Login001mb.findByIdAndRemove({ _id: loginid });
+            await Users001wb.findByIdAndRemove({ _id: userid });
+            return res.json('users001wb deleted');
+        } else {
+            return res.status(500).json({
+                message: 'Error when deleting users001wb.',
+                error: err
+            });
+        }
 
-};
+    };
