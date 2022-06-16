@@ -88,6 +88,7 @@ export const create = async (req, res) => {
     person001mb.updateduser = req.body.updateduser;
     person001mb.updateddatetime = req.body.updateddatetime;
     person001mb.status = req.body.status;
+  
     if (!(person001mb.email && person001mb.firstname && person001mb.roleid)) {
         return res.status(402).json("Enter a Required Field");
     }
@@ -130,9 +131,10 @@ export const create = async (req, res) => {
     subscriberdetails001wb.inserteddatetime = req.body.inserteddatetime;
     subscriberdetails001wb.updateduser = req.body.updateduser;
     subscriberdetails001wb.status = req.body.status;
+    subscriberdetails001wb.monthlyregistration = req.body.monthlyregistration;
     await subscriberdetails001wb.save()
-    if ( subscriberdetails001wb) {
-        const updateperson = await Subscriberdetails001wb.findOne({ personid:subscriberdetails001wb.personid });
+    if (subscriberdetails001wb) {
+        const updateperson = await Subscriberdetails001wb.findOne({ personid: subscriberdetails001wb.personid });
         const updatepersons = await Login001mb.findOne({ personid: login001mb.personid });
         person001mb.subscriberdetailsid = updateperson._id;
         person001mb.loginid = updatepersons._id;
@@ -237,7 +239,7 @@ export const update = async (req, res) => {
         login001mb.personid = person._id ? person._id : login001mb.personid;
         login001mb.theme = req.body.theme ? req.body.theme : login001mb.theme;
         login001mb.username = req.body.username ? req.body.username : login001mb.username;
-        login001mb.password = req.body.password ?  bcrypt.hashSync(req.body.password, 10) : login001mb.password;
+        login001mb.password = req.body.password ? bcrypt.hashSync(req.body.password, 10) : login001mb.password;
         login001mb.roleid = req.body.roleid.id ? req.body.roleid.id : login001mb.roleid;
         login001mb.status = req.body.status ? req.body.status : login001mb.status
         login001mb.inserteduser = req.body.inserteduser ? req.body.inserteduser : login001mb.inserteduser;
@@ -261,6 +263,7 @@ export const update = async (req, res) => {
         subscriberdetails001wb.subscapproval = req.body.subscapproval;
         subscriberdetails001wb.approvedby = req.body.approvedby ? req.body.approvedby : subscriberdetails001wb.approvedby;
         subscriberdetails001wb.approvedon = req.body.approvedon ? req.body.approvedon : subscriberdetails001wb.approvedon;
+        subscriberdetails001wb.monthlyregistration = req.body.monthlyregistration ? req.body.monthlyregistration : subscriberdetails001wb.monthlyregistration;
         subscriberdetails001wb.save(function (err, subscriberdetails001wb) {
             if (err) {
                 return res.status(500).json({
